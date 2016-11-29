@@ -1,0 +1,56 @@
+.inline-buttons
+{
+  text-decoration: none;
+  padding: 0;
+
+  li
+  {
+    display: inline-block;
+    background: $black;
+    text-align: center;
+
+    a
+    {
+      display: block;
+      color: $white;
+      font-weight: 300;
+      padding: 10px;
+    }
+  }
+  li:hover > a
+  {
+    color: $grey;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .disabled
+  {
+    background: $grey;
+  }
+  .disabled:hover > a
+  {
+    color: $white;
+  }
+
+  .active
+  {
+    outline: 2px solid $red;
+  }
+}
+
+input[type=button], input[type=submit]
+{
+  border: 0;
+  background: $black;
+  text-align: center;
+  color: $white;
+  font-weight: 300;
+  padding: 10px;
+}
+
+input[type=button]:hover, input[type=submit]:hover
+{
+  color: $grey;
+  cursor: pointer;
+  text-decoration: none;
+}

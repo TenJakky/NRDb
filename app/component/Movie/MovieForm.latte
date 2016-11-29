@@ -1,0 +1,14 @@
+{control form}
+
+<script>
+$(document).ready(function ()
+{
+    $('select[name="director_id"]').change(function (evt, params)
+    {
+        var disabled = params.selected;
+        $('input[name="name"]').prop('disabled', disabled);
+        $('input[name="surname"]').prop('disabled', disabled);
+        $('select[name="country_id"]').prop('disabled', disabled).trigger("chosen:updated");
+    });
+});
+</script>

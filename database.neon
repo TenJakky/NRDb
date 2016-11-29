@@ -1,0 +1,4 @@
+database:
+    dsn: 'DNS'
+    user: USER
+    password: "PSWD"

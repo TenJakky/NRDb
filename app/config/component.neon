@@ -1,0 +1,29 @@
+services:
+
+    loginForm:
+        class: App\Component\LoginForm
+
+    newUserForm:
+        class: App\Component\NewUserForm
+
+    settingsForm:
+        class: App\Component\SettingsForm
+
+    movieList:
+        class: App\Component\MovieList
+
+    movieForm:
+        class: App\Component\MovieForm
+
+    editMovieForm:
+        class: App\Component\EditMovieForm
+
+    rateMovieForm:
+        class: App\Component\RateMovieForm
+
+    directorList:
+        class: App\Component\DirectorList
+
+    directorForm:
+        class: App\Component\DirectorForm
+

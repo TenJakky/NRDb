@@ -1,0 +1,43 @@
+{redefine table-open-tag}
+    <table class="grid">
+{/redefine}
+{redefine table-close-tag}
+    </table>
+{/redefine}
+
+{define col-rating}
+    <td>
+        {$ratingModel->getRating($row->id)|number: 2}
+    </td>
+{/define}
+{define col-original_title}
+    <td>
+        <a href="{plink Movie:view $row->id}">{$row->original_title}</a>
+    </td>
+{/define}
+{define col-director_id}
+    <td>
+        <a href="{plink Director:View $row->director_id}">{$row->director_id|director}</a>
+    </td>
+{/define}
+{define col-my_rating}
+    <td>
+        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+        {if $rating}
+            {$rating->rating}
+            <a href="{plink Movie:editRating $rating->id}">Edit rating</a>
+        {else}
+            <a href="{plink Movie:rate $row->id}">Rate</a>
+        {/if}
+    </td>
+{/define}
+{define col-men_rating}
+<td>
+    {$ratingModel->getMenRating($row->id)|number: 2}
+</td>
+{/define}
+{define col-women_rating}
+<td>
+    {$ratingModel->getWomenRating($row->id)|number: 2}
+</td>
+{/define}

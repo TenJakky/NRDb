@@ -1,0 +1,37 @@
+parameters:
+    appName: NRDb
+    appTitle: 'NRDb'
+
+includes:
+    - database.neon
+    - parameters.neon
+    - model.neon
+    - component.neon
+
+php:
+    date.timezone: Europe/Prague
+
+application:
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenter\*Presenter
+
+session:
+    name: %appName%
+    expiration: 14 days
+
+latte:
+    macros:
+        - Nextras\Latte\Macros\RedefineMacro::install
+
+services:
+    - App\RouterFactory
+    router: @App\RouterFactory::createRouter
+
+    - App\Model\Authenticator
+    authenticator: @App\Model\Authenticator
+
+    nette.latteFactory:
+        setup:
+            - addFilter(director, @App\Latte\DirectorFilter)
+    - App\Latte\DirectorFilter

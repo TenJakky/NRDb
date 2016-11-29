@@ -1,0 +1,31 @@
+.flash
+{
+  text-align: center;
+  border-radius: 10px;
+  width: 100%;
+  padding: 15px;
+}
+
+.failure
+{
+  @extend .flash;
+
+  background-color: $failure;
+  border: 2px solid $failure-border
+}
+
+.success
+{
+  @extend .flash;
+
+  background-color: $success;
+  border: 2px solid $success-border
+}
+
+.info
+{
+  @extend .flash;
+
+  background-color: $info;
+  border: 2px solid $info-border
+}

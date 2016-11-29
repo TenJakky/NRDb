@@ -1,0 +1,74 @@
+{layout ../@layout.latte}
+{block title}{$data->username}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            {if $data->username == $user->identity->username}
+                <a href="{plink Default:settings}">Change account settings</a>
+            {/if}
+        </li>
+    </ul>
+</section>
+<section>
+    <table class="list">
+        <tr>
+            <th>Name</th>
+            <td>{$data->name} {$data->surname}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{$data->gender}</td>
+        </tr>
+        <tr>
+            <th>Nationality</th>
+            <td>{$data->ref('country', 'country_id')->name}</td>
+        </tr>
+        {if $data->birthdate != null}
+        <tr>
+            <th>Birthday</th>
+            <td>{$data->birthdate|date:'%d.%m.%Y'}</td>
+        </tr>
+        {/if}
+        {if $data->description != null}
+        <tr>
+            <th>Description</th>
+            <td>{$data->description}</td>
+        </tr>
+        {/if}
+    </table>
+</section>
+<section>
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>
+                    Movie
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Note
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {foreach $ratingsMovie as $rating}
+            <tr>
+                <td>
+                    <a href="{plink Movie:view $rating->movie_id}">{$rating->ref('movies', 'movie_id')->original_title}</a>
+                </td>
+                <td>
+                    {$rating->rating}
+                </td>
+                <td>
+                    {$rating->note}
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</section>

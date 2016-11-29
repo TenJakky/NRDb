@@ -1,0 +1,42 @@
+form
+{
+  table
+  {
+    width: 100%;
+
+    tr
+    {
+      th
+      {
+        text-align: left;
+
+        label.required:after
+        {
+          content: " *";
+        }
+      }
+
+      td
+      {
+        padding: 5px;
+
+        input[type=number], input[type=text], textarea, input[type=password]
+        {
+          border: 1px solid $grey;
+          outline: none;
+          width: 47%;
+        }
+
+        textarea, input
+        {
+          padding: 8px 10px;
+        }
+
+        input[type=number]:focus, input[type=text]:focus, textarea:focus, input[type=password]:focus
+        {
+          outline: 2px solid $red;
+        }
+      }
+    }
+  }
+}

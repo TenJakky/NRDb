@@ -1,0 +1,64 @@
+{layout ../@layout.latte}
+{block title}{$data->name} {$data->surname}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Director:edit $data->id}">Edit details</a>
+        </li>
+    </ul>
+</section>
+<section>
+    <table class="list">
+        <tr>
+            <td>Nationality</td>
+            <td>{$data->ref('country', 'country_id')->name}</td>
+        </tr>
+        <tr>
+            <td>Born</td>
+            <td>{$data->born|date:'%d.%m.%Y'}</td>
+        </tr>
+        <tr>
+            <td>Died</td>
+            <td>{$data->died|date:'%d.%m.%Y'}</td>
+        </tr>
+        <tr>
+            <td>Bio</td>
+            <td>{$data->bio}</td>
+        </tr>
+    </table>
+</section>
+<section>
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Year
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {foreach $movies as $movie}
+            <tr>
+                <td>
+                    <a href="{plink Movie:view $movie->id}">{$movie->original_title}</a>
+                </td>
+                <td>
+                    {$ratingMovieModel->getRating($movie->id)|number:2}
+                </td>
+                <td>
+                    {$movie->year}
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</section>

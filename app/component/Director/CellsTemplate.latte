@@ -1,0 +1,34 @@
+{redefine table-open-tag}
+    <table class="grid">
+{/redefine}
+{redefine table-close-tag}
+    </table>
+{/redefine}
+{define col-name}
+    <td>
+        <a href="{plink Director:view $row->id}">{$row->name} {$row->surname}</a>
+    </td>
+{/define}
+{define col-country_id}
+    <td>
+        {$row->ref('country', 'country_id')->name}
+    </td>
+{/define}
+{define col-movie_count}
+    <td>
+        {$movieModel->findBy('director_id', $row->id)->count()}
+    </td>
+{/define}
+{define col-top_movie}
+    <td>
+        {var topMovie => $movieModel->getTopMovie($row->id)}
+        {if $topMovie}
+            <a href="{plink Movie:view $topMovie->id}">{$topMovie->original_title}</a>
+        {/if}
+    </td>
+{/define}
+{define col-average_rating}
+    <td>
+        {$movieModel->getAverageRating($row->id)|number:2}
+    </td>
+{/define}
