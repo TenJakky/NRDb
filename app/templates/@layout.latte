@@ -9,11 +9,12 @@
         <meta name="keywords" content="václav, pelíšek, pelda, peldax, ratings, movies, books, series, games">
         <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
         <link rel="stylesheet" type="text/css" href="/www/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/www/bower/chosen/chosen.css">
         <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:300,700' >
-        <script type='text/javascript' src="/www/js-libs/jquery.min.js"></script>
-        <script type='text/javascript' src="/www/js-libs/chosen.jquery.min.js"></script>
-        <script type='text/javascript' src="/www/js-libs/netteForms.min.js"></script>
-        <script type='text/javascript' src="/www/js-libs/nette.ajax.js"></script>
+        <script type='text/javascript' src="/www/bower/jquery/dist/jquery.min.js"></script>
+        <script type='text/javascript' src="/www/bower/chosen/chosen.jquery.min.js"></script>
+        <script type='text/javascript' src="/www/bower/nette-forms/src/assets/netteForms.min.js"></script>
+        <script type='text/javascript' src="/www/bower/nette.ajax.js/nette.ajax.js"></script>
         <script type='text/javascript' src="/www/js-libs/nextras.datagrid.js"></script>
         <script type='text/javascript' src="/www/common.js"></script>
         {include head}
@@ -37,23 +38,23 @@
                     <a href="{plink Game:default}">Games</a>
                 </li>
                 {if $user->isLoggedIn()}
-                    <li class="right">
-                        <a href="{plink User:view $user->getId()}">{$user->identity->username}</a>
-                    </li>
-                    <li>
-                        <a href="{plink Default:logout}">Log out</a>
-                    </li>
-                    {if in_array('Administrator', $user->getRoles())}
-                        <li>
-                            <a href="{plink Default:newUser}">New user</a>
-                        </li>
-                    {/if}
+                <li class="right">
+                    <a href="{plink User:view $user->getId()}">{$user->identity->username}</a>
+                </li>
+                <li>
+                    <a href="{plink Default:logout}">Log out</a>
+                </li>
+                {if in_array('Administrator', $user->getRoles())}
+                <li>
+                    <a href="{plink Default:newUser}">New user</a>
+                </li>
+                {/if}
                 {/if}
             </ul>
         </nav>
         <main>
             {foreach $flashes as $flash}
-                <div class="{$flash->type}">{$flash->message}</div>
+            <div class="{$flash->type}">{$flash->message}</div>
             {/foreach}
             <header>
                 <h1>{include title}</h1>

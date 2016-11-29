@@ -1,0 +1,4 @@
+www/bower/*
+vendor/*
+
+composer.lock
