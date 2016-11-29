@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 class RatingMovieModel extends BaseModel

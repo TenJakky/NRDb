@@ -25,12 +25,21 @@ class MoviePresenter extends BaseViewPresenter
 
     public function actionRate($id = 0)
     {
-        $this->template->movieId = $id;
+        if ($this->ratingMovieModel->findByArray(array(
+            'user_id' => $this->getUser()->getId(),
+            'movie_id' => $id
+            ))->count('*') > 0)
+        {
+            $this->presenter->flashMessage('You have already rated this movie.', 'failure');
+            $this->presenter->redirect('Movie:view', $id);
+        }
+
+        $this->template->id = $id;
     }
 
-    public function actionEditRating($ratingId)
+    public function actionEditRating($id)
     {
-        $this->template->ratingId = $ratingId;
+        $this->template->ratingId = $id;
     }
 
     public function actionEdit($id)

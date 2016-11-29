@@ -22,7 +22,7 @@ class RateMovieForm extends BaseFormComponent
             $rating = $this->ratingMovieModel->findRow($ratingId);
             if (!$rating || $rating->user_id != $this->presenter->getUser()->getId())
             {
-                $this->presenter->flashMessage('You cannot edit this rating.', 'error');
+                $this->presenter->flashMessage('You cannot edit this rating.', 'failure');
                 $this->presenter->redirect('Movie:default');
             }
             $this['form']->setDefaults($rating);
@@ -31,7 +31,7 @@ class RateMovieForm extends BaseFormComponent
         {
             if (!$this->movieModel->findRow($movieId))
             {
-                $this->presenter->flashMessage('Movie not found.', 'error');
+                $this->presenter->flashMessage('Movie not found.', 'failure');
                 $this->presenter->redirect('Movie:default');
             }
             $this['form']->setDefaults(array('movie_id' => $movieId));
@@ -67,6 +67,7 @@ class RateMovieForm extends BaseFormComponent
             )->fetchPairs('id', 'original_title');
         }
 
+        $form->addHidden('id');
         $form->addSelect('movie_id', 'Movie', $movies)
             ->setPrompt('Select movie')
             ->setRequired();
