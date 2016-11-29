@@ -44,6 +44,7 @@ class RateMovieForm extends BaseFormComponent
     {
         $form = new \Nette\Application\UI\Form();
 
+        $user = $this->presenter->getUser()->getId();
         if ($this->presenter->getAction() == 'rate')
         {
             $movies = $this->movieModel->query(
@@ -51,7 +52,7 @@ class RateMovieForm extends BaseFormComponent
                 movies.id,
                 movies.original_title
                 from movies
-                left join ratings_movie on movies.id = ratings_movie.movie_id and ratings_movie.user_id = 1
+                left join ratings_movie on movies.id = ratings_movie.movie_id and ratings_movie.user_id = {$user}
                 where ratings_movie.user_id is null"
             )->fetchPairs('id', 'original_title');
         }
@@ -62,8 +63,8 @@ class RateMovieForm extends BaseFormComponent
                 movies.id,
                 movies.original_title
                 from movies
-                left join ratings_movie on movies.id = ratings_movie.movie_id and ratings_movie.user_id = 1
-                where ratings_movie.user_id = 1"
+                left join ratings_movie on movies.id = ratings_movie.movie_id and ratings_movie.user_id = {$user}
+                where ratings_movie.user_id = {$user}"
             )->fetchPairs('id', 'original_title');
         }
 
