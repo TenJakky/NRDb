@@ -1,4 +1,7 @@
 www/bower/*
 vendor/*
+temp/*
+log/*
 
 composer.lock
+www/css/common.css
