@@ -1,0 +1,19 @@
+{
+  "name": "movies.peldax.com",
+  "description": "movies webpage",
+  "homepage": "http://movies.peldax.com",
+  "type": "project",
+  "license": ["Unlicense"],
+  "authors": [
+    {
+      "name": "Václav Pelíšek",
+      "homepage": "http://peldax.com"
+    }
+  ],
+  "require": {
+    "php" : ">=5.3.7",
+    "nette/nette": "~2.4.0",
+    "nextras/datagrid": "@dev"
+  },
+  "minimum-stability": "stable"
+}
