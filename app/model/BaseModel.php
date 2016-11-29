@@ -82,7 +82,6 @@ abstract class BaseModel extends Nette\Object
         $columns = $this->context->connection->getSupplementalDriver()->getColumns($this->getTableName());
 
         $columnsResult = array();
-
         foreach ($columns as $column)
         {
             $columnsResult[] = $column['name'];
@@ -94,5 +93,10 @@ abstract class BaseModel extends Nette\Object
     public function query($sql)
     {
         return $this->context->query($sql);
+    }
+
+    public function count()
+    {
+        return $this->getTable()->count();
     }
 }

@@ -55,17 +55,17 @@ class DefaultPresenter extends BasePresenter
     public function renderDefault()
     {
         $total = 0;
-        $total += $this->template->moviesT = $this->movieModel->findAll()->count();
-        $total += $this->template->seriesT = $this->seriesModel->findAll()->count();
-        $total += $this->template->booksT = $this->bookModel->findAll()->count();
-        $total += $this->template->gamesT = $this->gameModel->findAll()->count();
+        $total += $this->template->moviesT = $this->movieModel->count();
+        $total += $this->template->seriesT = $this->seriesModel->count();
+        $total += $this->template->booksT = $this->bookModel->count();
+        $total += $this->template->gamesT = $this->gameModel->count();
         $this->template->total = $total;
 
         $totalR = 0;
-        $totalR += $this->template->moviesRT = $this->ratingMovieModel->findAll()->count();
-        $totalR += $this->template->seriesRT = $this->ratingSeriesModel->findAll()->count();
-        $totalR += $this->template->booksRT = $this->ratingBookModel->findAll()->count();
-        $totalR += $this->template->gamesRT = $this->ratingGameModel->findAll()->count();
+        $totalR += $this->template->moviesRT = $this->ratingMovieModel->count();
+        $totalR += $this->template->seriesRT = $this->ratingSeriesModel->count();
+        $totalR += $this->template->booksRT = $this->ratingBookModel->count();
+        $totalR += $this->template->gamesRT = $this->ratingGameModel->count();
         $this->template->totalR = $totalR;
 
         for ($i = 0; $i <= 10; $i++)
