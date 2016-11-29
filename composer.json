@@ -1,9 +1,9 @@
 {
-  "name": "movies.peldax.com",
-  "description": "movies webpage",
+  "name": "NRDb",
+  "description": "Nette Rating Database",
   "homepage": "http://movies.peldax.com",
   "type": "project",
-  "license": ["Unlicense"],
+  "license": ["Affero General Public Licence v3.0"],
   "authors": [
     {
       "name": "Václav Pelíšek",
@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php" : ">=5.3.7",
+    "php" : ">=5.6",
     "nette/nette": "~2.4.0",
     "nextras/datagrid": "@dev"
   },
