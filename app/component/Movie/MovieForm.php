@@ -75,16 +75,16 @@ class MovieForm extends BaseFormComponent
     {
         $data = $form->getValues();
 
-        $file = $data['poster'];
+        /*$file = $data['poster'];
         if($file->isOk() && $file->isImage())
         {
             $dest = MovieModel::FILE_DIR.\Nette\Utils\Strings::random(20);
             $file->move(getcwd().$dest);
             $data['poster_file'] = $dest;
-        }
+        }*/
 
         $rating = array();
-        $rating['rating'] = $data['rating_sum'];
+        $rating['rating'] = $data['rating'];
         $rating['user_id'] = $this->presenter->user->id;
         $rating['note'] = $data['note'];
 
@@ -104,7 +104,7 @@ class MovieForm extends BaseFormComponent
         $movie = $this->moviesModel->insert($data);
 
         $rating['movie_id'] = $movie->id;
-        $this->ratingsMovieModel->insert($rating);
+        $this->ratingMovieModel->insert($rating);
 
         $this->flashMessage('Movie successfully saved.', 'success');
         $this->presenter->redirect('Movie:view', array('id' => $movie->id));
