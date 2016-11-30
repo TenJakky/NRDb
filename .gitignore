@@ -2,6 +2,7 @@ www/bower/*
 vendor/*
 temp/*
 log/*
+.idea/*
 
 composer.lock
 www/css/common.css

@@ -57,7 +57,7 @@ class MovieForm extends BaseFormComponent
                 ->setRequired();
         $form->addSelect('country_id', 'Director nationality', $countries)
             ->setPrompt('Select nationality')
-            ->addConditionOn($form['name'], Form::BLANK)
+            ->addConditionOn($form['director_id'], Form::BLANK)
                 ->setRequired();
 
         $form->addSelect('rating', 'Rating', array_combine(range(0, 10, 1), range(0, 10, 1)))
