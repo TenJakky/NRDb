@@ -1,4 +1,5 @@
 database:
-    dsn: 'DNS'
-    user: USER
-    password: "PSWD"
+    dsn: 'mysql:host=innodb.endora.cz;dbname=movies'
+    user: movies
+    password: "blagrr/18/movies"
+

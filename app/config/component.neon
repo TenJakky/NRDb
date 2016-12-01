@@ -24,6 +24,6 @@ services:
     directorList:
         class: App\Component\DirectorList
 
-    directorForm:
-        class: App\Component\DirectorForm
+    personForm:
+        class: App\Component\PersonForm
 

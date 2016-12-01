@@ -7,18 +7,18 @@ use Nette\Forms\Form;
 
 class MovieForm extends BaseFormComponent
 {
-    protected $directorModel;
+    protected $personModel;
     protected $moviesModel;
     protected $countryModel;
     protected $ratingMovieModel;
 
     public function __construct(
-        \App\Model\DirectorModel $directorModel,
+        \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $moviesModel,
         \App\Model\CountryModel $countryModel,
         \App\Model\RatingMovieModel $ratingMovieModel)
     {
-        $this->directorModel = $directorModel;
+        $this->personModel = $personModel;
         $this->moviesModel = $moviesModel;
         $this->countryModel = $countryModel;
         $this->ratingMovieModel = $ratingMovieModel;
@@ -28,7 +28,7 @@ class MovieForm extends BaseFormComponent
     {
         $form = new \Nette\Application\UI\Form();
 
-        $directors = $this->directorModel->fetchSelectBox();
+        $directors = $this->personModel->fetchSelectBox();
         $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
 
         $form->addText('original_title', 'Original title')
@@ -46,7 +46,6 @@ class MovieForm extends BaseFormComponent
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
 
         $form->addSelect('director_id', 'Director', $directors)
-            ->setHtmlId('input_director')
             ->setPrompt('Select director')
             ->setOption('description', 'If your director is not in this list, please fill the details below.');
         $form->addText('name', 'Director name')
@@ -87,10 +86,11 @@ class MovieForm extends BaseFormComponent
         $rating['rating'] = $data['rating'];
         $rating['user_id'] = $this->presenter->user->id;
         $rating['note'] = $data['note'];
+        $rating['date'] = date('Y-m-d');
 
         if (!isset($data['director_id']))
         {
-            $director = $this->directorModel->insert(array('name'=>$data['name'], 'surname'=>$data['surname'], 'country_id'=>$data['country_id']));
+            $director = $this->personModel->insert(array('name'=>$data['name'], 'surname'=>$data['surname'], 'country_id'=>$data['country_id']));
             $data['director_id'] = $director->id;
         }
 

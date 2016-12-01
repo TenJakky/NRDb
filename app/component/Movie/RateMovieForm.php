@@ -87,6 +87,7 @@ class RateMovieForm extends BaseFormComponent
     {
         $data = $form->getValues();
         $data['user_id'] = $this->presenter->user->getId();
+        $data['date'] = date('Y-m-d');
 
         $this->ratingMovieModel->save($data);
 

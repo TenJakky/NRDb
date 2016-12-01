@@ -6,14 +6,14 @@ use Nette\Forms\Form;
 
 class EditMovieForm extends BaseFormComponent
 {
-    protected $directorModel;
+    protected $personModel;
     protected $movieModel;
 
     public function __construct(
-        \App\Model\DirectorModel $directorModel,
+        \App\Model\PersonModel $directorModel,
         \App\Model\MovieModel $movieModel)
     {
-        $this->directorModel = $directorModel;
+        $this->personModel = $directorModel;
         $this->movieModel = $movieModel;
     }
 
@@ -28,7 +28,7 @@ class EditMovieForm extends BaseFormComponent
     {
         $form = new \Nette\Application\UI\Form();
 
-        $directors = $this->directorModel->fetchSelectBox();
+        $directors = $this->personModel->fetchSelectBox();
 
         $form->addHidden('id');
         $form->addText('original_title', 'Original title')

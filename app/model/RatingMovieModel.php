@@ -4,7 +4,7 @@ namespace App\Model;
 
 class RatingMovieModel extends BaseModel
 {
-    protected $tableName = 'ratings_movie';
+    protected $tableName = 'rating_movie';
 
     public function getRating($movieId)
     {

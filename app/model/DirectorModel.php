@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Model;
 
-class DirectorModel extends BaseModel
+class PersonModel extends BaseModel
 {
-    protected $tableName = 'director';
+    protected $tableName = 'person';
 
     public function fetchSelectBox()
     {

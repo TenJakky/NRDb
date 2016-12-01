@@ -2,20 +2,20 @@
 
 namespace App\Presenter;
 
-class DirectorPresenter extends BaseViewPresenter
+class PersonPresenter extends BaseViewPresenter
 {
     protected $model;
     protected $movieModel;
     protected $ratingMovieModel;
 
     public function __construct(
-        \App\Model\DirectorModel $directorModel,
+        \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $movieModel,
         \App\Model\RatingMovieModel $ratingMovieModel
     )
     {
         parent::__construct();
-        $this->model = $directorModel;
+        $this->model = $personModel;
         $this->movieModel = $movieModel;
         $this->ratingMovieModel = $ratingMovieModel;
     }

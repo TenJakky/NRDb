@@ -15,9 +15,10 @@
         <a href="{plink Movie:view $row->id}">{$row->original_title}</a>
     </td>
 {/define}
-{define col-director_id}
+{define col-director}
     <td>
-        <a href="{plink Director:View $row->director_id}">{$row->director_id|director}</a>
+        {var $directors => $movieDirectorModel->findBy('movie_id', $row->id)->fetch()}
+        <a href="{plink Person:View $directors->person_id}">{$directors->person_id|person}</a>
     </td>
 {/define}
 {define col-my_rating}

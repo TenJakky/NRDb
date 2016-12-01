@@ -7,13 +7,13 @@ class DirectorList extends BaseGridComponent
     protected $movieModel;
 
     public function __construct(
-        \App\Model\DirectorModel $directorModel,
+        \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $movieModel
     )
     {
         parent::__construct();
 
-        $this->model = $directorModel;
+        $this->model = $personModel;
         $this->movieModel = $movieModel;
     }
 

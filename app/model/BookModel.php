@@ -4,5 +4,5 @@ namespace App\Model;
 
 class BookModel extends BaseModel
 {
-    protected $tableName = 'books';
+    protected $tableName = 'book';
 }
