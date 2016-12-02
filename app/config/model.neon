@@ -8,9 +8,11 @@ services:
 - App\Model\RatingSeriesModel
 - App\Model\RatingBookModel
 - App\Model\RatingGameModel
-- App\Model\DirectorModel
+- App\Model\PersonModel
 - App\Model\StudioModel
-- App\Model\AuthorModel
 - App\Model\CountryModel
 - App\Model\ChangelogModel
+- App\Model\MovieDirectorModel
+- App\Model\MovieActorModel
+
 

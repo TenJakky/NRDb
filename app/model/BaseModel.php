@@ -7,7 +7,7 @@ use Nette;
 abstract class BaseModel extends Nette\Object
 {
     /** @var string Table name */
-    protected $tableName;
+    public $tableName;
 
     /** @var Nette\Database\Context */
     protected $context;

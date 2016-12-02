@@ -1,22 +1,28 @@
 <?php
+
 namespace App\Model;
 
 class MovieModel extends BaseModel
 {
-    protected $tableName = 'movies';
+    public $tableName = 'movie';
 
-    const TABLE_NAME = 'movies';
     const FILE_DIR = '/images/movie/';
 
     protected $ratingMovieModel;
+    protected $movieDirectorModel;
+    protected $movieActorModel;
 
     public function __construct(
         \App\Model\RatingMovieModel $ratingMovieModel,
+        \App\Model\MovieDirectorModel $movieDirectorModel,
+        \App\Model\MovieActorModel $movieActorModel,
         \Nette\Database\Context $context)
     {
-        $this->ratingMovieModel = $ratingMovieModel;
-
         parent::__construct($context);
+
+        $this->ratingMovieModel = $ratingMovieModel;
+        $this->movieDirectorModel = $movieDirectorModel;
+        $this->movieActorModel = $movieActorModel;
     }
 
     public function getTopMovie($directorId)

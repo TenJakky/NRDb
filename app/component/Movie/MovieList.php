@@ -2,16 +2,13 @@
 
 namespace App\Component;
 
-use Tracy\Debugger;
-
 class MovieList extends BaseGridComponent
 {
-    public $ratingMovieModel;
+    protected $ratingMovieModel;
 
     public function __construct(
         \App\Model\MovieModel $movieModel,
-        \App\Model\RatingMovieModel $ratingMovieModel
-    )
+        \App\Model\RatingMovieModel $ratingMovieModel)
     {
         parent::__construct();
 
@@ -27,9 +24,9 @@ class MovieList extends BaseGridComponent
         $this->grid->addColumn('original_title', 'Original title')->enableSort();
         $this->grid->addColumn('english_title', 'English Title')->enableSort();
         $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
-        $this->grid->addColumn('director_id', 'Director')->enableSort();
+        $this->grid->addColumn('director', 'Director')->enableSort();
         $this->grid->addColumn('year', 'Year')->enableSort();
-        $this->grid->addColumn('rating', 'Rating')->enableSort();
+        $this->grid->addColumn('rating', 'Rating');//->enableSort();
         $this->grid->addColumn('men_rating', 'Men\'s Rating');
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
@@ -51,10 +48,10 @@ class MovieList extends BaseGridComponent
             {
                 $filters[$k] = $v;
             }
-            else if ($k == 'director_id')
+            else if ($k == 'director')
             {
-                $filters['director.name LIKE ?'] = "%$v%";
-                $filters['director.surname LIKE ?'] = "%$v%";
+                $filters['person.name LIKE ?'] = "%$v%";
+                $filters['person.surname LIKE ?'] = "%$v%";
             }
             else
             {
@@ -66,18 +63,18 @@ class MovieList extends BaseGridComponent
 
         if ($order[0])
         {
-            if ($order[0] == 'director_id')
+            if ($order[0] == 'director')
             {
-                $orders = "director.surname $order[1], director.name $order[1]";
+                $orders = "person.surname $order[1], person.name $order[1]";
             }
             else if ($order[0] == 'rating')
             {
-                $orders = "(rating_sum / rating_size) $order[1]";
+                //$orders = "sum(rating_sum / rating_size) $order[1]";
             }
             else if ($order[0] == 'my_rating')
             {
-                $set->where(':ratings_movie.user_id = '.$this->presenter->getUser()->getId());
-                $orders = ":ratings_movie.rating $order[1]";
+                $set->where(':rating_movie.user_id = '.$this->presenter->getUser()->getId());
+                $orders = ":rating_movie.rating $order[1]";
             }
             else
             {

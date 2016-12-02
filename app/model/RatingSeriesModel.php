@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Model;
 
 class RatingSeriesModel extends BaseModel
 {
-    protected $tableName = 'ratings_series';
+    public $tableName = 'rating_series';
 }

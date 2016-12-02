@@ -34,5 +34,5 @@ services:
 
     nette.latteFactory:
         setup:
-            - addFilter(director, @App\Latte\DirectorFilter)
-    - App\Latte\DirectorFilter
+            - addFilter(person, @App\Latte\PersonFilter)
+    - App\Latte\PersonFilter

@@ -4,16 +4,16 @@
 {block content}
 
 {if $data->poster_file}
-    <div id="image">
-        <img src="{php getcwd().$data->poster_file}"/>
-    </div>
+<div id="image">
+    <img src="{php getcwd().$data->poster_file}"/>
+</div>
 {/if}
 <h2>{$ratingModel->getRating($data->id)|number: 2}</h2>
 <h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
 <h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
 {var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
 {if $rating}
-    <h3>My rating: {$rating->rating}</h3>
+<h3>My rating: {$rating->rating}</h3>
 {/if}
 <section>
     <ul class="inline-buttons">
@@ -36,8 +36,14 @@
             <td>{$data->english_title}</td>
         </tr>
         <tr>
+            <td>Czech title</td>
+            <td>{$data->czech_title}</td>
+        </tr>
+        <tr>
             <td>Director</td>
-            <td><a href="{plink Director:view $data->director_id}">{$data->director_id|director}</a></td>
+            {foreach $data->related('movie2director.movie_id') as $director}
+            <td><a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a></td>
+            {/foreach}
         </tr>
         <tr>
             <td>Year</td>
@@ -62,19 +68,25 @@
                 <th>
                     Note
                 </th>
+                <th>
+                    Date
+                </th>
             </tr>
         </thead>
         <tbody>
         {foreach $ratingModel->findby('movie_id', $data->id)->fetchAll() as $rating}
             <tr>
                 <td>
-                    <a href="{plink User:view $rating->user_id}">{$rating->ref('users', 'user_id')->username}</a>
+                    <a href="{plink User:view $rating->user_id}">{$rating->ref('user', 'user_id')->username}</a>
                 </td>
                 <td>
                     {$rating->rating}
                 </td>
                 <td>
                     {$rating->note}
+                </td>
+                <td>
+                    {$rating->date|date:'%d.%m.%Y'}
                 </td>
             </tr>
         {/foreach}

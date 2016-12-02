@@ -2,21 +2,18 @@
 
 namespace App\Component;
 
-use App\Model\MovieModel;
-use Nette\Forms\Form;
-
-class DirectorForm extends BaseFormComponent
+class PersonForm extends BaseFormComponent
 {
-    protected $directorModel;
+    protected $personModel;
     protected $moviesModel;
     protected $countryModel;
     protected $ratingsMovieModel;
 
     public function __construct(
-        \App\Model\DirectorModel $directorModel,
+        \App\Model\PersonModel $personModel,
         \App\Model\CountryModel $countryModel)
     {
-        $this->directorModel = $directorModel;
+        $this->personModel = $personModel;
         $this->countryModel = $countryModel;
     }
 
@@ -24,12 +21,12 @@ class DirectorForm extends BaseFormComponent
     {
         if ($id)
         {
-            $row = $this->directorModel->findRow($id);
+            $row = $this->personModel->findRow($id);
 
             if (!$row)
             {
-                $this->flashMessage('Director not found', 'failure');
-                $this->redirect('Director:default');
+                $this->flashMessage('Person not found', 'failure');
+                $this->redirect('Person:default');
             }
             $data = $row->toArray();
 
@@ -49,11 +46,11 @@ class DirectorForm extends BaseFormComponent
         $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
 
         $form->addHidden('id');
-        $form->addText('name', 'Director name')
+        $form->addText('name', 'Person name')
             ->setRequired();
-        $form->addText('surname', 'Director surname')
+        $form->addText('surname', 'Person surname')
             ->setRequired();
-        $form->addSelect('country_id', 'Director nationality', $countries)
+        $form->addSelect('country_id', 'Person nationality', $countries)
             ->setPrompt('Select nationality')
             ->setRequired();
         $form->addText('born', 'Born');
@@ -73,9 +70,9 @@ class DirectorForm extends BaseFormComponent
         $data['born'] = $data['born'] ? date_create($data['born'])->format('Y-m-d') : null;
         $data['died'] = $data['died'] ? date_create($data['died'])->format('Y-m-d') : null;
 
-        $id = $this->directorModel->save($data);
+        $id = $this->personModel->save($data);
 
-        $this->flashMessage('Director successfully saved.', 'success');
-        $this->presenter->redirect('Director:view', array('id' => $id));
+        $this->flashMessage('Person successfully saved.', 'success');
+        $this->presenter->redirect('Person:view', array('id' => $id));
     }
 }
