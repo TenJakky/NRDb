@@ -2,14 +2,13 @@
 
 namespace App\Component;
 
-class DirectorList extends BaseGridComponent
+class DirectorList extends BaseDatagridComponent
 {
     protected $movieModel;
 
     public function __construct(
         \App\Model\PersonModel $personModel,
-        \App\Model\MovieModel $movieModel
-    )
+        \App\Model\MovieModel $movieModel)
     {
         parent::__construct();
 
@@ -22,6 +21,7 @@ class DirectorList extends BaseGridComponent
         parent::createComponentDataGrid();
 
         $this->grid->addCellsTemplate(__DIR__ . '/DirectorListCellsTemplate.latte');
+
         $this->grid->addColumn('name', 'Name')->enableSort();
         $this->grid->addColumn('country_id', 'Nationality')->enableSort();
         $this->grid->addColumn('movie_count', '# of movies');
@@ -34,7 +34,7 @@ class DirectorList extends BaseGridComponent
     }
 
 
-    public function prepareDataSource($filter, $order)
+    public function getDataSource($filter, $order)
     {
         $filters = array();
         foreach ($filter as $k => $v)
@@ -50,7 +50,7 @@ class DirectorList extends BaseGridComponent
             }
             else
             {
-                $filters[$k . ' LIKE ?'] = "%$v%";
+                $filters[$k.' LIKE ?'] = "%$v%";
             }
         }
 

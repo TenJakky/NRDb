@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class MovieList extends BaseGridComponent
+class MovieList extends BaseDatagridComponent
 {
     protected $ratingMovieModel;
 
@@ -39,7 +39,7 @@ class MovieList extends BaseGridComponent
         return $this->grid;
     }
 
-    public function prepareDataSource($filter, $order)
+    public function getDataSource($filter, $order)
     {
         $filters = array();
         foreach ($filter as $k => $v)

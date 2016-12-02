@@ -12,6 +12,9 @@ services:
     movieList:
         class: App\Component\MovieList
 
+    movieSmallList:
+        class: App\Component\MovieSmallList
+
     movieForm:
         class: App\Component\MovieForm
 

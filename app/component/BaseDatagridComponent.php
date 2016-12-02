@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class BaseGridComponent extends \Nette\Application\UI\Control
+class BaseDatagridComponent extends \Nette\Application\UI\Control
 {
     /**
      * @var \App\Tool\Datagrid
@@ -21,7 +21,7 @@ class BaseGridComponent extends \Nette\Application\UI\Control
         }
         $this->grid->addCellsTemplate(__DIR__.'/Paginator.latte');
         $this->grid->setDatasourceCallback(array($this, 'dataSource'));
-        $this->grid->setPagination($this->presenter->getUser()->getIdentity()->per_page, array($this, 'dataSourceSum'));
+        $this->grid->setPagination($this->presenter->getUser()->getIdentity()->per_page, array($this, 'dataSourceCount'));
     }
 
     public function render()
@@ -30,7 +30,7 @@ class BaseGridComponent extends \Nette\Application\UI\Control
         $this->template->render();
     }
 
-    public function prepareDataSource($filter, $order)
+    public function getDataSource($filter, $order)
     {
         $filters = array();
         foreach ($filter as $k => $v) {
@@ -50,11 +50,11 @@ class BaseGridComponent extends \Nette\Application\UI\Control
 
     public function dataSource($filter, $order, \Nette\Utils\Paginator $paginator = null)
     {
-        return $this->prepareDataSource($filter, $order)->limit($paginator->getItemsPerPage(), $paginator->getOffset());
+        return $this->getDataSource($filter, $order)->limit($paginator->getItemsPerPage(), $paginator->getOffset());
     }
 
-    public function dataSourceSum($filter, $order)
+    public function dataSourceCount($filter, $order)
     {
-        return $this->prepareDataSource($filter, $order)->count('*');
+        return $this->getDataSource($filter, $order)->count('*');
     }
 }

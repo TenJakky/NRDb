@@ -32,7 +32,6 @@ class LoginForm extends BaseFormComponent
         }
 
         $this->presenter->flashMessage('Successfully logged in.', 'success');
-
         $this->presenter->redirect('Default:default');
     }
 }

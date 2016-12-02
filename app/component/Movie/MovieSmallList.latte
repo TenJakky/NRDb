@@ -1,0 +1,12 @@
+<table class="grid">
+{foreach $movies as $movie}
+	<tr>
+		<td>{$movie->original_title}</td>
+		<td>{$movie->english_title}</td>
+		<td>{$movie->czech_title}</td>
+		<td>{$movie->year}</td>
+		<td>RATING</td>
+		<td>MY RATING</td>
+	</tr>	
+{/foreach}
+</table>

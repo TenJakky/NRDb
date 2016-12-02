@@ -1,0 +1,18 @@
+{layout ../@layout.latte}
+{block title}Movies{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Movie:add}">Add movie</a>
+        </li>
+        <li>
+            <a href="{plink Movie:rate}">Add rating</a>
+        </li>
+    </ul>
+</section>
+<section>
+    {control movieList}
+</section>
