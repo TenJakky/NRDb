@@ -35,8 +35,7 @@ class MovieModel extends BaseModel
         LEFT JOIN movie2director ON movie.id = movie2director.movie_id
         WHERE movie2director.person_id = {$directorId}
         GROUP BY movie.id
-        ORDER BY sum(rating_movie.rating) DESC"
-        )->fetch();
+        ORDER BY sum(rating_movie.rating) DESC")->fetch();
     }
 
     public function getAverageRating($directorId)

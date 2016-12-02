@@ -34,7 +34,7 @@ class MovieList extends BaseDatagridComponent
         $this->grid->setTemplateParams(
             array(
                 'userId' => $this->presenter->user->getId(),
-                'ratingModel' => $this->ratingMovieModel));
+                'ratingMovieModel' => $this->ratingMovieModel));
 
         return $this->grid;
     }

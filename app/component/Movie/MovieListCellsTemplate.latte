@@ -8,7 +8,7 @@
 
 {define col-rating}
 <td>
-    {$ratingModel->getRating($row->id)|number: 2}
+    {$ratingMovieModel->getRating($row->id)|number: 2}
 </td>
 {/define}
 
@@ -30,7 +30,7 @@
 
 {define col-my_rating}
 <td>
-    {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+    {var $rating => $ratingMovieModel->getUserRating($row->id, $userId)}
     {if $rating}
         {$rating->rating}
         <a href="{plink Movie:editRating $rating->id}">Edit rating</a>
@@ -42,12 +42,12 @@
 
 {define col-men_rating}
 <td>
-    {$ratingModel->getMenRating($row->id)|number: 2}
+    {$ratingMovieModel->getMenRating($row->id)|number: 2}
 </td>
 {/define}
 
 {define col-women_rating}
 <td>
-    {$ratingModel->getWomenRating($row->id)|number: 2}
+    {$ratingMovieModel->getWomenRating($row->id)|number: 2}
 </td>
 {/define}
