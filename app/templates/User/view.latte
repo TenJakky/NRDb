@@ -59,7 +59,7 @@
         {foreach $ratingsMovie as $rating}
             <tr>
                 <td>
-                    <a href="{plink Movie:view $rating->movie_id}">{$rating->ref('movies', 'movie_id')->original_title}</a>
+                    <a href="{plink Movie:view $rating->movie_id}">{$rating->ref('movie', 'movie_id')->original_title}</a>
                 </td>
                 <td>
                     {$rating->rating}

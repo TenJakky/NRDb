@@ -3,7 +3,7 @@
 {block head}{/block}
 {block content}
 
-{if $data->poster_file}
+{if isset($data->poster_file)}
 <div id="image">
     <img src="{php getcwd().$data->poster_file}"/>
 </div>
