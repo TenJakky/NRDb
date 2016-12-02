@@ -4,5 +4,5 @@ namespace App\Model;
 
 class RatingSeriesModel extends BaseModel
 {
-    protected $tableName = 'rating_series';
+    public $tableName = 'rating_series';
 }

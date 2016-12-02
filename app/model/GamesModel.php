@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Model;
 
 class GameModel extends BaseModel
 {
-    protected $tableName = 'game';
+    public $tableName = 'game';
 }

@@ -6,3 +6,5 @@ log/*
 
 composer.lock
 www/css/common.css
+app/config/database.neon
+

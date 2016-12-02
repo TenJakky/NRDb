@@ -4,14 +4,13 @@ namespace App\Model;
 
 class RatingMovieModel extends BaseModel
 {
-    protected $tableName = 'rating_movie';
+    public $tableName =  'rating_movie';
 
     public function getRating($movieId)
     {
         $result = $this->context->query(
-            "select sum(rating) as `sum`, count(*) as `size` from ratings_movie ".
-            "where ratings_movie.movie_id = {$movieId}"
-        )->fetch();
+        "select sum(rating) as `sum`, count(*) as `size` from {$this->tableName} ".
+        "where {$this->tableName}.movie_id = {$movieId}")->fetch();
 
         if ($result['size'] === 0)
         {
@@ -28,9 +27,9 @@ class RatingMovieModel extends BaseModel
     public function getWomenRating($movieId)
     {
         $result = $this->context->query(
-        "select sum(ratings_movie.rating) as `sum`, count(*) as `size` from ratings_movie ".
-        "left join users on ratings_movie.user_id = users.id ".
-        "where ratings_movie.movie_id = {$movieId} AND users.gender = 'Female'")->fetch();
+        "select sum({$this->tableName}.rating) as `sum`, count(*) as `size` from {$this->tableName} ".
+        "left join user on {$this->tableName}.user_id = user.id ".
+        "where {$this->tableName}.movie_id = {$movieId} AND user.gender = 'Female'")->fetch();
 
         if ($result['size'] === 0)
         {
@@ -42,9 +41,9 @@ class RatingMovieModel extends BaseModel
     public function getMenRating($movieId)
     {
         $result = $this->context->query(
-            "select sum(ratings_movie.rating) as `sum`, count(*) as `size` from ratings_movie ".
-            "left join users on ratings_movie.user_id = users.id ".
-            "where ratings_movie.movie_id = {$movieId} AND users.gender = 'Male'")->fetch();
+            "select sum({$this->tableName}.rating) as `sum`, count(*) as `size` from {$this->tableName} ".
+            "left join user on {$this->tableName}.user_id = user.id ".
+            "where {$this->tableName}.movie_id = {$movieId} AND user.gender = 'Male'")->fetch();
 
         if ($result['size'] === 0)
         {

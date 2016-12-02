@@ -4,7 +4,7 @@ namespace App\Model;
 
 class PersonModel extends BaseModel
 {
-    protected $tableName = 'person';
+    public $tableName = 'person';
 
     public function fetchSelectBox()
     {

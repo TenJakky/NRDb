@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Model;
 
 class MovieModel extends BaseModel
 {
-    protected $tableName = 'movie';
+    public $tableName = 'movie';
 
     const FILE_DIR = '/images/movie/';
 

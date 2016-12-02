@@ -4,5 +4,5 @@ namespace App\Model;
 
 class CountryModel extends BaseModel
 {
-    protected $tableName = 'country';
+    public $tableName = 'country';
 }

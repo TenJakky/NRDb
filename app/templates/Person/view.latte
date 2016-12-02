@@ -6,7 +6,7 @@
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Director:edit $data->id}">Edit details</a>
+            <a href="{plink Person:edit $data->id}">Edit details</a>
         </li>
     </ul>
 </section>
@@ -46,7 +46,8 @@
             </tr>
         </thead>
         <tbody>
-        {foreach $movies as $movie}
+        {foreach $data->related('movie2director.person_id') as $row}
+        {var movie => $row->ref('movie', 'movie_id')}
             <tr>
                 <td>
                     <a href="{plink Movie:view $movie->id}">{$movie->original_title}</a>

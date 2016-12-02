@@ -11,17 +11,20 @@ class MovieForm extends BaseFormComponent
     protected $moviesModel;
     protected $countryModel;
     protected $ratingMovieModel;
+    protected $movieDirectorModel;
 
     public function __construct(
         \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $moviesModel,
         \App\Model\CountryModel $countryModel,
-        \App\Model\RatingMovieModel $ratingMovieModel)
+        \App\Model\RatingMovieModel $ratingMovieModel,
+        \App\Model\MovieDirectorModel $movieDirectorModel)
     {
         $this->personModel = $personModel;
         $this->moviesModel = $moviesModel;
         $this->countryModel = $countryModel;
         $this->ratingMovieModel = $ratingMovieModel;
+        $this->movieDirectorModel = $movieDirectorModel;
     }
 
     public function createComponentForm()
@@ -45,18 +48,18 @@ class MovieForm extends BaseFormComponent
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
 
-        $form->addSelect('director_id', 'Director', $directors)
+        $form->addSelect('director', 'Director', $directors)
             ->setPrompt('Select director')
             ->setOption('description', 'If your director is not in this list, please fill the details below.');
         $form->addText('name', 'Director name')
-            ->addConditionOn($form['director_id'], Form::BLANK)
+            ->addConditionOn($form['director'], Form::BLANK)
                 ->setRequired();
         $form->addText('surname', 'Director surname')
-            ->addConditionOn($form['director_id'], Form::BLANK)
+            ->addConditionOn($form['director'], Form::BLANK)
                 ->setRequired();
         $form->addSelect('country_id', 'Director nationality', $countries)
             ->setPrompt('Select nationality')
-            ->addConditionOn($form['director_id'], Form::BLANK)
+            ->addConditionOn($form['director'], Form::BLANK)
                 ->setRequired();
 
         $form->addSelect('rating', 'Rating', array_combine(range(0, 10, 1), range(0, 10, 1)))
@@ -88,23 +91,39 @@ class MovieForm extends BaseFormComponent
         $rating['note'] = $data['note'];
         $rating['date'] = date('Y-m-d');
 
-        if (!isset($data['director_id']))
+        unset($data['note']);
+        unset($data['rating']);
+
+
+        if (isset($data['director']))
         {
-            $director = $this->personModel->insert(array('name'=>$data['name'], 'surname'=>$data['surname'], 'country_id'=>$data['country_id']));
-            $data['director_id'] = $director->id;
+            $movieDirector = array();
+            $movieDirector['person_id'] = $data['director'];
+        }
+        else
+        {
+            $director = $this->personModel->insert(array(
+                'name' => $data['name'],
+                'surname'=>$data['surname'],
+                'country_id'=>$data['country_id']));
+
+            $movieDirector = array();
+            $movieDirector['person_id'] = $director->id;
         }
 
-        unset($data['note']);
         unset($data['name']);
-        unset($data['poster']);
         unset($data['surname']);
         unset($data['country_id']);
-        unset($data['rating']);
+        unset($data['director']);
 
         $movie = $this->moviesModel->insert($data);
 
         $rating['movie_id'] = $movie->id;
         $this->ratingMovieModel->insert($rating);
+
+        $movieDirector['movie_id'] = $movie->id;
+        $this->movieDirectorModel->insert($movieDirector);
+
 
         $this->flashMessage('Movie successfully saved.', 'success');
         $this->presenter->redirect('Movie:view', array('id' => $movie->id));

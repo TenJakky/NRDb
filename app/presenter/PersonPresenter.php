@@ -11,8 +11,7 @@ class PersonPresenter extends BaseViewPresenter
     public function __construct(
         \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $movieModel,
-        \App\Model\RatingMovieModel $ratingMovieModel
-    )
+        \App\Model\RatingMovieModel $ratingMovieModel)
     {
         parent::__construct();
         $this->model = $personModel;
@@ -24,7 +23,6 @@ class PersonPresenter extends BaseViewPresenter
     {
         parent::actionView($id);
 
-        $this->template->movies = $this->movieModel->findBy('director_id', $id)->fetchAll();
         $this->template->ratingMovieModel = $this->ratingMovieModel;
     }
 
