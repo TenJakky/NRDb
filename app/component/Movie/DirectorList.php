@@ -21,11 +21,11 @@ class DirectorList extends BaseGridComponent
     {
         parent::createComponentDataGrid();
 
-        $this->grid->addCellsTemplate(__DIR__.'/CellsTemplate.latte');
+        $this->grid->addCellsTemplate(__DIR__ . '/DirectorListCellsTemplate.latte');
         $this->grid->addColumn('name', 'Name')->enableSort();
         $this->grid->addColumn('country_id', 'Nationality')->enableSort();
-        $this->grid->addColumn('movie_count', '# of movies');//TODO:->enableSort();
-        $this->grid->addColumn('average_rating', 'Average rating');//TODO:->enableSort();
+        $this->grid->addColumn('movie_count', '# of movies');
+        $this->grid->addColumn('average_rating', 'Average rating');
         $this->grid->addColumn('top_movie', 'Top movie');
 
         $this->grid->setTemplateParams(array('movieModel' => $this->movieModel));

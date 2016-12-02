@@ -8,13 +8,16 @@ class EditMovieForm extends BaseFormComponent
 {
     protected $personModel;
     protected $movieModel;
+    protected $movieDirectorModel;
 
     public function __construct(
         \App\Model\PersonModel $directorModel,
-        \App\Model\MovieModel $movieModel)
+        \App\Model\MovieModel $movieModel,
+        \App\Model\MovieDirectorModel $movieDirectorModel)
     {
         $this->personModel = $directorModel;
         $this->movieModel = $movieModel;
+        $this->movieDirectorModel = $movieDirectorModel;
     }
 
     public function render($id = 1)
@@ -38,6 +41,7 @@ class EditMovieForm extends BaseFormComponent
         $form->addText('czech_title', 'Czech title');
         $form->addText('year', 'Year')
             ->addRule(Form::INTEGER, 'Year must be number')
+            ->addRule(Form::MIN_LENGTH, 'Year must be at least 4 digit long.', 4)
             ->setRequired();
         $form->addTextArea('description', 'Description')
             ->setOption('description', 'IMDB has nice short descriptions.');
@@ -45,8 +49,7 @@ class EditMovieForm extends BaseFormComponent
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
 
-        $form->addSelect('director_id', 'Director', $directors)
-            ->setHtmlId('input_director')
+        $form->addSelect('director', 'Director', $directors)
             ->setPrompt('Select director');
 
         $form->addSubmit('submit', 'Submit');

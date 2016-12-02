@@ -13,10 +13,10 @@ class MovieModel extends BaseModel
     protected $movieActorModel;
 
     public function __construct(
+        \Nette\Database\Context $context,
         \App\Model\RatingMovieModel $ratingMovieModel,
         \App\Model\MovieDirectorModel $movieDirectorModel,
-        \App\Model\MovieActorModel $movieActorModel,
-        \Nette\Database\Context $context)
+        \App\Model\MovieActorModel $movieActorModel)
     {
         parent::__construct($context);
 
@@ -28,23 +28,33 @@ class MovieModel extends BaseModel
     public function getTopMovie($directorId)
     {
         return $this->query(
-            "select 
-                {$this->tableName}.*
-                from {$this->tableName}
-                left join ratings_movie on {$this->tableName}.id = ratings_movie.movie_id
-                where {$this->tableName}.director_id = {$directorId}
-                order by sum(ratings_movie.rating) DESC"
+        "SELECT
+        movie.*
+        FROM movie
+        LEFT JOIN rating_movie ON movie.id = rating_movie.movie_id
+        LEFT JOIN movie2director ON movie.id = movie2director.movie_id
+        WHERE movie2director.person_id = {$directorId}
+        GROUP BY movie.id
+        ORDER BY sum(rating_movie.rating) DESC"
         )->fetch();
     }
 
     public function getAverageRating($directorId)
     {
-        $set = $this->findBy('director_id', $directorId);
-        $sum = 0;
-        foreach ($set as $movie)
-        {
-            $sum += $this->ratingMovieModel->getRating($movie->id);
-        }
-        return $set->count() ? $sum / $set->count() : null;
+        $result = $this->ratingMovieModel->query(
+        "SELECT
+        sum(`subsum`) AS `sum`,
+        count(*) AS `size`
+        FROM
+        (
+        SELECT 
+        (sum(rating_movie.rating) / count(*)) as `subsum`
+        FROM movie2director
+        LEFT JOIN rating_movie ON rating_movie.movie_id = movie2director.movie_id
+        WHERE movie2director.person_id = {$directorId}
+        GROUP BY rating_movie.movie_id
+        ) AS `alias`")->fetch();
+
+        return $result->size ? $result->sum / $result->size : null;
     }
 }

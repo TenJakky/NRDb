@@ -41,6 +41,7 @@ class MovieForm extends BaseFormComponent
         $form->addText('czech_title', 'Czech title');
         $form->addText('year', 'Year')
             ->addRule(Form::INTEGER, 'Year must be number')
+            ->addRule(Form::MIN_LENGTH, 'Year must be at least 4 digit long.', 4)
             ->setRequired();
         $form->addTextArea('description', 'Description')
             ->setOption('description', 'IMDB has nice short descriptions.');
