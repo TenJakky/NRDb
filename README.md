@@ -1,24 +1,23 @@
 # NRDb
 
 [![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen.svg)](https://github.com/peldax/NRDb/releases)
+[![license](https://img.shields.io/github/license/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/blob/master/LICENSE)
 
 [![Code Climate](https://codeclimate.com/github/peldax/NRDb/badges/gpa.svg)](https://codeclimate.com/github/peldax/NRDb)
 
-[![license](https://img.shields.io/github/license/shard-lang/shard.svg?maxAge=3600)](https://github.com/shard-lang/shard/blob/master/LICENSE)
+[//]: #[![Downloads](https://img.shields.io/github/downloads/peldax/NRDb/total.svg?maxAge=60)]()
 
-[//]: #[![Downloads](https://img.shields.io/github/downloads/shard-lang/shard/total.svg?maxAge=60)]()
+[![Issues](https://img.shields.io/github/issues-raw/peldax/NRDb.svg?maxAge=600)](https://github.com/peldax/NRDb/issues)
+[![ClosedIssues](https://img.shields.io/github/issues-closed-raw/peldax/NRDb.svg?maxAge=600)](https://github.com/peldax/NRDb/issues?q=is%3Aissue+is%3Aclosed)
 
-[![Issues](https://img.shields.io/github/issues-raw/shard-lang/shard.svg?maxAge=600)](https://github.com/shard-lang/shard/issues)
-[![ClosedIssues](https://img.shields.io/github/issues-closed-raw/shard-lang/shard.svg?maxAge=600)](https://github.com/shard-lang/shard/issues?q=is%3Aissue+is%3Aclosed)
+[//]: #[![PullRequests](https://img.shields.io/github/issues-pr-raw/peldax/NRDb.svg?maxAge=600)](https://github.com/peldax/NRDb/pulls)
+[//]: #[![ClosedPullRequests](https://img.shields.io/github/issues-pr-closed-raw/peldax/NRDb.svg?maxAge=600)](https://github.com/peldax/NRDb/pulls?q=is%3Apr+is%3Aclosed)
 
-[//]: #[![PullRequests](https://img.shields.io/github/issues-pr-raw/shard-lang/shard.svg?maxAge=600)](https://github.com/shard-lang/shard/pulls)
-[//]: #[![ClosedPullRequests](https://img.shields.io/github/issues-pr-closed-raw/shard-lang/shard.svg?maxAge=600)](https://github.com/shard-lang/shard/pulls?q=is%3Apr+is%3Aclosed)
+[//]: #[![Release](https://img.shields.io/github/release/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/releases)
+[//]: #[![CommitsSinceRelease](https://img.shields.io/github/commits-since/peldax/NRDb/0.svg?maxAge=600)]()
 
-[//]: #[![Release](https://img.shields.io/github/release/shard-lang/shard.svg?maxAge=3600)](https://github.com/shard-lang/shard/releases)
-[//]: #[![CommitsSinceRelease](https://img.shields.io/github/commits-since/shard-lang/shard/0.svg?maxAge=600)]()
-
-[//]: #[![Tag](https://img.shields.io/github/tag/shard-lang/shard.svg?maxAge=3600)](https://github.com/shard-lang/shard/tags)
-[//]: #[![CommitsSinceTag](https://img.shields.io/github/commits-since/shard-lang/shard/0.svg?maxAge=600)]()
+[//]: #[![Tag](https://img.shields.io/github/tag/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/tags)
+[//]: #[![CommitsSinceTag](https://img.shields.io/github/commits-since/peldax/NRDb/0.svg?maxAge=600)]()
 
 Nette Rating Database - web application for sharing movies, books or games between friends.
 
