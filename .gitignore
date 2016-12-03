@@ -1,7 +1,14 @@
 www/bower/*
+
 vendor/*
+!vendor/.htaccess
+
 temp/*
+!temp/.htaccess
+
 log/*
+!log/.htaccess
+
 .idea/*
 
 composer.lock
