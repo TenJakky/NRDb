@@ -33,7 +33,7 @@ Feel free to use or contribute.
 
 ## How to customize
 
-1. Style your gallery in *.scss* files.
+1. Change css in *.scss* files.
 3. Change html elements in *.latte* files.
 
 ## Credits
