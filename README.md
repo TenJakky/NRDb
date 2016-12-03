@@ -16,8 +16,8 @@
 [//]: #[![Release](https://img.shields.io/github/release/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/releases)
 [//]: #[![CommitsSinceRelease](https://img.shields.io/github/commits-since/peldax/NRDb/0.svg?maxAge=600)]()
 
-[//]: #[![Tag](https://img.shields.io/github/tag/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/tags)
-[//]: #[![CommitsSinceTag](https://img.shields.io/github/commits-since/peldax/NRDb/0.svg?maxAge=600)]()
+[![Tag](https://img.shields.io/github/tag/peldax/NRDb.svg?maxAge=600)](https://github.com/peldax/NRDb/tags)
+[![CommitsSinceTag](https://img.shields.io/github/commits-since/peldax/NRDb/0.5.svg?maxAge=600)]()
 
 Nette Rating Database - web application for sharing movies, books or games between friends.
 
