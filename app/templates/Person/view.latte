@@ -13,19 +13,19 @@
 <section>
     <table class="list">
         <tr>
-            <td>Nationality</td>
+            <th>Nationality</th>
             <td>{$data->ref('country', 'country_id')->name}</td>
         </tr>
         <tr>
-            <td>Born</td>
+            <th>Born</th>
             <td>{$data->born|date:'%d.%m.%Y'}</td>
         </tr>
         <tr>
-            <td>Died</td>
+            <th>Died</th>
             <td>{$data->died|date:'%d.%m.%Y'}</td>
         </tr>
         <tr>
-            <td>Bio</td>
+            <th>Bio</th>
             <td>{$data->bio}</td>
         </tr>
     </table>

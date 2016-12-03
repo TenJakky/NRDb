@@ -6,7 +6,7 @@
 <section>
     <ul class="inline-buttons">
         <li>
-            {if $data->username == $user->identity->username}
+            {if $data->id == $user->getId()}
                 <a href="{plink Default:settings}">Change account settings</a>
             {/if}
         </li>
