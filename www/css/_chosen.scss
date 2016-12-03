@@ -232,7 +232,20 @@
   font-size: 1px; }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover {
-  background-position: -42px -10px; }
+  background-position: -42px -10px;
+  text-decoration: none;
+}
+
+.search-choice-close::after
+{
+  content: "X";
+  font-size: 13px;
+}
+
+.search-choice-close:hover::after
+{
+  font-weight: bold;
+}
 
 .chosen-container-multi .chosen-choices li.search-choice-disabled {
   padding-right: 5px;
