@@ -38,15 +38,11 @@ Feel free to use or contribute.
 
 ## Credits
 
-[Nette](http://www.nette.org)
-
-[Datagrid](http://www.github.com/nextras/datagrid)
-
-[jQuery](http://www.jquery.com)
-
-[Chosen](http://www.github.com/harvesthq/chosen)
-
-[Google Fonts - Roboto](https://www.google.com/fonts/specimen/Roboto)
+* [Nette](http://www.nette.org)
+* [Datagrid](http://www.github.com/nextras/datagrid)
+* [jQuery](http://www.jquery.com)
+* [Chosen](http://www.github.com/harvesthq/chosen)
+* [Google Fonts - Roboto](https://www.google.com/fonts/specimen/Roboto)
 
 ## Issues
 
