@@ -49,8 +49,7 @@ class MovieForm extends BaseFormComponent
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
 
-        $form->addSelect('director', 'Director', $directors)
-            ->setPrompt('Select director')
+        $form->addMultiSelect('director', 'Director', $directors)
             ->setOption('description', 'If your director is not in this list, please fill the details below.');
         $form->addText('name', 'Director name')
             ->addConditionOn($form['director'], Form::BLANK)
@@ -86,20 +85,31 @@ class MovieForm extends BaseFormComponent
             $data['poster_file'] = $dest;
         }*/
 
-        $rating = array();
-        $rating['rating'] = $data['rating'];
-        $rating['user_id'] = $this->presenter->user->id;
-        $rating['note'] = $data['note'];
-        $rating['date'] = date('Y-m-d');
+        $movie = $this->moviesModel->insert(array(
+            'original_title' => $data['original_title'],
+            'english_title' => $data['english_title'],
+            'czech_title' => $data['czech_title'],
+            'year' => $data['year'],
+            'description' => $data['description'],
+        ));
 
-        unset($data['note']);
-        unset($data['rating']);
+        $this->ratingMovieModel->insert(array(
+            'rating' => $data['rating'],
+            'movie_id' => $movie->id,
+            'user_id' => $this->presenter->user->id,
+            'note' => $data['note'],
+            'date' => date('Y-m-d')
+        ));
 
-
-        if (isset($data['director']))
+        if (!empty($data['director']))
         {
-            $movieDirector = array();
-            $movieDirector['person_id'] = $data['director'];
+            foreach ($data['director'] as $person)
+            {
+                $this->movieDirectorModel->insert(array(
+                    'movie_id' => $movie->id,
+                    'person_id' => $person
+                ));
+            }
         }
         else
         {
@@ -111,20 +121,6 @@ class MovieForm extends BaseFormComponent
             $movieDirector = array();
             $movieDirector['person_id'] = $director->id;
         }
-
-        unset($data['name']);
-        unset($data['surname']);
-        unset($data['country_id']);
-        unset($data['director']);
-
-        $movie = $this->moviesModel->insert($data);
-
-        $rating['movie_id'] = $movie->id;
-        $this->ratingMovieModel->insert($rating);
-
-        $movieDirector['movie_id'] = $movie->id;
-        $this->movieDirectorModel->insert($movieDirector);
-
 
         $this->flashMessage('Movie successfully saved.', 'success');
         $this->presenter->redirect('Movie:view', array('id' => $movie->id));

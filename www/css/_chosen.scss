@@ -34,7 +34,6 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-weight: normal;
   color: #999999; }
 
 .chosen-container .search-choice .group-name:after, .chosen-container .chosen-single .group-name:after {
@@ -59,7 +58,7 @@
   line-height: 24px; }
 
 .chosen-container-single .chosen-default {
-  color: #999; }
+  color: $black; }
 
 .chosen-container-single .chosen-single span {
   display: block;
@@ -101,7 +100,7 @@
 
 .chosen-container-single .chosen-search {
   position: relative;
-  z-index: 1010;
+  z-index: 101;
   margin: 0;
   padding: 3px 4px;
   white-space: nowrap; }
@@ -114,7 +113,6 @@
   outline: 0;
   border: 1px solid $grey;
   font-size: 1em;
-  font-family: sans-serif;
   line-height: normal;
   border-radius: 0; }
 
@@ -189,7 +187,7 @@
   height: auto;
   border: 1px solid $grey;
   background-color: #fff;
-  cursor: text; }
+  cursor: pointer; }
 
 .chosen-container-multi .chosen-choices li {
   float: left;
@@ -207,10 +205,8 @@
   outline: 0;
   border: 0 !important;
   background: transparent !important;
-  color: #999;
+  color: $black;
   font-size: 100%;
-  font-family: sans-serif;
-  line-height: normal;
   border-radius: 0; }
 
 .chosen-container-multi .chosen-choices li.search-choice {
@@ -219,10 +215,6 @@
   padding: 3px 20px 3px 5px;
   border: 1px solid $grey;
   max-width: 100%;
-  background-color: #eeeeee;
-  background-size: 100% 19px;
-  background-repeat: repeat-x;
-  background-clip: padding-box;
   color: #333;
   line-height: 13px;
   cursor: default; }
@@ -266,7 +258,8 @@
 /* @group Active  */
 .chosen-container-active .chosen-single {
   border: 1px solid $red;
-  outline: 1px solid $red; }
+  outline: 1px solid $red;
+}
 
 .chosen-container-active.chosen-with-drop .chosen-single {
   border: 1px solid $grey; }
@@ -280,6 +273,7 @@
 
 .chosen-container-active .chosen-choices {
   border: 1px solid $red;
+  outline: 1px solid $red;
 }
 
 .chosen-container-active .chosen-choices li.search-field input[type="text"] {

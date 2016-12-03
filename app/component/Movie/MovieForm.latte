@@ -3,12 +3,30 @@
 <script>
 $(document).ready(function ()
 {
-    $('select[name="director_id"]').change(function (evt, params)
+    var selected = 0;
+
+    $('select[name="director[]"]').change(function (evt, params)
     {
-        var disabled = params.selected;
-        $('input[name="name"]').prop('disabled', disabled);
-        $('input[name="surname"]').prop('disabled', disabled);
-        $('select[name="country_id"]').prop('disabled', disabled).trigger("chosen:updated");
+        if (params.selected)
+        {
+            if (selected === 0)
+            {
+                $('input[name="name"]').prop('disabled', true);
+                $('input[name="surname"]').prop('disabled', true);
+                $('select[name="country_id"]').prop('disabled', true).trigger("chosen:updated");
+            }
+            selected++;
+        }
+        else
+        {
+            selected--;
+            if (selected === 0)
+            {
+                $('input[name="name"]').prop('disabled', false);
+                $('input[name="surname"]').prop('disabled', false);
+                $('select[name="country_id"]').prop('disabled', false).trigger("chosen:updated");
+            }
+        }
     });
 });
 </script>

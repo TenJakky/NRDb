@@ -32,6 +32,11 @@ form
           padding: 8px 10px;
         }
 
+        textarea
+        {
+          height: 150px;
+        }
+
         input[type=number]:focus, input[type=text]:focus, textarea:focus, input[type=password]:focus
         {
           outline: 2px solid $red;

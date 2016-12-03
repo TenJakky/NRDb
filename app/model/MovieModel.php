@@ -52,7 +52,7 @@ class MovieModel extends BaseModel
         LEFT JOIN rating_movie ON rating_movie.movie_id = movie2director.movie_id
         WHERE movie2director.person_id = {$directorId}
         GROUP BY rating_movie.movie_id
-        ) AS `alias`")->fetch();
+        ) AS `subquery`")->fetch();
 
         return $result->size ? $result->sum / $result->size : null;
     }

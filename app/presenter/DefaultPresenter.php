@@ -2,6 +2,8 @@
 
 namespace App\Presenter;
 
+use App\Model\UserModel;
+
 class DefaultPresenter extends BasePresenter
 {
     protected $movieModel;
@@ -14,6 +16,7 @@ class DefaultPresenter extends BasePresenter
     protected $ratingBookModel;
     protected $ratingGameModel;
 
+    protected $userModel;
     protected $changelogModel;
 
     public function __construct(
@@ -25,6 +28,7 @@ class DefaultPresenter extends BasePresenter
         \App\Model\RatingSeriesModel $ratingsSeriesModel,
         \App\Model\RatingBookModel $ratingsBookModel,
         \App\Model\RatingGameModel $ratingsGameModel,
+        \App\Model\UserModel $userModel,
         \App\Model\ChangelogModel $changelogModel
 )
     {
@@ -36,6 +40,7 @@ class DefaultPresenter extends BasePresenter
         $this->ratingSeriesModel = $ratingsSeriesModel;
         $this->ratingBookModel = $ratingsBookModel;
         $this->ratingGameModel = $ratingsGameModel;
+        $this->userModel = $userModel;
         $this->changelogModel = $changelogModel;
     }
 
@@ -78,6 +83,7 @@ class DefaultPresenter extends BasePresenter
             $this->template->{"total{$i}"} = $count;
         }
 
+        $this->template->activeUsers = $this->userModel->getActivity();
         $this->template->changes = $this->changelogModel->findAll()->order('date DESC')->limit(5);
     }
 }

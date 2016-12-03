@@ -20,9 +20,14 @@ class EditMovieForm extends BaseFormComponent
         $this->movieDirectorModel = $movieDirectorModel;
     }
 
-    public function render($id = 1)
+    public function render($id = 0)
     {
-        $this['form']->setDefaults($this->movieModel->findRow($id));
+        $row = $this->movieModel->findRow($id);
+
+        $data = $row->toArray();
+        $data['director'] = $row->related('movie2director.movie_id')->fetchPairs('id', 'person_id');
+
+        $this['form']->setDefaults($data);
 
         parent::render();
     }
@@ -49,8 +54,7 @@ class EditMovieForm extends BaseFormComponent
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
 
-        $form->addSelect('director', 'Director', $directors)
-            ->setPrompt('Select director');
+        $form->addMultiSelect('director', 'Director', $directors);
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -61,6 +65,13 @@ class EditMovieForm extends BaseFormComponent
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
         $data = $form->getValues();
+
+        $this->movieDirectorModel->findBy('movie_id', $data['id'])->delete();
+        foreach($data['director'] as $person)
+        {
+            $this->movieDirectorModel->insert(array('person_id' => $person, 'movie_id' => $data['id']));
+        }
+        unset($data['director']);
 
         $id = $this->movieModel->save($data);
 
