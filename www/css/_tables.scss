@@ -23,17 +23,18 @@
   }
 }
 
-.highlight
-{
-  background-color: #f9d2d4;
-}
-
 .list
 {
   @extend .table;
+  table-layout: fixed;
 }
 
-#director-list
+.highlight
+{
+  background-color: $lightRed;
+}
+
+.director-list
 {
   padding: 0;
   margin: 0;

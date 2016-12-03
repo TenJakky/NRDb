@@ -32,25 +32,31 @@
 <section>
     <table class="list">
         <tr>
-            <td>English title</td>
+            <th>English title</th>
             <td>{$data->english_title}</td>
         </tr>
         <tr>
-            <td>Czech title</td>
+            <th>Czech title</th>
             <td>{$data->czech_title}</td>
         </tr>
         <tr>
-            <td>Director</td>
-            {foreach $data->related('movie2director.movie_id') as $director}
-            <td><a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a></td>
-            {/foreach}
+            <th>Director</th>
+            <td>
+                <ul class="director-list">
+                {foreach $data->related('movie2director.movie_id') as $director}
+                    <li>
+                        <a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a>
+                    </li>
+                {/foreach}
+                </ul>
+            </td>
         </tr>
         <tr>
-            <td>Year</td>
+            <th>Year</th>
             <td>{$data->year}</td>
         </tr>
         <tr>
-            <td>Description</td>
+            <th>Description</th>
             <td>{$data->description}</td>
         </tr>
     </table>

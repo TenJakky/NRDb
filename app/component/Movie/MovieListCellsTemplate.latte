@@ -20,7 +20,7 @@
 
 {define col-director}
 <td>
-    <ul id="director-list">
+    <ul class="director-list">
         {foreach $row->related('movie2director.movie_id') as $director}
         <li><a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a></li>
         {/foreach}
