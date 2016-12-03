@@ -1,5 +1,15 @@
 form
 {
+  label.required:after, tr.required > th > label:after,
+  {
+    content: " *";
+  }
+
+  #person_form
+  {
+    display: none;
+  }
+
   table
   {
     width: 100%;
@@ -9,11 +19,6 @@ form
       th
       {
         text-align: left;
-
-        label.required:after
-        {
-          content: " *";
-        }
       }
 
       td
@@ -34,7 +39,7 @@ form
 
         textarea
         {
-          height: 150px;
+          height: 100px;
         }
 
         input[type=number]:focus, input[type=text]:focus, textarea:focus, input[type=password]:focus

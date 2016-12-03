@@ -7,6 +7,7 @@ class LoginForm extends BaseFormComponent
     public function createComponentForm()
     {
         $form = new \Nette\Application\UI\Form();
+        $form->addProtection('Security token has expired, please submit the form again');
 
         $form->addText('username', 'Username');
         $form->addPassword('password', 'Password');

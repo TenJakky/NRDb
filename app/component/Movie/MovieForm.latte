@@ -1,32 +1,128 @@
-{control form}
+{snippetArea area}
+{form form}
+    <table>
+        <tbody>
+            <tr class="required">
+                <th>{label original_title /}</th>
+                <td>{input original_title}</td>
+            </tr>
+            <tr class="required">
+                <th>{label english_title /}</th>
+                <td>{input english_title}</td>
+            </tr>
+            <tr>
+                <th>{label czech_title /}</th>
+                <td>{input czech_title}</td>
+            </tr>
+            <tr class="required">
+                <th>{label year /}</th>
+                <td>{input year}</td>
+            </tr>
+            <tr>
+                <th>{label description /}</th>
+                <td>{input description}</td>
+            </tr>
+            <tr class="required">
+                <th>{label director /}</th>
+                <td n:snippet="personSelect1">{input director}&nbsp;&nbsp;&nbsp;{input add_person}</td>
+            </tr>
+            <tr>
+                <th>{label actor /}</th>
+                <td n:snippet="personSelect2">{input actor}</td>
+            </tr>
+            <tr id="person_form">
+                <th></th>
+                <td>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>{label name /}</th>
+                                <td>{input name}</td>
+                            </tr>
+                            <tr>
+                                <th>{label surname /}</th>
+                                <td>{input surname}</td>                
+                            </tr>
+                            <tr>
+                                <th>{label country_id /}</th>
+                                <td>{input country_id}</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>{input submit_person}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="required">
+                <th>{label rating /}</th>
+                <td>{input rating}</td>
+            </tr>
+            <tr>
+                <th>{label note /}</th>
+                <td>{input note}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{input submit}</td>
+            </tr>
+        </tbody>
+    </table>
+{/form}
+{/snippetArea}
 
 <script>
 $(document).ready(function ()
 {
-    var selected = 0;
-
-    $('select[name="director[]"]').change(function (evt, params)
+    $('input[name="add_person"]').click(function()
     {
-        if (params.selected)
+        $('#person_form').toggle();
+    });
+
+    $('input[name="submit_person"]').click(function()
+    {
+        var name = $('input[name="name"]');
+        var surname = $('input[name="surname"]')
+        var country_id = $('select[name="country_id"]')
+
+        if (name.val() == 0)
         {
-            if (selected === 0)
-            {
-                $('input[name="name"]').prop('disabled', true);
-                $('input[name="surname"]').prop('disabled', true);
-                $('select[name="country_id"]').prop('disabled', true).trigger("chosen:updated");
-            }
-            selected++;
+            alert("This field is required.");
+            $(name).focus();
+            return;
         }
-        else
+        if (surname.val() == 0)
         {
-            selected--;
-            if (selected === 0)
-            {
-                $('input[name="name"]').prop('disabled', false);
-                $('input[name="surname"]').prop('disabled', false);
-                $('select[name="country_id"]').prop('disabled', false).trigger("chosen:updated");
-            }
+            alert("This field is required.");
+            $(surname).focus();
+            return;
         }
+        if (country_id.val() == 0)
+        {
+            alert("This field is required.");
+            $(country_id).trigger('chosen:activate');
+            return;
+        }
+
+        $.post(
+        {
+            url: {link addPerson!},
+            data:
+            {
+                name: $('input[name="name"]').val(),
+                surname: $('input[name="surname"]').val(),
+                country_id: $('select[name="country_id"]').val()
+            },
+            success: function(result)
+            {
+                alert('Successfully submitted.');
+                $('input[name="name"]').val('');
+                $('input[name="surname"]').val(''),
+                $('select[name="country_id"]').val(0);
+                $('select[name="country_id"]').trigger('chosen:updated');   
+            }
+        });    
     });
 });
 </script>

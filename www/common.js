@@ -7,4 +7,9 @@ $(document).ready(function ()
             width: '50%'
         }
     );
+
+    $('select').chosen().focus(function()
+    {
+        $(this).trigger('chosen:activate');
+    });
 });

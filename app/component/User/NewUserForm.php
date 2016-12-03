@@ -16,6 +16,7 @@ class NewUserForm extends BaseFormComponent
     public function createComponentForm()
     {
         $form = new \Nette\Application\UI\Form();
+        $form->addProtection('Security token has expired, please submit the form again');
 
         $form->addText('username', 'Username')->setRequired();
         $form->addText('password', 'Password')->setRequired();
