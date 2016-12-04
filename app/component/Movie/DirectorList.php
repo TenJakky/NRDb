@@ -36,6 +36,8 @@ class DirectorList extends BaseDatagridComponent
     public function getDataSource($filter, $order)
     {
         $filters = array();
+        $filters[':movie2director.id NOT'] = null;
+
         foreach ($filter as $k => $v)
         {
             if ($k == 'id' || is_array($v))
