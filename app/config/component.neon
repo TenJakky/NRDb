@@ -18,9 +18,6 @@ services:
     movieForm:
         class: App\Component\MovieForm
 
-    editMovieForm:
-        class: App\Component\EditMovieForm
-
     rateMovieForm:
         class: App\Component\RateMovieForm
 
@@ -29,4 +26,10 @@ services:
 
     personForm:
         class: App\Component\PersonForm
+
+    directedList:
+        class: App\Component\DirectedList
+
+    actedList:
+        class: App\Component\ActedList
 

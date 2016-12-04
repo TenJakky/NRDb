@@ -57,20 +57,17 @@ abstract class BaseModel extends Nette\Object
         return $this->findByArray(array($this->getTable()->getPrimary() => (int) $id))->delete();
     }
 
-    public function save($data, $id = 0)
+    public function save($data)
     {
-        if (isset($data['id']) && $data['id'] != 0)
+        if (isset($data['id']))
         {
             $data['id'] = (int) $data['id'];
-            $this->getTable()->where('id', $data['id'])->update($data);
 
-            return $data['id'];
-        }
-        else if (0 != $id)
-        {
-            $id = (int) $id;
-            $this->getTable()->where('id', $id)->update($data);
-            return $id;
+            if ($data['id'] != 0)
+            {
+                $this->getTable()->where('id', $data['id'])->update($data);
+                return $data['id'];
+            }
         }
 
         $row = $this->insert($data);

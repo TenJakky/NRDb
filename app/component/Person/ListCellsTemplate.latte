@@ -18,16 +18,6 @@
 </td>
 {/define}
 
-{define col-director}
-<td>
-    <ul class="person-list">
-        {foreach $row->related('movie2director.movie_id') as $director}
-        <li><a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a></li>
-        {/foreach}
-    </ul>
-</td>
-{/define}
-
 {define col-my_rating}
 <td>
     {var $rating => $ratingMovieModel->getUserRating($row->id, $userId)}
@@ -37,17 +27,5 @@
     {else}
         <a href="{plink Movie:rate $row->id}">Rate</a>
     {/if}
-</td>
-{/define}
-
-{define col-men_rating}
-<td>
-    {$ratingMovieModel->getMenRating($row->id)|number: 2}
-</td>
-{/define}
-
-{define col-women_rating}
-<td>
-    {$ratingMovieModel->getWomenRating($row->id)|number: 2}
 </td>
 {/define}

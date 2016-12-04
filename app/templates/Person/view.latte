@@ -30,36 +30,21 @@
         </tr>
     </table>
 </section>
+{if $data->related('movie2director.person_id')->count() > 0}
 <section>
-    <table class="grid">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Rating
-                </th>
-                <th>
-                    Year
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        {foreach $data->related('movie2director.person_id') as $row}
-        {var movie => $row->ref('movie', 'movie_id')}
-            <tr>
-                <td>
-                    <a href="{plink Movie:view $movie->id}">{$movie->original_title}</a>
-                </td>
-                <td>
-                    {$ratingMovieModel->getRating($movie->id)|number:2}
-                </td>
-                <td>
-                    {$movie->year}
-                </td>
-            </tr>
-        {/foreach}
-        </tbody>
-    </table>
+    <h2>Directed</h2>
+    {control directedList $data->id}
 </section>
+{/if}
+{if $data->related('movie2actor.person_id')->count() > 0}
+<section>
+    <h2>Acted in</h2>
+    {control actedList $data->id}
+</section>
+{/if}
+{if $data->related('book2author.person_id')->count() > 0}
+<section>
+    <h2>Written</h2>
+    {control writtenList $data->id}
+</section>
+{/if}

@@ -42,10 +42,10 @@
         <tr>
             <th>Director</th>
             <td>
-                <ul class="director-list">
-                {foreach $data->related('movie2director.movie_id') as $director}
+                <ul class="person-list">
+                {foreach $data->related('movie2director.movie_id') as $person}
                     <li>
-                        <a href="{plink Person:view $director->person_id}">{$director->person_id|person}</a>
+                        <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
                     </li>
                 {/foreach}
                 </ul>
@@ -58,6 +58,18 @@
         <tr>
             <th>Description</th>
             <td>{$data->description}</td>
+        </tr>
+        <tr>
+            <th>Cast</th>
+            <td>
+                <ul class="person-list">
+                {foreach $data->related('movie2actor.movie_id') as $person}
+                    <li>
+                        <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
+                    </li>
+                {/foreach}
+                </ul>
+            </td>
         </tr>
     </table>
 </section>

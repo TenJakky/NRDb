@@ -20,7 +20,6 @@ class MovieList extends BaseDatagridComponent
     {
         parent::createComponentDataGrid();
 
-        $this->grid->addCellsTemplate(__DIR__ . '/MovieListCellsTemplate.latte');
         $this->grid->addColumn('original_title', 'Original title')->enableSort();
         $this->grid->addColumn('english_title', 'English Title')->enableSort();
         $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
@@ -31,6 +30,7 @@ class MovieList extends BaseDatagridComponent
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
 
+        $this->grid->addCellsTemplate(__DIR__ . '/MovieListCellsTemplate.latte');
         $this->grid->setTemplateParams(
             array(
                 'userId' => $this->presenter->user->getId(),
