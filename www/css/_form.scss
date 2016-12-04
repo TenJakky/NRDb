@@ -1,6 +1,6 @@
 form
 {
-  label.required:after, tr.required > th > label:after,
+  label.required:after, tr.required > th > label:after
   {
     content: " *";
   }
@@ -24,6 +24,11 @@ form
       td
       {
         padding: 5px;
+
+        div
+        {
+          display: inline;
+        }
 
         input[type=number], input[type=text], textarea, input[type=password]
         {

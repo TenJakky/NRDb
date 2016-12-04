@@ -140,6 +140,9 @@ class MovieForm extends BaseFormComponent
         $this['form']['director']->setItems($person);
         $this['form']['actor']->setItems($person);
 
-        $this->redrawControl('personSelect1');
+        $this->template->getLatte()->addProvider('formsStack', [$this['form']]);
+
+        $this->redrawControl('personSelect');
+        $this->redrawControl('personSelect2');
     }
 }

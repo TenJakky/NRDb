@@ -1,4 +1,3 @@
-{snippetArea area}
 {form form}
     <table>
         <tbody>
@@ -24,11 +23,11 @@
             </tr>
             <tr class="required">
                 <th>{label director /}</th>
-                <td n:snippet="personSelect1">{input director}&nbsp;&nbsp;&nbsp;{input add_person}</td>
+                <td>{snippet personSelect}{input director}{/snippet}&nbsp;&nbsp;&nbsp;{input add_person}</td>
             </tr>
             <tr>
                 <th>{label actor /}</th>
-                <td n:snippet="personSelect2">{input actor}</td>
+                <td>{snippet personSelect2}{input actor}{/snippet}</td>
             </tr>
             <tr id="person_form">
                 <th></th>
@@ -41,7 +40,7 @@
                             </tr>
                             <tr>
                                 <th>{label surname /}</th>
-                                <td>{input surname}</td>                
+                                <td>{input surname}</td>
                             </tr>
                             <tr>
                                 <th>{label country_id /}</th>
@@ -70,11 +69,17 @@
         </tbody>
     </table>
 {/form}
-{/snippetArea}
 
 <script>
 $(document).ready(function ()
 {
+    $.nette.ext('snippets').after(function ($el)
+    {
+        $el.find('select').chosen(chosenOptions);
+    });
+
+    $.nette.init();
+
     $('input[name="add_person"]').click(function()
     {
         $('#person_form').toggle();
@@ -83,44 +88,45 @@ $(document).ready(function ()
     $('input[name="submit_person"]').click(function()
     {
         var name = $('input[name="name"]');
-        var surname = $('input[name="surname"]')
-        var country_id = $('select[name="country_id"]')
+        var surname = $('input[name="surname"]');
+        var country_id = $('select[name="country_id"]');
 
         if (name.val() == 0)
         {
             alert("This field is required.");
-            $(name).focus();
+            name.focus();
             return;
         }
         if (surname.val() == 0)
         {
             alert("This field is required.");
-            $(surname).focus();
+            surname.focus();
             return;
         }
         if (country_id.val() == 0)
         {
             alert("This field is required.");
-            $(country_id).trigger('chosen:activate');
+            country_id.trigger('chosen:activate');
             return;
         }
 
-        $.post(
+        $.nette.ajax(
         {
             url: {link addPerson!},
+            method: 'POST',
             data:
             {
-                name: $('input[name="name"]').val(),
-                surname: $('input[name="surname"]').val(),
-                country_id: $('select[name="country_id"]').val()
+                name: name.val(),
+                surname: surname.val(),
+                country_id: country_id.val()
             },
             success: function(result)
             {
                 alert('Successfully submitted.');
-                $('input[name="name"]').val('');
-                $('input[name="surname"]').val(''),
-                $('select[name="country_id"]').val(0);
-                $('select[name="country_id"]').trigger('chosen:updated');   
+                name.val('');
+                surname.val('');
+                country_id.val(0);
+                country_id.trigger('chosen:updated');
             }
         });    
     });
