@@ -4,15 +4,22 @@ services:
 - App\Model\SeriesModel
 - App\Model\BookModel
 - App\Model\GameModel
+
 - App\Model\RatingMovieModel
 - App\Model\RatingSeriesModel
 - App\Model\RatingBookModel
 - App\Model\RatingGameModel
+
 - App\Model\PersonModel
 - App\Model\StudioModel
+
 - App\Model\CountryModel
+
 - App\Model\ChangelogModel
+- App\Model\HeadlineModel
+
 - App\Model\MovieDirectorModel
 - App\Model\MovieActorModel
-
-
+- App\Model\SeriesDirectorModel
+- App\Model\SeriesActorModel
+- App\Model\BookAuthorModel

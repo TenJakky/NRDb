@@ -3,11 +3,22 @@ services:
     loginForm:
         class: App\Component\LoginForm
 
+    settingsForm:
+        class: App\Component\SettingsForm
+
+
+    headline:
+        class: App\Component\Headline
+
+    headlineForm:
+        class: App\Component\HeadlineForm
+
     newUserForm:
         class: App\Component\NewUserForm
 
-    settingsForm:
-        class: App\Component\SettingsForm
+    introductionForm:
+        class: App\Component\IntroductionForm
+
 
     movieList:
         class: App\Component\MovieList

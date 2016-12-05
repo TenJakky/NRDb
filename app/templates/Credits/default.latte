@@ -1,0 +1,26 @@
+{layout ../@layout.latte}
+{block title}Credits{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <h2>Credits</h2>
+    <ul>
+        <li>This application is being developed by <a href="http://www.peldax.com">Václav Pelíšek</a>.</li>
+        <li>You can post your contributions or feedback at project's <a href="http://www.github.com/peldax/NRDb">Github repository</a>.</li>
+    </ul>
+    <h3>Frameworks and libraries used</h3>
+    <ul>
+        <li><a href="http://www.nette.org">Nette</a></li>
+        <li><a href="http://www.github.com/nextras/datagrid">Datagrid</a></li>
+        <li><a href="http://www.jquery.com">jQuery</a></li>
+        <li><a href="http://www.github.com/harvesthq/chosen">Chosen</a></li>
+    </ul>
+</section>
+<section>
+    <h2>Changelog</h2>
+    {foreach $changes as $change}
+        <h3>{$change->version} - {$change->date|date:'%d.%m.%Y'}</h3>
+        {$change->message|noescape}
+    {/foreach}
+</section>

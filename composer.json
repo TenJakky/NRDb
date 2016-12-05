@@ -12,7 +12,7 @@
   ],
   "require": {
     "php" : ">=5.6",
-    "nette/nette": "~2.4.0",
+    "nette/nette": ">=2.4.0",
     "nextras/datagrid": "@dev"
   },
   "minimum-stability": "stable"

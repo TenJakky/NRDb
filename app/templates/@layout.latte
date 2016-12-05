@@ -20,40 +20,53 @@
     </head>
     <body>
         <nav>
-            <ul>
-                <li>
-                    <a href="{plink Default:default}">Dashboard</a>
-                </li>
-                <li>
-                    <a href="{plink Movie:default}">Movies</a>
-                </li>
-                <li>
-                    <a href="{plink Series:default}">Series</a>
-                </li>
-                <li>
-                    <a href="{plink Book:default}">Books</a>
-                </li>
-                <li>
-                    <a href="{plink Game:default}">Games</a>
-                </li>
+            <div>
+                <ul>
+                    <li>
+                        <a href="{plink Default:default}">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{plink Movie:default}">Movies</a>
+                    </li>
+                    <li>
+                        <a href="{plink Series:default}">Series</a>
+                    </li>
+                    <li>
+                        <a href="{plink Book:default}">Books</a>
+                    </li>
+                    <li>
+                        <a href="{plink Music:default}">Music</a>
+                    </li>
+                    <li>
+                        <a href="{plink Game:default}">Games</a>
+                    </li>
+                    <li>
+                        <a href="{plink Statistics:default}">Statistics</a>
+                    </li>
+                </ul>
+                <ul class="right">
                 {if $user->isLoggedIn()}
-                <li class="right">
-                    <a href="{plink User:view $user->getId()}">{$user->identity->username}</a>
-                </li>
-                <li>
-                    <a href="{plink Default:logout}">Log out</a>
-                </li>
+                    <li>
+                        <a href="{plink User:view $user->getId()}">{$user->getIdentity()->username}</a>
+                    </li>
+                    <li>
+                        <a href="{plink Default:logout}">Log out</a>
+                    </li>
                 {if in_array('Administrator', $user->getRoles())}
-                <li>
-                    <a href="{plink Default:newUser}">New user</a>
-                </li>
+                    <li>
+                        <a href="{plink Default:newUser}">New user</a>
+                    </li>
                 {/if}
                 {/if}
-            </ul>
+                    <li>
+                        <a href="{plink Credits:default}">Credits</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <main>
             {foreach $flashes as $flash}
-            <div class="{$flash->type}">{$flash->message}</div>
+                <div class="{$flash->type}">{$flash->message}</div>
             {/foreach}
             <header>
                 <h1>{include title}</h1>

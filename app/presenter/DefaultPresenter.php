@@ -17,7 +17,7 @@ class DefaultPresenter extends BasePresenter
     protected $ratingGameModel;
 
     protected $userModel;
-    protected $changelogModel;
+    protected $introductionModel;
 
     public function __construct(
         \App\Model\MovieModel $movieModel,
@@ -29,8 +29,7 @@ class DefaultPresenter extends BasePresenter
         \App\Model\RatingBookModel $ratingsBookModel,
         \App\Model\RatingGameModel $ratingsGameModel,
         \App\Model\UserModel $userModel,
-        \App\Model\ChangelogModel $changelogModel
-)
+        \App\Model\IntroductionModel $IntroductionModel)
     {
         $this->movieModel = $movieModel;
         $this->seriesModel = $seriesModel;
@@ -41,12 +40,7 @@ class DefaultPresenter extends BasePresenter
         $this->ratingBookModel = $ratingsBookModel;
         $this->ratingGameModel = $ratingsGameModel;
         $this->userModel = $userModel;
-        $this->changelogModel = $changelogModel;
-    }
-
-    public function renderSettings()
-    {
-        $this->template->data = $this->user->getIdentity()->data;
+        $this->introfuctionModel = $introfuctionModel;
     }
 
     public function actionLogout()
@@ -84,6 +78,5 @@ class DefaultPresenter extends BasePresenter
         }
 
         $this->template->activeUsers = $this->userModel->getActivity();
-        $this->template->changes = $this->changelogModel->findAll()->order('date DESC')->limit(5);
     }
 }
