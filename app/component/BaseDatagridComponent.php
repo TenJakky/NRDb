@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class BaseDatagridComponent extends \Nette\Application\UI\Control
+class BaseDatagridComponent extends BaseComponent
 {
     /**
      * @var \App\Tool\Datagrid
@@ -31,14 +31,9 @@ class BaseDatagridComponent extends \Nette\Application\UI\Control
             $this->grid = new \App\Tool\Datagrid;
         }
         $this->grid->addCellsTemplate(__DIR__.'/Paginator.latte');
-        $this->grid->setDatasourceCallback(array($this, 'dataSource'));
+        $this->grid->addCellsTemplate(__DIR__.'/TableTag.latte');
+        $this->grid->setDataSourceCallback(array($this, 'dataSource'));
         $this->grid->setPagination($this->perPage, array($this, 'dataSourceCount'));
-    }
-
-    public function render()
-    {
-        $this->template->setFile(str_replace(".php", ".latte", $this->getReflection()->getFileName()));
-        $this->template->render();
     }
 
     public function getDataSource($filter, $order)
