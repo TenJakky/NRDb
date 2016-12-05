@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class NewUserForm extends BaseFormComponent
+class NewUserForm extends BaseComponent
 {
     protected $userModel;
     protected $countryModel;

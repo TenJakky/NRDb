@@ -2,7 +2,7 @@
 
 namespace App\Presenter;
 
-class StatisticsPresenter extends BaseViewPresenter
+class StatisticsPresenter extends BasePresenter
 {
 
 }

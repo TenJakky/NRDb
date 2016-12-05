@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class PersonForm extends BaseFormComponent
+class PersonForm extends BaseComponent
 {
     protected $personModel;
     protected $moviesModel;

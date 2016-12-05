@@ -1,0 +1,113 @@
+{layout ../@layout.latte}
+{block title}{$data->original_title}{/block}
+{block head}{/block}
+{block content}
+
+{if isset($data->poster_file)}
+<div id="image">
+    <img src="{php getcwd().$data->poster_file}"/>
+</div>
+{/if}
+<h2>{$ratingModel->getRating($data->id)|number: 2}</h2>
+<h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
+<h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
+{var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
+{if $rating}
+<h3>My rating: {$rating->rating}</h3>
+{/if}
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Movie:edit $data->id}">Edit details</a>
+        </li>
+        <li>
+            {if $rating}
+            <a href="{plink Movie:editRating $rating->id}">Edit rating</a>
+            {else}
+            <a href="{plink Movie:rate $data->id}">Rate</a>
+            {/if}
+        </li>
+    </ul>
+</section>
+<section>
+    <table class="list">
+        <tr>
+            <th>English title</th>
+            <td>{$data->english_title}</td>
+        </tr>
+        <tr>
+            <th>Czech title</th>
+            <td>{$data->czech_title}</td>
+        </tr>
+        <tr>
+            <th>Director</th>
+            <td>
+                <ul class="person-list">
+                {foreach $data->related('movie2director.movie_id') as $person}
+                    <li>
+                        <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
+                    </li>
+                {/foreach}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Year</th>
+            <td>{$data->year}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{$data->description}</td>
+        </tr>
+        <tr>
+            <th>Cast</th>
+            <td>
+                <ul class="person-list">
+                {foreach $data->related('movie2actor.movie_id') as $person}
+                    <li>
+                        <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
+                    </li>
+                {/foreach}
+                </ul>
+            </td>
+        </tr>
+    </table>
+</section>
+<section>
+    <table class="grid">
+        <thead>
+            <tr>
+                <th>
+                    User
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Note
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {foreach $ratingModel->findby('movie_id', $data->id)->fetchAll() as $rating}
+            <tr>
+                <td>
+                    <a href="{plink User:view $rating->user_id}">{$rating->ref('user', 'user_id')->username}</a>
+                </td>
+                <td>
+                    {$rating->rating}
+                </td>
+                <td>
+                    {$rating->note}
+                </td>
+                <td>
+                    {$rating->date|date:'%d.%m.%Y'}
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</section>

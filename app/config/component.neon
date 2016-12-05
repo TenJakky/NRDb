@@ -7,11 +7,11 @@ services:
         class: App\Component\SettingsForm
 
 
-    headline:
-        class: App\Component\Headline
+    newsBanner:
+        class: App\Component\NewsBanner
 
-    headlineForm:
-        class: App\Component\HeadlineForm
+    newsForm:
+        class: App\Component\NewsForm
 
     newUserForm:
         class: App\Component\NewUserForm

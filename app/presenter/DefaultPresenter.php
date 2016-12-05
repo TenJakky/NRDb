@@ -29,7 +29,7 @@ class DefaultPresenter extends BasePresenter
         \App\Model\RatingBookModel $ratingsBookModel,
         \App\Model\RatingGameModel $ratingsGameModel,
         \App\Model\UserModel $userModel,
-        \App\Model\IntroductionModel $IntroductionModel)
+        \App\Model\IntroductionModel $introductionModel)
     {
         $this->movieModel = $movieModel;
         $this->seriesModel = $seriesModel;
@@ -40,7 +40,7 @@ class DefaultPresenter extends BasePresenter
         $this->ratingBookModel = $ratingsBookModel;
         $this->ratingGameModel = $ratingsGameModel;
         $this->userModel = $userModel;
-        $this->introfuctionModel = $introfuctionModel;
+        $this->introductionModel = $introductionModel;
     }
 
     public function actionLogout()
@@ -53,6 +53,8 @@ class DefaultPresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->template->introduction = $this->introductionModel->getIntroduction();
+
         $total = 0;
         $total += $this->template->moviesT = $this->movieModel->count();
         $total += $this->template->seriesT = $this->seriesModel->count();

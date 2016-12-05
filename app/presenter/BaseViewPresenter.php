@@ -6,7 +6,9 @@ class BaseViewPresenter extends BasePresenter
 {
     public function actionView($id)
     {
-        if (!$id || !($data = $this->model->findRow($id)))
+        $data = $this->model->findRow($id);
+
+        if (!$data)
         {
             $this->flashMessage($this->name.' was not found.', 'failure');
             $this->redirect('Default:default');

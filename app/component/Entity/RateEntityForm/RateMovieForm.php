@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class RateMovieForm extends BaseFormComponent
+class RateMovieForm extends BaseComponent
 {
     protected $movieModel;
     protected $ratingMovieModel;

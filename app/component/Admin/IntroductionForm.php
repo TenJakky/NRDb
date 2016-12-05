@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class IntroductionForm extends BaseFormComponent
+class IntroductionForm extends BaseComponent
 {
 	
 }

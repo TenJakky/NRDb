@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class SettingsForm extends BaseFormComponent
+class SettingsForm extends BaseComponent
 {
     protected $userModel;
     protected $countryModel;

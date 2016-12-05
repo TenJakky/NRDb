@@ -4,7 +4,7 @@ namespace App\Component;
 
 use Nette\Forms\Form;
 
-class MovieForm extends BaseFormComponent
+class MovieForm extends BaseComponent
 {
     protected $personModel;
     protected $movieModel;

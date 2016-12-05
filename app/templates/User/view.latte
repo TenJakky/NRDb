@@ -40,35 +40,3 @@
         {/if}
     </table>
 </section>
-<section>
-    <table class="grid">
-        <thead>
-            <tr>
-                <th>
-                    Movie
-                </th>
-                <th>
-                    Rating
-                </th>
-                <th>
-                    Note
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        {foreach $ratingsMovie as $rating}
-            <tr>
-                <td>
-                    <a href="{plink Movie:view $rating->movie_id}">{$rating->ref('movie', 'movie_id')->original_title}</a>
-                </td>
-                <td>
-                    {$rating->rating}
-                </td>
-                <td>
-                    {$rating->note}
-                </td>
-            </tr>
-        {/foreach}
-        </tbody>
-    </table>
-</section>

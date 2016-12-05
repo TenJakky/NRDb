@@ -1,25 +1,33 @@
 services:
 
-- App\Model\MovieModel
-- App\Model\SeriesModel
-- App\Model\BookModel
-- App\Model\GameModel
-
-- App\Model\RatingMovieModel
-- App\Model\RatingSeriesModel
-- App\Model\RatingBookModel
-- App\Model\RatingGameModel
-
-- App\Model\PersonModel
-- App\Model\StudioModel
-
 - App\Model\CountryModel
 
+- App\Model\NewsModel
 - App\Model\ChangelogModel
-- App\Model\HeadlineModel
+- App\Model\IntroductionModel
 
+- App\Model\PersonModel
+
+- App\Model\MovieModel
 - App\Model\MovieDirectorModel
 - App\Model\MovieActorModel
+- App\Model\RatingMovieModel
+
+- App\Model\SeriesModel
 - App\Model\SeriesDirectorModel
 - App\Model\SeriesActorModel
+- App\Model\RatingSeriesModel
+
+- App\Model\BookModel
 - App\Model\BookAuthorModel
+- App\Model\RatingBookModel
+
+- App\Model\GameModel
+- App\Model\RatingGameModel
+
+- App\Model\MusicModel
+- App\Model\RatingMusicModel
+
+- App\Model\StudioModel
+
+
