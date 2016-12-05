@@ -18,13 +18,13 @@
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Movie:edit $data->id}">Edit details</a>
+            <a href="{plink Book:edit $data->id}">Edit details</a>
         </li>
         <li>
             {if $rating}
-            <a href="{plink Movie:editRating $rating->id}">Edit rating</a>
+            <a href="{plink Book:editRating $rating->id}">Edit rating</a>
             {else}
-            <a href="{plink Movie:rate $data->id}">Rate</a>
+            <a href="{plink Book:rate $data->id}">Rate</a>
             {/if}
         </li>
     </ul>
@@ -43,7 +43,7 @@
             <th>Director</th>
             <td>
                 <ul class="person-list">
-                {foreach $data->related('movie2director.movie_id') as $person}
+                {foreach $data->related('book2author.book_id') as $person}
                     <li>
                         <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
                     </li>
@@ -58,18 +58,6 @@
         <tr>
             <th>Description</th>
             <td>{$data->description}</td>
-        </tr>
-        <tr>
-            <th>Cast</th>
-            <td>
-                <ul class="person-list">
-                {foreach $data->related('movie2actor.movie_id') as $person}
-                    <li>
-                        <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
-                    </li>
-                {/foreach}
-                </ul>
-            </td>
         </tr>
     </table>
 </section>
@@ -92,7 +80,7 @@
             </tr>
         </thead>
         <tbody>
-        {foreach $ratingModel->findby('movie_id', $data->id)->fetchAll() as $rating}
+        {foreach $ratingModel->findby('book_id', $data->id)->fetchAll() as $rating}
             <tr>
                 <td>
                     <a href="{plink User:view $rating->user_id}">{$rating->ref('user', 'user_id')->username}</a>
