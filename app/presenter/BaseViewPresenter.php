@@ -2,7 +2,7 @@
 
 namespace App\Presenter;
 
-class BaseViewPresenter extends BasePresenter
+abstract class BaseViewPresenter extends BasePresenter
 {
     public function actionView($id)
     {

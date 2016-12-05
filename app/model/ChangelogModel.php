@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class ChangelogModel extends BaseModel
+final class ChangelogModel extends BaseModel
 {
     public $tableName = 'changelog';
 }

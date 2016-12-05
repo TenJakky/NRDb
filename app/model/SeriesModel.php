@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class SeriesModel extends BaseModel
+final class SeriesModel extends BaseModel
 {
     public $tableName = 'series';
 }

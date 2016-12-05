@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Nette\Security as NS;
 
-class Authenticator extends UserModel implements NS\IAuthenticator
+final class Authenticator extends UserModel implements NS\IAuthenticator
 {
     public function authenticate(array $credentials)
     {

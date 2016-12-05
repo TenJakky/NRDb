@@ -2,7 +2,7 @@
 
 namespace App\Presenter;
 
-class PersonPresenter extends BaseViewPresenter
+final class PersonPresenter extends BaseViewPresenter
 {
     protected $model;
 

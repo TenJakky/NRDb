@@ -4,7 +4,7 @@ namespace App\Presenter;
 
 use App\Model\UserModel;
 
-class DefaultPresenter extends BasePresenter
+final class DefaultPresenter extends BasePresenter
 {
     protected $movieModel;
     protected $seriesModel;

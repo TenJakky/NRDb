@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class RatingBookModel extends BaseModel
+final class RatingBookModel extends BaseModel
 {
     public $tableName = 'rating_book';
 }

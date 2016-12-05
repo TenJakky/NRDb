@@ -2,7 +2,7 @@
 
 namespace App\Presenter;
 
-class BaseEntityPresenter extends BaseViewPresenter
+abstract class BaseEntityPresenter extends BaseViewPresenter
 {
     public function actionEditRating($id)
     {

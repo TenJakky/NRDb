@@ -2,7 +2,7 @@
 
 namespace App\Presenter;
 
-class CreditsPresenter extends BasePresenter
+final class CreditsPresenter extends BasePresenter
 {
 	protected $changelogModel;
 

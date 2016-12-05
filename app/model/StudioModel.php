@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class StudioModel extends BaseModel
+final class StudioModel extends BaseModel
 {
     public $tableName = 'studio';
 }

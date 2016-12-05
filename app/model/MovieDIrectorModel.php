@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class MovieDirectorModel extends BaseModel
+final class MovieDirectorModel extends BaseModel
 {
     public $tableName = 'movie2director';
 }
