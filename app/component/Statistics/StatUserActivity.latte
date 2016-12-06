@@ -1,0 +1,26 @@
+<table class="grid">
+    <thead>
+        <td>X</td>
+        <th>Movies</th>
+        <th>Series</th>
+        <th>Books</th>
+        <th>Games</th>
+        <th>Total</th>
+    </thead>
+    <tbody>
+    {foreach $activeUsers as $temp}
+        {if $temp->id == $user->getId()}
+        <tr class="highlight">
+        {else}
+        <tr>
+        {/if}
+            <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
+            <td>{$temp->movie}</td>
+            <td>{$temp->series}</td>
+            <td>{$temp->book}</td>
+            <td>{$temp->game}</td>
+            <td>{$temp->total}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

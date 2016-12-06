@@ -2,23 +2,20 @@ services:
 
     loginForm:
         class: App\Component\LoginForm
-
     settingsForm:
         class: App\Component\SettingsForm
 
 
-    newsBanner:
-        class: App\Component\NewsBanner
-
-    newsForm:
-        class: App\Component\NewsForm
-
     newUserForm:
         class: App\Component\NewUserForm
-
+    newsBanner:
+        class: App\Component\NewsBanner
+    newsForm:
+        class: App\Component\NewsForm
+    introductionBanner:
+        class: App\Component\IntroductionBanner
     introductionForm:
         class: App\Component\IntroductionForm
-
 
     movieList:
         class: App\Component\MovieList
@@ -36,10 +33,12 @@ services:
 
     personForm:
         class: App\Component\PersonForm
-
     directedList:
         class: App\Component\DirectedList
-
     actedList:
         class: App\Component\ActedList
 
+    statElementCount:
+        class: App\Component\StatElementCount
+    statUserActivity:
+        class: App\Component\StatUserActivity
