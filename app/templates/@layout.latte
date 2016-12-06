@@ -52,11 +52,11 @@
                     <li>
                         <a href="{plink Default:logout}">Log out</a>
                     </li>
-                {if in_array('Administrator', $user->getRoles())}
+                    {if !in_array('User', $user->getRoles())}
                     <li>
-                        <a href="{plink Default:newUser}">New user</a>
+                        <a href="{plink Admin:Default:default}">Administration</a>
                     </li>
-                {/if}
+                    {/if}
                 {/if}
                     <li>
                         <a href="{plink Credits:default}">Credits</a>
