@@ -10,7 +10,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         parent::startup();
 
-        if (!$this->user->isLoggedIn() && $this->action != 'login')
+        if ($this->action != 'login' && !$this->user->isLoggedIn())
         {
             $this->redirect('Default:login');
         }

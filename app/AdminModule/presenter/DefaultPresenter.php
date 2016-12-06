@@ -2,7 +2,8 @@
 
 namespace App\AdminModule\Presenter;
 
-final class DefaultPresenter extends \App\Presenter\BasePresenter
+final class DefaultPresenter extends BasePresenter
 {
 
 }
+
