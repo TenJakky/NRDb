@@ -22,18 +22,17 @@ services:
 
     movieList:
         class: App\Component\MovieList
-
     movieSmallList:
         class: App\Component\MovieSmallList
-
     movieForm:
         class: App\Component\MovieForm
-
     rateMovieForm:
         class: App\Component\RateMovieForm
-
     directorList:
         class: App\Component\DirectorList
+    actorList:
+            class: App\Component\ActorList
+
 
     personForm:
         class: App\Component\PersonForm

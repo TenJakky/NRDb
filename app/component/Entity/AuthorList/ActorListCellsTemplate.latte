@@ -12,13 +12,13 @@
 
 {define col-movie_count}
     <td>
-        {$row->related('movie2director.person_id')->count()}
+        {$row->related('movie2actor.person_id')->count()}
     </td>
 {/define}
 
 {define col-top_movie}
     <td>
-        {var topMovie => $movieModel->getTopDirectorMovie($row->id)}
+        {var topMovie => $movieModel->getTopActorMovie($row->id)}
         {if $topMovie}
             <a href="{plink Movie:view $topMovie->id}">{$topMovie->original_title}</a>
         {/if}
@@ -27,6 +27,6 @@
 
 {define col-average_rating}
     <td>
-        {$movieModel->getAverageDirectorRating($row->id)|number:2}
+        {$movieModel->getAverageActorRating($row->id)|number:2}
     </td>
 {/define}
