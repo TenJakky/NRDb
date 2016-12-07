@@ -2,28 +2,9 @@
 
 namespace App\Model;
 
-final class MovieModel extends BaseModel
+final class MovieModel extends BaseEntityModel
 {
     public $tableName = 'movie';
-
-    const FILE_DIR = '/images/movie/';
-
-    protected $ratingMovieModel;
-    protected $movieDirectorModel;
-    protected $movieActorModel;
-
-    public function __construct(
-        \Nette\Database\Context $context,
-        \App\Model\RatingMovieModel $ratingMovieModel,
-        \App\Model\MovieDirectorModel $movieDirectorModel,
-        \App\Model\MovieActorModel $movieActorModel)
-    {
-        parent::__construct($context);
-
-        $this->ratingMovieModel = $ratingMovieModel;
-        $this->movieDirectorModel = $movieDirectorModel;
-        $this->movieActorModel = $movieActorModel;
-    }
 
     public function getTopDirectorMovie($directorId)
     {
@@ -53,12 +34,11 @@ final class MovieModel extends BaseModel
 
     public function getAverageDirectorRating($directorId)
     {
-        $result = $this->ratingMovieModel->query(
+        $result = $this->query(
         "SELECT
         sum(`subsum`) AS `sum`,
         count(*) AS `size`
-        FROM
-        (
+        FROM (
         SELECT 
         (sum(rating_movie.rating) / count(*)) as `subsum`
         FROM movie2director
@@ -72,12 +52,11 @@ final class MovieModel extends BaseModel
 
     public function getAverageActorRating($actorId)
     {
-        $result = $this->ratingMovieModel->query(
-            "SELECT
+        $result = $this->query(
+        "SELECT
         sum(`subsum`) AS `sum`,
         count(*) AS `size`
-        FROM
-        (
+        FROM (
         SELECT 
         (sum(rating_movie.rating) / count(*)) as `subsum`
         FROM movie2actor

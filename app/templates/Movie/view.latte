@@ -74,40 +74,5 @@
     </table>
 </section>
 <section>
-    <table class="grid">
-        <thead>
-            <tr>
-                <th>
-                    User
-                </th>
-                <th>
-                    Rating
-                </th>
-                <th>
-                    Note
-                </th>
-                <th>
-                    Date
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        {foreach $ratingModel->findby('movie_id', $data->id)->fetchAll() as $rating}
-            <tr>
-                <td>
-                    <a href="{plink User:view $rating->user_id}">{$rating->ref('user', 'user_id')->username}</a>
-                </td>
-                <td>
-                    {$rating->rating}
-                </td>
-                <td>
-                    {$rating->note}
-                </td>
-                <td>
-                    {$rating->date|date:'%d.%m.%Y'}
-                </td>
-            </tr>
-        {/foreach}
-        </tbody>
-    </table>
+    {control ratingListMovie $data->id}
 </section>

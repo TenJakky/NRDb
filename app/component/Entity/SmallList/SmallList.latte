@@ -1,0 +1,30 @@
+<table class="grid">
+    <thead>
+        <th>Original Title</th>
+        <th>English Title</th>
+        <th>Czech Title</th>
+        <th>Year</th>
+        <th>Rating</th>
+        <th>My Rating</th>
+    </thead>
+    <tbody>
+    {foreach $entities as $entity}
+        <tr>
+            <td><a href="{plink "{$name}:view" $entity->id}">{$entity->original_title}</a></td>
+            <td>{$entity->english_title}</td>
+            <td>{$entity->czech_title}</td>
+            <td>{$entity->year}</td>
+            <td>{$ratingModel->getRating($entity->id)|number:2}</td>
+            <td>
+            {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
+            {if $rating}
+                {$rating->rating}
+                <a href="{plink "{$name}:editRating" $rating->id}">Edit rating</a>
+            {else}
+                <a href="{plink "{$name}:rate" $entity->id}">Rate</a>
+            {/if}
+            </td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

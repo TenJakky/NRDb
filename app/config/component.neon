@@ -19,8 +19,10 @@ services:
 
     movieList:
         class: App\Component\MovieList
-    movieSmallList:
-        class: App\Component\MovieSmallList
+    smallListMovie:
+        class: App\Component\SmallListMovie
+    ratingListMovie:
+        class: App\Component\RatingListMovie
     movieForm:
         class: App\Component\MovieForm
     rateMovieForm:

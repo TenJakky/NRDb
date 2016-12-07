@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class MusicModel extends BaseModel
+final class MusicModel extends BaseEntityModel
 {
     public $tableName = 'music';
 }

@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class GameModel extends BaseModel
+final class GameModel extends BaseEntityModel
 {
     public $tableName = 'game';
 }
