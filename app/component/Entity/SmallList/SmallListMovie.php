@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class SmallListMovie extends SmallList
+final class SmallListMovie extends SmallList
 {
     public function __construct(
         \App\Model\MovieModel $movieModel,

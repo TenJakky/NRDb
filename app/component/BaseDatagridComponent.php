@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class BaseDatagridComponent extends BaseComponent
+abstract class BaseDatagridComponent extends BaseComponent
 {
     /** @var \App\Tool\Datagrid */
     protected $grid;

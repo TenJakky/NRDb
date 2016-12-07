@@ -29,7 +29,7 @@ abstract class SmallList extends BaseComponent
                 break;
         }
 
-        $this->template->name = $this->presenter->getName();
+        $this->template->pName = $this->presenter->getName();
         $this->template->userId = $userId;
         $this->template->ratingModel = $this->ratingModel;
         $this->template->entities = $data;

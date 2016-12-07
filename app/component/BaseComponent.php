@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class BaseComponent extends \Nette\Application\UI\Control
+abstract class BaseComponent extends \Nette\Application\UI\Control
 {
     public function render()
     {

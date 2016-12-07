@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class SmallListBook extends SmallList
+final class SmallListBook extends SmallList
 {
     public function __construct(
         \App\Model\BookModel $bookModel,

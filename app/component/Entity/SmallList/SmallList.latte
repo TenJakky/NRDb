@@ -10,7 +10,7 @@
     <tbody>
     {foreach $entities as $entity}
         <tr>
-            <td><a href="{plink "{$name}:view" $entity->id}">{$entity->original_title}</a></td>
+            <td><a href="{plink "{$pName}:view" $entity->id}">{$entity->original_title}</a></td>
             <td>{$entity->english_title}</td>
             <td>{$entity->czech_title}</td>
             <td>{$entity->year}</td>
@@ -19,9 +19,9 @@
             {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
             {if $rating}
                 {$rating->rating}
-                <a href="{plink "{$name}:editRating" $rating->id}">Edit rating</a>
+                <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
             {else}
-                <a href="{plink "{$name}:rate" $entity->id}">Rate</a>
+                <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
             {/if}
             </td>
         </tr>

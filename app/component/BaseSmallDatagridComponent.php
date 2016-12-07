@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class BaseSmallDatagridComponent extends BaseDatagridComponent
+abstract class BaseSmallDatagridComponent extends BaseDatagridComponent
 {
     public function attached($presenter)
     {

@@ -9,9 +9,9 @@ class Datagrid extends \Nextras\Datagrid\Datagrid
 
     public function render()
     {
-        foreach ($this->templateParams as $k => $param)
+        foreach ($this->templateParams as $k => $v)
         {
-            $this->template->{$k} = $param;
+            $this->template->{$k} = $v;
         }
 
         parent::render();
@@ -20,5 +20,10 @@ class Datagrid extends \Nextras\Datagrid\Datagrid
     public function setTemplateParams(array $params)
     {
         $this->templateParams = $params;
+    }
+
+    public function addTemplateParam($key, $val)
+    {
+        $this->templateParams[$key] = $val;
     }
 }

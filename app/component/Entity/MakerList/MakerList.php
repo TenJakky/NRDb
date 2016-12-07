@@ -2,41 +2,45 @@
 
 namespace App\Component;
 
-class DirectorList extends BaseDatagridComponent
+abstract class MakerList extends BaseDatagridComponent
 {
-    protected $movieModel;
+    /** @var \App\Model\BaseEntityModel */
+    protected $entityModel;
 
-    public function __construct(
-        \App\Model\PersonModel $personModel,
-        \App\Model\MovieModel $movieModel)
+    /** @var \App\Model\BaseEntityModel */
+    protected $type;
+
+    public function render()
     {
-        parent::__construct();
-
-        $this->model = $personModel;
-        $this->movieModel = $movieModel;
+        $this->template->setFile(__DIR__.'/MakerList.latte');
+        $this->template->render();
     }
 
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();
 
+        $name = lcfirst($this->presenter->getName());
+
         $this->grid->addColumn('name', 'Name')->enableSort();
         $this->grid->addColumn('country_id', 'Nationality')->enableSort();
-        $this->grid->addColumn('movie_count', '# of movies');
+        $this->grid->addColumn('entity_count', "# of {$name}s");
         $this->grid->addColumn('average_rating', 'Average rating');
-        $this->grid->addColumn('top_movie', 'Top movie');
-
-        $this->grid->addCellsTemplate(__DIR__ . '/DirectorListCellsTemplate.latte');
-        $this->grid->setTemplateParams(array('movieModel' => $this->movieModel));
-
+        $this->grid->addColumn('top_entity', "Top {$name}");
+        $this->grid->addCellsTemplate(__DIR__ . '/MakerListCellsTemplate.latte');
+        $this->grid->setTemplateParams(array(
+            'entityModel' => $this->entityModel,
+            'pName' => $this->presenter->getName(),
+            'pname' => $name,
+            'type' => $this->type));
         return $this->grid;
     }
 
-
     public function getDataSource($filter, $order)
     {
-        $filters = array();
-        $filters[':movie2director.id NOT'] = null;
+        $name = lcfirst($this->presenter->getName());
+
+        $filter[":{$name}2{$this->type}.id"] = null;
 
         foreach ($filter as $k => $v)
         {
@@ -55,7 +59,7 @@ class DirectorList extends BaseDatagridComponent
             }
         }
 
-        $set = $this->model->findByArray($filters);
+        $set = $this->model->findByArray($filter);
 
         if ($order[0])
         {
@@ -69,7 +73,7 @@ class DirectorList extends BaseDatagridComponent
             }
             else if ($order[0] == 'average_rating')
             {
-               $orders = "TODO $order[1]";
+                $orders = "TODO $order[1]";
             }
             else if ($order[0] == 'movie_count')
             {

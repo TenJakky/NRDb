@@ -12,7 +12,8 @@ abstract class RateForm extends BaseComponent
 
     public function render($entityId = 0, $ratingId = 0)
     {
-        $name = $this->presenter->getName();
+        $Name = $this->presenter->getName();
+        $name = lcfirst($Name);
 
         if ($ratingId)
         {
@@ -20,7 +21,7 @@ abstract class RateForm extends BaseComponent
             if (!$rating || $rating->user_id != $this->presenter->getUser()->getId())
             {
                 $this->presenter->flashMessage('You cannot edit this rating.', 'failure');
-                $this->presenter->redirect("{$name}:default");
+                $this->presenter->redirect("{$Name}:default");
             }
             $this['form']->setDefaults($rating);
         }
@@ -28,10 +29,10 @@ abstract class RateForm extends BaseComponent
         {
             if (!$this->model->findRow($entityId))
             {
-                $this->presenter->flashMessage("{$name} not found.", 'failure');
-                $this->presenter->redirect("{$name}:default");
+                $this->presenter->flashMessage("{$Name} not found.", 'failure');
+                $this->presenter->redirect("{$Name}:default");
             }
-            $this['form']->setDefaults(array('movie_id' => $entityId));
+            $this['form']->setDefaults(array("{$name}_id" => $entityId));
         }
 
         $this->template->setFile(__DIR__.'/RateForm.latte');
@@ -40,7 +41,8 @@ abstract class RateForm extends BaseComponent
 
     public function createComponentForm()
     {
-        $form = new \Nette\Application\UI\Form();
+        $Name = $this->presenter->getName();
+        $name = lcfirst($Name);
 
         $userId = $this->presenter->getUser()->getId();
         if ($this->presenter->getAction() == 'rate')
@@ -52,9 +54,10 @@ abstract class RateForm extends BaseComponent
             $entities = $this->model->getRated($userId)->fetchPairs('id', 'original_title');
         }
 
+        $form = new \Nette\Application\UI\Form();
         $form->addHidden('id');
-        $form->addSelect('movie_id', 'Movie', $entities)
-            ->setPrompt('Select movie')
+        $form->addSelect("{$name}_id", $Name, $entities)
+            ->setPrompt("Select {$name}")
             ->setRequired();
         $form->addSelect('rating', 'Rating', array_combine(range(0, 10, 1), range(0, 10, 1)))
             ->setPrompt('Select rating')
@@ -69,6 +72,9 @@ abstract class RateForm extends BaseComponent
 
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
+        $Name = $this->presenter->getName();
+        $name = lcfirst($Name);
+
         $data = $form->getValues();
         $data['user_id'] = $this->presenter->user->getId();
         $data['date'] = date('Y-m-d');
@@ -76,6 +82,6 @@ abstract class RateForm extends BaseComponent
         $this->ratingModel->save($data);
 
         $this->presenter->flashMessage('Rating successfully saved.', 'success');
-        $this->presenter->redirect('Movie:view', array('id' => $data['movie_id']));
+        $this->presenter->redirect("{$Name}:view", array('id' => $data["{$name}_id"]));
     }
 }
