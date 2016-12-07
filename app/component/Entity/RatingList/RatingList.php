@@ -4,6 +4,7 @@ namespace App\Component;
 
 abstract class RatingList extends BaseSmallDatagridComponent
 {
+    /** @var int */
     protected $entityId = 0;
 
     public function render($entityId = 0)

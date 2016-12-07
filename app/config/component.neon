@@ -2,39 +2,56 @@ services:
 
     loginForm:
         class: App\Component\LoginForm
+
     settingsForm:
         class: App\Component\SettingsForm
 
-
     newUserForm:
         class: App\Component\NewUserForm
+
     newsBanner:
         class: App\Component\NewsBanner
     newsForm:
         class: App\Component\NewsForm
+
     introductionBanner:
         class: App\Component\IntroductionBanner
     introductionForm:
         class: App\Component\IntroductionForm
 
+
     movieList:
         class: App\Component\MovieList
+    bookList:
+        class: App\Component\BookList
+
     smallListMovie:
         class: App\Component\SmallListMovie
+    smallListBook:
+       class: App\Component\SmallListBook
+
     ratingListMovie:
         class: App\Component\RatingListMovie
+    ratingListBook:
+        class: App\Component\RatingListBook
+
     movieForm:
         class: App\Component\MovieForm
-    rateMovieForm:
-        class: App\Component\RateMovieForm
+    bookForm:
+        class: App\Component\BookForm
+
+    rateFormMovie:
+        class: App\Component\RateFormMovie
+    rateFormBook:
+        class: App\Component\RateFormBook
+
     directorList:
         class: App\Component\DirectorList
     actorList:
-            class: App\Component\ActorList
+        class: App\Component\ActorList
+    authorList:
+        class: App\Component\AuthorList
 
-
-    personForm:
-        class: App\Component\PersonForm
     directedList:
         class: App\Component\DirectedList
     actedList:

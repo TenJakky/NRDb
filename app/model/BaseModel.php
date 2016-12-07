@@ -12,7 +12,7 @@ abstract class BaseModel extends Nette\Object
     /** @var Nette\Database\Context */
     protected $context;
 
-    public function __construct(\Nette\Database\Context $context)
+    public function __construct(Nette\Database\Context $context)
     {
         $this->context = $context;
     }
@@ -76,7 +76,7 @@ abstract class BaseModel extends Nette\Object
 
     public function getColumns()
     {
-        $columns = $this->context->connection->getSupplementalDriver()->getColumns($this->getTableName());
+        $columns = $this->context->getConnection()->getSupplementalDriver()->getColumns($this->getTableName());
 
         $columnsResult = array();
         foreach ($columns as $column)

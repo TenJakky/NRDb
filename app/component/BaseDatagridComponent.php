@@ -4,19 +4,13 @@ namespace App\Component;
 
 class BaseDatagridComponent extends BaseComponent
 {
-    /**
-     * @var \App\Tool\Datagrid
-     */
+    /** @var \App\Tool\Datagrid */
     protected $grid;
 
-    /**
-     * @var \App\Model\BaseModel
-     */
+    /** @var \App\Model\BaseModel */
     protected $model;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $perPage;
 
     public function attached($presenter)

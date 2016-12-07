@@ -4,7 +4,10 @@ namespace App\Component;
 
 abstract class SmallList extends BaseComponent
 {
+    /** @var \App\Model\BaseEntityModel */
     protected $model;
+
+    /** @var \App\Model\BaseRatingModel */
     protected $ratingModel;
 
     public function render($type = 0)
@@ -16,13 +19,13 @@ abstract class SmallList extends BaseComponent
         {
             default:
             case 'new':
-                $data = $this->model->getRecent($perPage);
+                $data = $this->model->getRecent($perPage)->fetchAll();
                 break;
             case 'top':
-                $data = $this->model->getTop($perPage);
+                $data = $this->model->getTop($perPage)->fetchAll();
                 break;
             case 'notRated':
-                $data = $this->model->getNotRated($userId, $perPage);
+                $data = $this->model->getNotRated($userId, $perPage)->fetchAll();
                 break;
         }
 
