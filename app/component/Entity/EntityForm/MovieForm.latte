@@ -1,73 +1,29 @@
-{form form}
-    <table>
-        <tbody>
-            <tr class="required">
-                <th>{label original_title /}</th>
-                <td>{input original_title}</td>
-            </tr>
-            <tr class="required">
-                <th>{label english_title /}</th>
-                <td>{input english_title}</td>
-            </tr>
-            <tr>
-                <th>{label czech_title /}</th>
-                <td>{input czech_title}</td>
-            </tr>
-            <tr class="required">
-                <th>{label year /}</th>
-                <td>{input year}</td>
-            </tr>
-            <tr>
-                <th>{label description /}</th>
-                <td>{input description}</td>
-            </tr>
-            <tr class="required">
-                <th>{label director /}</th>
-                <td>{snippet personSelect}{input director}{/snippet}&nbsp;&nbsp;&nbsp;{input add_person}</td>
-            </tr>
-            <tr>
-                <th>{label actor /}</th>
-                <td>{snippet personSelect2}{input actor}{/snippet}</td>
-            </tr>
-            <tr id="person_form">
-                <th></th>
-                <td>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>{label name /}</th>
-                                <td>{input name}</td>
-                            </tr>
-                            <tr>
-                                <th>{label surname /}</th>
-                                <td>{input surname}</td>
-                            </tr>
-                            <tr>
-                                <th>{label country_id /}</th>
-                                <td>{input country_id}</td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>{input submit_person}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>{input submit}</td>
-            </tr>
-        </tbody>
-    </table>
-{/form}
+{snippet formSnippet}
+    {control form}
+{/snippet}
+
+<div id="person_form">
+    {control personForm}
+</div>
 
 <script>
 $(document).ready(function ()
 {
-    $.nette.ext('snippets').after(function ($el)
+    var formValues = [];
+
+    $.nette.ext('snippets').after(function (el)
     {
-        $el.find('select').chosen(chosenOptions);
+        index = 0;
+        $('#frm-movieForm-form')
+        .find('input, textarea, select')
+        .not('input[type="button"], input[type="submit"]')
+        .each(function()
+        {
+            $(this).val(formValues[index]);
+            index++;
+        });
+        
+        $(el).find('select').chosen(chosenOptions);
     });
 
     $.nette.init();
@@ -101,6 +57,15 @@ $(document).ready(function ()
             country_id.trigger('chosen:activate');
             return;
         }
+
+        $('#frm-movieForm-form')
+        .find('input, textarea, select')
+        .not('input[type="button"], input[type="submit"]')
+        .each(function()
+        {
+            formValues.push($(this).val());
+        });
+        console.log(formValues);
 
         $.nette.ajax(
         {

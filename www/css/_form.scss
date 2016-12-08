@@ -30,11 +30,16 @@ form
           display: inline;
         }
 
-        input[type=number], input[type=text], textarea, input[type=password]
+        input[type=number], input[type=text], textarea, input[type=password], input[type=date]
         {
           border: 1px solid $grey;
           outline: none;
           width: 47%;
+
+          &:focus
+          {
+            outline: 2px solid $red;
+          }
         }
 
         textarea, input
@@ -45,11 +50,6 @@ form
         textarea
         {
           height: 100px;
-        }
-
-        input[type=number]:focus, input[type=text]:focus, textarea:focus, input[type=password]:focus
-        {
-          outline: 2px solid $red;
         }
       }
     }

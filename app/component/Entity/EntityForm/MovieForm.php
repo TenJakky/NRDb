@@ -47,7 +47,6 @@ class MovieForm extends BaseComponent
         $form = new \Nette\Application\UI\Form();
 
         $person = $this->personModel->fetchSelectBox();
-        $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
 
         $form->addHidden('id');
         $form->addText('original_title', 'Original title')
@@ -57,31 +56,34 @@ class MovieForm extends BaseComponent
         $form->addText('czech_title', 'Czech title');
         $form->addText('year', 'Year')
             ->addRule(Form::INTEGER, 'Year must be number')
-            ->addRule(Form::MIN_LENGTH, 'Year must be at least 4 digit long.', 4)
+            ->addRule(Form::LENGTH, 'Year must be exactly 4 digit long.', 4)
             ->setRequired();
         $form->addTextArea('description', 'Description');
         /*$form->addUpload('poster', 'Poster')
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
-
         $form->addButton('add_person', 'Add new person');
         $form->addMultiSelect('director', 'Directors', $person)
             ->setRequired();
         $form->addMultiSelect('actor', 'Actors', $person);
 
-        $form->addGroup('New Person')
-            ->setOption('label', null)
-            ->setOption('container', \Nette\Utils\Html::el('fieldset')
-                ->addId('person_form'));
+        $form->addSubmit('submit', 'Submit');
+        $form->onSuccess[] = [$this, 'formSubmitted'];
+
+        return $form;
+    }
+
+    public function createComponentPersonForm()
+    {
+        $form = new \Nette\Application\UI\Form();
+
+        $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
+
         $form->addText('name', 'Name *');
         $form->addText('surname', 'Surname *');
         $form->addSelect('country_id', 'Nationality *', $countries)
             ->setPrompt('Select nationality');
         $form->addButton('submit_person', 'Submit');
-        $form->setCurrentGroup(null);
-
-        $form->addSubmit('submit', 'Submit');
-        $form->onSuccess[] = [$this, 'formSubmitted'];
 
         return $form;
     }
@@ -135,6 +137,11 @@ class MovieForm extends BaseComponent
 
     public function handleAddPerson()
     {
+        if (!$this->presenter->isAjax())
+        {
+            return;
+        }
+
         $data = $this->presenter->getContext()->getByType('Nette\Http\Request')->getPost();
         
         if (isset($data['name'], $data['surname'], $data['country_id']))
@@ -143,13 +150,12 @@ class MovieForm extends BaseComponent
         }
 
         $person = $this->personModel->fetchSelectBox();
-
         $this['form']['director']->setItems($person);
         $this['form']['actor']->setItems($person);
 
         $this->template->getLatte()->addProvider('formsStack', [$this['form']]);
-
-        $this->redrawControl('personSelect');
-        $this->redrawControl('personSelect2');
+        //$this->redrawControl('personSelect');
+        //$this->redrawControl('personSelect2');
+        $this->redrawControl('formSnippet');
     }
 }

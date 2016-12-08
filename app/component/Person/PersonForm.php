@@ -53,8 +53,8 @@ class PersonForm extends BaseComponent
         $form->addSelect('country_id', 'Person nationality', $countries)
             ->setPrompt('Select nationality')
             ->setRequired();
-        $form->addText('born', 'Born');
-        $form->addText('died', 'Died');
+        $form->addDatePicker('born', 'Born');
+        $form->addDatePicker('died', 'Died');
         $form->addTextArea('bio', 'Bio');
 
         $form->addSubmit('submit', 'Submit');

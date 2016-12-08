@@ -40,7 +40,7 @@ abstract class MakerList extends BaseDatagridComponent
     {
         $name = lcfirst($this->presenter->getName());
 
-        $filter[":{$name}2{$this->type}.id"] = null;
+        $filter[":{$name}2{$this->makerType}.id"] = null;
 
         foreach ($filter as $k => $v)
         {
