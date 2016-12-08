@@ -19,6 +19,8 @@ services:
     introductionForm:
         class: App\Component\IntroductionForm
 
+    personForm:
+        class: App\Component\PersonForm
 
     movieList:
         class: App\Component\MovieList

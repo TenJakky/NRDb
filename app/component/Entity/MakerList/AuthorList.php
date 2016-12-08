@@ -12,6 +12,6 @@ final class AuthorList extends MakerList
 
         $this->model = $personModel;
         $this->entityModel = $bookModel;
-        $this->type = 'author';
+        $this->makerType = 'author';
     }
 }

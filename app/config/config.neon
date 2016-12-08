@@ -25,6 +25,9 @@ latte:
     macros:
         - Nextras\Latte\Macros\RedefineMacro::install
 
+extensions:
+    nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension
+
 services:
     - App\RouterFactory
     router: @App\RouterFactory::createRouter
