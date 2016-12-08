@@ -7,8 +7,8 @@ abstract class MakerList extends BaseDatagridComponent
     /** @var \App\Model\BaseEntityModel */
     protected $entityModel;
 
-    /** @var \App\Model\BaseEntityModel */
-    protected $type;
+    /** @var string */
+    protected $makerType;
 
     public function render()
     {
@@ -32,7 +32,7 @@ abstract class MakerList extends BaseDatagridComponent
             'entityModel' => $this->entityModel,
             'pName' => $this->presenter->getName(),
             'pname' => $name,
-            'type' => $this->type));
+            'type' => $this->makerType));
         return $this->grid;
     }
 
