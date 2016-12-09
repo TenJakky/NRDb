@@ -13,12 +13,16 @@ $(document).ready(function ()
 
     $.nette.ext('snippets').after(function (el)
     {
-        index = 0;
+        var index = 0;
         $('#frm-movieForm-form')
         .find('input, textarea, select')
-        .not('input[type="button"], input[type="submit"]')
+        .not('input[type="button"], input[type="submit"], input[name="_do"]')
         .each(function()
         {
+            if ($(this).parent().hasClass('search-field'))
+            {
+                return;
+            }
             $(this).val(formValues[index]);
             index++;
         });
@@ -60,12 +64,15 @@ $(document).ready(function ()
 
         $('#frm-movieForm-form')
         .find('input, textarea, select')
-        .not('input[type="button"], input[type="submit"]')
+        .not('input[type="button"], input[type="submit"], input[name="_do"]')
         .each(function()
         {
+            if ($(this).parent().hasClass('search-field'))
+            {
+                return;
+            }
             formValues.push($(this).val());
         });
-        console.log(formValues);
 
         $.nette.ajax(
         {
