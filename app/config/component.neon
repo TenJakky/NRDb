@@ -58,6 +58,8 @@ services:
         class: App\Component\DirectedList
     actedList:
         class: App\Component\ActedList
+    writtenList:
+        class: App\Component\WrittenList
 
     statElementCount:
         class: App\Component\StatElementCount

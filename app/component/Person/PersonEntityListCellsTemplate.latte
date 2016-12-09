@@ -1,0 +1,23 @@
+{define col-rating}
+<td>
+    {$ratingModel->getRating($row->id)|number: 2}
+</td>
+{/define}
+
+{define col-original_title}
+<td>
+    <a href="{plink "{$pName}:view" $row->id}">{$row->original_title}</a>
+</td>
+{/define}
+
+{define col-my_rating}
+<td>
+    {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+    {if $rating}
+        {$rating->rating}
+        <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+    {else}
+        <a href="{plink "{$pName}:rate" $row->id}">Rate</a>
+    {/if}
+</td>
+{/define}

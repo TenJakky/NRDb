@@ -7,7 +7,7 @@
 {define col-maker}
     <td>
         <ul class="person-list">
-            {foreach $row->related("{$pname}2{$type}.movie_id") as $personEntity}
+            {foreach $row->related("{$pname}2{$type}.{$pname}_id") as $personEntity}
                 <li><a href="{plink Person:view $personEntity->person_id}">{$personEntity->person_id|person}</a></li>
             {/foreach}
         </ul>

@@ -10,6 +10,12 @@ abstract class EntityList extends BaseDatagridComponent
     /** @var string */
     protected $makerType;
 
+    public function render()
+    {
+        $this->template->setFile(__DIR__.'/EntityList.latte');
+        $this->template->render();
+    }
+
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();
