@@ -2,26 +2,21 @@
 
 namespace App\Component;
 
-use Nette\Forms\Form;
-
-class MovieForm extends BaseComponent
+final class MovieForm extends EntityForm
 {
-    protected $personModel;
-    protected $movieModel;
-    protected $countryModel;
     protected $movieDirectorModel;
     protected $movieActorModel;
 
     public function __construct(
+        \App\Model\CountryModel $countryModel,
         \App\Model\PersonModel $personModel,
         \App\Model\MovieModel $movieModel,
-        \App\Model\CountryModel $countryModel,
         \App\Model\MovieDirectorModel $movieDirectorModel,
         \App\Model\MovieActorModel $movieActorModel)
     {
-        $this->personModel = $personModel;
-        $this->movieModel = $movieModel;
         $this->countryModel = $countryModel;
+        $this->personModel = $personModel;
+        $this->model = $movieModel;
         $this->movieDirectorModel = $movieDirectorModel;
         $this->movieActorModel = $movieActorModel;
     }
@@ -30,7 +25,7 @@ class MovieForm extends BaseComponent
     {
         if ($id)
         { 
-            $row = $this->movieModel->findRow($id);
+            $row = $this->model->findRow($id);
             
             $data = $row->toArray();
             $data['director'] = $row->related('movie2director.movie_id')->fetchPairs('id', 'person_id');
@@ -39,7 +34,8 @@ class MovieForm extends BaseComponent
             $this['form']->setDefaults($data);
         }
 
-        parent::render();
+        $this->template->setFile(__DIR__.'/EntityForm.latte');
+        $this->template->render();
     }
 
     public function createComponentForm()
@@ -55,8 +51,8 @@ class MovieForm extends BaseComponent
             ->setRequired();
         $form->addText('czech_title', 'Czech title');
         $form->addText('year', 'Year')
-            ->addRule(Form::INTEGER, 'Year must be number')
-            ->addRule(Form::LENGTH, 'Year must be exactly 4 digit long.', 4)
+            ->addRule($form::INTEGER, 'Year must be number')
+            ->addRule($form::LENGTH, 'Year must be exactly 4 digit long.', 4)
             ->setRequired();
         $form->addTextArea('description', 'Description');
         /*$form->addUpload('poster', 'Poster')
@@ -73,21 +69,6 @@ class MovieForm extends BaseComponent
         return $form;
     }
 
-    public function createComponentPersonForm()
-    {
-        $form = new \Nette\Application\UI\Form();
-
-        $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
-
-        $form->addText('name', 'Name *');
-        $form->addText('surname', 'Surname *');
-        $form->addSelect('country_id', 'Nationality *', $countries)
-            ->setPrompt('Select nationality');
-        $form->addButton('submit_person', 'Submit');
-
-        return $form;
-    }
-
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
         $data = $form->getValues();
@@ -100,7 +81,7 @@ class MovieForm extends BaseComponent
             $data['poster_file'] = $dest;
         }*/
 
-        $movieId = $this->movieModel->save(array(
+        $movieId = $this->model->save(array(
             'id' => isset($data['id']) ? $data['id'] : 0,
             'original_title' => $data['original_title'],
             'english_title' => $data['english_title'],
@@ -133,29 +114,5 @@ class MovieForm extends BaseComponent
             $this->presenter->redirect("Movie:rate", array('id' => $movieId));
         }
         $this->presenter->redirect('Movie:view', array('id' => $movieId));
-    }
-
-    public function handleAddPerson()
-    {
-        if (!$this->presenter->isAjax())
-        {
-            return;
-        }
-
-        $data = $this->presenter->getContext()->getByType('Nette\Http\Request')->getPost();
-        
-        if (isset($data['name'], $data['surname'], $data['country_id']))
-        {
-            $this->personModel->insert($data);
-        }
-
-        $person = $this->personModel->fetchSelectBox();
-        $this['form']['director']->setItems($person);
-        $this['form']['actor']->setItems($person);
-
-        $this->template->getLatte()->addProvider('formsStack', [$this['form']]);
-        //$this->redrawControl('personSelect');
-        //$this->redrawControl('personSelect2');
-        $this->redrawControl('formSnippet');
     }
 }
