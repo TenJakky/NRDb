@@ -51,6 +51,20 @@ form
         {
           height: 100px;
         }
+
+        span.form-error
+        {
+          padding: 15px;
+          margin: 15px;
+          border-radius: 10px;
+          background-color: $failure;
+          border: 2px solid $failure-border
+        }
+
+        span.error
+        {
+          display: none;
+        }
       }
     }
   }
