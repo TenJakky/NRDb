@@ -62,7 +62,6 @@ final class MovieForm extends EntityForm
         /*$form->addUpload('poster', 'Poster')
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
-        $form->addButton('add_person', 'Add new person');
         $form->addMultiSelect('director', 'Directors', $person)
             ->setRequired();
         $form->addMultiSelect('actor', 'Actors', $person);

@@ -52,13 +52,27 @@ form
           height: 100px;
         }
 
-        span.form-error
+        span.form-flash
         {
-          padding: 15px;
+          padding: 10px;
           margin: 15px;
           border-radius: 10px;
+        }
+
+        span.form-error
+        {
+          @extend .form-flash;
+
           background-color: $failure;
           border: 2px solid $failure-border
+        }
+
+        span.form-success
+        {
+          @extend .form-flash;
+
+          background-color: $success;
+          border: 2px solid $success-border
         }
 
         span.error

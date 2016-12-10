@@ -1,6 +1,7 @@
 $(document).ready(function ()
 {
     var formValues = [];
+    var span = '<span class="form-success">Successfully Submitted</span>';
 
     function storeValues()
     {
@@ -36,6 +37,30 @@ $(document).ready(function ()
         });
     }
 
+    function validateSubform(form, inputs)
+    {
+        var errors = [];
+        for (var i = 0; i < inputs.length; i++)
+        {
+            if ($(inputs[i]).val() == 0)
+            {
+                var error = {
+                    message: "This field is required.",
+                    element: inputs[i]
+                };
+                errors.push(error);
+            }
+        }
+
+        if (errors.length)
+        {
+            Nette.showFormErrors(form, errors);
+            return false;
+        }
+
+        return true;
+    }
+
     $.nette.ext('snippets').after(function (el)
     {
         restoreValues();
@@ -66,75 +91,47 @@ $(document).ready(function ()
 
     $('input[name="submit_person"]').click(function()
     {
-        var form = $('#person_subform');
+        var form = $('#person_subform form');
         var name = form.find('input[name="name"]');
         var surname = form.find('input[name="surname"]');
         var countryId = form.find('select[name="country_id"]');
 
-        if (name.val() == 0)
+        if (validateSubform(form, [name, surname, countryId]))
         {
-            alert("This field is required.");
-            name.focus();
-            return;
-        }
-        if (surname.val() == 0)
-        {
-            alert("This field is required.");
-            surname.focus();
-            return;
-        }
-        if (countryId.val() == 0)
-        {
-            alert("This field is required.");
-            countryId.trigger('chosen:activate');
-            return;
-        }
+            storeValues();
 
-        storeValues();
-
-        $.nette.ajax(
-        {
-            url: addPersonLink,
-            method: 'POST',
-            data:
+            $.nette.ajax(
             {
-                name: name.val(),
-                surname: surname.val(),
-                country_id: countryId.val()
-            },
-            success: function(result)
-            {
-                alert('Successfully submitted.');
-                name.val('');
-                surname.val('');
-                countryId.val(0);
-                countryId.trigger('chosen:updated');
-            }
-        });
+                url: addPersonLink,
+                method: 'POST',
+                data: {
+                    name: name.val(),
+                    surname: surname.val(),
+                    country_id: countryId.val()
+                },
+                success: function (result)
+                {
+                    name.val('');
+                    surname.val('');
+                    countryId.val(0);
+                    countryId.trigger('chosen:updated');
+                    form.find('input[type="button"]').after(span);
+                }
+            });
+        }
     });
 
     $('input[name="submit_pseudonym"]').click(function()
     {
-        var form = $('#pseudonym_subform');
+        var form = $('#pseudonym_subform form');
         var name = form.find('input[name="name"]');
         var personId = form.find('select[name="person_id"]');
 
-        if (name.val() == 0)
+        if (validateSubform(form, [name, personId]))
         {
-            alert("This field is required.");
-            name.focus();
-            return;
-        }
-        if (personId.val() == 0)
-        {
-            alert("This field is required.");
-            personId.trigger('chosen:activate');
-            return;
-        }
+            storeValues();
 
-        storeValues();
-
-        $.nette.ajax(
+            $.nette.ajax(
             {
                 url: addPseudonymLink,
                 method: 'POST',
@@ -145,41 +142,37 @@ $(document).ready(function ()
                 },
                 success: function(result)
                 {
-                    alert('Successfully submitted.');
                     name.val('');
                     personId.val(0);
                     personId.trigger('chosen:updated');
+                    form.find('input[type="button"]').after(span);
                 }
             });
+        }
     });
 
     $('input[name="submit_band"]').click(function()
     {
-        var form = $('#band_subform');
+        var form = $('#band_subform form');
         var name = form.find('input[name="name"]');
 
-        if (name.val() == 0)
+        if (validateSubform(form, [name]))
         {
-            alert("This field is required.");
-            name.focus();
-            return;
-        }
+            storeValues();
 
-        storeValues();
-
-        $.nette.ajax(
+            $.nette.ajax(
             {
                 url: addBandLink,
                 method: 'POST',
-                data:
-                {
+                data: {
                     name: name.val()
                 },
-                success: function(result)
+                success: function (result)
                 {
-                    alert('Successfully submitted.');
                     name.val('');
+                    form.find('input[type="button"]').after(span);
                 }
             });
+        }
     });
 });
