@@ -3,32 +3,8 @@
 {block head}{/block}
 {block content}
 
-{if isset($data->poster_file)}
-<div id="image">
-    <img src="{php getcwd().$data->poster_file}"/>
-</div>
-{/if}
-<h2>{$ratingModel->getRating($data->id)|number: 2}</h2>
-<h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
-<h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
-{var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
-{if $rating}
-<h3>My rating: {$rating->rating}</h3>
-{/if}
-<section>
-    <ul class="inline-buttons">
-        <li>
-            <a href="{plink Book:edit $data->id}">Edit details</a>
-        </li>
-        <li>
-            {if $rating}
-            <a href="{plink Book:editRating $rating->id}">Edit rating</a>
-            {else}
-            <a href="{plink Book:rate $data->id}">Rate</a>
-            {/if}
-        </li>
-    </ul>
-</section>
+{control viewHead $data, $ratingModel}
+
 <section>
     <table class="list">
         <tr>

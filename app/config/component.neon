@@ -22,6 +22,9 @@ services:
     personForm:
         class: App\Component\PersonForm
 
+    viewHead:
+        class: App\Component\ViewHead
+
     movieList:
         class: App\Component\MovieList
     bookList:
