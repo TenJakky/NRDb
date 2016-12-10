@@ -33,7 +33,7 @@ final class BookForm extends EntityForm
             {
                 if (isset($author->person_id))
                 {
-                    $data['author'][] = $author->person_id;
+                    $data['person'][] = $author->person_id;
                 }
                 if (isset($author->pseudonym_id))
                 {
@@ -70,13 +70,12 @@ final class BookForm extends EntityForm
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
         $person = $form->addMultiSelect('person', 'Author person', $person);
-        $form->addMultiSelect('pseudonym', 'Author pseudonym', $pseudonym)
-            ->addConditionOn($form['person'], $form::BLANK)
+        $pseudonym = $form->addMultiSelect('pseudonym', 'Author pseudonym', $pseudonym);
+        
+        $person->addConditionOn($form['pseudonym'], $form::BLANK)
                 ->setRequired();
-        $person
-            ->addConditionOn($form['pseudonym'], $form::BLANK)
+        $pseudonym->addConditionOn($form['person'], $form::BLANK)
                 ->setRequired();
-
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];

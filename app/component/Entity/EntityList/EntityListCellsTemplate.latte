@@ -7,8 +7,20 @@
 {define col-maker}
     <td>
         <ul class="person-list">
-            {foreach $row->related("{$pname}2{$type}.{$pname}_id") as $personEntity}
-                <li><a href="{plink Person:view $personEntity->person_id}">{$personEntity->person_id|person}</a></li>
+            {foreach $row->related("{$pname}2{$type}.{$pname}_id") as $temp}
+                {if isset($temp->person_id)}
+                <li>
+                    <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                </li>
+                {elseif isset($temp->pseudonym_id)}
+                <li>
+                    <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
+                </li>
+                {else}
+                <li>
+                    <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
+                </li>
+                {/if}
             {/foreach}
         </ul>
     </td>
