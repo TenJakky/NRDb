@@ -2,9 +2,6 @@
 
 namespace App\Component;
 
-use App\Model\BandModel;
-use App\Model\PseudonymModel;
-
 final class BookForm extends EntityForm
 {
     protected $bookAuthorModel;

@@ -1,34 +1,34 @@
 {layout ../@layout.latte}
-{block title}Movies{/block}
+{block title}Music{/block}
 {block head}{/block}
 {block content}
 
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Movie:add}">Add movie</a>
+            <a href="{plink Movie:add}">Add recording</a>
         </li>
         <li>
             <a href="{plink Movie:rate}">Add rating</a>
         </li>
         <li>
-            <a href="{plink Movie:list}">List of movies</a>
+            <a href="{plink Movie:list}">List of recordings</a>
         </li>
         <li>
-            <a href="{plink Movie:directorList}">List of directors</a>
+            <a href="{plink Movie:interpretList}">List of interprets</a>
         </li>
     </ul>
 </section>
 <section>
     <h2>Recently added</h2>
-    {control movieSmallList 'new'}
+    {control smallListMusic 'new'}
 </section>
 <section>
     <h2>Top rated</h2>
-    {control movieSmallList 'top'}
+    {control smallListMusic 'top'}
 </section>
 <section>
     <h2>To rate</h2>
-    {control movieSmallList 'notRated'}
+    {control smallListMusic 'notRated'}
 </section>
 
