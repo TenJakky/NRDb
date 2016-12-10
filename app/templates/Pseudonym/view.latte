@@ -1,0 +1,19 @@
+{layout ../@layout.latte}
+{block title}{$data->name}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <table class="list">
+        <tr>
+            <th>Pseudonym of</th>
+            <td><a href="{plink Person:view $data->person_id}">{$data->person_id|person}</a></td>
+        </tr>
+    </table>
+</section>
+{if $data->related('book2author.pseudonym_id')->count() > 0}
+    <section>
+        <h2>Written</h2>
+        {control writtenList $data->id}
+    </section>
+{/if}

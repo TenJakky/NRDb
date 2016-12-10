@@ -17,6 +17,7 @@ final class WrittenList extends PersonEntityList
 
     public function getDataSource($filter, $order)
     {
-        return $this->model->findBy(':book2author.person_id', $this->personId)->order('year DESC');
+        $name = lcfirst($this->presenter->getName());
+        return $this->model->findBy(":book2author.{$name}_id", $this->personId)->order('year DESC');
     }
 }

@@ -28,6 +28,16 @@
             <th>Bio</th>
             <td>{$data->bio}</td>
         </tr>
+        <th>Pseudonyms</th>
+        <td>
+            <ul class="person-list">
+                {foreach $data->related('pseudonym.person_id') as $pseudonym}
+                    <li>
+                        <a href="{plink Pseudonym:view $pseudonym->id}">{$pseudonym->name}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </td>
     </table>
 </section>
 {if $data->related('movie2director.person_id')->count() > 0}
