@@ -2,6 +2,9 @@
 
 namespace App\Component;
 
+use App\Model\BandModel;
+use App\Model\PseudonymModel;
+
 final class BookForm extends EntityForm
 {
     protected $bookAuthorModel;
@@ -9,11 +12,15 @@ final class BookForm extends EntityForm
     public function __construct(
         \App\Model\CountryModel $countryModel,
         \App\Model\PersonModel $personModel,
+        \App\Model\PseudonymModel $pseudonymModel,
+        \App\Model\BandModel $bandModel,
         \App\Model\BookModel $bookModel,
         \App\Model\BookAuthorModel $bookAuthorModel)
     {
         $this->countryModel = $countryModel;
         $this->personModel = $personModel;
+        $this->pseudonymModel = $pseudonymModel;
+        $this->bandModel = $bandModel;
         $this->model = $bookModel;
         $this->bookAuthorModel = $bookAuthorModel;
     }
@@ -25,8 +32,17 @@ final class BookForm extends EntityForm
             $row = $this->model->findRow($id);
 
             $data = $row->toArray();
-            $data['author'] = $row->related('book2author.book_id')->fetchPairs('id', 'person_id');
-            $data['actor'] = $row->related('book2actor.book_id')->fetchPairs('id', 'person_id');
+            foreach($row->related('book2author.book_id') as $author)
+            {
+                if (isset($author->person_id))
+                {
+                    $data['author'][] = $author->person_id;
+                }
+                if (isset($author->pseudonym_id))
+                {
+                    $data['pseudonym'][] = $author->pseudonym_id;
+                }
+            }
 
             $this['form']->setDefaults($data);
         }
@@ -40,6 +56,7 @@ final class BookForm extends EntityForm
         $form = new \Nette\Application\UI\Form();
 
         $person = $this->personModel->fetchSelectBox();
+        $pseudonym = $this->pseudonymModel->fetchSelectBox();
 
         $form->addHidden('id');
         $form->addText('original_title', 'Original title')
@@ -55,9 +72,14 @@ final class BookForm extends EntityForm
         /*$form->addUpload('poster', 'Poster')
             ->addRule(Form::IMAGE, 'Thumbnail must be JPEG, PNG or GIF')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
-        $form->addButton('add_person', 'Add new person');
-        $form->addMultiSelect('author', 'Authors', $person)
-            ->setRequired();
+        $person = $form->addMultiSelect('person', 'Author person', $person);
+        $form->addMultiSelect('pseudonym', 'Author pseudonym', $pseudonym)
+            ->addConditionOn($form['person'], $form::BLANK)
+                ->setRequired();
+        $person
+            ->addConditionOn($form['pseudonym'], $form::BLANK)
+                ->setRequired();
+
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -87,11 +109,18 @@ final class BookForm extends EntityForm
         ));
 
         $this->bookAuthorModel->findBy('book_id', $bookId)->delete();
-        foreach ($data['author'] as $person)
+        foreach ($data['person'] as $person)
         {
             $this->bookAuthorModel->insert(array(
                 'book_id' => $bookId,
                 'person_id' => $person
+            ));
+        }
+        foreach ($data['pseudonym'] as $pseudonym)
+        {
+            $this->bookAuthorModel->insert(array(
+                'book_id' => $bookId,
+                'pseudonym_id' => $pseudonym
             ));
         }
 

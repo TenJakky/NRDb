@@ -10,6 +10,12 @@ abstract class EntityForm extends BaseComponent
     /** @var \App\Model\PersonModel */
     protected $personModel;
 
+    /** @var \App\Model\PseudonymModel */
+    protected $pseudonymModel;
+
+    /** @var \App\Model\BandModel */
+    protected $bandModel;
+
     /** @var \App\Model\BaseEntityModel */
     protected $model;
 
@@ -28,23 +34,87 @@ abstract class EntityForm extends BaseComponent
         return $form;
     }
 
+    public function createComponentPseudonymForm()
+    {
+        $form = new \Nette\Application\UI\Form();
+
+        $person = $this->personModel->fetchSelectBox();
+
+        $form->addText('name', 'Name *');
+        $form->addSelect('person_id', 'Person *', $person)
+            ->setPrompt('Select person');
+        $form->addButton('submit_pseudonym', 'Submit');
+
+        return $form;
+    }
+
+    public function createComponentBandForm()
+    {
+        $form = new \Nette\Application\UI\Form();
+
+        $form->addText('name', 'Name *');
+        $form->addButton('submit_band', 'Submit');
+
+        return $form;
+    }
+
     public function handleAddPerson()
     {
-        if (!$this->presenter->isAjax())
-        {
-            return;
-        }
+        $data = $this->getPost();
 
-        $data = $this->presenter->getContext()->getByType('Nette\Http\Request')->getPost();
-
-        if (isset($data['name'], $data['surname'], $data['country_id']))
-        {
+        if (isset($data['person_name'], $data['person_surname'], $data['person_country_id'])) {
             $this->personModel->insert($data);
         }
 
         $person = $this->personModel->fetchSelectBox();
-        $this['form']['director']->setItems($person);
-        $this['form']['actor']->setItems($person);
+        if (isset($this['form']['director']))
+        {
+            $this['form']['director']->setItems($person);
+            $this['form']['actor']->setItems($person);
+        }
+        if (isset($this['form']['author']))
+        {
+            $this['form']['author']->setItems($person);
+        }
+
+        $this['pseudonymForm']['person_id']->setItems($person);
+
+        $this->redrawControl('formSnippet');
+        $this->redrawControl('pseudonymSnippet');
+    }
+
+    public function handleAddPseudonym()
+    {
+        $data = $this->getPost();
+
+        if (isset($data['name'], $data['person_id']))
+        {
+            $this->pseudonymModel->insert($data);
+        }
+
+        $pseudonym = $this->pseudonymModel->fetchSelectBox();
+        if (isset($this['form']['pseudonym']))
+        {
+            $this['form']['pseudonym']->setItems($pseudonym);
+        }
+
+        $this->redrawControl('formSnippet');
+    }
+
+    public function handleAddBand()
+    {
+        $data = $this->getPost();
+
+        if (isset($data['name']))
+        {
+            $this->bandModel->insert($data);
+        }
+
+        $band = $this->bandModel->fetchSelectBox();
+        if (isset($this['form']['band']))
+        {
+            $this['form']['band']->setItems($band);
+        }
 
         $this->redrawControl('formSnippet');
     }

@@ -8,13 +8,6 @@ final class PersonModel extends BaseModel
 
     public function fetchSelectBox()
     {
-        $rows = $this->findAll()->order('surname ASC');
-
-        $array = array();
-        foreach ($rows as $row)
-        {
-            $array[$row->id] = $row->name.' '.$row->surname;
-        }
-        return $array;
+        return $this->getTable()->select("id, concat(name, ' ', surname) AS name")->order('surname ASC')->fetchPairs('id', 'name');
     }
 }

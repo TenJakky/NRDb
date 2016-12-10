@@ -4,7 +4,6 @@ namespace App\Presenter;
 
 final class GamePresenter extends BaseEntityPresenter
 {
-    protected $model;
     protected $ratingModel;
 
     public function __construct(

@@ -4,7 +4,6 @@ namespace App\Presenter;
 
 final class MoviePresenter extends BaseEntityPresenter
 {
-    protected $model;
     protected $ratingModel;
 
     public function __construct(

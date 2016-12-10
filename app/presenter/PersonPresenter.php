@@ -4,8 +4,6 @@ namespace App\Presenter;
 
 final class PersonPresenter extends BaseViewPresenter
 {
-    protected $model;
-
     public function __construct(
         \App\Model\PersonModel $personModel)
     {

@@ -10,12 +10,16 @@ final class MovieForm extends EntityForm
     public function __construct(
         \App\Model\CountryModel $countryModel,
         \App\Model\PersonModel $personModel,
+        \App\Model\PseudonymModel $pseudonymModel,
+        \App\Model\BandModel $bandModel,
         \App\Model\MovieModel $movieModel,
         \App\Model\MovieDirectorModel $movieDirectorModel,
         \App\Model\MovieActorModel $movieActorModel)
     {
         $this->countryModel = $countryModel;
         $this->personModel = $personModel;
+        $this->pseudonymModel = $pseudonymModel;
+        $this->bandModel = $bandModel;
         $this->model = $movieModel;
         $this->movieDirectorModel = $movieDirectorModel;
         $this->movieActorModel = $movieActorModel;

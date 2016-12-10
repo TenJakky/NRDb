@@ -7,6 +7,9 @@ services:
 - App\Model\IntroductionModel
 
 - App\Model\PersonModel
+- App\Model\PseudonymModel
+- App\Model\BandModel
+- App\Model\BandMemberModel
 
 - App\Model\MovieModel
 - App\Model\MovieDirectorModel
@@ -22,12 +25,9 @@ services:
 - App\Model\BookAuthorModel
 - App\Model\RatingBookModel
 
-- App\Model\GameModel
-- App\Model\RatingGameModel
-
 - App\Model\MusicModel
+- App\Model\MusicInterpretModel
 - App\Model\RatingMusicModel
 
-- App\Model\StudioModel
-
-
+- App\Model\GameModel
+- App\Model\RatingGameModel

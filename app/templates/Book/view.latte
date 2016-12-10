@@ -40,13 +40,19 @@
             <td>{$data->czech_title}</td>
         </tr>
         <tr>
-            <th>Director</th>
+            <th>Author</th>
             <td>
                 <ul class="person-list">
                 {foreach $data->related('book2author.book_id') as $person}
+                    {if isset($person->person_id)}
                     <li>
                         <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
                     </li>
+                    {else}
+                    <li>
+                        <a href="{plink Pseudonym:view $person->pseudonym_id}">{$person->pseudonym->name}</a>
+                    </li>
+                    {/if}
                 {/foreach}
                 </ul>
             </td>

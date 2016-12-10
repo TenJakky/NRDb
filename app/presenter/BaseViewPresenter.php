@@ -4,6 +4,8 @@ namespace App\Presenter;
 
 abstract class BaseViewPresenter extends BasePresenter
 {
+    protected $model;
+
     public function actionView($id)
     {
         $data = $this->model->findRow($id);

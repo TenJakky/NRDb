@@ -1,10 +1,33 @@
-<script>var addPersonLink = {link addPerson!};</script>
+<script>
+    var addPersonLink = {link addPerson!};
+    var addPseudonymLink = {link addPseudonym!};
+    var addBandLink = {link addBand!};
+</script>
 <script type='text/javascript' src="/www/entityForm.js"></script>
+
+<ul class="inline-buttons">
+    <li><a id="add_person" href="javascript:;">Add person</a></li>
+    <li><a id="add_pseudonym" href="javascript:;">Add pseudonym</a></li>
+    <li><a id="add_band" href="javascript:;">Add band</a></li>
+</ul>
 
 {snippet formSnippet}
     {control form}
 {/snippet}
 
-<div id="person_form">
+<div id="person_subform">
+    <h2>Person Form</h2>
     {control personForm}
+</div>
+
+<div id="pseudonym_subform">
+    <h2>Pseudonym Form</h2>
+{snippet pseudonymSnippet}
+    {control pseudonymForm}
+{/snippet}
+</div>
+
+<div id="band_subform">
+    <h2>Band Form</h2>
+    {control bandForm}
 </div>
