@@ -3,38 +3,8 @@
 {block head}{/block}
 {block content}
 
-{control viewHead $data, $ratingModel}
+{control entityView $data, $ratingModel}
 
-<section>
-    <table class="list">
-        <tr>
-            <th>Author</th>
-            <td>
-                <ul class="person-list">
-                    {foreach $data->related('music2interpret.music_id') as $person}
-                        {if isset($person->person_id)}
-                            <li>
-                                <a href="{plink Person:view $person->person_id}">{$person->person_id|person}</a>
-                            </li>
-                        {elseif isset($person->pseudonym_id)}
-                            <li>
-                                <a href="{plink Pseudonym:view $person->pseudonym_id}">{$person->pseudonym->name}</a>
-                            </li>
-                        {/if}
-                    {/foreach}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <th>Year</th>
-            <td>{$data->year}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{$data->description}</td>
-        </tr>
-    </table>
-</section>
 <section>
     {control ratingListMusic $data->id}
 </section>

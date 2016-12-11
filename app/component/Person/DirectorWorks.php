@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class ActedList extends PersonEntityList
+final class DirectorWorks extends ArtistWorks
 {
     public function __construct(
         \App\Model\MovieModel $movieModel,
@@ -12,11 +12,7 @@ final class ActedList extends PersonEntityList
 
         $this->model = $movieModel;
         $this->ratingModel = $ratingMovieModel;
-        $this->pTarget = 'Movie';
-    }
-
-    public function getDataSource($filter, $order)
-    {
-        return $this->model->findBy(':movie2actor.person_id', $this->personId)->order('year DESC');
+        $this->entityType = 'Movie';
+        $this->artistType = 'director';
     }
 }

@@ -13,7 +13,13 @@
 </section>
 {if $data->related('book2author.pseudonym_id')->count() > 0}
     <section>
-        <h2>Written</h2>
-        {control writtenList $data->id}
+        <h2>Books</h2>
+        {control authorWorks $data->id}
+    </section>
+{/if}
+{if $data->related('music2interpret.pseudonym_id')->count() > 0}
+    <section>
+        <h2>Music</h2>
+        {control interpretWorks $data->id}
     </section>
 {/if}

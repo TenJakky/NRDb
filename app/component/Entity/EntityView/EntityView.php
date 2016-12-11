@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class ViewHead extends BaseComponent
+final class EntityView extends BaseComponent
 {
     public function render($data = null, $ratingModel = null)
     {

@@ -19,24 +19,24 @@
             <td>{$data->name} {$data->surname}</td>
         </tr>
         <tr>
-            <th>Gender</th>
-            <td>{$data->gender}</td>
-        </tr>
-        <tr>
             <th>Nationality</th>
             <td>{$data->ref('country', 'country_id')->name}</td>
         </tr>
-        {if $data->birthdate != null}
         <tr>
-            <th>Birthday</th>
-            <td>{$data->birthdate|date:'%d.%m.%Y'}</td>
+            <th>Gender</th>
+            <td>{$data->gender}</td>
         </tr>
+        {if $data->birthdate != null}
+            <tr>
+                <th>Birthday</th>
+                <td>{$data->birthdate|date:'%d.%m.%Y'}</td>
+            </tr>
         {/if}
         {if $data->description != null}
-        <tr>
-            <th>Description</th>
-            <td>{$data->description}</td>
-        </tr>
+            <tr>
+                <th>Description</th>
+                <td>{$data->description}</td>
+            </tr>
         {/if}
     </table>
 </section>

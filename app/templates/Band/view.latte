@@ -1,0 +1,51 @@
+{layout ../@layout.latte}
+{block title}{$data->name}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <table class="list">
+        <tr>
+            <th>Members</th>
+            <td>
+                <ul class="person-list">
+                    {foreach $data->related('band2member.band_id')->where('year_to', null) as $temp}
+                        {if isset($temp->person_id)}
+                            <li>
+                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                            </li>
+                        {else}
+                            <li>
+                                <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
+                            </li>
+                        {/if}
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Former Members</th>
+            <td>
+                <ul class="person-list">
+                    {foreach $data->related('band2member.band_id')->where('year_to NOT', null) as $temp}
+                        {if isset($temp->person_id)}
+                            <li>
+                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                            </li>
+                        {else}
+                            <li>
+                                <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
+                            </li>
+                        {/if}
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+    </table>
+</section>
+{if $data->related('music2interpret.band_id')->count() > 0}
+<section>
+    <h2>Interpret</h2>
+    {control interpretWorks $data->id}
+</section>
+{/if}

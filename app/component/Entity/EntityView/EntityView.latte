@@ -1,0 +1,122 @@
+{if isset($data->poster_file)}
+    <div id="image">
+        <img src="{php getcwd().$data->poster_file}"/>
+    </div>
+{/if}
+
+<h2>{$ratingModel->getRating($data->id)|number: 2}</h2>
+<h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
+<h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
+
+{var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
+{if $rating}
+    <h3>My rating: {$rating->rating}</h3>
+{/if}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink "{$pName}:edit" $data->id}">Edit details</a>
+        </li>
+        <li>
+            {if $rating}
+                <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+            {else}
+                <a href="{plink "{$pName}:rate" $data->id}">Rate</a>
+            {/if}
+        </li>
+    </ul>
+</section>
+<section>
+    <table class="list">
+        {if isset($data->english_title)}
+            <tr>
+                <th>English title</th>
+                <td>{$data->english_title}</td>
+            </tr>
+        {/if}
+        {if isset($data->czech_title)}
+            <tr>
+                <th>Czech title</th>
+                <td>{$data->czech_title}</td>
+            </tr>
+        {/if}
+        <tr>
+            <th>Year</th>
+            <td>{$data->year}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{$data->description}</td>
+        </tr>
+        {switch $pName}
+            {case 'Book'}
+                <tr>
+                    <th>Author</th>
+                    <td>
+                        <ul class="person-list">
+                        {foreach $data->related('book2author.book_id') as $temp}
+                            {if isset($temp->person_id)}
+                                <li>
+                                    <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                                </li>
+                            {else}
+                                <li>
+                                    <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
+                                </li>
+                            {/if}
+                        {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+            {case 'Movie'}
+                <tr>
+                    <th>Director</th>
+                    <td>
+                        <ul class="person-list">
+                        {foreach $data->related('movie2director.movie_id') as $temp}
+                            <li>
+                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                            </li>
+                        {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Cast</th>
+                    <td>
+                        <ul class="person-list">
+                        {foreach $data->related('movie2actor.movie_id') as $temp}
+                            <li>
+                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                            </li>
+                        {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+            {case 'Music'}
+                <tr>
+                    <th>Interpret</th>
+                    <td>
+                        <ul class="person-list">
+                            {foreach $data->related('music2interpret.music_id') as $temp}
+                                {if isset($temp->person_id)}
+                                    <li>
+                                        <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+                                    </li>
+                                {elseif isset($temp->pseudonym_id)}
+                                    <li>
+                                        <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
+                                    </li>
+                                {else}
+                                    <li>
+                                        <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
+                                    </li>
+                                {/if}
+                            {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+        {/switch}
+    </table>
+</section>

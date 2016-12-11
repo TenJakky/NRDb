@@ -22,8 +22,8 @@ services:
     personForm:
         class: App\Component\PersonForm
 
-    viewHead:
-        class: App\Component\ViewHead
+    entityView:
+        class: App\Component\EntityView
 
     movieList:
         class: App\Component\MovieList
@@ -69,12 +69,14 @@ services:
     interpretList:
         class: App\Component\InterpretList
 
-    directedList:
-        class: App\Component\DirectedList
-    actedList:
-        class: App\Component\ActedList
-    writtenList:
-        class: App\Component\WrittenList
+    directorWorks:
+        class: App\Component\DirectorWorks
+    actorWorks:
+        class: App\Component\ActorWorks
+    authorWorks:
+        class: App\Component\AuthorWorks
+    interpretWorks:
+        class: App\Component\InterpretWorks
 
     statElementCount:
         class: App\Component\StatElementCount

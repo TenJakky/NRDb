@@ -62,7 +62,8 @@ abstract class EntityForm extends BaseComponent
     {
         $data = $this->getPost();
 
-        if (isset($data['person_name'], $data['person_surname'], $data['person_country_id'])) {
+        if (isset($data['name'], $data['surname'], $data['country_id']))
+        {
             $this->personModel->insert($data);
         }
 

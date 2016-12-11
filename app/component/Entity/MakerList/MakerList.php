@@ -38,9 +38,9 @@ abstract class MakerList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $name = lcfirst($this->presenter->getName());
+        $pname = lcfirst($this->presenter->getName());
 
-        $filter[":{$name}2{$this->makerType}.id NOT"] = null;
+        $filter[":{$pname}2{$this->makerType}.id NOT"] = null;
 
         foreach ($filter as $k => $v)
         {
