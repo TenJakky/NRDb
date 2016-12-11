@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class DirectorList extends MakerList
+final class ActorList extends ArtistList
 {
     public function __construct(
         \App\Model\PersonModel $personModel,
@@ -12,6 +12,6 @@ final class DirectorList extends MakerList
 
         $this->model = $personModel;
         $this->entityModel = $movieModel;
-        $this->makerType = 'director';
+        $this->makerType = 'actor';
     }
 }

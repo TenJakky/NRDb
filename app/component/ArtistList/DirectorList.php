@@ -2,16 +2,16 @@
 
 namespace App\Component;
 
-final class InterpretList extends MakerList
+final class DirectorList extends ArtistList
 {
     public function __construct(
         \App\Model\PersonModel $personModel,
-        \App\Model\MusicModel $musicModel)
+        \App\Model\MovieModel $movieModel)
     {
         parent::__construct();
 
         $this->model = $personModel;
-        $this->entityModel = $musicModel;
-        $this->makerType = 'interpret';
+        $this->entityModel = $movieModel;
+        $this->makerType = 'director';
     }
 }

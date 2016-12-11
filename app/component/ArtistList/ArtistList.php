@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class MakerList extends BaseDatagridComponent
+abstract class ArtistList extends BaseDatagridComponent
 {
     /** @var \App\Model\BaseEntityModel */
     protected $entityModel;
@@ -12,7 +12,7 @@ abstract class MakerList extends BaseDatagridComponent
 
     public function render()
     {
-        $this->template->setFile(__DIR__.'/MakerList.latte');
+        $this->template->setFile(__DIR__ . '/AristList.latte');
         $this->template->render();
     }
 
@@ -27,7 +27,7 @@ abstract class MakerList extends BaseDatagridComponent
         $this->grid->addColumn('entity_count', "# of {$name}s");
         $this->grid->addColumn('average_rating', 'Average rating');
         $this->grid->addColumn('top_entity', "Top {$name}");
-        $this->grid->addCellsTemplate(__DIR__ . '/MakerListCellsTemplate.latte');
+        $this->grid->addCellsTemplate(__DIR__ . '/ArtistListCellsTemplate.latte');
         $this->grid->setTemplateParams(array(
             'entityModel' => $this->entityModel,
             'pName' => $this->presenter->getName(),

@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class SmallList extends BaseComponent
+abstract class EntitySmallList extends BaseComponent
 {
     /** @var \App\Model\BaseEntityModel */
     protected $model;
@@ -34,7 +34,7 @@ abstract class SmallList extends BaseComponent
         $this->template->ratingModel = $this->ratingModel;
         $this->template->entities = $data;
 
-        $this->template->setFile(__DIR__.'/SmallList.latte');
+        $this->template->setFile(__DIR__.'/EntitySmallList.latte');
         $this->template->render();
     }
 }

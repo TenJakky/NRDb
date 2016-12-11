@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class SmallListMusic extends SmallList
+final class MusicSmallList extends EntitySmallList
 {
     public function __construct(
         \App\Model\MusicModel $musicModel,

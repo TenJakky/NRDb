@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class AuthorList extends MakerList
+final class AuthorList extends ArtistList
 {
     public function __construct(
         \App\Model\PersonModel $personModel,
