@@ -57,7 +57,7 @@ final class MusicForm extends EntityForm
         $form = new \Nette\Application\UI\Form();
 
         $person = $this->personModel->fetchSelectBox();
-        $pseuodnym = $this->pseudonymModel->fetchSelectBox();
+        $pseudonym = $this->pseudonymModel->fetchSelectBox();
         $band = $this->bandModel->fetchSelectBox();
 
         $form->addHidden('id');
