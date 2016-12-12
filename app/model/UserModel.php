@@ -15,8 +15,9 @@ class UserModel extends BaseModel
         `movie`,
         `series`,
         `book`,
+        `music`,
         `game`,
-        `movie` + `series` + `book` + `game` as `total`
+        `movie` + `series` + `book` + `music` + `game` as `total`
         FROM user
         
         LEFT JOIN (
@@ -45,6 +46,15 @@ class UserModel extends BaseModel
         LEFT JOIN rating_book on rating_book.user_id = user.id
         GROUP BY user.id
         ) AS `sq_book` ON user.id = `sq_book`.`id`
+        
+        LEFT JOIN (
+        SELECT
+        user.id AS `id`,
+        count(rating_music.id) as `music`
+        FROM user
+        LEFT JOIN rating_music on rating_music.user_id = user.id
+        GROUP BY user.id
+        ) AS `sq_music` ON user.id = `sq_music`.`id`
         
         LEFT JOIN (
         SELECT

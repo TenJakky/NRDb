@@ -1,6 +1,6 @@
 {define col-user_id}
 <td>
-    {$row->user->username}
+    <a href="{plink User:view $row->id}">{$row->user->username}</a>
 </td>
 {/define}
 
