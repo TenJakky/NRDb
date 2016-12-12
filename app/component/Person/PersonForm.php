@@ -55,7 +55,7 @@ class PersonForm extends BaseComponent
             ->setRequired();
         $form->addDatePicker('born', 'Born');
         $form->addDatePicker('died', 'Died');
-        $form->addTextArea('bio', 'Bio');
+        $form->addTextArea('description', 'Description');
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];

@@ -25,19 +25,33 @@
             <td>{$data->died|date:'%d.%m.%Y'}</td>
         </tr>
         <tr>
+            <th>Pseudonyms</th>
+            <td>
+                <ul class="person-list">
+                    {foreach $data->related('pseudonym.person_id') as $temp}
+                        <li>
+                            <a href="{plink Pseudonym:view $temp->id}">{$temp->name}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Member of</th>
+            <td>
+                <ul class="person-list">
+                    {foreach $data->related('band2member.person_id') as $temp}
+                        <li>
+                            <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+        <tr>
             <th>Description</th>
             <td>{$data->description}</td>
         </tr>
-        <th>Pseudonyms</th>
-        <td>
-            <ul class="person-list">
-                {foreach $data->related('pseudonym.person_id') as $pseudonym}
-                    <li>
-                        <a href="{plink Pseudonym:view $pseudonym->id}">{$pseudonym->name}</a>
-                    </li>
-                {/foreach}
-            </ul>
-        </td>
     </table>
 </section>
 {if $data->related('movie2director.person_id')->count() > 0}

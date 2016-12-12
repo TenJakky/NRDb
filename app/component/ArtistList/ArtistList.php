@@ -12,7 +12,7 @@ abstract class ArtistList extends BaseDatagridComponent
 
     public function render()
     {
-        $this->template->setFile(__DIR__ . '/AristList.latte');
+        $this->template->setFile(__DIR__ . '/ArtistList.latte');
         $this->template->render();
     }
 

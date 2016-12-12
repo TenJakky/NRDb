@@ -9,6 +9,22 @@
             <th>Pseudonym of</th>
             <td><a href="{plink Person:view $data->person_id}">{$data->person_id|person}</a></td>
         </tr>
+        <tr>
+            <th>Member of</th>
+            <td>
+                <ul class="person-list">
+                    {foreach $data->related('band2member.person_id') as $temp}
+                        <li>
+                            <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{$data->description}</td>
+        </tr>
     </table>
 </section>
 {if $data->related('book2author.pseudonym_id')->count() > 0}
