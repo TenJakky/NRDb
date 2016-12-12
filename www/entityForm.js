@@ -37,6 +37,11 @@ $(document).ready(function ()
         });
     }
 
+    function successSpan(form)
+    {
+        form.find('input[type="button"]').after( $(span).delay(2000).fadeOut(800) );
+    }
+
     function validateSubform(form, inputs)
     {
         var errors = [];
@@ -115,7 +120,7 @@ $(document).ready(function ()
                     surname.val('');
                     countryId.val(0);
                     countryId.trigger('chosen:updated');
-                    form.find('input[type="button"]').after(span);
+                    successSpan(form);
                 }
             });
         }
@@ -145,7 +150,7 @@ $(document).ready(function ()
                     name.val('');
                     personId.val(0);
                     personId.trigger('chosen:updated');
-                    form.find('input[type="button"]').after(span);
+                    successSpan(form);
                 }
             });
         }
@@ -170,7 +175,7 @@ $(document).ready(function ()
                 success: function (result)
                 {
                     name.val('');
-                    form.find('input[type="button"]').after(span);
+                    successSpan(form);
                 }
             });
         }
