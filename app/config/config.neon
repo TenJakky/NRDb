@@ -35,7 +35,7 @@ services:
     - App\Model\Authenticator
     authenticator: @App\Model\Authenticator
 
+    - App\Latte\PersonFilter
     nette.latteFactory:
         setup:
             - addFilter(person, @App\Latte\PersonFilter)
-    - App\Latte\PersonFilter

@@ -27,6 +27,8 @@ services:
 
     movieList:
         class: App\Component\MovieList
+    seriesList:
+        class: App\Component\SeriesList
     bookList:
         class: App\Component\BookList
     musicList:
@@ -34,6 +36,8 @@ services:
 
     movieSmallList:
         class: App\Component\MovieSmallList
+    seriesSmallList:
+        class: App\Component\SeriesSmallList
     bookSmallList:
        class: App\Component\BookSmallList
     musicSmallList:
@@ -41,6 +45,8 @@ services:
 
     movieForm:
         class: App\Component\MovieForm
+    seriesForm:
+        class: App\Component\SeriesForm
     bookForm:
         class: App\Component\BookForm
     musicForm:
@@ -48,6 +54,8 @@ services:
 
     ratingListMovie:
         class: App\Component\RatingListMovie
+    ratingListSeries:
+        class: App\Component\RatingListSeries
     ratingListBook:
         class: App\Component\RatingListBook
     ratingListMusic:
@@ -55,6 +63,8 @@ services:
 
     rateFormMovie:
         class: App\Component\RateFormMovie
+    rateFormSeries:
+        class: App\Component\RateFormSeries
     rateFormBook:
         class: App\Component\RateFormBook
     rateFormMusic:
