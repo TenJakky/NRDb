@@ -1,7 +1,7 @@
 <table class="grid">
     <thead>
         <th>Original Title</th>
-        {if isset($entity->english_title)}
+        {if !in_array($pName, array('Music', 'Game'))}
             <th>English Title</th>
             <th>Czech Title</th>
         {/if}
@@ -13,7 +13,7 @@
     {foreach $entities as $entity}
         <tr>
             <td><a href="{plink "{$pName}:view" $entity->id}">{$entity->original_title}</a></td>
-            {if isset($entity->english_title)}
+            {if !in_array($pName, array('Music', 'Game'))}
                 <td>{$entity->english_title}</td>
                 <td>{$entity->czech_title}</td>
             {/if}
