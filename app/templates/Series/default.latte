@@ -1,34 +1,39 @@
 {layout ../@layout.latte}
-{block title}Movies{/block}
+{block title}Series{/block}
 {block head}{/block}
 {block content}
 
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Movie:add}">Add movie</a>
+            <a href="{plink Series:add}">Add series</a>
         </li>
         <li>
-            <a href="{plink Movie:rate}">Add rating</a>
+            <a href="{plink Series:rate}">Add rating</a>
         </li>
         <li>
-            <a href="{plink Movie:list}">List of movies</a>
+            <a href="{plink Series:list}">List of series</a>
         </li>
         <li>
-            <a href="{plink Movie:directorList}">List of directors</a>
+            <a href="{plink Series:seasonList}">List of seasons</a>
+        </li>
+        <li>
+            <a href="{plink Series:directorList}">List of directors</a>
+        </li>
+        <li>
+            <a href="{plink Movie:actorList}">List of actors</a>
         </li>
     </ul>
 </section>
 <section>
     <h2>Recently added</h2>
-    {control movieSmallList 'new'}
+    {control seriesSmallList 'new'}
 </section>
 <section>
     <h2>Top rated</h2>
-    {control movieSmallList 'top'}
+    {control seriesSmallList 'top'}
 </section>
 <section>
     <h2>To rate</h2>
-    {control movieSmallList 'notRated'}
+    {control seriesSmallList 'notRated'}
 </section>
-

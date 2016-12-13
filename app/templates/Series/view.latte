@@ -1,0 +1,10 @@
+{layout ../@layout.latte}
+{block title}{$data->original_title}{/block}
+{block head}{/block}
+{block content}
+
+{control entityView $data, $ratingModel}
+
+<section>
+    {control ratingListSeries $data->id}
+</section>
