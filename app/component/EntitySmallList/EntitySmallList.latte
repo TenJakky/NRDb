@@ -5,7 +5,9 @@
             <th>English Title</th>
             <th>Czech Title</th>
         {/if}
-        <th>Year</th>
+        {if $pName != 'Series'}
+            <th>Year</th>
+        {/if}
         <th>Rating</th>
         <th>My Rating</th>
     </thead>
@@ -17,7 +19,9 @@
                 <td>{$entity->english_title}</td>
                 <td>{$entity->czech_title}</td>
             {/if}
-            <td>{$entity->year}</td>
+            {if $pName != 'Series'}
+                <td>{$entity->year}</td>
+            {/if}
             <td>{$ratingModel->getRating($entity->id)|number:2}</td>
             <td>
                 {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
