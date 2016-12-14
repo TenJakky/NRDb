@@ -13,52 +13,32 @@ abstract class BaseRatingModel extends BaseModel
     public function getRating($entityId)
     {
         $name = substr($this->tableName, 7);
-        $result = $this->context->query(
-        "SELECT
-        sum(rating) AS `sum`,
-        count(*) AS `size`
-        FROM {$this->tableName}
-        WHERE {$this->tableName}.{$name}_id = {$entityId}")->fetch();
 
-        if ($result['size'] === 0)
-        {
-            return 0;
-        }
-        return $result['sum'] / $result['size'];
+        return $this->getTable()
+            ->select('sum(rating) / count(*) AS `rating`')
+            ->where("{$name}_id", $entityId)
+            ->fetch()->rating;
     }
 
     public function getWomenRating($entityId)
     {
         $name = substr($this->tableName, 7);
-        $result = $this->context->query(
-        "SELECT
-        sum({$this->tableName}.rating) AS `sum`,
-        count(*) AS `size`
-        FROM {$this->tableName}
-        LEFT JOIN user ON {$this->tableName}.user_id = user.id
-        WHERE {$this->tableName}.{$name}_id = {$entityId} AND user.gender = 'Female'")->fetch();
 
-        if ($result['size'] === 0)
-        {
-            return 0;
-        }
-        return $result['sum'] / $result['size'];
+        return $this->getTable()
+            ->select('sum(rating) / count(*) AS `rating`')
+            ->where("{$name}_id", $entityId)
+            ->where('user.gender', 'Female')
+            ->fetch()->rating;
     }
 
     public function getMenRating($entityId)
     {
         $name = substr($this->tableName, 7);
-        $result = $this->context->query(
-        "SELECT
-        sum({$this->tableName}.rating) AS `sum`,
-        count(*) AS `size` FROM {$this->tableName}
-        LEFT JOIN user ON {$this->tableName}.user_id = user.id 
-        WHERE {$this->tableName}.{$name}_id = {$entityId} AND user.gender = 'Male'")->fetch();
 
-        if ($result['size'] === 0)
-        {
-            return 0;
-        }
-        return $result->sum / $result['size'];
+        return $this->getTable()
+            ->select('sum(rating) / count(*) AS `rating`')
+            ->where("{$name}_id", $entityId)
+            ->where('user.gender', 'Male')
+            ->fetch()->rating;
     }
 }
