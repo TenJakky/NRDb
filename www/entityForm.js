@@ -47,7 +47,7 @@ $(document).ready(function ()
         var errors = [];
         for (var i = 0; i < inputs.length; i++)
         {
-            if ($(inputs[i]).val() == 0)
+            if (!$(inputs[i]).val())
             {
                 var error = {
                     message: "This field is required.",
