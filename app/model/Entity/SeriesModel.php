@@ -21,6 +21,12 @@ final class SeriesModel extends BaseEntityModel
 
     public function getNotRated($userId, $limit = false)
     {
-        return $this->getTable()->limit($limit);
+        return $this
+            ->findAll()
+            ->joinWhere(":series_season:{$this->ratingTableName}", 'user_id', $userId)
+            ->where(":series_season:{$this->ratingTableName}.user_id", null)
+            ->group(':series_season.series_id')
+            ->order("{$this->tableName}.id DESC")
+            ->limit($limit);
     }
 }
