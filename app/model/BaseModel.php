@@ -87,9 +87,9 @@ abstract class BaseModel extends Nette\Object
         return $columnsResult;
     }
 
-    public function query($sql)
+    public function query($sql, ...$params)
     {
-        return $this->context->query($sql);
+        return $this->context->query($sql, ...$params);
     }
 
     public function count()

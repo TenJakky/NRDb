@@ -10,6 +10,7 @@
         {/if}
         <th>Rating</th>
         <th>My Rating</th>
+        <th>Actions</th>
     </thead>
     <tbody>
     {foreach $entities as $entity}
@@ -23,13 +24,31 @@
                 <td>{$entity->year}</td>
             {/if}
             <td>{$ratingModel->getRating($entity->id)|number:2}</td>
+            {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
             <td>
-                {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
-                {if $rating}
-                    {$rating->rating}
-                    <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+                {if $pName != 'Series'}
+                    {if $rating}
+                        {$rating->rating}
+                    {/if}
                 {else}
-                    <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
+                    {if $rating}
+                        {$rating|number:2}
+                    {/if}
+                {/if}
+            </td>
+            <td>
+                {if $pName != 'Series'}
+                    {if $rating}
+                        <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+                    {else}
+                        <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
+                    {/if}
+                {else}
+                    {if $rating}
+                        <a href="{plink "{$pName}:editRating" $entity->id}">Edit rating</a>
+                    {else}
+                        <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
+                    {/if}
                 {/if}
             </td>
         </tr>

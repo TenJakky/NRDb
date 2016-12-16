@@ -22,4 +22,9 @@ final class SeriesModel extends BaseEntityModel
         ORDER BY sum({$this->ratingTableName}.rating) / count({$this->ratingTableName}.id) DESC
         LIMIT {$limit}");
     }
+
+    public function getNotRated($userId, $limit = false)
+    {
+        return $this->getTable()->limit($limit);
+    }
 }
