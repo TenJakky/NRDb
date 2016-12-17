@@ -26,15 +26,14 @@
             <td>{$ratingModel->getRating($entity->id)|number:2}</td>
             {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
             <td>
-                {if $pName != 'Series'}
-                    {if $rating}
+                {if $rating}
+                    {if $pName != 'Series'}
                         {$rating->rating}
-                    {/if}
-                {else}
-                    {if $rating}
+                    {else}
                         {$rating|number:2}
                     {/if}
                 {/if}
+
             </td>
             <td>
                 {if $pName != 'Series'}

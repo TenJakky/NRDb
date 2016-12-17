@@ -10,7 +10,13 @@
 
 {var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
 {if $rating}
-    <h3>My rating: {$rating->rating}</h3>
+    <h3>My rating:
+    {if $pName != 'Series'}
+        {$rating->rating}
+    {else}
+        {$rating|number:2}
+    {/if}
+    </h3>
 {/if}
 
 <section>
@@ -19,10 +25,18 @@
             <a href="{plink "{$pName}:edit" $data->id}">Edit details</a>
         </li>
         <li>
-            {if $rating}
-                <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+            {if $pName != 'Series'}
+                {if $rating}
+                    <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+                {else}
+                    <a href="{plink "{$pName}:rate" $data->id}">Rate</a>
+                {/if}
             {else}
-                <a href="{plink "{$pName}:rate" $data->id}">Rate</a>
+                {if $rating}
+                    <a href="{plink "{$pName}:editRating" $data->id}">Edit rating</a>
+                {else}
+                    <a href="{plink "{$pName}:rate" $data->id}">Rate</a>
+                {/if}
             {/if}
         </li>
     </ul>
@@ -41,10 +55,12 @@
                 <td>{$data->czech_title}</td>
             </tr>
         {/if}
-        <tr>
-            <th>Year</th>
-            <td>{$data->year}</td>
-        </tr>
+        {if isset($data->year)}
+            <tr>
+                <th>Year</th>
+                <td>{$data->year}</td>
+            </tr>
+        {/if}
         <tr>
             <th>Description</th>
             <td>{$data->description}</td>
@@ -70,6 +86,7 @@
                     </td>
                 </tr>
             {case 'Movie'}
+            {case 'Series'}
                 <tr>
                     <th>Director</th>
                     <td>
