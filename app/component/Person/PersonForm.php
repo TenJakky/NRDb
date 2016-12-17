@@ -43,7 +43,7 @@ class PersonForm extends BaseComponent
     {
         $form = new \Nette\Application\UI\Form();
 
-        $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
+        $countries = $this->countryModel->getTable()->fetchPairs('id', 'name');
 
         $form->addHidden('id');
         $form->addText('name', 'Person name')

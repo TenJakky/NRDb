@@ -8,6 +8,6 @@ final class BandModel extends BaseModel
 
     public function fetchSelectBox()
     {
-        return $this->findAll()->order('name ASC')->fetchPairs('id', 'name');
+        return $this->getTable()->order('name ASC')->fetchPairs('id', 'name');
     }
 }

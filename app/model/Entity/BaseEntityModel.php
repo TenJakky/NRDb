@@ -9,13 +9,13 @@ abstract class BaseEntityModel extends BaseModel
 
     public function getRecent($limit)
     {
-        return $this->findAll()->order('id DESC')->limit($limit);
+        return $this->getTable()->order('id DESC')->limit($limit);
     }
 
     public function getTop($limit)
     {
         return $this
-            ->findAll()
+            ->getTable()
             ->group('id')
             ->order("sum(:{$this->ratingTableName}.rating)/count(*) DESC")
             ->limit($limit);
@@ -40,10 +40,9 @@ abstract class BaseEntityModel extends BaseModel
     {
         $joinTable = "{$this->tableName}2{$personType}";
 
-        $result = $this->query(
+        return $result = $this->query(
         "SELECT
-        sum(`subsum`) AS `sum`,
-        count(*) AS `size`
+        sum(`subsum`) / count(*) AS `average`
         FROM (
         SELECT 
         (sum({$this->ratingTableName}.rating) / count(*)) AS `subsum`
@@ -51,32 +50,26 @@ abstract class BaseEntityModel extends BaseModel
         LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$this->tableName}_id = {$joinTable}.{$this->tableName}_id
         WHERE {$joinTable}.person_id = {$personId}
         GROUP BY {$this->ratingTableName}.{$this->tableName}_id
-        ) AS `subquery`")->fetch();
-
-        return $result->size ? $result->sum / $result->size : null;
+        ) AS `subquery`")->fetch()->average;
     }
 
-    public function getNotRated($userId, $limit = false)
+    public function getNotRated($userId, $limit = null)
     {
-        return $this->query(
-        "SELECT
-        {$this->tableName}.*
-        FROM {$this->tableName}
-        LEFT JOIN {$this->ratingTableName} ON {$this->tableName}.id = {$this->ratingTableName}.{$this->tableName}_id AND {$this->ratingTableName}.user_id = {$userId}
-        WHERE {$this->ratingTableName}.user_id IS NULL
-        ORDER BY {$this->tableName}.id DESC ".
-        ($limit ? "LIMIT {$limit}" : null));
+        return $this
+            ->getTable()
+            ->joinWhere(":{$this->ratingTableName}", ":{$this->ratingTableName}.user_id", $userId)
+            ->where(":{$this->ratingTableName}.user_id", null)
+            ->order("{$this->tableName}.id DESC")
+            ->limit($limit);
     }
 
-    public function getRated($userId, $limit = false)
+    public function getRated($userId, $limit = null)
     {
-        return $this->query(
-        "SELECT
-        {$this->tableName}.*
-        FROM {$this->tableName}
-        LEFT JOIN {$this->ratingTableName} ON {$this->tableName}.id = {$this->ratingTableName}.{$this->tableName}_id AND {$this->ratingTableName}.user_id = {$userId}
-        WHERE {$this->ratingTableName}.user_id = {$userId}
-        ORDER BY {$this->tableName}.id DESC ".
-        ($limit ? "LIMIT {$limit}" : null));
+        return $this
+            ->getTable()
+            ->joinWhere(":{$this->ratingTableName}", ":{$this->ratingTableName}.user_id", $userId)
+            ->where(":{$this->ratingTableName}.user_id", $userId)
+            ->order("{$this->tableName}.id DESC")
+            ->limit($limit);
     }
 }

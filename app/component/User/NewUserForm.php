@@ -24,7 +24,7 @@ final class NewUserForm extends BaseComponent
         $form->addText('name', 'Name')->setRequired();
         $form->addText('surname', 'Surname')->setRequired();
 
-        $form->addSelect('country_id', 'Nationality', $this->countryModel->findAll()->fetchPairs('id', 'name'));
+        $form->addSelect('country_id', 'Nationality', $this->countryModel->getTable()->fetchPairs('id', 'name'));
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];

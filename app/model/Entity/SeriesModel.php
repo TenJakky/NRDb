@@ -13,7 +13,7 @@ final class SeriesModel extends BaseEntityModel
     public function getTop($limit)
     {
         return $this
-            ->findAll()
+            ->getTable()
             ->group('id')
             ->order("sum(:series_season:{$this->ratingTableName}.rating)/count(*) DESC")
             ->limit($limit);
@@ -22,7 +22,7 @@ final class SeriesModel extends BaseEntityModel
     public function getNotRated($userId, $limit = false)
     {
         return $this
-            ->findAll()
+            ->getTable()
             ->joinWhere(":series_season:{$this->ratingTableName}", 'user_id', $userId)
             ->where(":series_season:{$this->ratingTableName}.user_id", null)
             ->group(':series_season.series_id')

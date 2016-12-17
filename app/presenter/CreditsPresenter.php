@@ -14,6 +14,6 @@ final class CreditsPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-        $this->template->changes = $this->changelogModel->findAll()->order('date DESC')->limit(5);
+        $this->template->changes = $this->changelogModel->getTable()->order('date DESC')->limit(5);
 	}
 }

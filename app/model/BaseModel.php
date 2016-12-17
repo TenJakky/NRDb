@@ -17,19 +17,19 @@ abstract class BaseModel extends Nette\Object
         $this->context = $context;
     }
 
-    protected function getTableName()
+    public function getConnection()
+    {
+        return $this->context;
+    }
+
+    public function getTableName()
     {
         return $this->tableName;
     }
 
-    protected function getTable()
+    public function getTable()
     {
         return $this->context->table($this->tableName);
-    }
-
-    public function findAll()
-    {
-        return $this->getTable();
     }
 
     public function findByArray(array $by)
@@ -45,6 +45,16 @@ abstract class BaseModel extends Nette\Object
     public function findRow($id)
     {
         return $this->getTable()->where('id', (int) $id)->fetch();
+    }
+
+    public function query($sql, ...$params)
+    {
+        return $this->context->query($sql, ...$params);
+    }
+
+    public function count()
+    {
+        return $this->getTable()->count();
     }
 
     public function insert($data)
@@ -85,15 +95,5 @@ abstract class BaseModel extends Nette\Object
         }
 
         return $columnsResult;
-    }
-
-    public function query($sql, ...$params)
-    {
-        return $this->context->query($sql, ...$params);
-    }
-
-    public function count()
-    {
-        return $this->getTable()->count();
     }
 }

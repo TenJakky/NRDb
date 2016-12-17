@@ -23,7 +23,7 @@ abstract class EntityForm extends BaseComponent
     {
         $form = new \Nette\Application\UI\Form();
 
-        $countries = $this->countryModel->findAll()->fetchPairs('id', 'name');
+        $countries = $this->countryModel->getTable()->fetchPairs('id', 'name');
 
         $form->addText('name', 'Name *');
         $form->addText('surname', 'Surname *');
