@@ -25,15 +25,12 @@ abstract class BaseEntityModel extends BaseModel
     {
         $joinTable = "{$this->tableName}2{$personType}";
 
-        return $this->query(
-        "SELECT
-        {$this->tableName}.*
-        FROM {$this->tableName}
-        LEFT JOIN {$this->ratingTableName} ON {$this->tableName}.id = {$this->ratingTableName}.{$this->tableName}_id
-        LEFT JOIN {$joinTable} ON {$this->tableName}.id = {$joinTable}.{$this->tableName}_id
-        WHERE {$joinTable}.person_id = {$personId}
-        GROUP BY {$this->tableName}.id
-        ORDER BY sum({$this->ratingTableName}.rating) DESC")->fetch();
+        return $this
+            ->getTable()
+            ->where(":{$joinTable}.person_id", $personId)
+            ->group("{$this->tableName}.id")
+            ->order("sum(:{$this->ratingTableName}.rating) DESC")
+            ->fetch();
     }
 
     public function getPersonAverage(string $personType, int $personId)
