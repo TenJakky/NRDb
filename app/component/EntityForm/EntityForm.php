@@ -70,8 +70,7 @@ abstract class EntityForm extends BaseComponent
 
     public function personFormSubmitted(\Nette\Forms\Form $form)
     {
-        $values = $form->getValues();
-        $this->personModel->insert($values);
+        $this->personModel->insert($form->getValues());
 
         $person = $this->personModel->fetchSelectBox();
         $this['pseudonymForm']['person_id']->setItems($person);
@@ -95,8 +94,7 @@ abstract class EntityForm extends BaseComponent
 
     public function pseudonymFormSubmitted(\Nette\Forms\Form $form)
     {
-        $values = $form->getValues();
-        $this->pseudonymModel->insert($values);
+        $this->pseudonymModel->insert($form->getValues());
 
         if (isset($this['form']['pseudonym']))
         {
@@ -111,8 +109,7 @@ abstract class EntityForm extends BaseComponent
 
     public function bandFormSubmitted(\Nette\Forms\Form $form)
     {
-        $values = $form->getValues();
-        $this->bandModel->insert($values);
+        $this->bandModel->insert($form->getValues());
 
         if (isset($this['form']['band']))
         {
