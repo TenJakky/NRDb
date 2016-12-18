@@ -16,25 +16,29 @@
       font-weight: 300;
       padding: 10px;
     }
-  }
-  li:hover > a
-  {
-    color: $grey;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .disabled
-  {
-    background: $grey;
-  }
-  .disabled:hover > a
-  {
-    color: $white;
-  }
 
-  .active
-  {
-    outline: 2px solid $red;
+    &.active
+    {
+      outline: 2px solid $red;
+    }
+
+    &.disabled
+    {
+      background: $grey;
+    }
+
+    &:hover > a
+    {
+      color: $grey;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    &.disabled:hover > a
+    {
+      color: $white;
+      cursor: not-allowed;
+    }
   }
 }
 
