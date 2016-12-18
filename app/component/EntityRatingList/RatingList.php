@@ -31,8 +31,7 @@ abstract class RatingList extends BaseSmallDatagridComponent
     public function getDataSource($filter, $order)
     {
         $name = lcfirst($this->presenter->getName());
-        $filter["{$name}_id"] = $this->entityId;
 
-        return $this->model->findByArray($filter)->order(implode(' ', $order));
+        return $this->model->findBy("{$name}_id", $this->entityId);
     }
 }

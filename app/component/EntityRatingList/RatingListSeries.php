@@ -10,4 +10,10 @@ final class RatingListSeries extends RatingList
         parent::__construct();
         $this->model = $ratingSeriesModel;
     }
+
+    public function getDataSource($filter, $order)
+    {
+        return $this->model->findBy('series_season_id', $this->entityId)->group('series_season.series_id');
+
+    }
 }
