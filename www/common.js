@@ -5,11 +5,6 @@ var chosenOptions =
     width: '50%'
 };
 
-$(document).ready(function ()
-{
-    $('select').chosen(chosenOptions);
-});
-
 Nette.showFormErrors = function (form, errors)
 {
     $(form).find('span.form-error').remove();
@@ -31,3 +26,17 @@ Nette.showFormErrors = function (form, errors)
         $(elem).focus();
     }
 };
+
+$(document).ready(function ()
+{
+    $('select').chosen(chosenOptions);
+
+    $.nette.ext('flash', {
+        complete: function () {
+            $('.flash').animate({
+                opacity: 1.0
+            }, 2000).fadeOut(1000);
+        }
+    });
+    $.nette.init();
+});

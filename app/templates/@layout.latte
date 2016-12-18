@@ -65,9 +65,13 @@
             </div>
         </nav>
         <main>
-            {foreach $flashes as $flash}
-                <div class="{$flash->type}">{$flash->message}</div>
-            {/foreach}
+            <div id="flasharea">
+                {snippet flash}
+                    {foreach $flashes as $flash}
+                        <div class="flash {$flash->type}">{$flash->message}</div>
+                    {/foreach}
+                {/snippet}
+            </div>
             <header>
                 <h1>{include title}</h1>
             </header>

@@ -22,6 +22,7 @@ abstract class EntityForm extends BaseComponent
     public function createComponentPersonForm()
     {
         $form = new \Nette\Application\UI\Form();
+        $form->getElementPrototype()->addClass('ajax');
 
         $countries = $this->countryModel->getTable()->fetchPairs('id', 'name');
 
@@ -29,7 +30,9 @@ abstract class EntityForm extends BaseComponent
         $form->addText('surname', 'Surname *');
         $form->addSelect('country_id', 'Nationality *', $countries)
             ->setPrompt('Select nationality');
-        $form->addButton('submit_person', 'Submit');
+        $form->addSubmit('submit_person', 'Submit');
+
+        $form->onSubmit[] = [$this, 'personFormSubmitted'];
 
         return $form;
     }
@@ -37,13 +40,16 @@ abstract class EntityForm extends BaseComponent
     public function createComponentPseudonymForm()
     {
         $form = new \Nette\Application\UI\Form();
+        $form->getElementPrototype()->addClass('ajax');
 
         $person = $this->personModel->fetchSelectBox();
 
         $form->addText('name', 'Name *');
         $form->addSelect('person_id', 'Person *', $person)
             ->setPrompt('Select person');
-        $form->addButton('submit_pseudonym', 'Submit');
+        $form->addSubmit('submit_pseudonym', 'Submit');
+
+        $form->onSubmit[] = [$this, 'pseudonymFormSubmitted'];
 
         return $form;
     }
@@ -51,72 +57,71 @@ abstract class EntityForm extends BaseComponent
     public function createComponentBandForm()
     {
         $form = new \Nette\Application\UI\Form();
+        $form->getElementPrototype()->addClass('ajax');
 
-        $form->addText('name', 'Name *');
-        $form->addButton('submit_band', 'Submit');
+        $form->addText('name', 'Name')
+            ->setRequired();
+        $form->addSubmit('submit_band', 'Submit');
+
+        $form->onSubmit[] = [$this, 'bandFormSubmitted'];
 
         return $form;
     }
 
-    public function handleAddPerson()
+    public function personFormSubmitted(\Nette\Forms\Form $form)
     {
-        $data = $this->getPost();
-
-        if (isset($data['name'], $data['surname'], $data['country_id']))
-        {
-            $this->personModel->insert($data);
-        }
+        $values = $form->getValues();
+        $this->personModel->insert($values);
 
         $person = $this->personModel->fetchSelectBox();
+        $this['pseudonymForm']['person_id']->setItems($person);
+        $this->redrawControl('pseudonymSnippet');
+
         if (isset($this['form']['director']))
         {
             $this['form']['director']->setItems($person);
             $this['form']['actor']->setItems($person);
+            $this->redrawControl('formSnippet');
         }
         if (isset($this['form']['author']))
         {
             $this['form']['author']->setItems($person);
+            $this->redrawControl('formSnippet');
         }
 
-        $this['pseudonymForm']['person_id']->setItems($person);
-
-        $this->redrawControl('formSnippet');
-        $this->redrawControl('pseudonymSnippet');
+        $this->presenter->flashMessage('Successfully submitted', 'success');
+        $this->presenter->redrawControl('flash');
     }
 
-    public function handleAddPseudonym()
+    public function pseudonymFormSubmitted(\Nette\Forms\Form $form)
     {
-        $data = $this->getPost();
+        $values = $form->getValues();
+        $this->pseudonymModel->insert($values);
 
-        if (isset($data['name'], $data['person_id']))
-        {
-            $this->pseudonymModel->insert($data);
-        }
-
-        $pseudonym = $this->pseudonymModel->fetchSelectBox();
         if (isset($this['form']['pseudonym']))
         {
+            $pseudonym = $this->pseudonymModel->fetchSelectBox();
             $this['form']['pseudonym']->setItems($pseudonym);
+            $this->redrawControl('formSnippet');
         }
 
-        $this->redrawControl('formSnippet');
+        $this->presenter->flashMessage('Successfully submitted', 'success');
+        $this->presenter->redrawControl('flash');
     }
 
-    public function handleAddBand()
+    public function bandFormSubmitted(\Nette\Forms\Form $form)
     {
-        $data = $this->getPost();
+        $values = $form->getValues();
+        $this->bandModel->insert($values);
 
-        if (isset($data['name']))
-        {
-            $this->bandModel->insert($data);
-        }
-
-        $band = $this->bandModel->fetchSelectBox();
         if (isset($this['form']['band']))
         {
+            $band = $this->bandModel->fetchSelectBox();
             $this['form']['band']->setItems($band);
+            $this->redrawControl('formSnippet');
         }
 
-        $this->redrawControl('formSnippet');
+        $this->presenter->flashMessage('Successfully submitted', 'success');
+        $this->presenter->redrawControl('flash');
     }
 }
