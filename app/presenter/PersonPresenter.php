@@ -14,4 +14,9 @@ final class PersonPresenter extends BaseViewPresenter
     {
         $this->template->id = $id;
     }
+
+    public function actionEditPseudonym($id)
+    {
+        $this->template->id = $id;
+    }
 }

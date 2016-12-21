@@ -4,9 +4,11 @@ parameters:
 
 includes:
     - database.neon
+
     - parameters.neon
     - model.neon
     - component.neon
+    - filter.neon
 
 php:
     date.timezone: Europe/Prague
@@ -35,7 +37,3 @@ services:
     - App\Model\Authenticator
     authenticator: @App\Model\Authenticator
 
-    - App\Latte\PersonFilter
-    nette.latteFactory:
-        setup:
-            - addFilter(person, @App\Latte\PersonFilter)

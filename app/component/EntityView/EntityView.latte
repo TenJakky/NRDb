@@ -61,58 +61,28 @@
                 <tr>
                     <th>Author</th>
                     <td>
-                        <ul class="person-list">
-                        {foreach $data->related('jun_book2author.book_id') as $temp}
-                            <li>
-                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
-                            </li>
-                        {/foreach}
-                        </ul>
+                        {include '../../latte/PersonList.latte' people => $data->related('jun_book2author.book_id')}
                     </td>
                 </tr>
-            {case 'Movie'}
             {case 'Series'}
+            {case 'Movie'}
                 <tr>
                     <th>Director</th>
                     <td>
-                        <ul class="person-list">
-                        {foreach $data->related('jun_movie2director.movie_id') as $temp}
-                            <li>
-                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
-                            </li>
-                        {/foreach}
-                        </ul>
+                        {include '../../latte/PersonList.latte' people => $data->related('jun_movie2director.movie_id')}
                     </td>
                 </tr>
                 <tr>
                     <th>Cast</th>
                     <td>
-                        <ul class="person-list">
-                        {foreach $data->related('jun_movie2actor.movie_id') as $temp}
-                            <li>
-                                <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
-                            </li>
-                        {/foreach}
-                        </ul>
+                        {include '../../latte/PersonList.latte' people => $data->related('jun_movie2actor.movie_id')}
                     </td>
                 </tr>
             {case 'Music'}
                 <tr>
                     <th>Interpret</th>
                     <td>
-                        <ul class="person-list">
-                        {foreach $data->related('jun_music2interpret.music_id') as $temp}
-                            {if isset($temp->person_id)}
-                                <li>
-                                    <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
-                                </li>
-                            {else}
-                                <li>
-                                    <a href="{plink Group:view $temp->person_group_id}">{$temp->person_group->name}</a>
-                                </li>
-                            {/if}
-                        {/foreach}
-                        </ul>
+                        {include '../../latte/PersonList.latte' people => $data->related('jun_music2interpret.movie_id')}
                     </td>
                 </tr>
         {/switch}

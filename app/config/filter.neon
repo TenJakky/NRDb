@@ -1,0 +1,7 @@
+services:
+
+    - App\Filter\PersonFilter
+
+    nette.latteFactory:
+        setup:
+            - addFilter(person, @App\Filter\PersonFilter)

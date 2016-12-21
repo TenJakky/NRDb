@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Latte;
+namespace App\Filter;
 
 class PersonFilter extends \Nette\Object
 {

@@ -1,0 +1,13 @@
+<ul class="person-list">
+{foreach $people as $temp}
+    {if isset($temp->person_id)}
+        <li>
+            <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
+        </li>
+    {else}
+        <li>
+            <a href="{plink Group:view $temp->person_group_id}">{$temp->person_group->name}</a>
+        </li>
+    {/if}
+{/foreach}
+</ul>

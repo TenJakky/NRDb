@@ -9,4 +9,9 @@ final class GroupPresenter extends BaseViewPresenter
     {
         $this->model = $personGroupModel;
     }
+
+    public function actionEdit($id)
+    {
+        $this->template->id = $id;
+    }
 }
