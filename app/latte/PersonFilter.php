@@ -13,7 +13,6 @@ class PersonFilter extends \Nette\Object
 
     public function __invoke($id)
     {
-        $row = $this->personModel->findRow($id);
-        return $row->name.' '.$row->surname;
+        return $this->personModel->getTable()->select("concat_ws(' ', name, middlename, surname) AS name")->wherePrimary($id)->fetch()->name;
     }
 }

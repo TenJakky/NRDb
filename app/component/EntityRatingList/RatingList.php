@@ -25,7 +25,7 @@ abstract class RatingList extends BaseSmallDatagridComponent
 
         $this->grid->addCellsTemplate(__DIR__ . '/RatingListCellsTemplate.latte');
 
-        $this->grid->addTemplateParam('userId', $this->presenter->getUser()->getId());
+        $this->grid->addTemplateParameter('userId', $this->presenter->getUser()->getId());
 
         return $this->grid;
     }
