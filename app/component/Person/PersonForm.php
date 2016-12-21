@@ -2,12 +2,13 @@
 
 namespace App\Component;
 
-class PersonForm extends BaseComponent
+final class PersonForm extends BaseComponent
 {
+    /** @var \App\Model\PersonModel */
     protected $personModel;
-    protected $moviesModel;
+
+    /** @var \App\Model\CountryModel */
     protected $countryModel;
-    protected $ratingsMovieModel;
 
     public function __construct(
         \App\Model\PersonModel $personModel,
@@ -36,7 +37,8 @@ class PersonForm extends BaseComponent
             $this['form']->setDefaults($data);
         }
 
-        parent::render();
+        $this->template->setFile(__DIR__.'/PersonForm.latte');
+        $this->template->render();
     }
 
     public function createComponentForm()
@@ -46,11 +48,12 @@ class PersonForm extends BaseComponent
         $countries = $this->countryModel->getTable()->fetchPairs('id', 'name');
 
         $form->addHidden('id');
-        $form->addText('name', 'Person name')
+        $form->addText('name', 'Name')
             ->setRequired();
-        $form->addText('surname', 'Person surname')
+        $form->addText('middlename', 'Middle Name');
+        $form->addText('surname', 'Surname')
             ->setRequired();
-        $form->addSelect('country_id', 'Person nationality', $countries)
+        $form->addSelect('country_id', 'Nationality', $countries)
             ->setPrompt('Select nationality')
             ->setRequired();
         $form->addDatePicker('born', 'Born');
@@ -72,7 +75,14 @@ class PersonForm extends BaseComponent
 
         $id = $this->personModel->save($data);
 
-        $this->flashMessage('Person successfully saved.', 'success');
+        $this->presenter->flashMessage('Person successfully saved.', 'success');
+
+        if ($this->presenter->isAjax())
+        {
+            $this->presenter->redrawControl('flash');
+            return;
+        }
+
         $this->presenter->redirect('Person:view', array('id' => $id));
     }
 }

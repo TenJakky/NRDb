@@ -21,6 +21,10 @@ services:
 
     personForm:
         class: App\Component\PersonForm
+    pseudonymForm:
+        class: App\Component\PseudonymForm
+    personGroupForm:
+        class: App\Component\PersonGroupForm
 
     entityView:
         class: App\Component\EntityView
