@@ -45,12 +45,16 @@ services:
 
     movieForm:
         class: App\Component\MovieForm
+        inject: yes
     seriesForm:
         class: App\Component\SeriesForm
+        inject: yes
     bookForm:
         class: App\Component\BookForm
+        inject: yes
     musicForm:
         class: App\Component\MusicForm
+        inject: yes
 
     ratingListMovie:
         class: App\Component\RatingListMovie

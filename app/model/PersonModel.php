@@ -8,6 +8,19 @@ final class PersonModel extends BaseModel
 
     public function fetchSelectBox()
     {
-        return $this->getTable()->select("id, concat(name, ' ', surname) AS name")->order('surname ASC')->fetchPairs('id', 'name');
+        return $this->getTable()
+            ->select("id, concat_ws(' ', name, middlename, surname) AS name")
+            ->where('type', 'person')
+            ->order('surname ASC')
+            ->fetchPairs('id', 'name');
+    }
+
+    public function fetchPseudonymSelectBox()
+    {
+        return $this->getTable()
+            ->select("id, concat_ws(' ', name, middlename, surname) AS name")
+            ->where('type', 'pseudonym')
+            ->order('surname ASC')
+            ->fetchPairs('id', 'name');
     }
 }

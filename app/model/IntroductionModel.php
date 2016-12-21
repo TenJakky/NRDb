@@ -4,7 +4,7 @@ namespace App\Model;
 
 final class IntroductionModel extends BaseModel
 {
-    public $tableName = 'introduction';
+    public $tableName = 'adm_introduction';
 
     public function getIntroduction()
     {

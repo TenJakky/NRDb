@@ -1,15 +1,14 @@
 services:
 
 - App\Model\CountryModel
+- App\Model\ChangelogModel
 
 - App\Model\NewsModel
-- App\Model\ChangelogModel
 - App\Model\IntroductionModel
 
 - App\Model\PersonModel
-- App\Model\PseudonymModel
-- App\Model\BandModel
-- App\Model\BandMemberModel
+- App\Model\PersonGroupModel
+- App\Model\GroupMemberModel
 
 - App\Model\MovieModel
 - App\Model\MovieDirectorModel
@@ -30,4 +29,5 @@ services:
 - App\Model\RatingMusicModel
 
 - App\Model\GameModel
+- App\Model\GameDeveloperModel
 - App\Model\RatingGameModel

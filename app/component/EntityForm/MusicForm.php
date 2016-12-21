@@ -7,17 +7,9 @@ final class MusicForm extends EntityForm
 	protected $musicInterpretModel;
 
     public function __construct(
-        \App\Model\CountryModel $countryModel,
-        \App\Model\PersonModel $personModel,
-        \App\Model\PseudonymModel $pseudonymModel,
-        \App\Model\BandModel $bandModel,
         \App\Model\MusicModel $musicModel,
         \App\Model\MusicInterpretModel $musicInterpretModel)
     {
-        $this->countryModel = $countryModel;
-        $this->personModel = $personModel;
-        $this->pseudonymModel = $pseudonymModel;
-        $this->bandModel = $bandModel;
         $this->model = $musicModel;
         $this->musicInterpretModel = $musicInterpretModel;
     }

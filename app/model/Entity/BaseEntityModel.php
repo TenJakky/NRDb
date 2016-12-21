@@ -23,7 +23,8 @@ abstract class BaseEntityModel extends BaseModel
 
     public function getPersonTop(string $personType, int $personId)
     {
-        $joinTable = "{$this->tableName}2{$personType}";
+        $entity = substr($this->tableName, 4);
+        $joinTable = "jun_{$entity}2{$personType}";
 
         return $this
             ->getTable()
@@ -35,7 +36,8 @@ abstract class BaseEntityModel extends BaseModel
 
     public function getPersonAverage(string $personType, int $personId)
     {
-        $joinTable = "{$this->tableName}2{$personType}";
+        $entity = substr($this->tableName, 4);
+        $joinTable = "jun_{$entity}2{$personType}";
 
         return $result = $this->query(
         "SELECT
@@ -44,9 +46,9 @@ abstract class BaseEntityModel extends BaseModel
         SELECT 
         (sum({$this->ratingTableName}.rating) / count(*)) AS `subsum`
         FROM {$joinTable}
-        LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$this->tableName}_id = {$joinTable}.{$this->tableName}_id
+        LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$entity}_id = {$joinTable}.{$entity}_id
         WHERE {$joinTable}.person_id = {$personId}
-        GROUP BY {$this->ratingTableName}.{$this->tableName}_id
+        GROUP BY {$this->ratingTableName}.{$entity}_id
         ) AS `subquery`")->fetch()->average;
     }
 

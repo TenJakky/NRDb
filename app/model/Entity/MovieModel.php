@@ -5,7 +5,7 @@ namespace App\Model;
 final class MovieModel extends BaseEntityModel
 {
     /** @var string */
-    public $tableName = 'movie';
+    public $tableName = 'ent_movie';
 
     /** @var string */
     protected $ratingTableName = 'rating_movie';

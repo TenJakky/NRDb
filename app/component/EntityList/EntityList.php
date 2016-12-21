@@ -33,6 +33,7 @@ abstract class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('men_rating', 'Men\'s Rating');
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
+        $this->grid->addColumn('action', 'Action');
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParams(array(
                 'userId' => $this->presenter->user->getId(),

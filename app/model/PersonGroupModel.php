@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-final class PseudonymModel extends BaseModel
+final class PersonGroupModel extends BaseModel
 {
-    public $tableName = 'pseudonym';
+    public $tableName = 'person_group';
 
     public function fetchSelectBox()
     {

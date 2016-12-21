@@ -14,7 +14,7 @@
     <table class="list">
         <tr>
             <th>Nationality</th>
-            <td>{$data->ref('country', 'country_id')->name}</td>
+            <td>{$data->ref('def_country', 'country_id')->name}</td>
         </tr>
         <tr>
             <th>Born</th>
@@ -28,7 +28,7 @@
             <th>Pseudonyms</th>
             <td>
                 <ul class="person-list">
-                    {foreach $data->related('pseudonym.person_id') as $temp}
+                    {foreach $data->related('person.person_id') as $temp}
                         <li>
                             <a href="{plink Pseudonym:view $temp->id}">{$temp->name}</a>
                         </li>
@@ -40,7 +40,7 @@
             <th>Member of</th>
             <td>
                 <ul class="person-list">
-                    {foreach $data->related('band2member.person_id') as $temp}
+                    {foreach $data->related('jun_group2member.person_id') as $temp}
                         <li>
                             <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
                         </li>
@@ -54,25 +54,25 @@
         </tr>
     </table>
 </section>
-{if $data->related('movie2director.person_id')->count() > 0}
+{if $data->related('jun_movie2director.person_id')->count() > 0}
     <section>
         <h2>Director</h2>
         {control directorWorks $data->id}
     </section>
 {/if}
-{if $data->related('movie2actor.person_id')->count() > 0}
+{if $data->related('jun_movie2actor.person_id')->count() > 0}
     <section>
         <h2>Actor</h2>
         {control actorWorks $data->id}
     </section>
 {/if}
-{if $data->related('book2author.person_id')->count() > 0}
+{if $data->related('jun_book2author.person_id')->count() > 0}
     <section>
         <h2>Author</h2>
         {control authorWorks $data->id}
     </section>
 {/if}
-{if $data->related('music2interpret.person_id')->count() > 0}
+{if $data->related('jun_music2interpret.person_id')->count() > 0}
     <section>
         <h2>Interpret</h2>
         {control interpretWorks $data->id}

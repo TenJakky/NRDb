@@ -4,5 +4,5 @@ namespace App\Model;
 
 final class SeriesDirectorModel extends BaseModel
 {
-    public $tableName = 'series2director';
+    public $tableName = 'jun_series2director';
 }

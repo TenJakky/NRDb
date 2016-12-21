@@ -7,7 +7,7 @@
 {define col-maker}
     <td>
         <ul class="person-list">
-            {foreach $row->related("{$pname}2{$type}.{$pname}_id") as $temp}
+            {foreach $row->related("jun_{$pname}2{$type}.{$pname}_id") as $temp}
                 {if isset($temp->person_id)}
                 <li>
                     <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
@@ -49,6 +49,14 @@
         {var $rating => $ratingModel->getUserRating($row->id, $userId)}
         {if $rating}
             {$rating->rating}
+        {/if}
+    </td>
+{/define}
+
+{define col-action}
+    <td>
+        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+        {if $rating}
             <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
         {else}
             <a href="{plink "{$pName}:rate" $row->id}">Rate</a>

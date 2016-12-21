@@ -10,11 +10,8 @@ abstract class EntityForm extends BaseComponent
     /** @var \App\Model\PersonModel */
     protected $personModel;
 
-    /** @var \App\Model\PseudonymModel */
-    protected $pseudonymModel;
-
-    /** @var \App\Model\BandModel */
-    protected $bandModel;
+    /** @var \App\Model\PersonGroupModel */
+    protected $personGroupModel;
 
     /** @var \App\Model\BaseEntityModel */
     protected $model;
@@ -54,16 +51,16 @@ abstract class EntityForm extends BaseComponent
         return $form;
     }
 
-    public function createComponentBandForm()
+    public function createComponentGroupForm()
     {
         $form = new \Nette\Application\UI\Form();
         $form->getElementPrototype()->addClass('ajax');
 
         $form->addText('name', 'Name')
             ->setRequired();
-        $form->addSubmit('submit_band', 'Submit');
+        $form->addSubmit('submit_group', 'Submit');
 
-        $form->onSubmit[] = [$this, 'bandFormSubmitted'];
+        $form->onSubmit[] = [$this, 'groupFormSubmitted'];
 
         return $form;
     }
@@ -94,11 +91,14 @@ abstract class EntityForm extends BaseComponent
 
     public function pseudonymFormSubmitted(\Nette\Forms\Form $form)
     {
-        $this->pseudonymModel->insert($form->getValues());
+        $values = $form->getValues();
+        $values['type'] = 'pseudonym';
+
+        $this->personModel->insert($values);
 
         if (isset($this['form']['pseudonym']))
         {
-            $pseudonym = $this->pseudonymModel->fetchSelectBox();
+            $pseudonym = $this->personModel->fetchSelectBox();
             $this['form']['pseudonym']->setItems($pseudonym);
             $this->redrawControl('formSnippet');
         }
@@ -109,16 +109,31 @@ abstract class EntityForm extends BaseComponent
 
     public function bandFormSubmitted(\Nette\Forms\Form $form)
     {
-        $this->bandModel->insert($form->getValues());
+        $this->personGroupModel->insert($form->getValues());
 
         if (isset($this['form']['band']))
         {
-            $band = $this->bandModel->fetchSelectBox();
+            $band = $this->personGroupModel->fetchSelectBox();
             $this['form']['band']->setItems($band);
             $this->redrawControl('formSnippet');
         }
 
         $this->presenter->flashMessage('Successfully submitted', 'success');
         $this->presenter->redrawControl('flash');
+    }
+
+    public function injectPersonGroupModel(\App\Model\PersonGroupModel $pgModel)
+    {
+        $this->personGroupModel = $pgModel;
+    }
+
+    public function injectPersonModel(\App\Model\PersonModel $pModel)
+    {
+        $this->personModel = $pModel;
+    }
+
+    public function injectCountryModel(\App\Model\CountryModel $cModel)
+    {
+        $this->countryModel = $cModel;
     }
 }

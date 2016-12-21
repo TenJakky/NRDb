@@ -7,17 +7,9 @@ final class BookForm extends EntityForm
     protected $bookAuthorModel;
 
     public function __construct(
-        \App\Model\CountryModel $countryModel,
-        \App\Model\PersonModel $personModel,
-        \App\Model\PseudonymModel $pseudonymModel,
-        \App\Model\BandModel $bandModel,
         \App\Model\BookModel $bookModel,
         \App\Model\BookAuthorModel $bookAuthorModel)
     {
-        $this->countryModel = $countryModel;
-        $this->personModel = $personModel;
-        $this->pseudonymModel = $pseudonymModel;
-        $this->bandModel = $bandModel;
         $this->model = $bookModel;
         $this->bookAuthorModel = $bookAuthorModel;
     }
@@ -53,7 +45,7 @@ final class BookForm extends EntityForm
         $form = new \Nette\Application\UI\Form();
 
         $person = $this->personModel->fetchSelectBox();
-        $pseudonym = $this->pseudonymModel->fetchSelectBox();
+        $pseudonym = $this->personModel->fetchPseudonymSelectBox();
 
         $form->addHidden('id');
         $form->addText('original_title', 'Original title')

@@ -6,7 +6,7 @@
 
 {define col-country_id}
 <td>
-    {$row->ref('country', 'country_id')->name}
+    {$row->ref('def_country', 'country_id')->name}
 </td>
 {/define}
 
@@ -27,6 +27,6 @@
 
 {define col-entity_count}
 <td>
-    {$row->related("{$pname}2{$type}.person_id")->count()}
+    {$row->related("jun_{$pname}2{$type}.person_id")->count()}
 </td>
 {/define}

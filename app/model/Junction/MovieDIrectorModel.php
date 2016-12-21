@@ -4,5 +4,5 @@ namespace App\Model;
 
 final class MovieDirectorModel extends BaseModel
 {
-    public $tableName = 'movie2director';
+    public $tableName = 'jun_movie2director';
 }
