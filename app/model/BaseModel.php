@@ -69,7 +69,7 @@ abstract class BaseModel extends Nette\Object
 
     public function save($data)
     {
-        if (isset($data['id']))
+        if (isset($data['id']) && $data['id'] != 0)
         {
             $data['id'] = (int) $data['id'];
 
@@ -79,7 +79,7 @@ abstract class BaseModel extends Nette\Object
                 return $data['id'];
             }
         }
-
+        unset($data['id']);
         $row = $this->insert($data);
         return $row->id;
     }

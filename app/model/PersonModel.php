@@ -23,4 +23,12 @@ final class PersonModel extends BaseModel
             ->order('surname ASC')
             ->fetchPairs('id', 'name');
     }
+
+    public function fetchAllSelectBox()
+    {
+        return $this->getTable()
+            ->select("id, concat_ws(' ', name, middlename, surname) AS name")
+            ->order('surname ASC')
+            ->fetchPairs('id', 'name');
+    }
 }
