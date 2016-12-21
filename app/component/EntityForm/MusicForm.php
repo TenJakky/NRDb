@@ -57,7 +57,7 @@ final class MusicForm extends EntityForm
             ->setRequired();
         $form->addText('year', 'Year')
             ->addRule($form::INTEGER, 'Year must be number')
-            ->addRule($form::LENGTH, 'Year must be exactly 4 digit long.', 4)
+            ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4)
             ->setRequired();
         $form->addTextArea('description', 'Description');
         /*$form->addUpload('poster', 'Poster')
