@@ -10,12 +10,17 @@ final class PersonGroupForm extends BaseComponent
     /** @var \App\Model\PersonModel */
     protected $personModel;
 
+    /** @var \App\Model\GroupMemberModel */
+    protected $groupMemberModel;
+
     public function __construct(
         \App\Model\PersonModel $personModel,
-        \App\Model\PersonGroupModel $personGroupModel)
+        \App\Model\PersonGroupModel $personGroupModel,
+        \App\Model\GroupMemberModel $groupMemberModel)
     {
         $this->personModel = $personModel;
         $this->personGroupModel = $personGroupModel;
+        $this->groupMemberModel = $groupMemberModel;
     }
 
     public function render($id = 0)
@@ -65,10 +70,19 @@ final class PersonGroupForm extends BaseComponent
     {
         $data = $form->getValues();
 
-        // TODO SAVE MEMBERS
+        $members = $data['members'];
         unset($data['members']);
 
         $id = $this->personGroupModel->save($data);
+
+        $this->groupMemberModel->findBy('person_group_id', $id)->delete();
+        foreach ($members as $member)
+        {
+            $this->groupMemberModel->insert(array(
+                'person_id' => $member,
+                'person_group_id' => $id
+            ));
+        }
 
         $this->presenter->flashMessage('Group successfully saved.', 'success');
 

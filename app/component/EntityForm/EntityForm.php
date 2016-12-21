@@ -23,7 +23,6 @@ abstract class EntityForm extends BaseComponent
         $form = parent::createComponent($name, $args);
 
         $form['form']->getElementPrototype()->addClass('ajax');
-
         $form['form']->onSuccess[] = [$this, 'redrawSnippets'];
 
         return $form;
