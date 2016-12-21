@@ -19,14 +19,13 @@ abstract class EntityList extends BaseDatagridComponent
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();
-        $this->grid->addColumn('original_title', 'Original title')->enableSort();
 
+        $this->grid->addColumn('original_title', 'Original title')->enableSort();
         if (!in_array($this->presenter->getName(), array('Music', 'Game')))
         {
             $this->grid->addColumn('english_title', 'English Title')->enableSort();
             $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
         }
-
         $this->grid->addColumn('maker', ucfirst($this->makerType));
         $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating');
@@ -35,7 +34,7 @@ abstract class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
-        $this->grid->setTemplateParams(array(
+        $this->grid->setTemplateParameters(array(
                 'userId' => $this->presenter->user->getId(),
                 'ratingModel' => $this->ratingModel,
                 'pName' => $this->presenter->getName(),

@@ -4,7 +4,7 @@ namespace App\Component;
 
 abstract class BaseDatagridComponent extends BaseComponent
 {
-    /** @var \App\Tool\Datagrid */
+    /** @var \Nextras\Datagrid\Datagrid */
     protected $grid;
 
     /** @var \App\Model\BaseModel */
@@ -22,7 +22,7 @@ abstract class BaseDatagridComponent extends BaseComponent
     {
         if ($this->grid === null)
         {
-            $this->grid = new \App\Tool\Datagrid;
+            $this->grid = new \Nextras\Datagrid\Datagrid;
         }
         $this->grid->addCellsTemplate(__DIR__.'/Paginator.latte');
         $this->grid->addCellsTemplate(__DIR__.'/TableTag.latte');

@@ -12,13 +12,9 @@
                 <li>
                     <a href="{plink Person:view $temp->person_id}">{$temp->person_id|person}</a>
                 </li>
-                {elseif isset($temp->pseudonym_id)}
-                <li>
-                    <a href="{plink Pseudonym:view $temp->pseudonym_id}">{$temp->pseudonym->name}</a>
-                </li>
                 {else}
                 <li>
-                    <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
+                    <a href="{plink Group:view $temp->person_group_id}">{$temp->person_group->name}</a>
                 </li>
                 {/if}
             {/foreach}
@@ -26,31 +22,57 @@
     </td>
 {/define}
 
+{define col-year}
+    <td class="center">
+        {$row->year}
+    </td>
+{/define}
+
+{define col-head-class-year}
+    center
+{/define}
+
 {define col-rating}
-<td>
-    {$ratingModel->getRating($row->id)|number: 2}
-</td>
+    <td class="center">
+        {$ratingModel->getRating($row->id)|number: 2}
+    </td>
+{/define}
+
+{define col-head-class-rating}
+    center
 {/define}
 
 {define col-men_rating}
-<td>
-    {$ratingModel->getMenRating($row->id)|number: 2}
-</td>
+    <td class="center">
+        {$ratingModel->getMenRating($row->id)|number: 2}
+    </td>
+{/define}
+
+{define col-head-class-men_rating}
+    center
 {/define}
 
 {define col-women_rating}
-<td>
-    {$ratingModel->getWomenRating($row->id)|number: 2}
-</td>
+    <td class="center">
+        {$ratingModel->getWomenRating($row->id)|number: 2}
+    </td>
+{/define}
+
+{define col-head-class-women_rating}
+    center
 {/define}
 
 {define col-my_rating}
-    <td>
+    <td class="center">
         {var $rating => $ratingModel->getUserRating($row->id, $userId)}
         {if $rating}
             {$rating->rating}
         {/if}
     </td>
+{/define}
+
+{define col-head-class-my_rating}
+    center
 {/define}
 
 {define col-action}

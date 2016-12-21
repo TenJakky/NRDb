@@ -6,10 +6,10 @@
             <th>Czech Title</th>
         {/if}
         {if $pName != 'Series'}
-            <th>Year</th>
+            <th class="center">Year</th>
         {/if}
-        <th>Rating</th>
-        <th>My Rating</th>
+        <th class="center">Rating</th>
+        <th class="center">My Rating</th>
         <th>Action</th>
     </thead>
     <tbody>
@@ -21,11 +21,11 @@
                 <td>{$entity->czech_title}</td>
             {/if}
             {if $pName != 'Series'}
-                <td>{$entity->year}</td>
+                <td class="center">{$entity->year}</td>
             {/if}
-            <td>{$ratingModel->getRating($entity->id)|number:2}</td>
+            <td class="center">{$ratingModel->getRating($entity->id)|number:2}</td>
             {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
-            <td>
+            <td class="center">
                 {if $rating}
                     {if $pName != 'Series'}
                         {$rating->rating}

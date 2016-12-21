@@ -39,8 +39,7 @@ abstract class ArtistWorks extends BaseSmallDatagridComponent
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addCellsTemplate(__DIR__ . '/ArtistWorksCellsTemplate.latte');
-        $this->grid->setTemplateParams(
-            array(
+        $this->grid->setTemplateParameters(array(
                 'userId' => $this->presenter->user->getId(),
                 'ratingModel' => $this->ratingModel,
                 'eType' => $this->entityType));
