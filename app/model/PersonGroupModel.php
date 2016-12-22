@@ -4,7 +4,7 @@ namespace App\Model;
 
 final class PersonGroupModel extends BaseModel
 {
-    public $tableName = 'person_group';
+    public $tableName = 'group';
 
     public function fetchSelectBox()
     {

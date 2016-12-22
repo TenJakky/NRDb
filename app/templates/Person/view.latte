@@ -32,13 +32,7 @@
             <tr>
                 <th>Pseudonyms</th>
                 <td>
-                    <ul class="person-list">
-                        {foreach $data->related('person.person_id') as $temp}
-                            <li>
-                                <a href="{plink Person:view $temp->id}">{$temp->name}</a>
-                            </li>
-                        {/foreach}
-                    </ul>
+                    {include '../../latte/ArtistList.latte' artists => $data->related('person.person_id')}
                 </td>
             </tr>
         {else}
@@ -52,13 +46,7 @@
         <tr>
             <th>Member of</th>
             <td>
-                <ul class="person-list">
-                    {foreach $data->related('jun_group2member.person_id') as $temp}
-                        <li>
-                            <a href="{plink Band:view $temp->band_id}">{$temp->band->name}</a>
-                        </li>
-                    {/foreach}
-                </ul>
+                {include '../../latte/ArtistList.latte' artists => $data->related('jun_group2member.person_id')}
             </td>
         </tr>
         <tr>
