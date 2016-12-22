@@ -4,16 +4,17 @@
 
   .dropdown-list
   {
+    display: none;
+    z-index: 1101;
     padding: 0;
     margin: 0;
     border: 1px solid $red;
     border-top: 0;
     background-color: $white;
-    display: none;
     position: absolute;
     top: 100%;
-    z-index: 1101;
     height: auto;
+    width: 100%;
 
     li
     {

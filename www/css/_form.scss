@@ -1,3 +1,32 @@
+#search
+{
+  width: auto;
+  padding: 5px 8px;
+  border: 0;
+}
+
+input[type=number], input[type=text], textarea, input[type=password], input[type=date]
+{
+  border: 1px solid $grey;
+  outline: none;
+  width: 47%;
+
+  &:focus
+  {
+    outline: 2px solid $red;
+  }
+}
+
+textarea, input
+{
+  padding: 8px 10px;
+}
+
+textarea
+{
+  height: 100px;
+}
+
 form
 {
   label.required:after, tr.required > th > label:after
@@ -28,28 +57,6 @@ form
         div
         {
           display: inline;
-        }
-
-        input[type=number], input[type=text], textarea, input[type=password], input[type=date]
-        {
-          border: 1px solid $grey;
-          outline: none;
-          width: 47%;
-
-          &:focus
-          {
-            outline: 2px solid $red;
-          }
-        }
-
-        textarea, input
-        {
-          padding: 8px 10px;
-        }
-
-        textarea
-        {
-          height: 100px;
         }
 
         span.form-flash
