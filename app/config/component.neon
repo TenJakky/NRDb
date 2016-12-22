@@ -19,6 +19,9 @@ services:
     introductionForm:
         class: App\Component\IntroductionForm
 
+    changelog:
+        class: App\Component\Changelog
+
     personForm:
         class: App\Component\PersonForm
     pseudonymForm:

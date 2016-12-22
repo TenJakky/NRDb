@@ -18,9 +18,5 @@
     </ul>
 </section>
 <section>
-    <h2>Changelog</h2>
-    {foreach $changes as $change}
-        <h3>{$change->version} - {$change->date|date:'%d.%m.%Y'}</h3>
-        {$change->message|noescape}
-    {/foreach}
+    {control changelog}
 </section>
