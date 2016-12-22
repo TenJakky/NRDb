@@ -1,32 +1,36 @@
 {define col-name}
-<td>
-    <a href="{plink Person:view $row->id}">{$row->id|person}</a>
-</td>
+    <td>
+        <a href="{plink Person:view $row->id}">{$row->id|person}</a>
+    </td>
 {/define}
 
 {define col-country_id}
-<td>
-    {$row->ref('def_country', 'country_id')->name}
-</td>
+    <td>
+        {if isset($row->country_id)}
+            {$row->ref('def_country', 'country_id')->name}
+        {else}
+            {$row->ref('person', 'person_id')->ref('def_country', 'country_id')->name}
+        {/if}
+    </td>
 {/define}
 
 {define col-top_entity}
-<td>
-    {var topEntity => $entityModel->getPersonTop($type, $row->id)}
-    {if $topEntity}
-        <a href="{plink "{$pName}:view" $topEntity->id}">{$topEntity->original_title}</a>
-    {/if}
-</td>
+    <td>
+        {var topEntity => $entityModel->getPersonTop($type, $row->id)}
+        {if $topEntity}
+            <a href="{plink "{$pName}:view" $topEntity->id}">{$topEntity->original_title}</a>
+        {/if}
+    </td>
 {/define}
 
 {define col-average_rating}
-<td>
-    {$entityModel->getPersonAverage($type, $row->id)|number:2}
-</td>
+    <td>
+        {$entityModel->getPersonAverage($type, $row->id)|number:2}
+    </td>
 {/define}
 
 {define col-entity_count}
-<td>
-    {$row->related("jun_{$pname}2{$type}.person_id")->count()}
-</td>
+    <td>
+        {$row->related("jun_{$pname}2{$type}.person_id")->count()}
+    </td>
 {/define}
