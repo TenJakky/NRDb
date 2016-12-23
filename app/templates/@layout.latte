@@ -22,64 +22,64 @@
         <nav>
             <div>
                 <ul>
-                    <li>
-                        <a href="{plink Default:default}">Dashboard</a>
-                    </li>
-                    <li class="dropdown">
-                        <a>Categories</a>
-                        <ul class="dropdown-list">
+                    {if $user->isLoggedIn()}
+                        <li>
+                            <a href="{plink Default:default}">Dashboard</a>
+                        </li>
+                        <li class="dropdown">
+                            <a>Categories</a>
+                            <ul class="dropdown-list">
+                                <li>
+                                    <a href="{plink Movie:default}">Movie</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Series:default}">Series</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Book:default}">Book</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Music:default}">Music</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Game:default}">Game</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a>Browse</a>
+                            <ul class="dropdown-list">
+                                <li>
+                                    <a href="{plink Person:default}">Artists</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Group:default}">Groups</a>
+                                </li>
+                                <li>
+                                    <a href="{plink User:default}">Users</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{plink Statistics:default}">Statistics</a>
+                        </li>
+                        <li class="dropdown">
+                            {control search}
+                        </li>
+                    </ul>
+                    <ul class="right">
+                        <li>
+                            <a href="{plink User:view $user->getId()}">{$user->getIdentity()->username}</a>
+                        </li>
+                        <li>
+                            <a href="{plink Default:logout}">Log out</a>
+                        </li>
+                        {if !in_array('User', $user->getRoles())}
                             <li>
-                                <a href="{plink Movie:default}">Movie</a>
+                                <a href="{plink Admin:Default:default}">Administration</a>
                             </li>
-                            <li>
-                                <a href="{plink Series:default}">Series</a>
-                            </li>
-                            <li>
-                                <a href="{plink Book:default}">Book</a>
-                            </li>
-                            <li>
-                                <a href="{plink Music:default}">Music</a>
-                            </li>
-                            <li>
-                                <a href="{plink Game:default}">Game</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a>Browse</a>
-                        <ul class="dropdown-list">
-                            <li>
-                                <a href="{plink Person:default}">Artists</a>
-                            </li>
-                            <li>
-                                <a href="{plink Group:default}">Groups</a>
-                            </li>
-                            <li>
-                                <a href="{plink User:default}">Users</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{plink Statistics:default}">Statistics</a>
-                    </li>
-                    <li class="dropdown">
-                        {control search}
-                    </li>
-                </ul>
-                <ul class="right">
-                {if $user->isLoggedIn()}
-                    <li>
-                        <a href="{plink User:view $user->getId()}">{$user->getIdentity()->username}</a>
-                    </li>
-                    <li>
-                        <a href="{plink Default:logout}">Log out</a>
-                    </li>
-                    {if !in_array('User', $user->getRoles())}
-                    <li>
-                        <a href="{plink Admin:Default:default}">Administration</a>
-                    </li>
+                        {/if}
                     {/if}
-                {/if}
                     <li>
                         <a href="{plink Default:credits}">Credits</a>
                     </li>
