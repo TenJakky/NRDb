@@ -2,10 +2,10 @@
 
 namespace App\Component;
 
-final class PersonGroupForm extends BaseComponent
+final class GroupForm extends BaseComponent
 {
-    /** @var \App\Model\PersonGroupModel */
-    protected $personGroupModel;
+    /** @var \App\Model\GroupModel */
+    protected $groupModel;
 
     /** @var \App\Model\PersonModel */
     protected $personModel;
@@ -15,11 +15,11 @@ final class PersonGroupForm extends BaseComponent
 
     public function __construct(
         \App\Model\PersonModel $personModel,
-        \App\Model\PersonGroupModel $personGroupModel,
+        \App\Model\GroupModel $groupModel,
         \App\Model\GroupMemberModel $groupMemberModel)
     {
         $this->personModel = $personModel;
-        $this->personGroupModel = $personGroupModel;
+        $this->groupModel = $groupModel;
         $this->groupMemberModel = $groupMemberModel;
     }
 
@@ -27,7 +27,7 @@ final class PersonGroupForm extends BaseComponent
     {
         if ($id)
         {
-            $row = $this->personGroupModel->findRow($id);
+            $row = $this->groupModel->findRow($id);
 
             if (!$row)
             {
@@ -73,7 +73,7 @@ final class PersonGroupForm extends BaseComponent
         $members = $data['members'];
         unset($data['members']);
 
-        $id = $this->personGroupModel->save($data);
+        $id = $this->groupModel->save($data);
 
         $this->groupMemberModel->findBy('group_id', $id)->delete();
         foreach ($members as $member)

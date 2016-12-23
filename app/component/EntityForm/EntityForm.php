@@ -10,7 +10,7 @@ abstract class EntityForm extends BaseComponent
     /** @var \App\Model\PersonModel */
     protected $personModel;
 
-    /** @var \App\Model\PersonGroupModel */
+    /** @var \App\Model\GroupModel */
     protected $personGroupModel;
 
     public function createComponent($name, array $args = null)
@@ -40,7 +40,7 @@ abstract class EntityForm extends BaseComponent
         $this->personModel = $personModel;
     }
 
-    public function injectPersonGroupModel(\App\Model\PersonGroupModel $personGroupModel)
+    public function injectGroupModel(\App\Model\GroupModel $personGroupModel)
     {
         $this->personGroupModel = $personGroupModel;
     }

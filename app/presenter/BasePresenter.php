@@ -43,4 +43,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             return $this->context->createService($name);
         }
     }
+
+    public function getPost()
+    {
+        return $this->context->getByType('Nette\Http\Request')->getPost();
+    }
 }

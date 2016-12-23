@@ -5,9 +5,9 @@ namespace App\Presenter;
 final class GroupPresenter extends BaseViewPresenter
 {
     public function __construct(
-        \App\Model\PersonGroupModel $personGroupModel)
+        \App\Model\GroupModel $groupModel)
     {
-        $this->model = $personGroupModel;
+        $this->model = $groupModel;
     }
 
     public function actionEdit($id)
