@@ -75,12 +75,12 @@ final class PersonGroupForm extends BaseComponent
 
         $id = $this->personGroupModel->save($data);
 
-        $this->groupMemberModel->findBy('person_group_id', $id)->delete();
+        $this->groupMemberModel->findBy('group_id', $id)->delete();
         foreach ($members as $member)
         {
             $this->groupMemberModel->insert(array(
                 'person_id' => $member,
-                'person_group_id' => $id
+                'group_id' => $id
             ));
         }
 

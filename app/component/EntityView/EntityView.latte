@@ -61,7 +61,7 @@
                 <tr>
                     <th>Author</th>
                     <td>
-                        {include '../../latte/PersonList.latte' people => $data->related('jun_book2author.book_id')}
+                        {artistList $data->related('jun_book2author.book_id')}
                     </td>
                 </tr>
             {case 'Series'}
@@ -69,20 +69,20 @@
                 <tr>
                     <th>Director</th>
                     <td>
-                        {include '../../latte/PersonList.latte' people => $data->related('jun_movie2director.movie_id')}
+                        {artistList $data->related('jun_movie2director.movie_id')}
                     </td>
                 </tr>
                 <tr>
                     <th>Cast</th>
                     <td>
-                        {include '../../latte/PersonList.latte' people => $data->related('jun_movie2actor.movie_id')}
+                        {artistList $data->related('jun_movie2actor.movie_id')}
                     </td>
                 </tr>
             {case 'Music'}
                 <tr>
                     <th>Interpret</th>
                     <td>
-                        {include '../../latte/PersonList.latte' people => $data->related('jun_music2interpret.movie_id')}
+                        {artistList $data->related('jun_music2interpret.music_id')}
                     </td>
                 </tr>
         {/switch}

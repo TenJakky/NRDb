@@ -21,20 +21,21 @@ final class MusicForm extends EntityForm
             $row = $this->model->findRow($id);
             
             $data = $row->toArray();
-            foreach ($row->related('music2interpret.music_id') as $author)
+            foreach ($row->related('jun_music2interpret.music_id') as $author)
             {
-                if (isset($author->person_id))
+                if (isset($author->group_id))
+                {
+                    $data['group'][] = $author->group_id;
+                    continue;
+                }
+
+                if ($author->person->type == 'person')
                 {
                     $data['person'][] = $author->person_id;
+                    continue;
                 }
-                if (isset($author->pseudonym_id))
-                {
-                    $data['pseudonym'][] = $author->pseudonym_id;
-                }
-                if (isset($author->band_id))
-                {
-                    $data['band'][] = $author->band_id;
-                }
+                
+                $data['pseudonym'][] = $author->pseudonym_id; 
             }
 
             $this['form']->setDefaults($data);
@@ -65,7 +66,7 @@ final class MusicForm extends EntityForm
             ->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 100 kB.', 100 * 1024);*/
         $form->addMultiSelect('person', 'Interpret person', $person);
         $form->addMultiSelect('pseudonym', 'Interpret pseudonym', $pseudonym);
-        $form->addMultiSelect('band', 'Interpret band', $band);
+        $form->addMultiSelect('group', 'Interpret band', $band);
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -104,14 +105,14 @@ final class MusicForm extends EntityForm
         {
             $this->musicInterpretModel->insert(array(
                 'music_id' => $musicId,
-                'pseudonym_id' => $pseudonym
+                'person_id' => $pseudonym
             ));
         }
-        foreach ($data['band'] as $band)
+        foreach ($data['group'] as $band)
         {
             $this->musicInterpretModel->insert(array(
                 'music_id' => $musicId,
-                'band_id' => $band
+                'group_id' => $band
             ));
         }
 

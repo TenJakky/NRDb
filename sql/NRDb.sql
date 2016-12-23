@@ -122,13 +122,13 @@ CREATE TABLE IF NOT EXISTS `jun_game2developer` (
   `id` int(11) NOT NULL,
   `game_id` int(11) NOT NULL,
   `person_id` int(11) DEFAULT NULL,
-  `person_group_id` int(11) DEFAULT NULL
+  `group_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `jun_group2member`;
 CREATE TABLE IF NOT EXISTS `jun_group2member` (
   `id` int(11) NOT NULL,
-  `person_group_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
   `role` varchar(255) DEFAULT NULL,
   `year_from` int(11) DEFAULT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `jun_music2interpret` (
   `id` int(11) NOT NULL,
   `music_id` int(11) NOT NULL,
   `person_id` int(11) DEFAULT NULL,
-  `person_group_id` int(11) DEFAULT NULL
+  `group_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `jun_series2actor`;
@@ -188,8 +188,8 @@ CREATE TABLE IF NOT EXISTS `person` (
   `image_file` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `person_group`;
-CREATE TABLE IF NOT EXISTS `person_group` (
+DROP TABLE IF EXISTS `group`;
+CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL,
   `type` enum('band','studio') NOT NULL DEFAULT 'band',
   `name` varchar(255) NOT NULL,
@@ -328,13 +328,13 @@ ALTER TABLE `jun_book2author`
 ALTER TABLE `jun_game2developer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `person_id` (`person_id`),
-  ADD KEY `person_group_id` (`person_group_id`) USING BTREE,
+  ADD KEY `group_id` (`group_id`) USING BTREE,
   ADD KEY `game_id` (`game_id`) USING BTREE;
 
 ALTER TABLE `jun_group2member`
   ADD PRIMARY KEY (`id`),
   ADD KEY `person_id` (`person_id`),
-  ADD KEY `person_group_id` (`person_group_id`) USING BTREE;
+  ADD KEY `group_id` (`group_id`) USING BTREE;
 
 ALTER TABLE `jun_movie2actor`
   ADD PRIMARY KEY (`id`),
@@ -350,7 +350,7 @@ ALTER TABLE `jun_music2interpret`
   ADD PRIMARY KEY (`id`),
   ADD KEY `person_id` (`person_id`),
   ADD KEY `music_id` (`music_id`) USING BTREE,
-  ADD KEY `person_group_id` (`person_group_id`) USING BTREE;
+  ADD KEY `group_id` (`group_id`) USING BTREE;
 
 ALTER TABLE `jun_series2actor`
   ADD PRIMARY KEY (`id`),
@@ -370,7 +370,7 @@ ALTER TABLE `person`
   ADD KEY `type` (`type`),
   ADD KEY `person_id` (`person_id`);
 
-ALTER TABLE `person_group`
+ALTER TABLE `group`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`);
 
@@ -485,7 +485,7 @@ ALTER TABLE `jun_series2director`
 ALTER TABLE `person`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `person_group`
+ALTER TABLE `group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- --------------------------------------------------------
@@ -527,10 +527,10 @@ ALTER TABLE `jun_book2author`
 ALTER TABLE `jun_game2developer`
   ADD CONSTRAINT `jun_game2developer_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `ent_game` (`id`),
   ADD CONSTRAINT `jun_game2developer_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`),
-  ADD CONSTRAINT `jun_game2developer_ibfk_3` FOREIGN KEY (`person_group_id`) REFERENCES `person_group` (`id`);
+  ADD CONSTRAINT `jun_game2developer_ibfk_3` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`);
 
 ALTER TABLE `jun_group2member`
-  ADD CONSTRAINT `jun_group2member_ibfk_1` FOREIGN KEY (`person_group_id`) REFERENCES `person_group` (`id`),
+  ADD CONSTRAINT `jun_group2member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
   ADD CONSTRAINT `jun_group2member_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 ALTER TABLE `jun_movie2actor`
@@ -544,7 +544,7 @@ ALTER TABLE `jun_movie2director`
 ALTER TABLE `jun_music2interpret`
   ADD CONSTRAINT `jun_music2interpret_ibfk_1` FOREIGN KEY (`music_id`) REFERENCES `ent_music` (`id`),
   ADD CONSTRAINT `jun_music2interpret_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`),
-  ADD CONSTRAINT `jun_music2interpret_ibfk_3` FOREIGN KEY (`person_group_id`) REFERENCES `person_group` (`id`);
+  ADD CONSTRAINT `jun_music2interpret_ibfk_3` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`);
 
 ALTER TABLE `jun_series2actor`
   ADD CONSTRAINT `jun_series2actor_ibfk_1` FOREIGN KEY (`series_season_id`) REFERENCES `ent_series_season` (`id`),

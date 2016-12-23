@@ -49,10 +49,11 @@ abstract class ArtistWorks extends BaseSmallDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $pname = $this->presenter->getName();
+        $pname = lcfirst($this->presenter->getName());
+
         $entity = lcfirst($this->entityType);
         $artist = $this->artistType;
 
-        return $this->model->findBy(":{$entity}2{$artist}.{$pname}_id", $this->artistId)->order('year DESC');
+        return $this->model->findBy(":jun_{$entity}2{$artist}.{$pname}_id", $this->artistId)->order('year DESC');
     }
 }

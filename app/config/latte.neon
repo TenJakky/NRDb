@@ -1,3 +1,7 @@
+latte:
+    macros:
+        - App\Latte\Macros::install
+
 services:
 
     - App\Filter\PersonFilter
