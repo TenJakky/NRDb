@@ -7,7 +7,7 @@ services:
 - App\Model\IntroductionModel
 
 - App\Model\PersonModel
-- App\Model\PersonGroupModel
+- App\Model\GroupModel
 - App\Model\GroupMemberModel
 
 - App\Model\MovieModel
