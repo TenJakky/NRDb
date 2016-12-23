@@ -27,27 +27,14 @@
             {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
             <td class="center">
                 {if $rating}
-                    {if $pName != 'Series'}
-                        {$rating->rating}
-                    {else}
-                        {$rating|number:2}
-                    {/if}
+                    {$rating->rating}
                 {/if}
-
             </td>
             <td>
-                {if $pName != 'Series'}
-                    {if $rating}
-                        <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
-                    {else}
-                        <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
-                    {/if}
+                {if $rating}
+                    <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
                 {else}
-                    {if $rating}
-                        <a href="{plink "{$pName}:editRating" $entity->id}">Edit rating</a>
-                    {else}
-                        <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
-                    {/if}
+                    <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
                 {/if}
             </td>
         </tr>
