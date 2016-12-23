@@ -12,13 +12,15 @@
         <tr> 
             <th>Members</th> 
             <td> 
-                {include '../../latte/ArtistList.latte' artists => $data->related('jun_group2member.group_id')->where('year_to', null)}
+                {var $temp => $data->related('jun_group2member.group_id')->where('year_to', null)}
+                {personList $temp}
             </td> 
         </tr> 
         <tr> 
             <th>Former Members</th> 
             <td> 
-                {include '../../latte/ArtistList.latte' artists => $data->related('jun_group2member.group_id')->where('year_to NOT', null)}
+                {var $temp => $data->related('jun_group2member.group_id')->where('year_to NOT', null)}
+                {personList $temp}
             </td> 
         </tr> 
         <tr> 

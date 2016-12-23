@@ -32,7 +32,7 @@
             <tr>
                 <th>Pseudonyms</th>
                 <td>
-                    {include '../../latte/ArtistList.latte' artists => $data->related('person.person_id')}
+                    {personList $data->related('person.person_id')}
                 </td>
             </tr>
         {else}
@@ -46,7 +46,7 @@
         <tr>
             <th>Member of</th>
             <td>
-                {include '../../latte/ArtistList.latte' artists => $data->related('jun_group2member.person_id')}
+                {bandList $data->related('jun_group2member.person_id')}
             </td>
         </tr>
         <tr>
