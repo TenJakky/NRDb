@@ -69,13 +69,13 @@ class Search extends BaseComponent
 			    	'english_title LIKE' => "%$search%",
 			    	'czech_title LIKE' => "%$search%"));
 		    
-		    $this->searchSeries = $this->movieModel->getTable()
+		    $this->searchSeries = $this->seriesModel->getTable()
 		    ->whereOr(array(
 		    	'original_title LIKE' => "%$search%",
 		    	'english_title LIKE' => "%$search%",
 		    	'czech_title LIKE' => "%$search%"));
 		    
-		    $this->searchBook = $this->movieModel->getTable()
+		    $this->searchBook = $this->bookModel->getTable()
 		    ->whereOr(array(
 		    	'original_title LIKE' => "%$search%",
 		    	'english_title LIKE' => "%$search%",
