@@ -64,40 +64,32 @@ class Search extends BaseComponent
 			$this->flag = true;
 
 			$this->searchMovie = $this->movieModel->getTable()
-			    ->whereOr(array(
-			    	'original_title LIKE' => "%$search%",
-			    	'english_title LIKE' => "%$search%",
-			    	'czech_title LIKE' => "%$search%"));
+                ->where(
+                    'MATCH(original_title, english_title, czech_title) AGAINST(?)', "%$search%");
 		    
-		    $this->searchSeries = $this->movieModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%",
-		    	'english_title LIKE' => "%$search%",
-		    	'czech_title LIKE' => "%$search%"));
+		    $this->searchSeries = $this->seriesModel->getTable()
+                ->where(
+                    'MATCH(original_title, english_title, czech_title) AGAINST(?)', "%$search%");
 		    
-		    $this->searchBook = $this->movieModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%",
-		    	'english_title LIKE' => "%$search%",
-		    	'czech_title LIKE' => "%$search%"));
+		    $this->searchBook = $this->bookModel->getTable()
+		        ->where(
+		    	    'MATCH(original_title, english_title, czech_title) AGAINST(?)', "%$search%");
 		    
 		    $this->searchMusic = $this->musicModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%"));
+                ->where(
+                    'MATCH(original_title) AGAINST(?)', "%$search%");
 		    
 		    $this->searchGame = $this->gameModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%"));
+                ->where(
+                    'MATCH(original_title) AGAINST(?)', "%$search%");
 
 		    $this->searchPerson = $this->personModel->getTable()
-		    ->whereOr(array(
-		    	'name LIKE' => "%$search%",
-		    	'middlename LIKE' => "%$search%",
-		    	'surname LIKE' => "%$search%"));
+		        ->where(
+                    'MATCH(name, middlename, surname) AGAINST(?)', "%$search%");
 		    
 		    $this->searchGroup = $this->groupModel->getTable()
-		    ->whereOr(array(
-		    	'name LIKE' => "%$search%"));
+                ->where(
+                    'MATCH(name) AGAINST(? IN BOOLEAN MODE)', "%$search%");
 		}
 
 	    $this->redrawControl('search');
