@@ -21,16 +21,14 @@ final class BookForm extends EntityForm
             $row = $this->model->findRow($id);
 
             $data = $row->toArray();
-            foreach($row->related('book2author.book_id') as $author)
+            foreach($row->related('jun_book2author.book_id') as $author)
             {
-                if (isset($author->person_id))
+                if ($author->person->type == 'person')
                 {
                     $data['person'][] = $author->person_id;
                 }
-                if (isset($author->pseudonym_id))
-                {
-                    $data['pseudonym'][] = $author->pseudonym_id;
-                }
+
+                $data['pseudonym'][] = $author->person_id;
             }
 
             $this['form']->setDefaults($data);
@@ -108,7 +106,7 @@ final class BookForm extends EntityForm
         {
             $this->bookAuthorModel->insert(array(
                 'book_id' => $bookId,
-                'pseudonym_id' => $pseudonym
+                'person_id' => $pseudonym
             ));
         }
 
