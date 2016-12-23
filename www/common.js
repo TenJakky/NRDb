@@ -39,4 +39,29 @@ $(document).ready(function ()
         }
     });
     $.nette.init();
+
+    $('#search').keyup(function()
+    {
+        var value = $(this).val();
+
+        $.nette.ajax(
+        {
+            traditional: true,
+            url: searchUrl,
+            method: 'POST',
+            data:
+            {
+                search: value
+            },
+            success: function()
+            {
+                return;
+            }
+        });
+    });
+
+    $('#search').focus(function()
+    {
+        //$(this).next().toggle();
+    });
 });

@@ -21,13 +21,15 @@ services:
 
     changelog:
         class: App\Component\Changelog
+    search:
+        class: App\Component\Search
 
     personForm:
         class: App\Component\PersonForm
     pseudonymForm:
         class: App\Component\PseudonymForm
-    personGroupForm:
-        class: App\Component\PersonGroupForm
+    groupForm:
+        class: App\Component\GroupForm
 
     entityView:
         class: App\Component\EntityView
