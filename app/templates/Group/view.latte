@@ -3,23 +3,30 @@
 {block head}{/block}
 {block content}
 
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Group:edit $data->id}">Edit details</a>
+        </li>
+    </ul>
+</section>
 <section> 
     <table class="list"> 
         <tr> 
             <th>Years active</th> 
-            <td>{if isset($data->year_from)}{$data->year_from} - {if isset($data->year_to)}$data->year_to{else}present{/if}{/if}</td> 
+            <td>{if $data->year_from}{$data->year_from} - {if isset($data->year_to)}{$data->year_to}{else}present{/if}{/if}</td>
         </tr> 
         <tr> 
             <th>Members</th> 
             <td> 
-                {var $temp => $data->related('jun_group2member.group_id')->where('year_to', null)}
+                {var $temp => $data->related('jun_group2member.group_id')->where('active', 1)}
                 {personList $temp}
             </td> 
         </tr> 
         <tr> 
             <th>Former Members</th> 
             <td> 
-                {var $temp => $data->related('jun_group2member.group_id')->where('year_to NOT', null)}
+                {var $temp => $data->related('jun_group2member.group_id')->where('active', 0)}
                 {personList $temp}
             </td> 
         </tr> 
