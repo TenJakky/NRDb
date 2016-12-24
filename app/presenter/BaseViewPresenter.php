@@ -12,8 +12,8 @@ abstract class BaseViewPresenter extends BasePresenter
 
         if (!$data)
         {
-            $this->flashMessage($this->name.' was not found.', 'failure');
-            $this->redirect('Default:default');
+            $this->flashMessage($this->getName().' was not found.', 'failure');
+            $this->redirect(':default');
         }
 
         $this->template->data = $data;

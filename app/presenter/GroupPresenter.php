@@ -2,16 +2,11 @@
 
 namespace App\Presenter;
 
-final class GroupPresenter extends BaseViewPresenter
+final class GroupPresenter extends BaseViewEditPresenter
 {
     public function __construct(
         \App\Model\GroupModel $groupModel)
     {
         $this->model = $groupModel;
-    }
-
-    public function actionEdit($id)
-    {
-        $this->template->id = $id;
     }
 }

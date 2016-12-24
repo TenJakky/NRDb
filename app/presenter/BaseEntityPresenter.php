@@ -2,16 +2,11 @@
 
 namespace App\Presenter;
 
-abstract class BaseEntityPresenter extends BaseViewPresenter
+abstract class BaseEntityPresenter extends BaseViewEditPresenter
 {
     public function actionEditRating($id)
     {
         $this->template->ratingId = $id;
-    }
-
-    public function actionEdit($id)
-    {
-        $this->template->id = $id;
     }
 
     public function actionView($id)
