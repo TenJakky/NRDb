@@ -8,18 +8,6 @@ nav
   height: 40px;
   background: $black;
 
-  #search
-  {
-    height: 26px;
-    margin-top: 6px;
-    padding: 2px 8px;
-  }
-
-  #search::-webkit-search-cancel-button
-  {
-    display: none;
-  }
-
   div
   {
     display: flex;

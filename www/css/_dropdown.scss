@@ -2,6 +2,24 @@
 {
   position:relative;
 
+  #search + ul.dropdown-list
+  {
+    width: 150%;
+    left: -25%;
+  }
+
+  #search
+  {
+    height: 26px;
+    margin-top: 6px;
+    padding: 2px 8px;
+  }
+
+  #search::-webkit-search-cancel-button
+  {
+    display: none;
+  }
+
   .dropdown-list
   {
     display: none;

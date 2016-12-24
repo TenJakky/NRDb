@@ -28,7 +28,7 @@ final class GroupForm extends BaseComponent
         if ($id)
         {
             $row = $this->groupModel->findRow($id);
-            
+
             $data = $row->toArray();
             $data['members'] = $row->related('jun_group2member.group_id')->where('active', 1)->fetchPairs('id', 'person_id');
             $data['former_members'] = $row->related('jun_group2member.group_id')->where('active', 0)->fetchPairs('id', 'person_id');
