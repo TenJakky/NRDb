@@ -22,10 +22,10 @@ final class MovieForm extends EntityForm
         if ($id)
         { 
             $row = $this->model->findRow($id);
-            
+
             $data = $row->toArray();
-            $data['director'] = $row->related('movie2director.movie_id')->fetchPairs('id', 'person_id');
-            $data['actor'] = $row->related('movie2actor.movie_id')->fetchPairs('id', 'person_id');
+            $data['director'] = $row->related('jun_movie2director.movie_id')->fetchField('person_id');
+            $data['actor'] = $row->related('jun_movie2actor.movie_id')->fetchField('person_id');
 
             $this['form']->setDefaults($data);
         }

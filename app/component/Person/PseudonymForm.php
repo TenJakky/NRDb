@@ -19,12 +19,6 @@ final class PseudonymForm extends BaseComponent
         {
             $row = $this->personModel->findRow($id);
 
-            if (!$row)
-            {
-                $this->flashMessage('Pseudonym not found', 'failure');
-                $this->redirect('Pseudonym:default');
-            }
-
             $this['form']->setDefaults($row);
         }
 

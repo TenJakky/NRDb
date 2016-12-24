@@ -24,13 +24,7 @@ final class PersonForm extends BaseComponent
         {
             $row = $this->personModel->findRow($id);
 
-            if (!$row)
-            {
-                $this->flashMessage('Person not found', 'failure');
-                $this->redirect('Person:default');
-            }
             $data = $row->toArray();
-
             $data['born'] = $data['born'] ? date_create($data['born'])->format('d.m.Y') : null;
             $data['died'] = $data['died'] ? date_create($data['died'])->format('d.m.Y') : null;
 

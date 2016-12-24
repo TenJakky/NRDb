@@ -21,15 +21,12 @@ final class BookForm extends EntityForm
             $row = $this->model->findRow($id);
 
             $data = $row->toArray();
-            foreach($row->related('jun_book2author.book_id') as $author)
-            {
-                if ($author->person->type == 'person')
-                {
-                    $data['person'][] = $author->person_id;
-                }
-
-                $data['pseudonym'][] = $author->person_id;
-            }
+            $data['person'] = $row->related('jun_book2author.book_id')
+                ->where('person.type', 'person')
+                ->fetchPairs('id', 'person_id');
+            $data['pseudonym'] = $row->related('jun_book2author.book_id')
+                ->where('person.type', 'pseudonym')
+                ->fetchPairs('id', 'person_id');
 
             $this['form']->setDefaults($data);
         }

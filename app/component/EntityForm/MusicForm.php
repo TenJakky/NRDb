@@ -19,24 +19,17 @@ final class MusicForm extends EntityForm
         if ($id)
         { 
             $row = $this->model->findRow($id);
-            
-            $data = $row->toArray();
-            foreach ($row->related('jun_music2interpret.music_id') as $author)
-            {
-                if (isset($author->group_id))
-                {
-                    $data['group'][] = $author->group_id;
-                    continue;
-                }
 
-                if ($author->person->type == 'person')
-                {
-                    $data['person'][] = $author->person_id;
-                    continue;
-                }
-                
-                $data['pseudonym'][] = $author->pseudonym_id; 
-            }
+            $data = $row->toArray();
+            $data['person'] = $row->related('jun_music2interpret.music_id')
+                ->where('jun_music2interpret.person_id NOT', null)
+                ->where('person.type', 'person')
+                ->fetchPairs('id', 'person_id');
+            $data['pseudonym'] = $row->related('jun_music2interpret.music_id')
+                ->where('jun_music2interpret.person_id NOT', null)
+                ->where('person.type', 'pseudonym')
+                ->fetchPairs('id', 'person_id');
+            $data['group'] = $row->related('jun_music2interpret.music_id')->where('group_id NOT', null)->fetchPairs('id', 'group_id');
 
             $this['form']->setDefaults($data);
         }

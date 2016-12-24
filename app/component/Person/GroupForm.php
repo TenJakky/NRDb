@@ -28,14 +28,12 @@ final class GroupForm extends BaseComponent
         if ($id)
         {
             $row = $this->groupModel->findRow($id);
+            
+            $data = $row->toArray();
+            $data['members'] = $row->related('jun_group2member.group_id')->where('active', 1)->fetchPairs('id', 'person_id');
+            $data['former_members'] = $row->related('jun_group2member.group_id')->where('active', 0)->fetchPairs('id', 'person_id');
 
-            if (!$row)
-            {
-                $this->flashMessage('Group not found', 'failure');
-                $this->redirect('Group:default');
-            }
-
-            $this['form']->setDefaults($row);
+            $this['form']->setDefaults($data);
         }
 
         $this->template->setFile(__DIR__.'/PersonForm.latte');
@@ -59,6 +57,7 @@ final class GroupForm extends BaseComponent
                 ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
         $form->addText('description', 'Description');
         $form->addMultiSelect('members', 'Members', $this->personModel->fetchAllSelectBox());
+        $form->addMultiSelect('former_members', 'Former Members', $this->personModel->fetchAllSelectBox());
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -71,7 +70,9 @@ final class GroupForm extends BaseComponent
         $data = $form->getValues();
 
         $members = $data['members'];
+        $formerMembers = $data['former_members'];
         unset($data['members']);
+        unset($data['former_members']);
 
         $id = $this->groupModel->save($data);
 
@@ -81,6 +82,14 @@ final class GroupForm extends BaseComponent
             $this->groupMemberModel->insert(array(
                 'person_id' => $member,
                 'group_id' => $id
+            ));
+        }
+        foreach ($formerMembers as $member)
+        {
+            $this->groupMemberModel->insert(array(
+                'person_id' => $member,
+                'group_id' => $id,
+                'active' => 0
             ));
         }
 
