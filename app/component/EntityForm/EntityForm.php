@@ -32,7 +32,7 @@ abstract class EntityForm extends BaseComponent
     {
         $this->redrawControl('formSnippet');
         $this->redrawControl('pseudonymSnippet');
-        $this->redrawControl('personGroupSnippet');
+        $this->redrawControl('groupSnippet');
     }
 
     public function injectPersonModel(\App\Model\PersonModel $personModel)
