@@ -24,7 +24,7 @@ abstract class ArtistList extends BaseDatagridComponent
 
         $this->grid->addColumn('name', 'Name')->enableSort();
         $this->grid->addColumn('country_id', 'Nationality')->enableSort();
-        $this->grid->addColumn('entity_count', "# of {$name}s");
+        $this->grid->addColumn('entity_count', "{$this->presenter->getName()} count");
         $this->grid->addColumn('average_rating', 'Average rating');
         $this->grid->addColumn('top_entity', "Top {$name}");
         $this->grid->addCellsTemplate(__DIR__ . '/ArtistListCellsTemplate.latte');

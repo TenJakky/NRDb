@@ -8,25 +8,14 @@ final class SeriesModel extends BaseEntityModel
     public $tableName = 'ent_series';
 
     /** @var string */
-    protected $ratingTableName = 'rating_series_season';
+    protected $ratingTableName = 'rating_series';
 
-    public function getTop($limit)
+    public function getTopFromSeasons($limit)
     {
         return $this
             ->getTable()
             ->group('id')
             ->order("sum(:series_season:{$this->ratingTableName}.rating)/count(*) DESC")
-            ->limit($limit);
-    }
-
-    public function getNotRated($userId, $limit = false)
-    {
-        return $this
-            ->getTable()
-            ->joinWhere(":series_season:{$this->ratingTableName}", 'user_id', $userId)
-            ->where(":series_season:{$this->ratingTableName}.user_id", null)
-            ->group(':series_season.series_id')
-            ->order("{$this->tableName}.id DESC")
             ->limit($limit);
     }
 }

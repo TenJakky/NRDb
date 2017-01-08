@@ -65,6 +65,18 @@
                     </td>
                 </tr>
             {case 'Series'}
+                <tr>
+                    <th>Director</th>
+                    <td>
+                        {artistList $data->related('jun_series2director.series_season_id.series_id')}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Cast</th>
+                    <td>
+                        {artistList $data->related('jun_series2actor.series_season_id.series.id')}
+                    </td>
+                </tr>
             {case 'Movie'}
                 <tr>
                     <th>Director</th>
