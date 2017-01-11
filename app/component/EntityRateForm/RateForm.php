@@ -35,6 +35,7 @@ abstract class RateForm extends BaseComponent
             $this['form']->setDefaults(array("{$pname}_id" => $entityId));
         }
 
+        $this->template->pname = $pname;
         $this->template->setFile(__DIR__.'/RateForm.latte');
         $this->template->render();
     }
@@ -59,9 +60,10 @@ abstract class RateForm extends BaseComponent
         $form->addSelect("{$pname}_id", $pName, $entities)
             ->setPrompt("Select {$pname}")
             ->setRequired();
-        $form->addSelect('rating', 'Rating', array_combine(range(0, 10, 1), range(0, 10, 1)))
-            ->setPrompt('Select rating')
+        $rating = $form->addRadioList('rating', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
             ->setRequired();
+        $rating->getContainerPrototype()->id = 'rating';
+        $rating->getSeparatorPrototype()->setName(null);
         $form->addTextArea('note', 'Note');
 
         $form->addSubmit('submit', 'Submit');
