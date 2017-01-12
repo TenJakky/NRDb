@@ -26,8 +26,11 @@ abstract class EntityList extends BaseDatagridComponent
             $this->grid->addColumn('english_title', 'English Title')->enableSort();
             $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
         }
-        $this->grid->addColumn('maker', ucfirst($this->makerType));
-        $this->grid->addColumn('year', 'Year')->enableSort();
+        if ($this->presenter->getName() !== 'Series')
+        {
+            $this->grid->addColumn('maker', ucfirst($this->makerType));
+            $this->grid->addColumn('year', 'Year')->enableSort();
+        }
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('men_rating', 'Men\'s Rating');
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
