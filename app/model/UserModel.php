@@ -14,10 +14,11 @@ class UserModel extends BaseModel
         user.username,
         `movie`,
         `series`,
+        `season`,
         `book`,
         `music`,
         `game`,
-        `movie` + `series` + `book` + `music` + `game` as `total`
+        `movie` + `series` + `season` + `book` + `music` + `game` as `total`
         FROM user
         
         LEFT JOIN (
@@ -32,11 +33,20 @@ class UserModel extends BaseModel
         LEFT JOIN (
         SELECT
         user.id AS `id`,
-        count(rating_series_season.id) as `series`
+        count(rating_series.id) as `series`
+        FROM user
+        LEFT JOIN rating_series on rating_series.user_id = user.id
+        GROUP BY user.id
+        ) AS `sq_series` ON user.id = `sq_series`.`id`
+        
+        LEFT JOIN (
+        SELECT
+        user.id AS `id`,
+        count(rating_series_season.id) as `season`
         FROM user
         LEFT JOIN rating_series_season on rating_series_season.user_id = user.id
         GROUP BY user.id
-        ) AS `sq_series` ON user.id = `sq_series`.`id`
+        ) AS `sq_season` ON user.id = `sq_season`.`id`
         
         LEFT JOIN (
         SELECT

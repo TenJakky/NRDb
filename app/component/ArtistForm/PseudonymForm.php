@@ -22,7 +22,7 @@ final class PseudonymForm extends BaseComponent
             $this['form']->setDefaults($row);
         }
 
-        $this->template->setFile(__DIR__.'/PersonForm.latte');
+        $this->template->setFile(__DIR__.'/ArtistForm.latte');
         $this->template->render();
     }
 

@@ -1,8 +1,8 @@
-<table class="grid">
+<table class="grid table-fixed">
     <thead>
         <td>X</td>
         <th>Movie</th>
-        <th>Series</th>
+        <th>Series (Season)</th>
         <th>Book</th>
         <th>Music</th>
         <th>Game</th>
@@ -17,7 +17,7 @@
         {/if}
             <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
             <td>{$temp->movie}</td>
-            <td>{$temp->series}</td>
+            <td>{$temp->series} ({$temp->season})</td>
             <td>{$temp->book}</td>
             <td>{$temp->music}</td>
             <td>{$temp->game}</td>

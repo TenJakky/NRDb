@@ -31,7 +31,7 @@ final class PersonForm extends BaseComponent
             $this['form']->setDefaults($data);
         }
 
-        $this->template->setFile(__DIR__.'/PersonForm.latte');
+        $this->template->setFile(__DIR__.'/ArtistForm.latte');
         $this->template->render();
     }
 
