@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RateFormMusic extends RateForm
+final class MusicRateForm extends EntityRateForm
 {
     public function __construct(
         \App\Model\MusicModel $musicModel,

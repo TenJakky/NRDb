@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RateFormBook extends RateForm
+final class BookRateForm extends EntityRateForm
 {
     public function __construct(
         \App\Model\BookModel $bookModel,

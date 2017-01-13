@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class RatingList extends BaseSmallDatagridComponent
+abstract class EntityRatingList extends BaseSmallDatagridComponent
 {
     /** @var int */
     protected $entityId = 0;
@@ -10,7 +10,7 @@ abstract class RatingList extends BaseSmallDatagridComponent
     public function render($entityId = 0)
     {
         $this->entityId = $entityId;
-        $this->template->setFile(__DIR__.'/RatingList.latte');
+        $this->template->setFile(__DIR__.'/EntityRatingList.latte');
         $this->template->render();
     }
 

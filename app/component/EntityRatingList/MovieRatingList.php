@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RatingListMovie extends RatingList
+final class MovieRatingList extends EntityRatingList
 {
     public function __construct(
         \App\Model\RatingMovieModel $ratingMovieModel)

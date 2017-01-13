@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class RateForm extends BaseComponent
+abstract class EntityRateForm extends BaseComponent
 {
     /** @var \App\Model\BaseEntityModel */
     protected $model;
@@ -36,7 +36,7 @@ abstract class RateForm extends BaseComponent
         }
 
         $this->template->pname = $pname;
-        $this->template->setFile(__DIR__.'/RateForm.latte');
+        $this->template->setFile(__DIR__.'/EntityRateForm.latte');
         $this->template->render();
     }
 

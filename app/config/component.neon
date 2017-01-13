@@ -65,32 +65,23 @@ services:
         class: App\Component\MusicForm
         inject: yes
 
-    ratingListMovie:
-        class: App\Component\RatingListMovie
-    ratingListSeries:
-        class: App\Component\RatingListSeries
-    ratingListBook:
-        class: App\Component\RatingListBook
-    ratingListMusic:
-        class: App\Component\RatingListMusic
+    movieRatingList:
+        class: App\Component\MovieRatingList
+    seriesRatingList:
+        class: App\Component\SeriesRatingList
+    bookRatingList:
+        class: App\Component\BookRatingList
+    musicRatingList:
+        class: App\Component\MusicRatingList
 
-    rateFormMovie:
-        class: App\Component\RateFormMovie
-    rateFormSeries:
-        class: App\Component\RateFormSeries
-    rateFormBook:
-        class: App\Component\RateFormBook
-    rateFormMusic:
-        class: App\Component\RateFormMusic
-
-    directorList:
-        class: App\Component\DirectorList
-    actorList:
-        class: App\Component\ActorList
-    authorList:
-        class: App\Component\AuthorList
-    interpretList:
-        class: App\Component\InterpretList
+    movieRateForm:
+        class: App\Component\MovieRateForm
+    seriesRateForm:
+        class: App\Component\SeriesRateForm
+    bookRateForm:
+        class: App\Component\BookRateForm
+    musicRateForm:
+        class: App\Component\MusicRateForm
 
     directorWorks:
         class: App\Component\DirectorWorks

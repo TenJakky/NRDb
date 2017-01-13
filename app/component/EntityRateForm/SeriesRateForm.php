@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RateFormSeries extends RateForm
+final class SeriesRateForm extends EntityRateForm
 {
     public function __construct(
         \App\Model\SeriesModel $seriesModel,

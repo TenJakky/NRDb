@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RateFormMovie extends RateForm
+final class MovieRateForm extends EntityRateForm
 {
     public function __construct(
         \App\Model\MovieModel $movieModel,
