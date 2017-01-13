@@ -5,17 +5,21 @@ namespace App\Component;
 use App\Model\MusicInterpretModel;
 use App\Model\RatingMovieModel;
 use App\Model\RatingMusicModel;
+use App\Model\RatingSeriesSeasonModel;
+use App\Model\SeriesSeasonModel;
 
 class StatElementCount extends BaseComponent
 {
     protected $movieModel;
     protected $seriesModel;
+    protected $seriesSeasonModel;
     protected $bookModel;
     protected $musicModel;
     protected $gameModel;
 
     protected $ratingMovieModel;
     protected $ratingSeriesModel;
+    protected $ratingSeriesSeasonModel;
     protected $ratingBookModel;
     protected $ratingMusicModel;
     protected $ratingGameModel;
@@ -23,22 +27,26 @@ class StatElementCount extends BaseComponent
     public function __construct(
         \App\Model\MovieModel $movieModel,
         \App\Model\SeriesModel $seriesModel,
+        \App\Model\SeriesSeasonModel $seriesSeasonModel,
         \App\Model\BookModel $booksModel,
         \App\Model\MusicModel $musicModel,
         \App\Model\GameModel $gamesModel,
         \App\Model\RatingMovieModel $ratingMovieModel,
         \App\Model\RatingSeriesModel $ratingSeriesModel,
+        \App\Model\RatingSeriesSeasonModel $ratingSeriesSeasonModel,
         \App\Model\RatingBookModel $ratingBookModel,
         \App\Model\RatingMusicModel $ratingMusicModel,
         \App\Model\RatingGameModel $ratingGameModel)
     {
         $this->movieModel = $movieModel;
         $this->seriesModel = $seriesModel;
+        $this->seriesSeasonModel = $seriesSeasonModel;
         $this->bookModel = $booksModel;
         $this->musicModel = $musicModel;
         $this->gameModel = $gamesModel;
         $this->ratingMovieModel = $ratingMovieModel;
         $this->ratingSeriesModel = $ratingSeriesModel;
+        $this->ratingSeriesSeasonModel = $ratingSeriesSeasonModel;
         $this->ratingBookModel = $ratingBookModel;
         $this->ratingMusicModel = $ratingMusicModel;
         $this->ratingGameModel = $ratingGameModel;
@@ -49,6 +57,7 @@ class StatElementCount extends BaseComponent
         $total = 0;
         $total += $this->template->moviesT = $this->movieModel->count();
         $total += $this->template->seriesT = $this->seriesModel->count();
+        $total += $this->template->seasonsT = $this->seriesSeasonModel->count();
         $total += $this->template->booksT = $this->bookModel->count();
         $total += $this->template->musicT = $this->musicModel->count();
         $total += $this->template->gamesT = $this->gameModel->count();
@@ -57,6 +66,7 @@ class StatElementCount extends BaseComponent
         $totalR = 0;
         $totalR += $this->template->moviesRT = $this->ratingMovieModel->count();
         $totalR += $this->template->seriesRT = $this->ratingSeriesModel->count();
+        $totalR += $this->template->seasonsRT = $this->ratingSeriesSeasonModel->count();
         $totalR += $this->template->booksRT = $this->ratingBookModel->count();
         $totalR += $this->template->musicRT = $this->ratingMusicModel->count();
         $totalR += $this->template->gamesRT = $this->ratingGameModel->count();
@@ -67,6 +77,7 @@ class StatElementCount extends BaseComponent
             $count = 0;
             $count += $this->template->{"movies{$i}"} = $this->ratingMovieModel->findBy('rating', $i)->count();
             $count += $this->template->{"series{$i}"} = $this->ratingSeriesModel->findBy('rating', $i)->count();
+            $count += $this->template->{"seasons{$i}"} = $this->ratingSeriesSeasonModel->findBy('rating', $i)->count();
             $count += $this->template->{"books{$i}"} = $this->ratingBookModel->findBy('rating', $i)->count();
             $count += $this->template->{"music{$i}"} = $this->ratingMusicModel->findBy('rating', $i)->count();
             $count += $this->template->{"games{$i}"} = $this->ratingGameModel->findBy('rating', $i)->count();
