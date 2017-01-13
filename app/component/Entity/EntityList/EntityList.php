@@ -8,6 +8,9 @@ abstract class EntityList extends BaseDatagridComponent
     protected $ratingModel;
 
     /** @var string */
+    protected $entityType;
+
+    /** @var string */
     protected $makerType;
 
     public function render()
@@ -21,16 +24,13 @@ abstract class EntityList extends BaseDatagridComponent
         parent::createComponentDataGrid();
 
         $this->grid->addColumn('original_title', 'Original title')->enableSort();
-        if (!in_array($this->presenter->getName(), array('Music', 'Game')))
+        if (!in_array($this->entityType, array('Music', 'Game')))
         {
             $this->grid->addColumn('english_title', 'English Title')->enableSort();
             $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
         }
-        if ($this->presenter->getName() !== 'Series')
-        {
-            $this->grid->addColumn('maker', ucfirst($this->makerType));
-            $this->grid->addColumn('year', 'Year')->enableSort();
-        }
+        $this->grid->addColumn('maker', ucfirst($this->makerType));
+        $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('men_rating', 'Men\'s Rating');
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
@@ -40,8 +40,8 @@ abstract class EntityList extends BaseDatagridComponent
         $this->grid->setTemplateParameters(array(
                 'userId' => $this->presenter->user->getId(),
                 'ratingModel' => $this->ratingModel,
-                'pName' => $this->presenter->getName(),
-                'pname' => lcfirst($this->presenter->getName()),
+                'pName' => $this->entityType,
+                'pname' => lcfirst($this->entityType),
                 'type' => $this->makerType));
         return $this->grid;
     }

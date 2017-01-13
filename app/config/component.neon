@@ -38,6 +38,8 @@ services:
         class: App\Component\MovieList
     seriesList:
         class: App\Component\SeriesList
+    seasonList:
+        class: App\Component\SeasonList
     bookList:
         class: App\Component\BookList
     musicList:

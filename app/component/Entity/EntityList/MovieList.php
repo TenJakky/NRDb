@@ -13,5 +13,6 @@ final class MovieList extends EntityList
         $this->model = $movieModel;
         $this->ratingModel = $ratingMovieModel;
         $this->makerType = 'director';
+        $this->entityType = 'Movie';
     }
 }

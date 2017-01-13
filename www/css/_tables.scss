@@ -51,3 +51,7 @@
   list-style: none;
 }
 
+.season-list
+{
+  @extend .artist-list;
+}

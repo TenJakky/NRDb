@@ -12,5 +12,7 @@ final class SeriesList extends EntityList
 
         $this->model = $seriesModel;
         $this->ratingModel = $ratingSeriesModel;
+        $this->makerType = 'director';
+        $this->entityType = 'Series';
     }
 }
