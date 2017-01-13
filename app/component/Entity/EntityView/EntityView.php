@@ -8,7 +8,9 @@ final class EntityView extends BaseComponent
     {
         $this->template->data = $data;
         $this->template->ratingModel = $ratingModel;
+
         $this->template->pName = $this->presenter->getName();
+        $this->template->pname = lcfirst($this->presenter->getName());
 
         parent::render();
     }
