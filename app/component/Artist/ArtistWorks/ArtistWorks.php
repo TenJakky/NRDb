@@ -38,6 +38,7 @@ abstract class ArtistWorks extends BaseSmallDatagridComponent
         $this->grid->addColumn('year', 'Year');
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
+        $this->grid->addColumn('action', 'Action');
         $this->grid->addCellsTemplate(__DIR__ . '/ArtistWorksCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
                 'userId' => $this->presenter->user->getId(),

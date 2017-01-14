@@ -15,9 +15,17 @@
     {var $rating => $ratingModel->getUserRating($row->id, $userId)}
     {if $rating}
         {$rating->rating}
-        <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
-    {else}
-        <a href="{plink "{$eType}:rate" $row->id}">Rate</a>
     {/if}
 </td>
+{/define}
+
+{define col-action}
+    <td>
+        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+        {if $rating}
+            <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
+        {else}
+            <a href="{plink "{$eType}:rate" $row->id}">Rate</a>
+        {/if}
+    </td>
 {/define}

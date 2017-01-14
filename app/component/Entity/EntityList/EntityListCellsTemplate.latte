@@ -4,6 +4,12 @@
     </td>
 {/define}
 
+{define col-number}
+    <td>
+        <a href="{plink "Season:view" $row->id}">{$row->number}</a>
+    </td>
+{/define}
+
 {define col-maker}
     <td>
         {artistList $row->related("jun_{$etype}2{$mtype}.{$etype}_id")}
