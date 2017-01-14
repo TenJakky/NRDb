@@ -17,21 +17,10 @@ abstract class EntityRateForm extends BaseComponent
 
         if ($ratingId)
         {
-            $rating = $this->ratingModel->findRow($ratingId);
-            if (!$rating || $rating->user_id != $this->presenter->getUser()->getId())
-            {
-                $this->presenter->flashMessage('You cannot edit this rating.', 'failure');
-                $this->presenter->redirect("{$pName}:default");
-            }
-            $this['form']->setDefaults($rating);
+            $this['form']->setDefaults($this->ratingModel->findRow($ratingId));
         }
         elseif ($entityId)
         {
-            if (!$this->model->findRow($entityId))
-            {
-                $this->presenter->flashMessage("{$pName} not found.", 'failure');
-                $this->presenter->redirect("{$pName}:default");
-            }
             $this['form']->setDefaults(array("{$pname}_id" => $entityId));
         }
 
