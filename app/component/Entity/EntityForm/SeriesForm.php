@@ -4,17 +4,10 @@ namespace App\Component;
 
 final class SeriesForm extends EntityForm
 {
-    protected $seriesDirectorModel;
-    protected $seriesActorModel;
-
     public function __construct(
-        \App\Model\SeriesModel $seriesModel,
-        \App\Model\SeriesDirectorModel $seriesDirectorModel,
-        \App\Model\SeriesActorModel $seriesActorModel)
+        \App\Model\SeriesModel $seriesModel)
     {
         $this->model = $seriesModel;
-        $this->seriesDirectorModel = $seriesDirectorModel;
-        $this->seriesActorModel = $seriesActorModel;
     }
 
     public function render($id = 0)

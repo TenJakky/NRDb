@@ -80,13 +80,25 @@
                 <tr>
                     <th>Director</th>
                     <td>
-                        {artistList $data->related('jun_season2director.season_id.series_id')}
+                        {var $directors = array()}
+                        {foreach $data->related('ent_season.series_id') as $temp}
+                            {foreach $temp->related('jun_season2director.season_id') as $temp2}
+                                {php $directors[] = $temp2}
+                            {/foreach}
+                        {/foreach}
+                        {artistList $directors}
                     </td>
                 </tr>
                 <tr>
                     <th>Cast</th>
                     <td>
-                        {artistList $data->related('jun_season2actor.season_id.series.id')}
+                        {var $actors = array()}
+                        {foreach $data->related('ent_season.series_id') as $temp}
+                            {foreach $temp->related('jun_season2actor.season_id') as $temp2}
+                                {php $actors[] = $temp2}
+                            {/foreach}
+                        {/foreach}
+                        {artistList $actors}
                     </td>
                 </tr>
             {case 'Movie'}

@@ -47,9 +47,9 @@ abstract class BaseEntityModel extends BaseModel
         (sum({$this->ratingTableName}.rating) / count(*)) AS `subsum`
         FROM {$joinTable}
         LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$entity}_id = {$joinTable}.{$entity}_id
-        WHERE {$joinTable}.person_id = {$personId}
+        WHERE {$joinTable}.person_id = ?
         GROUP BY {$this->ratingTableName}.{$entity}_id
-        ) AS `subquery`")->fetch()->average;
+        ) AS `subquery`", $personId)->fetch()->average;
     }
 
     public function getNotRated($userId, $limit = null)

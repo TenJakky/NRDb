@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class SeriesDirectorModel extends BaseModel
+final class SeasonDirectorModel extends BaseModel
 {
-    public $tableName = 'jun_series2director';
+    public $tableName = 'jun_season2director';
 }

@@ -17,15 +17,15 @@ final class MovieForm extends EntityForm
         $this->movieActorModel = $movieActorModel;
     }
 
-    public function render($id = 0)
+    public function render($movieId = 0)
     {
-        if ($id)
+        if ($movieId)
         { 
-            $row = $this->model->findRow($id);
+            $row = $this->model->findRow($movieId);
 
             $data = $row->toArray();
-            $data['director'] = $row->related('jun_movie2director.movie_id')->fetchField('person_id');
-            $data['actor'] = $row->related('jun_movie2actor.movie_id')->fetchField('person_id');
+            $data['director'] = $row->related('jun_movie2director.movie_id')->fetchPairs('id', 'person_id');
+            $data['actor'] = $row->related('jun_movie2actor.movie_id')->fetchPairs('id', 'person_id');
 
             $this['form']->setDefaults($data);
         }

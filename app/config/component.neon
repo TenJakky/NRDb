@@ -83,6 +83,8 @@ services:
         class: App\Component\MovieRateForm
     seriesRateForm:
         class: App\Component\SeriesRateForm
+    seasonRateForm:
+        class: App\Component\SeasonRateForm
     bookRateForm:
         class: App\Component\BookRateForm
     musicRateForm:

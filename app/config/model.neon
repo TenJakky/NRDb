@@ -16,11 +16,11 @@ services:
 - App\Model\RatingMovieModel
 
 - App\Model\SeriesModel
-- App\Model\SeriesDirectorModel
-- App\Model\SeriesActorModel
 - App\Model\RatingSeriesModel
 
 - App\Model\SeasonModel
+- App\Model\SeasonDirectorModel
+- App\Model\SeasonActorModel
 - App\Model\RatingSeasonModel
 
 - App\Model\BookModel
