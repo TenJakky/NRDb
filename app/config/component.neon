@@ -60,6 +60,9 @@ services:
     seriesForm:
         class: App\Component\SeriesForm
         inject: yes
+    seasonForm:
+        class: App\Component\SeasonForm
+        inject: yes
     bookForm:
         class: App\Component\BookForm
         inject: yes

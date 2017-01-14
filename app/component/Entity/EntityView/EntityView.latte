@@ -119,6 +119,14 @@
 {if $pName === 'Series'}
 <section>
     <h2>Season List</h2>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink "Season:add" $data->id}">Add season</a>
+        </li>
+        <li>
+            <a href="{plink "Season:rate" $data->id}">Add rating</a>
+        </li>
+    </ul>
     {control seasonList $data->id}
 </section>
 {/if}

@@ -13,4 +13,9 @@ final class SeasonPresenter extends BaseEntityPresenter
         $this->model = $seasonModel;
         $this->ratingModel = $ratingSeasonModel;
     }
+
+    public function actionAdd($seriesId)
+    {
+        $this->template->seriesId = $seriesId;
+    }
 }
