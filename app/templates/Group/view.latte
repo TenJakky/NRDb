@@ -14,7 +14,7 @@
     <table class="list"> 
         <tr> 
             <th>Years active</th> 
-            <td>{if $data->year_from}{$data->year_from} - {if isset($data->year_to)}{$data->year_to}{else}present{/if}{/if}</td>
+            <td>{if $data->year_from}{$data->year_from} - {$data->year_to ? $data->year_to : 'present'}{/if}</td>
         </tr> 
         <tr> 
             <th>Members</th> 

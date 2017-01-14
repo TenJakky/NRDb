@@ -42,9 +42,9 @@ class UserModel extends BaseModel
         LEFT JOIN (
         SELECT
         user.id AS `id`,
-        count(rating_series_season.id) as `season`
+        count(rating_season.id) as `season`
         FROM user
-        LEFT JOIN rating_series_season on rating_series_season.user_id = user.id
+        LEFT JOIN rating_season on rating_season.user_id = user.id
         GROUP BY user.id
         ) AS `sq_season` ON user.id = `sq_season`.`id`
         
