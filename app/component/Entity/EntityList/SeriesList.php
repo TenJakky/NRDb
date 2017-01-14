@@ -15,4 +15,13 @@ final class SeriesList extends EntityList
         $this->makerType = 'director';
         $this->entityType = 'Series';
     }
+
+    public function createComponentDataGrid()
+    {
+        parent::createComponentDataGrid();
+
+        $this->grid->addCellsTemplate(__DIR__ . '/SeriesListCellsTemplate.latte');
+
+        return $this->grid;
+    }
 }

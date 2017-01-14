@@ -1,0 +1,11 @@
+{redefine col-maker}
+    <td>
+        {artistList $row->related("jun_season2director.season_id.series_id")}
+    </td>
+{/redefine}
+
+{redefine col-year}
+    <td class="center">
+        { $row->year}
+    </td>
+{/redefine}
