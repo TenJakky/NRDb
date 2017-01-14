@@ -23,11 +23,18 @@ abstract class EntityList extends BaseDatagridComponent
     {
         parent::createComponentDataGrid();
 
-        $this->grid->addColumn('original_title', 'Original title')->enableSort();
-        if (!in_array($this->entityType, array('Music', 'Game')))
+        if ($this->entityType === 'Season')
         {
-            $this->grid->addColumn('english_title', 'English Title')->enableSort();
-            $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
+            $this->grid->addColumn('number', 'Number')->enableSort('desc');
+        }
+        else
+        {
+            $this->grid->addColumn('original_title', 'Original title')->enableSort();
+            if (!in_array($this->entityType, array('Music', 'Game')))
+            {
+                $this->grid->addColumn('english_title', 'English Title')->enableSort();
+                $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
+            }
         }
         $this->grid->addColumn('maker', ucfirst($this->makerType));
         $this->grid->addColumn('year', 'Year')->enableSort();
