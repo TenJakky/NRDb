@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class RatingSeriesSeasonModel extends BaseRatingModel
+final class RatingSeasonModel extends BaseRatingModel
 {
-    public $tableName = 'rating_series_season';
+    public $tableName = 'rating_season';
 }

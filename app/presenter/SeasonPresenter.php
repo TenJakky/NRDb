@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Component;
+namespace App\Presenter;
 
-final class SeasonList extends EntityList
+final class SeasonPresenter extends BaseEntityPresenter
 {
+    protected $ratingModel;
+
     public function __construct(
         \App\Model\SeasonModel $seasonModel,
         \App\Model\RatingSeasonModel $ratingSeasonModel)
     {
-        parent::__construct();
-
         $this->model = $seasonModel;
         $this->ratingModel = $ratingSeasonModel;
-        $this->makerType = 'director';
-        $this->entityType = 'Season';
     }
 }

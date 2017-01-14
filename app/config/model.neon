@@ -20,8 +20,8 @@ services:
 - App\Model\SeriesActorModel
 - App\Model\RatingSeriesModel
 
-- App\Model\SeriesSeasonModel
-- App\Model\RatingSeriesSeasonModel
+- App\Model\SeasonModel
+- App\Model\RatingSeasonModel
 
 - App\Model\BookModel
 - App\Model\BookAuthorModel

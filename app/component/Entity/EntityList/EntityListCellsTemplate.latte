@@ -1,12 +1,12 @@
 {define col-original_title}
     <td>
-        <a href="{plink "{$pName}:view" $row->id}">{$row->original_title}</a>
+        <a href="{plink "{$eType}:view" $row->id}">{$row->original_title}</a>
     </td>
 {/define}
 
 {define col-maker}
     <td>
-        {artistList$row->related("jun_{$pname}2{$type}.{$pname}_id")}
+        {artistList $row->related("jun_{$etype}2{$mtype}.{$etype}_id")}
     </td>
 {/define}
 
@@ -67,9 +67,9 @@
     <td>
         {var $rating => $ratingModel->getUserRating($row->id, $userId)}
         {if $rating}
-            <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+            <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
         {else}
-            <a href="{plink "{$pName}:rate" $row->id}">Rate</a>
+            <a href="{plink "{$eType}:rate" $row->id}">Rate</a>
         {/if}
     </td>
 {/define}

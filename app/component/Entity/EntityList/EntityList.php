@@ -43,13 +43,14 @@ abstract class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('women_rating', 'Women\'s Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
+
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
                 'userId' => $this->presenter->user->getId(),
                 'ratingModel' => $this->ratingModel,
-                'pName' => $this->entityType,
-                'pname' => lcfirst($this->entityType),
-                'type' => $this->makerType));
+                'eType' => $this->entityType,
+                'etype' => lcfirst($this->entityType),
+                'mtype' => $this->makerType));
         return $this->grid;
     }
 
@@ -83,7 +84,7 @@ abstract class EntityList extends BaseDatagridComponent
             }
             else if ($order[0] == 'rating')
             {
-                //$orders = "sum(rating_sum / rating_size) $order[1]";
+                $orders = "sum(rating_sum / rating_size) $order[1]";
             }
             else if ($order[0] == 'my_rating')
             {
@@ -94,6 +95,7 @@ abstract class EntityList extends BaseDatagridComponent
             {
                 $orders = implode(' ', $order);
             }
+
             $set->order($orders);
         }
 
