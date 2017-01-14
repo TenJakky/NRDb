@@ -38,6 +38,8 @@ final class SeriesForm extends EntityForm
         $form->addText('english_title', 'English title')
             ->setRequired();
         $form->addText('czech_title', 'Czech title');
+        $form->addSelect('active', 'Status', array(0 => 'Finished', 1 => 'Running'))
+            ->setDefaultValue(1);
         $form->addTextArea('description', 'Description');
 
         $form->addSubmit('submit', 'Submit');

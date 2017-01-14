@@ -46,7 +46,19 @@
                 <td>{$data->czech_title}</td>
             </tr>
         {/if}
-        {if isset($data->year)}
+        {if $pName === 'Series'}
+            <tr>
+                <th>Status</th>
+                <td>{$data->active ? 'Running' : 'Finished'}</td>
+            </tr>
+            {var range = $data->related('ent_season.series_id')->select('MIN(year) AS min, MAX(year) AS max')->fetch()}
+            {if $range}
+                <tr>
+                    <th>Year</th>
+                    <td>{$range->min} - {$data->active ? 'present' : $range->max}</td>
+                </tr>
+            {/if}
+        {else}
             <tr>
                 <th>Year</th>
                 <td>{$data->year}</td>

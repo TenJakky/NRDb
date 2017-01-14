@@ -25,7 +25,7 @@ abstract class EntityList extends BaseDatagridComponent
 
         if ($this->entityType === 'Season')
         {
-            $this->grid->addColumn('number', 'Number')->enableSort('desc');
+            $this->grid->addColumn('number', 'Number')->enableSort('asc');
         }
         else
         {
