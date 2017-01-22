@@ -6,6 +6,10 @@
 
 {redefine col-year}
     <td class="center">
-        { $row->year}
+        {var range = $row->related('ent_season.series_id')->select('MIN(year) AS min, MAX(year) AS max')->fetch()}
+        {dump $range}
+        {if $range}
+            {$range->min} - {$row->active ? 'present' : $range->max}
+        {/if}
     </td>
 {/redefine}

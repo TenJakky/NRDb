@@ -39,14 +39,11 @@ abstract class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('maker', ucfirst($this->makerType));
         $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating');
-        $this->grid->addColumn('men_rating', 'Men\'s Rating');
-        $this->grid->addColumn('women_rating', 'Women\'s Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
 
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
-                'userId' => $this->presenter->user->getId(),
                 'ratingModel' => $this->ratingModel,
                 'eType' => $this->entityType,
                 'etype' => lcfirst($this->entityType),

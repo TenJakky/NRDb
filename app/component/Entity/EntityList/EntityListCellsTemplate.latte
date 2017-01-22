@@ -36,29 +36,9 @@
     center
 {/define}
 
-{define col-men_rating}
-    <td class="center">
-        {$ratingModel->getMenRating($row->id)|number: 2}
-    </td>
-{/define}
-
-{define col-head-class-men_rating}
-    center
-{/define}
-
-{define col-women_rating}
-    <td class="center">
-        {$ratingModel->getWomenRating($row->id)|number: 2}
-    </td>
-{/define}
-
-{define col-head-class-women_rating}
-    center
-{/define}
-
 {define col-my_rating}
     <td class="center">
-        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+        {var $rating => $ratingModel->getUserRating($row->id, $presenter->user->getId())}
         {if $rating}
             {$rating->rating}
         {/if}
@@ -71,7 +51,7 @@
 
 {define col-action}
     <td>
-        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
+        {var $rating => $ratingModel->getUserRating($row->id, $presenter->user->getId())}
         {if $rating}
             <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
         {else}
