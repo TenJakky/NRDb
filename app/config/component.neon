@@ -74,6 +74,8 @@ services:
         class: App\Component\MovieRatingList
     seriesRatingList:
         class: App\Component\SeriesRatingList
+    seasonRatingList:
+        class: App\Component\SeasonRatingList
     bookRatingList:
         class: App\Component\BookRatingList
     musicRatingList:

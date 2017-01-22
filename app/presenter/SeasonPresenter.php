@@ -18,4 +18,11 @@ final class SeasonPresenter extends BaseEntityPresenter
     {
         $this->template->seriesId = $seriesId;
     }
+
+    public function actionView($id)
+    {
+        parent::actionView($id);
+
+        $this->template->data = $this->model->getViewData($id);
+    }
 }

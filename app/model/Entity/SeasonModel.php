@@ -14,7 +14,7 @@ final class SeasonModel extends BaseEntityModel
     {
         return $this
             ->getTable()
-            ->select("{$this->tableName}.*, CONCAT(series.original_title, \" \", number, \".season\") AS original_title")
+            ->select("{$this->tableName}.*, CONCAT(series.original_title, \" - \", number, \".season\") AS original_title")
             ->joinWhere(":{$this->ratingTableName}", ":{$this->ratingTableName}.user_id", $userId)
             ->where(":{$this->ratingTableName}.user_id", null)
             ->order("{$this->tableName}.id DESC")
@@ -25,10 +25,19 @@ final class SeasonModel extends BaseEntityModel
     {
         return $this
             ->getTable()
-            ->select("{$this->tableName}.*, CONCAT(series.original_title, ' ', number, '.season') AS original_title")
+            ->select("{$this->tableName}.*, CONCAT(series.original_title, \" - \", number, \".season\") AS original_title")
             ->joinWhere(":{$this->ratingTableName}", ":{$this->ratingTableName}.user_id", $userId)
             ->where(":{$this->ratingTableName}.user_id", $userId)
             ->order("{$this->tableName}.id DESC")
             ->limit($limit);
+    }
+
+    public function getViewData($id)
+    {
+        return $this
+            ->getTable()
+            ->select("{$this->tableName}.*, CONCAT(series.original_title, \" - \", number, \".season\") AS original_title")
+            ->wherePrimary($id)
+            ->fetch();
     }
 }
