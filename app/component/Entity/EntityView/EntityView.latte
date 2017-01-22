@@ -19,6 +19,13 @@
 {/if}
 
 <section>
+    {if $presenter->name === 'Season'}
+        <ul class="inline-buttons">
+            <li>
+                <a href="{plink Series:view $data->series_id}">← Series page</a>
+            </li>
+        </ul>
+    {/if}
     <ul class="inline-buttons">
         <li>
             <a href="{plink "{$presenter->name}:edit" $data->id}">Edit details</a>
