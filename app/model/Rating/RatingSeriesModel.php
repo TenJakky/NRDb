@@ -9,8 +9,7 @@ final class RatingSeriesModel extends BaseRatingModel
     public function getUserRatingFromSeasons($entityId, $userId)
     {
         return $this->query("
-        SELECT
-        sum(`season`) / count(*) as `rating`
+        SELECT sum(`season`) / count(*) as `rating`
         FROM (
         SELECT
         sum(rating_season.rating) / count(*) as `season`
@@ -24,8 +23,7 @@ final class RatingSeriesModel extends BaseRatingModel
     public function getRatingFromSeasons($entityId)
     {
         return $this->query("
-        SELECT
-        sum(`season`) / count(*) as `rating`
+        SELECT sum(`season`) / count(*) as `rating`
         FROM (
         SELECT
         sum(rating_season.rating) / count(*) as `season`

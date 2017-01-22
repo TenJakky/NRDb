@@ -8,6 +8,7 @@ abstract class BaseEntityPresenter extends BaseViewEditPresenter
     {
         parent::actionView($id);
 
+        $this->template->entityModel = $this->model;
         $this->template->ratingModel = $this->ratingModel;
     }
 

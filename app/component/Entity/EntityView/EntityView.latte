@@ -5,7 +5,7 @@
 {/if}
 
 <h2>{$ratingModel->getRating($data->id)|number: 2}</h2>
-{if $pName == 'Series'}
+{if $presenter->name == 'Series'}
     <h3>Average rating from seasons: {$ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
 {/if}
 <h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
@@ -21,13 +21,13 @@
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink "{$pName}:edit" $data->id}">Edit details</a>
+            <a href="{plink "{$presenter->name}:edit" $data->id}">Edit details</a>
         </li>
         <li>
             {if $rating}
-                <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+                <a href="{plink "{$presenter->name}:editRating" $rating->id}">Edit rating</a>
             {else}
-                <a href="{plink "{$pName}:rate" $data->id}">Rate</a>
+                <a href="{plink "{$presenter->name}:rate" $data->id}">Rate</a>
             {/if}
         </li>
     </ul>
@@ -46,7 +46,7 @@
                 <td>{$data->czech_title}</td>
             </tr>
         {/if}
-        {if $pName === 'Series'}
+        {if $presenter->name === 'Series'}
             <tr>
                 <th>Status</th>
                 <td>{$data->active ? 'Running' : 'Finished'}</td>
@@ -68,7 +68,7 @@
             <th>Description</th>
             <td>{$data->description}</td>
         </tr>
-        {switch $pName}
+        {switch $presenter->name}
             {case 'Book'}
                 <tr>
                     <th>Author</th>
@@ -80,25 +80,13 @@
                 <tr>
                     <th>Director</th>
                     <td>
-                        {var $directors = array()}
-                        {foreach $data->related('ent_season.series_id') as $temp}
-                            {foreach $temp->related('jun_season2director.season_id') as $temp2}
-                                {php $directors[] = $temp2}
-                            {/foreach}
-                        {/foreach}
-                        {artistList $directors}
+                        {artistList $entityModel->getDirectors($data->id)}
                     </td>
                 </tr>
                 <tr>
                     <th>Cast</th>
                     <td>
-                        {var $actors = array()}
-                        {foreach $data->related('ent_season.series_id') as $temp}
-                            {foreach $temp->related('jun_season2actor.season_id') as $temp2}
-                                {php $actors[] = $temp2}
-                            {/foreach}
-                        {/foreach}
-                        {artistList $actors}
+                        {artistList $entityModel->getActors($data->id)}
                     </td>
                 </tr>
             {case 'Movie'}
@@ -124,21 +112,21 @@
         {/switch}
     </table>
 </section>
+{if $presenter->name === 'Series'}
+    <section>
+        <h2>Season List</h2>
+        <ul class="inline-buttons">
+            <li>
+                <a href="{plink "Season:add" $data->id}">Add season</a>
+            </li>
+            <li>
+                <a href="{plink "Season:rate" $data->id}">Add rating</a>
+            </li>
+        </ul>
+        {control seasonList $data->id}
+    </section>
+{/if}
 <section>
     <h2>User rating</h2>
-    {control "{$pname}RatingList" $data->id}
+    {control "{$presenter->name}RatingList" $data->id}
 </section>
-{if $pName === 'Series'}
-<section>
-    <h2>Season List</h2>
-    <ul class="inline-buttons">
-        <li>
-            <a href="{plink "Season:add" $data->id}">Add season</a>
-        </li>
-        <li>
-            <a href="{plink "Season:rate" $data->id}">Add rating</a>
-        </li>
-    </ul>
-    {control seasonList $data->id}
-</section>
-{/if}

@@ -35,14 +35,10 @@ abstract class EntityRateForm extends BaseComponent
         $pname = lcfirst($pName);
 
         $userId = $this->presenter->getUser()->getId();
-        if ($this->presenter->getAction() == 'rate')
-        {
-            $entities = $this->model->getNotRated($userId)->fetchPairs('id', 'original_title');
-        }
-        else
-        {
-            $entities = $this->model->getRated($userId)->fetchPairs('id', 'original_title');
-        }
+
+        $entities = $this->presenter->getAction() === 'rate' ?
+            $this->model->getNotRated($userId)->fetchPairs('id', 'original_title') :
+            $this->model->getRated($userId)->fetchPairs('id', 'original_title');
 
         $form = new \Nette\Application\UI\Form();
         $form->addHidden('id');
@@ -54,7 +50,6 @@ abstract class EntityRateForm extends BaseComponent
         $rating->getContainerPrototype()->id = 'rating';
         $rating->getSeparatorPrototype()->setName(null);
         $form->addTextArea('note', 'Note');
-
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
 
