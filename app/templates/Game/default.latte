@@ -1,31 +1,30 @@
 {layout ../@layout.latte}
-{block title}Games{/block}
+{block title}Game{/block}
 {block head}{/block}
 {block content}
 
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Movie:add}">Add game</a>
+            <a href="{plink Game:add}">Add game</a>
         </li>
         <li>
-            <a href="{plink Movie:rate}">Add rating</a>
+            <a href="{plink Game:rate}">Add rating</a>
         </li>
         <li>
-            <a href="{plink Movie:list}">List of games</a>
+            <a href="{plink Game:list}">List of games</a>
         </li>
     </ul>
 </section>
 <section>
     <h2>Recently added</h2>
-    {control movieSmallList 'new'}
+    {control gameSmallList 'new'}
 </section>
 <section>
     <h2>Top rated</h2>
-    {control movieSmallList 'top'}
+    {control gameSmallList 'top'}
 </section>
 <section>
     <h2>To rate</h2>
-    {control movieSmallList 'notRated'}
+    {control gameSmallList 'notRated'}
 </section>
-
