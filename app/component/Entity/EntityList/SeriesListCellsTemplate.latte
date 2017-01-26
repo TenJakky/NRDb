@@ -1,15 +1,13 @@
 {redefine col-maker}
     <td>
-        {artistList $row->related("jun_season2director.season_id.series_id")}
+        {artistList $entityModel->getDirectors($row->id)}
     </td>
 {/redefine}
 
 {redefine col-year}
     <td class="center">
-        {var range = $row->related('ent_season.series_id')->select('MIN(year) AS min, MAX(year) AS max')->fetch()}
-        {dump $range}
-        {if $range}
-            {$range->min} - {$row->active ? 'present' : $range->max}
-        {/if}
+        {ifset $row->year_min}
+            {$row->year_min} - {$row->active ? 'present' : $row->year_max}
+        {/ifset}
     </td>
 {/redefine}

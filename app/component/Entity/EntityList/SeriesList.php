@@ -24,4 +24,13 @@ final class SeriesList extends EntityList
 
         return $this->grid;
     }
+
+    public function getDataSource($filter, $order)
+    {
+        $set = parent::getDataSource($filter, $order);
+
+        return $set
+            ->select('*, ent_series.id AS id, MIN(:ent_season.year) AS year_min, MAX(:ent_season.year) AS year_max')
+            ->group('ent_series.id');
+    }
 }

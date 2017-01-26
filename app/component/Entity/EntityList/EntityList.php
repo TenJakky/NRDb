@@ -44,6 +44,7 @@ abstract class EntityList extends BaseDatagridComponent
 
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
+                'entityModel' => $this->model,
                 'ratingModel' => $this->ratingModel,
                 'eType' => $this->entityType,
                 'etype' => lcfirst($this->entityType),
