@@ -18,14 +18,14 @@
     {if $paginator->isFirst()}
         <li class="disabled"><a>« {$control->translate(Previous)}</a></li>
     {else}
-        <li><a href="{link paginate!, 'page' => $paginator->page - 1}" rel="prev" class="ajax">« {$control->translate(Previous)}</a></li>
+        <li><a href="{link paginate!, 'page' => $paginator->page - 1}" rel="prev">« {$control->translate(Previous)}</a></li>
     {/if}
 
     {foreach $steps as $step}
         {if $step == $paginator->page}
             <li class="active"><a href="">{$step}</a></li>
         {else}
-            <li><a href="{link paginate!, 'page' => $step}" class="ajax">{$step}</a></li>
+            <li><a href="{link paginate!, 'page' => $step}">{$step}</a></li>
         {/if}
         {if $iterator->nextValue > $step + 1}
             <li class="disabled"><a>…</a></li>
@@ -35,7 +35,7 @@
     {if $paginator->isLast()}
         <li class="disabled"><a >{$control->translate(Next)} »</a></li>
     {else}
-        <li><a href="{link paginate!, 'page' => $paginator->page + 1}" rel="next" class="ajax">{$control->translate(Next)} »</a></li>
+        <li><a href="{link paginate!, 'page' => $paginator->page + 1}" rel="next">{$control->translate(Next)} »</a></li>
     {/if}
 </ul>
 {/redefine}
