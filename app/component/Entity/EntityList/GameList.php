@@ -12,7 +12,7 @@ final class GameList extends EntityList
 
         $this->model = $gameModel;
         $this->ratingModel = $ratingGameModel;
-        $this->makerType = 'developer';
-        $this->entityType = 'Game';
+        $this->artistType = 'developer';
+        $this->entityType = 'game';
     }
 }

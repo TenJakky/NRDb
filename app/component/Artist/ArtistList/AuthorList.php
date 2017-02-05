@@ -12,6 +12,6 @@ final class AuthorList extends ArtistList
 
         $this->model = $personModel;
         $this->entityModel = $bookModel;
-        $this->makerType = 'author';
+        $this->artistType = 'author';
     }
 }

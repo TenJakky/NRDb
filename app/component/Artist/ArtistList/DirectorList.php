@@ -12,6 +12,6 @@ final class DirectorList extends ArtistList
 
         $this->model = $personModel;
         $this->entityModel = $movieModel;
-        $this->makerType = 'director';
+        $this->artistType = 'director';
     }
 }

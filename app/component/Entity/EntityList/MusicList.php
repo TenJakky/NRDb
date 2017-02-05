@@ -12,7 +12,7 @@ final class MusicList extends EntityList
 
         $this->model = $musicModel;
         $this->ratingModel = $ratingMusicModel;
-        $this->makerType = 'interpret';
-        $this->entityType = 'Music';
+        $this->artistType = 'interpret';
+        $this->entityType = 'music';
     }
 }

@@ -12,8 +12,8 @@ final class SeriesList extends EntityList
 
         $this->model = $seriesModel;
         $this->ratingModel = $ratingSeriesModel;
-        $this->makerType = 'director';
-        $this->entityType = 'Series';
+        $this->artistType = 'director';
+        $this->entityType = 'series';
     }
 
     public function createComponentDataGrid()

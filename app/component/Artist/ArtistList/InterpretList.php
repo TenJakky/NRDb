@@ -12,6 +12,6 @@ final class InterpretList extends ArtistList
 
         $this->model = $personModel;
         $this->entityModel = $musicModel;
-        $this->makerType = 'interpret';
+        $this->artistType = 'interpret';
     }
 }

@@ -29,7 +29,7 @@ final class SeasonList extends EntityList
 
         $this->model = $seasonModel;
         $this->ratingModel = $ratingSeasonModel;
-        $this->makerType = 'director';
-        $this->entityType = 'Season';
+        $this->artistType = 'director';
+        $this->entityType = 'season';
     }
 }

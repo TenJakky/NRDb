@@ -8,7 +8,7 @@ abstract class ArtistList extends BaseDatagridComponent
     protected $entityModel;
 
     /** @var string */
-    protected $makerType;
+    protected $artistType;
 
     public function render()
     {
@@ -32,7 +32,7 @@ abstract class ArtistList extends BaseDatagridComponent
             'entityModel' => $this->entityModel,
             'pName' => $this->presenter->getName(),
             'pname' => $name,
-            'type' => $this->makerType));
+            'type' => $this->artistType));
         return $this->grid;
     }
 
@@ -40,7 +40,7 @@ abstract class ArtistList extends BaseDatagridComponent
     {
         $pname = lcfirst($this->presenter->getName());
 
-        $filter[":{$pname}2{$this->makerType}.id NOT"] = null;
+        $filter[":{$pname}2{$this->artistType}.id NOT"] = null;
 
         foreach ($filter as $k => $v)
         {
