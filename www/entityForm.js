@@ -41,6 +41,9 @@ $(document).ready(function ()
     {
         restoreValues();
         $(el).find('select').chosen(chosenOptions);
+        $('#person_subform').hide();
+        $('#pseudonym_subform').hide();
+        $('#band_subform').hide();
     });
     $.nette.ext('snippets').before(function (el)
     {
