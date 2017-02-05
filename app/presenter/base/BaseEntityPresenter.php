@@ -16,7 +16,7 @@ abstract class BaseEntityPresenter extends BaseViewEditPresenter
     {
         $name = lcfirst($this->name);
 
-        if (!$this->model->findRow($id))
+        if ($id != 0 && !$this->model->findRow($id))
         {
             $this->presenter->flashMessage("{$this->name} not found.", 'failure');
             $this->presenter->redirect("{$this->name}:default");

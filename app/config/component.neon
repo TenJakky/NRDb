@@ -44,6 +44,8 @@ services:
         class: App\Component\BookList
     musicList:
         class: App\Component\MusicList
+    gameList:
+        class: App\Component\GameList
 
     movieSmallList:
         class: App\Component\MovieSmallList
@@ -53,6 +55,8 @@ services:
        class: App\Component\BookSmallList
     musicSmallList:
        class: App\Component\MusicSmallList
+    gameSmallList:
+       class: App\Component\GameSmallList
 
     movieForm:
         class: App\Component\MovieForm
@@ -69,6 +73,9 @@ services:
     musicForm:
         class: App\Component\MusicForm
         inject: yes
+    gameForm:
+        class: App\Component\GameForm
+        inject: yes
 
     movieRatingList:
         class: App\Component\MovieRatingList
@@ -80,6 +87,8 @@ services:
         class: App\Component\BookRatingList
     musicRatingList:
         class: App\Component\MusicRatingList
+    gameRatingList:
+        class: App\Component\GameRatingList
 
     movieRateForm:
         class: App\Component\MovieRateForm
@@ -91,6 +100,8 @@ services:
         class: App\Component\BookRateForm
     musicRateForm:
         class: App\Component\MusicRateForm
+    gameRateForm:
+        class: App\Component\GameRateForm
 
     directorWorks:
         class: App\Component\DirectorWorks
@@ -100,6 +111,8 @@ services:
         class: App\Component\AuthorWorks
     interpretWorks:
         class: App\Component\InterpretWorks
+    develoeprWorks:
+        class: App\Component\DeveloperWorks
 
     statElementCount:
         class: App\Component\StatElementCount

@@ -116,6 +116,13 @@
                         {artistList $data->related('jun_music2interpret.music_id')}
                     </td>
                 </tr>
+            {case 'Game'}
+                <tr>
+                    <th>Developer</th>
+                    <td>
+                        {artistList $data->related('jun_game2developer.game_id')}
+                    </td>
+                </tr>
         {/switch}
     </table>
 </section>
