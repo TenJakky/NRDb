@@ -30,6 +30,7 @@ final class SettingsForm extends BaseComponent
         $form->addSelect('country_id', 'Nationality', $this->countryModel->getTable()->fetchPairs('id', 'name'));
         $form->addTextArea('description', 'Description');
         $form->addText('per_page', 'Number of items per page');
+        $form->addText('per_page_small', 'Number of items in small lists');
 
         $form->addSubmit('submit', 'Submit');
 
@@ -56,8 +57,10 @@ final class SettingsForm extends BaseComponent
         unset($values['password1']);
         unset($values['password2']);
 
-        $this->presenter->getUser()->getIdentity()->per_page = $values['per_page'];
         $this->userModel->save($values);
+
+        $this->presenter->getUser()->getIdentity()->per_page = $values['per_page'];
+        $this->presenter->getUser()->getIdentity()->per_page_small = $values['per_page_small'];
 
         $this->presenter->flashMessage('Settings were successfully saved.', 'success');
         $this->presenter->redirect('User:view', $values['id']);
