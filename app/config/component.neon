@@ -111,7 +111,7 @@ services:
         class: App\Component\AuthorWorks
     interpretWorks:
         class: App\Component\InterpretWorks
-    develoeprWorks:
+    developerWorks:
         class: App\Component\DeveloperWorks
 
     statElementCount:
