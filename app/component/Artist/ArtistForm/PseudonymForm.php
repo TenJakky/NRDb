@@ -45,7 +45,9 @@ final class PseudonymForm extends BaseComponent
 
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
-        $id = $this->personModel->save($form->getValues());
+        $values = $form->getValues();
+        $values['type'] = 'pseudonym';
+        $id = $this->personModel->save($values);
 
         $this->presenter->flashMessage('Pseudonym successfully saved.', 'success');
 
