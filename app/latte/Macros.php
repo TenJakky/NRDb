@@ -41,9 +41,25 @@ class Macros extends \Latte\Macros\MacroSet
             {
                 echo 
                 \'<li><a href="\'.
+                LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link("Person:view", [$temp->id])).
+                \'">\'.
+                LR\Filters::escapeHtmlText(call_user_func($this->filters->person, $temp->id)).
+                \'</a></li>\';
+            }
+            echo "</ul>";
+            ');
+        });
+        $set->addMacro('memberList', function($node, $writer)
+        {
+            return $writer->write('
+            echo "<ul class=\"artist-list\">";
+            foreach (%node.word as $temp)
+            {
+                echo 
+                \'<li><a href="\'.
                 LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link("Person:view", [$temp->person_id])).
                 \'">\'.
-                LR\Filters::escapeHtmlText(call_user_func($this->filters->person, $temp->person_id)).
+                LR\Filters::escapeHtmlText(call_user_func($this->filters->person, $temp->person->id)).
                 \'</a></li>\';
             }
             echo "</ul>";

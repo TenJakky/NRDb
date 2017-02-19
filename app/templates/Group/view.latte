@@ -20,14 +20,14 @@
             <th>Members</th> 
             <td> 
                 {var $temp => $data->related('jun_group2member.group_id')->where('active', 1)}
-                {personList $temp}
+                {memberList $temp}
             </td> 
         </tr> 
         <tr> 
             <th>Former Members</th> 
             <td> 
                 {var $temp => $data->related('jun_group2member.group_id')->where('active', 0)}
-                {personList $temp}
+                {memberList $temp}
             </td> 
         </tr> 
         <tr> 
