@@ -18,6 +18,7 @@
     "nette-forms": "^2.4.2",
     "nette.ajax.js": "^2.2.0",
     "chosen": "^1.6.2",
-    "nextras.datagrid": "https://raw.githubusercontent.com/nextras/datagrid/master/js/nextras.datagrid.js"
+    "nextras.datagrid": "https://raw.githubusercontent.com/nextras/datagrid/master/js/nextras.datagrid.js",
+    "chart.js": "^2.5.0"
   }
 }
