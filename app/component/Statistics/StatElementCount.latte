@@ -1,26 +1,28 @@
 <table class="grid">
     <thead>
-        <td>X</td>
-        <th># of elements</th>
-        <th># of ratings</th>
-        <th>10*</th><th>9*</th><th>8*</th><th>7*</th><th>6*</th><th>5*</th><th>4*</th><th>3*</th><th>2*</th><th>1*</th><th>0*</th>
+        <tr>
+            <td></td>
+            <th># of elements</th>
+            <th># of ratings</th>
+            <th>10*</th><th>9*</th><th>8*</th><th>7*</th><th>6*</th><th>5*</th><th>4*</th><th>3*</th><th>2*</th><th>1*</th><th>0*</th>
+        </tr>
     </thead>
     <tbody>
         <tr>
             <th>Movie</th>
-            <td>{$moviesT}</td>
-            <td>{$moviesRT}</td>
-            <td>{$movies10}</td>
-            <td>{$movies9}</td>
-            <td>{$movies8}</td>
-            <td>{$movies7}</td>
-            <td>{$movies6}</td>
-            <td>{$movies5}</td>
-            <td>{$movies4}</td>
-            <td>{$movies3}</td>
-            <td>{$movies2}</td>
-            <td>{$movies1}</td>
-            <td>{$movies0}</td>
+            <td>{$movieT}</td>
+            <td>{$movieRT}</td>
+            <td>{$movie10}</td>
+            <td>{$movie9}</td>
+            <td>{$movie8}</td>
+            <td>{$movie7}</td>
+            <td>{$movie6}</td>
+            <td>{$movie5}</td>
+            <td>{$movie4}</td>
+            <td>{$movie3}</td>
+            <td>{$movie2}</td>
+            <td>{$movie1}</td>
+            <td>{$movie0}</td>
         </tr>
         <tr>
             <th>Series</th>
@@ -40,35 +42,35 @@
         </tr>
         <tr>
             <td>↳ Season</td>
-            <td>{$seasonsT}</td>
-            <td>{$seasonsRT}</td>
-            <td>{$seasons10}</td>
-            <td>{$seasons9}</td>
-            <td>{$seasons8}</td>
-            <td>{$seasons7}</td>
-            <td>{$seasons6}</td>
-            <td>{$seasons5}</td>
-            <td>{$seasons4}</td>
-            <td>{$seasons3}</td>
-            <td>{$seasons2}</td>
-            <td>{$seasons1}</td>
-            <td>{$seasons0}</td>
+            <td>{$seasonT}</td>
+            <td>{$seasonRT}</td>
+            <td>{$season10}</td>
+            <td>{$season9}</td>
+            <td>{$season8}</td>
+            <td>{$season7}</td>
+            <td>{$season6}</td>
+            <td>{$season5}</td>
+            <td>{$season4}</td>
+            <td>{$season3}</td>
+            <td>{$season2}</td>
+            <td>{$season1}</td>
+            <td>{$season0}</td>
         </tr>
         <tr>
             <th>Book</th>
-            <td>{$booksT}</td>
-            <td>{$booksRT}</td>
-            <td>{$books10}</td>
-            <td>{$books9}</td>
-            <td>{$books8}</td>
-            <td>{$books7}</td>
-            <td>{$books6}</td>
-            <td>{$books5}</td>
-            <td>{$books4}</td>
-            <td>{$books3}</td>
-            <td>{$books2}</td>
-            <td>{$books1}</td>
-            <td>{$books0}</td>
+            <td>{$bookT}</td>
+            <td>{$bookRT}</td>
+            <td>{$book10}</td>
+            <td>{$book9}</td>
+            <td>{$book8}</td>
+            <td>{$book7}</td>
+            <td>{$book6}</td>
+            <td>{$book5}</td>
+            <td>{$book4}</td>
+            <td>{$book3}</td>
+            <td>{$book2}</td>
+            <td>{$book1}</td>
+            <td>{$book0}</td>
         </tr>
         <tr>
             <th>Music</th>
@@ -88,19 +90,19 @@
         </tr>
         <tr>
             <th>Game</th>
-            <td>{$gamesT}</td>
-            <td>{$gamesRT}</td>
-            <td>{$games10}</td>
-            <td>{$games9}</td>
-            <td>{$games8}</td>
-            <td>{$games7}</td>
-            <td>{$games6}</td>
-            <td>{$games5}</td>
-            <td>{$games4}</td>
-            <td>{$games3}</td>
-            <td>{$games2}</td>
-            <td>{$games1}</td>
-            <td>{$games0}</td>
+            <td>{$gameT}</td>
+            <td>{$gameRT}</td>
+            <td>{$game10}</td>
+            <td>{$game9}</td>
+            <td>{$game8}</td>
+            <td>{$game7}</td>
+            <td>{$game6}</td>
+            <td>{$game5}</td>
+            <td>{$game4}</td>
+            <td>{$game3}</td>
+            <td>{$game2}</td>
+            <td>{$game1}</td>
+            <td>{$game0}</td>
         </tr>
         <tr>
             <th>Total</th>
@@ -120,3 +122,203 @@
         </tr>
     </tbody>
 </table>
+<h4>Plot amounts</h4>
+<ul class="inline-buttons">
+    <li><input type="button" value="# of elements" id="plotElement" /></li>
+    <li><input type="button" value="# of ratings" id="plotRating" /></li>
+</ul>
+<h4>Plot rating distribution</h4>
+<ul class="inline-buttons">
+    <li><input type="button" value="Movie" id="plotMovie" /></li>
+    <li><input type="button" value="Series" id="plotSeries" /></li>
+    <li><input type="button" value="Season" id="plotSeason" /></li>
+    <li><input type="button" value="Book" id="plotBook" /></li>
+    <li><input type="button" value="Music" id="plotMusic" /></li>
+    <li><input type="button" value="Game" id="plotGame" /></li>
+</ul>
+<canvas id="elementCountChart"></canvas>
+<script>
+    var elementChartOptions = {
+        type: 'bar',
+        data: {
+            labels: ["Movie", "Series", "Season", "Book", "Music", "Game"],
+            datasets: [{
+                label: 'Number of elements',
+                data: [{$movieT}, {$seriesT}, {$seasonT}, {$bookT}, {$musicT}, {$gameT}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Number of elements by type'
+            }
+        }
+    };
+    var ratingChartOptions = {
+        type: 'bar',
+        data: {
+            labels: ["Movie", "Series", "Season", "Book", "Music", "Game"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$movieRT}, {$seriesRT}, {$seasonRT}, {$bookRT}, {$musicRT}, {$gameRT}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Number of ratings for type'
+            }
+        }
+    };
+    var movieChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$movie0}, {$movie1}, {$movie2}, {$movie3}, {$movie4}, {$movie5}, {$movie6}, {$movie7}, {$movie8}, {$movie9}, {$movie10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of movie ratings'
+            }
+        }
+    };
+    var seriesChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$series0}, {$series1}, {$series2}, {$series3}, {$series4}, {$series5}, {$series6}, {$series7}, {$series8}, {$series9}, {$series10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of series ratings'
+            }
+        }
+    };
+    var seasonChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$season0}, {$season1}, {$season2}, {$season3}, {$season4}, {$season5}, {$season6}, {$season7}, {$season8}, {$season9}, {$season10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of season ratings'
+            }
+        }
+    };
+    var bookChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$book0}, {$book1}, {$book2}, {$book3}, {$book4}, {$book5}, {$book6}, {$book7}, {$book8}, {$book9}, {$book10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of book ratings'
+            }
+        }
+    };
+    var musicChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$music0}, {$music1}, {$music2}, {$music3}, {$music4}, {$music5}, {$music6}, {$music7}, {$music8}, {$music9}, {$music10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of music ratings'
+            }
+        }
+    };
+    var gameChartOptions = {
+        type: 'line',
+        data: {
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            datasets: [{
+                label: 'Number of ratings',
+                data: [{$game0}, {$game1}, {$game2}, {$game3}, {$game4}, {$game5}, {$game6}, {$game7}, {$game8}, {$game9}, {$game10}],
+                backgroundColor: chartBackgroundColors,
+                borderColor: chartBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                text: 'Distribution of game ratings'
+            }
+        }
+    };
+
+    $(document).ready(function()
+    {
+        var canvas = document.getElementById("elementCountChart");
+        var chart = new Chart(canvas, elementChartOptions);
+
+        $('#plotElement').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, elementChartOptions);
+        });
+        $('#plotRating').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, ratingChartOptions);
+        });
+        $('#plotMovie').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, movieChartOptions);
+        });
+        $('#plotSeries').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, seriesChartOptions);
+        });
+        $('#plotSeason').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, seasonChartOptions);
+        });
+        $('#plotBook').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, bookChartOptions);
+        });
+        $('#plotMusic').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, musicChartOptions);
+        });
+        $('#plotGame').click(function() {
+            chart.destroy();
+            chart = new Chart(canvas, gameChartOptions);
+        });
+    });
+</script>

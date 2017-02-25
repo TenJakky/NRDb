@@ -4,6 +4,7 @@ namespace App\Component;
 
 class StatUserActivity extends BaseComponent
 {
+    /** @var \App\Model\UserModel */
 	protected $userModel;
 
 	public function __construct(

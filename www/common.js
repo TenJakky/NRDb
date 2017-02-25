@@ -5,6 +5,27 @@ var chosenOptions =
     width: '50%'
 };
 
+Chart.defaults.global.legend.display = false;
+Chart.defaults.global.title.display = true;
+var chartBackgroundColors =
+[
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+];
+var chartBorderColors =
+[
+    'rgba(255,99,132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+];
+
 Nette.showFormErrors = function (form, errors)
 {
     $(form).find('span.form-error').remove();
@@ -39,29 +60,4 @@ $(document).ready(function ()
         }
     });
     $.nette.init();
-
-    $('#search').keyup(function()
-    {
-        var value = $(this).val();
-
-        $.nette.ajax(
-        {
-            traditional: true,
-            url: searchUrl,
-            method: 'POST',
-            data:
-            {
-                search: value
-            },
-            success: function()
-            {
-                return;
-            }
-        });
-    });
-
-    $('#search').focus(function()
-    {
-        //$(this).next().toggle();
-    });
 });
