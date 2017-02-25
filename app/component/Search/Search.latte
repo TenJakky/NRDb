@@ -1,4 +1,30 @@
-<script>var searchUrl = {link search!};</script>
+<script>
+    var searchUrl = {link search!};
+
+    $(document).ready(function()
+    {
+        $('#search').keyup(function()
+        {
+            var value = $(this).val();
+
+            $.nette.ajax(
+            {
+                traditional: true,
+                url: searchUrl,
+                method: 'POST',
+                data:
+                {
+                    search: value
+                },
+                success: function()
+                {
+                    return;
+                }
+            });
+        });
+    });
+
+</script>
 <input title="Global search" type="search" id="search" />
 <ul n:snippet="search" class="dropdown-list">
     {if $flag}
