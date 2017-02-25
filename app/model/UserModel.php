@@ -6,7 +6,7 @@ class UserModel extends BaseModel
 {
     public $tableName = 'user';
 
-    public function getActivity()
+    public function getActivity($limit = 5)
     {
         return $this->query(
         "SELECT
@@ -76,6 +76,6 @@ class UserModel extends BaseModel
         ) AS `sq_game` ON user.id = `sq_game`.`id`
         
         ORDER BY `total` DESC
-        LIMIT 5")->fetchAll();
+        LIMIT ?", $limit)->fetchAll();
     }
 }

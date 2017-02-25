@@ -118,3 +118,5 @@ services:
         class: App\Component\StatElementCount
     statUserActivity:
         class: App\Component\StatUserActivity
+    statUserRadar:
+        class: App\Component\StatUserRadar

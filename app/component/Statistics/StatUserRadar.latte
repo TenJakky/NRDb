@@ -1,0 +1,31 @@
+<canvas id="userRadarChart"></canvas>
+<script>
+    $(document).ready(function()
+    {
+        var canvas = document.getElementById("userRadarChart");
+        var chart = new Chart(canvas, {
+            type: 'radar',
+            data: {
+                labels: ["Movie", "Series", "Season", "Book", "Music", "Game"],
+                datasets: [{
+                    label: 'Number of elements',
+                    data: [{$statMovie}, {$statSeries}, {$statSeason}, {$statBook}, {$statMusic}, {$statGame}],
+                    backgroundColor: chartBackgroundColors,
+                    borderColor: chartBorderColors,
+                    borderWidth: 1
+                }]
+            },
+            options:
+            {
+                scale:
+                {
+                    ticks:
+                    {
+                        beginAtZero: true,
+                        suggestedMax: 1
+                    }
+                }
+            }
+        });
+    });
+</script>
