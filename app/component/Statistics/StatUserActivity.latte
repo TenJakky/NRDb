@@ -96,6 +96,11 @@
                             {
                                 return text + 'that is ' + label.yLabel * 100 + '% of ratings by the best user.';
                             }
+                        },
+                        title: function(title, data)
+                        {
+                            console.log(title);
+                            return `${ data.labels[title[0].index]} - ${ data.datasets[title[0].datasetIndex].label}`;
                         }
                     }
                 }
