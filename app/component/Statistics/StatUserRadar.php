@@ -43,12 +43,18 @@ class StatUserRadar extends BaseComponent
     {
         $userId = $this->presenter->getParameter('id');
 
-        $this->template->statMovie = $this->ratingMovieModel->getUserRatingCount($userId) / $this->ratingMovieModel->getMaxRatingCount();
-        $this->template->statSeries = $this->ratingSeriesModel->getUserRatingCount($userId) / $this->ratingSeriesModel->getMaxRatingCount();
-        $this->template->statSeason = $this->ratingSeasonModel->getUserRatingCount($userId) / $this->ratingSeasonModel->getMaxRatingCount();
-        $this->template->statBook = $this->ratingBookModel->getUserRatingCount($userId) / $this->ratingBookModel->getMaxRatingCount();
-        $this->template->statMusic = $this->ratingMusicModel->getUserRatingCount($userId) / $this->ratingMusicModel->getMaxRatingCount();
-        $this->template->statGame = $this->ratingGameModel->getUserRatingCount($userId) / $this->ratingGameModel->getMaxRatingCount();
+        $this->template->statMovie = $this->ratingMovieModel->getUserRatingCount($userId);
+        $this->template->statSeries = $this->ratingSeriesModel->getUserRatingCount($userId);
+        $this->template->statSeason = $this->ratingSeasonModel->getUserRatingCount($userId);
+        $this->template->statBook = $this->ratingBookModel->getUserRatingCount($userId);
+        $this->template->statMusic = $this->ratingMusicModel->getUserRatingCount($userId);
+        $this->template->statGame = $this->ratingGameModel->getUserRatingCount($userId);
+        $this->template->percentMovie = $this->template->statMovie  / $this->ratingMovieModel->getMaxRatingCount();
+        $this->template->percentSeries = $this->template->statSeries  / $this->ratingSeriesModel->getMaxRatingCount();
+        $this->template->percentSeason = $this->template->statSeason  / $this->ratingSeasonModel->getMaxRatingCount();
+        $this->template->percentBook = $this->template->statBook  / $this->ratingBookModel->getMaxRatingCount();
+        $this->template->percentMusic = $this->template->statMusic  / $this->ratingMusicModel->getMaxRatingCount();
+        $this->template->percentGame = $this->template->statGame / $this->ratingGameModel->getMaxRatingCount();
 
         parent::render();
     }

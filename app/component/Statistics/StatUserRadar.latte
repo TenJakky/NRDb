@@ -9,20 +9,42 @@
                 labels: ["Movie", "Series", "Season", "Book", "Music", "Game"],
                 datasets: [{
                     label: 'Number of elements',
-                    data: [{$statMovie}, {$statSeries}, {$statSeason}, {$statBook}, {$statMusic}, {$statGame}],
+                    data: [{$percentMovie}, {$percentSeries}, {$percentSeason}, {$percentBook}, {$percentMusic}, {$percentGame}],
                     backgroundColor: chartBackgroundColors,
                     borderColor: chartBorderColors,
                     borderWidth: 1
                 }]
             },
-            options:
-            {
-                scale:
-                {
-                    ticks:
-                    {
+            options: {
+                scale: {
+                    ticks: {
                         beginAtZero: true,
                         suggestedMax: 1
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (label)
+                        {
+                            var text;
+                            switch (label.index)
+                            {
+                                case 0: text = 'User has rated ' + {$statMovie} + ' movies, '; break;
+                                case 1: text = 'User has rated ' + {$statSeries} + ' series, '; break;
+                                case 2: text = 'User has rated ' + {$statSeason} + ' seasons, '; break;
+                                case 3: text = 'User has rated ' + {$statBook} + ' books, '; break;
+                                case 4: text = 'User has rated ' + {$statMusic} + ' recordings, '; break;
+                                case 5: text = 'User has rated ' + {$statGame} + ' games, '; break;
+                            }
+                            if (label.yLabel === 1)
+                            {
+                                return text += 'he is currently the best user.';
+                            }
+                            else
+                            {
+                                return text += 'that is ' + label.yLabel * 100 + '% of ratings by the best user.';
+                            }
+                        }
                     }
                 }
             }
