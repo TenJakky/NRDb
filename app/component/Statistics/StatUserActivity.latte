@@ -32,78 +32,37 @@
 </table>
 <canvas id="userActivityChart"></canvas>
 <script>
-    $(document).ready(function()
-    {
-        const statData = [
-            {foreach $activeUsers as $temp}
-            [
-                {$temp->movie},
-                {$temp->series},
-                {$temp->season},
-                {$temp->book},
-                {$temp->music},
-                {$temp->game}
-            ]
-            {sep},{/sep}
-            {/foreach}
-        ];
-
-        var canvas = document.getElementById("userActivityChart");
-        var chart = new Chart(canvas, {
-            type: 'radar',
-            data: {
-                labels: ["Movie", "Series", "Season", "Book", "Music", "Game"],
-                datasets: [
-                {foreach $activeUsers as $temp}
-                    {
-                        label: {$temp->username},
-                        data: [
-                            {$temp->movie / $movieMax},
-                            {$temp->series / $seriesMax},
-                            {$temp->season / $seasonMax},
-                            {$temp->book / $bookMax},
-                            {$temp->music / $musicMax},
-                            {$temp->game / $gameMax}
-                        ],
-                        backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
-                        borderColor: chartBorderColors[{$iterator->counter - 1}],
-                        borderWidth: 1
-                    }
-                    {sep},{/sep}
-                {/foreach}
-                ]
-            },
-            options: {
-                legend: {
-                    display: true
-                },
-                scale: {
-                    ticks: {
-                        beginAtZero: true,
-                        suggestedMax: 1
-                    }
-                },
-                tooltips: {
-                    callbacks: {
-                        label: function (label, data)
-                        {
-                            var text = `User ${ data.datasets[label.datasetIndex].label} has rated ${ statData[label.datasetIndex][label.index]} ${ data.labels[label.index]} elements, `;
-                            if (label.yLabel === 1)
-                            {
-                                return text + 'he is currently the best user in this category.';
-                            }
-                            else
-                            {
-                                return text + 'that is ' + label.yLabel * 100 + '% of ratings by the best user.';
-                            }
-                        },
-                        title: function(title, data)
-                        {
-                            return `${ data.labels[title[0].index]} - ${ data.datasets[title[0].datasetIndex].label}`;
-                        }
-                    }
-                }
-            }
-        });
-    });
+    const statData = [
+        {foreach $activeUsers as $temp}
+        [
+            {$temp->movie},
+            {$temp->series},
+            {$temp->season},
+            {$temp->book},
+            {$temp->music},
+            {$temp->game}
+        ]
+        {sep},{/sep}
+        {/foreach}
+    ];
+    const datasetData = [
+        {foreach $activeUsers as $temp}
+        {
+            label: {$temp->username},
+            data: [
+                {$temp->movie / $movieMax},
+                {$temp->series / $seriesMax},
+                {$temp->season / $seasonMax},
+                {$temp->book / $bookMax},
+                {$temp->music / $musicMax},
+                {$temp->game / $gameMax}
+            ],
+            backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
+            borderColor: chartBorderColors[{$iterator->counter - 1}],
+            borderWidth: 1
+        }
+        {sep},{/sep}
+        {/foreach}
+    ];
 </script>
+<script type="text/javascript" src="/www/js/component/statUserActivity.js"></script>
