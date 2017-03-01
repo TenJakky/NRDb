@@ -16,7 +16,7 @@
 </section>
 <section>
     <table class="list">
-        {if $data->type == 'person'}
+        {if $data->type === 'person'}
             <tr>
                 <th>Nationality</th>
                 <td>{$data->ref('def_country', 'country_id')->name}</td>
@@ -34,6 +34,29 @@
                 <td>
                     {personList $data->related('person.person_id')}
                 </td>
+            </tr>
+        {elseif $data->type === 'band'}
+            <tr>
+                <th>Years active</th>
+                <td>{if $data->born}{$data->born} - {$data->died ? $data->died : 'present'}{/if}</td>
+            </tr>
+            <tr>
+                <th>Members</th>
+                <td>
+                    {var $temp => $data->related('jun_group2member.group_id')->where('active', 1)}
+                    {memberList $temp}
+                </td>
+            </tr>
+            <tr>
+                <th>Former Members</th>
+                <td>
+                    {var $temp => $data->related('jun_group2member.group_id')->where('active', 0)}
+                    {memberList $temp}
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{$data->description}</td>
             </tr>
         {else}
             <tr>
@@ -55,33 +78,7 @@
         </tr>
     </table>
 </section>
-{if $data->related('jun_movie2director.person_id')->count() > 0}
-    <section>
-        <h2>As director</h2>
-        {control directorWorks $data->id}
-    </section>
-{/if}
-{if $data->related('jun_movie2actor.person_id')->count() > 0}
-    <section>
-        <h2>As actor</h2>
-        {control actorWorks $data->id}
-    </section>
-{/if}
-{if $data->related('jun_book2author.person_id')->count() > 0}
-    <section>
-        <h2>As author</h2>
-        {control authorWorks $data->id}
-    </section>
-{/if}
-{if $data->related('jun_music2interpret.person_id')->count() > 0}
-    <section>
-        <h2>As interpret</h2>
-        {control interpretWorks $data->id}
-    </section>
-{/if}
-{if $data->related('jun_game2developer.person_id')->count() > 0}
-    <section>
-        <h2>As developer</h2>
-        {control developerWorks $data->id}
-    </section>
-{/if}
+<section>
+    <h2>Works</h2>
+    {control artistWorks $data->id}
+</section>

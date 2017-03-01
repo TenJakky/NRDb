@@ -24,12 +24,10 @@ services:
     search:
         class: App\Component\Search
 
-    personForm:
-        class: App\Component\PersonForm
-    pseudonymForm:
-        class: App\Component\PseudonymForm
-    groupForm:
-        class: App\Component\GroupForm
+    artistForm:
+        class: App\Component\ArtistForm
+    artistWorks:
+        class: App\Component\ArtistWorks
 
     entityView:
         class: App\Component\EntityView
@@ -102,17 +100,6 @@ services:
         class: App\Component\MusicRateForm
     gameRateForm:
         class: App\Component\GameRateForm
-
-    directorWorks:
-        class: App\Component\DirectorWorks
-    actorWorks:
-        class: App\Component\ActorWorks
-    authorWorks:
-        class: App\Component\AuthorWorks
-    interpretWorks:
-        class: App\Component\InterpretWorks
-    developerWorks:
-        class: App\Component\DeveloperWorks
 
     statElementCount:
         class: App\Component\StatElementCount
