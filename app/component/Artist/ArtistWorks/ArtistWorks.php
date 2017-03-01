@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class ArtistWorks extends BaseSmallDatagridComponent
+final class ArtistWorks extends BaseSmallDatagridComponent
 {
     /** @var \App\Model\BaseRatingModel */
     protected $ratingModel;
