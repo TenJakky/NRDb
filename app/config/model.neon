@@ -6,7 +6,7 @@ services:
 - App\Model\NewsModel
 - App\Model\IntroductionModel
 
-- App\Model\PersonModel
+- App\Model\ArtistModel
 - App\Model\GroupMemberModel
 
 - App\Model\MovieModel

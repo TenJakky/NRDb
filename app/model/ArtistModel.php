@@ -2,15 +2,15 @@
 
 namespace App\Model;
 
-final class PersonModel extends BaseModel
+final class ArtistModel extends BaseModel
 {
-    public $tableName = 'person';
+    public $tableName = 'artist';
 
     public function fetchSelectBox()
     {
         return $this->getTable()
             ->select("id, concat_ws(' ', name, middlename, surname) AS name")
-            ->where('type', 'person')
+            ->where('type', 'artist')
             ->order('surname ASC')
             ->fetchPairs('id', 'name');
     }
