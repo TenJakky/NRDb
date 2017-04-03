@@ -2,60 +2,27 @@
 
 namespace App\Component;
 
-use App\Model\UserModel;
-
 class StatUserActivity extends BaseComponent
 {
     /** @var \App\Model\UserModel */
 	protected $userModel;
 
-    /** @var \App\Model\RatingMovieModel */
-    protected $ratingMovieModel;
-
-    /** @var \App\Model\RatingSeriesModel */
-    protected $ratingSeriesModel;
-
-    /** @var \App\Model\RatingSeasonModel */
-    protected $ratingSeasonModel;
-
-    /** @var \App\Model\RatingBookModel */
-    protected $ratingBookModel;
-
-    /** @var \App\Model\RatingMusicModel */
-    protected $ratingMusicModel;
-
-    /** @var \App\Model\RatingGameModel */
-    protected $ratingGameModel;
-
-
     public function __construct(
-        \App\Model\UserModel $userModel,
-        \App\Model\RatingMovieModel $ratingMovieModel,
-        \App\Model\RatingSeriesModel $ratingSeriesModel,
-        \App\Model\RatingSeasonModel $ratingSeasonModel,
-        \App\Model\RatingBookModel $ratingBookModel,
-        \App\Model\RatingMusicModel $ratingMusicModel,
-        \App\Model\RatingGameModel $ratingGameModel)
+        \App\Model\UserModel $userModel)
     {
         $this->userModel = $userModel;
-        $this->ratingMovieModel = $ratingMovieModel;
-        $this->ratingSeriesModel = $ratingSeriesModel;
-        $this->ratingSeasonModel = $ratingSeasonModel;
-        $this->ratingBookModel = $ratingBookModel;
-        $this->ratingMusicModel = $ratingMusicModel;
-        $this->ratingGameModel = $ratingGameModel;
 	}
 
 	public function render()
 	{
-		$this->template->activeUsers = $this->userModel->getActivity();
+		$this->template->activeUsers = $this->userModel->getTable()->order('ratings_total DESC')->limit(5);
 
-        $this->template->movieMax = $this->ratingMovieModel->getMaxRatingCount();
-        $this->template->seriesMax = $this->ratingSeriesModel->getMaxRatingCount();
-        $this->template->seasonMax = $this->ratingSeasonModel->getMaxRatingCount();
-        $this->template->bookMax = $this->ratingBookModel->getMaxRatingCount();
-        $this->template->musicMax = $this->ratingMusicModel->getMaxRatingCount();
-        $this->template->gameMax = $this->ratingGameModel->getMaxRatingCount();
+        $this->template->movieMax = $this->userModel->getTable()->order('ratings_movie DESC')->limit(1)->fetch()->ratings_movie;
+        $this->template->seriesMax = $this->userModel->getTable()->order('ratings_series DESC')->limit(1)->fetch()->ratings_series;
+        $this->template->seasonMax = $this->userModel->getTable()->order('ratings_season DESC')->limit(1)->fetch()->ratings_season;
+        $this->template->bookMax = $this->userModel->getTable()->order('ratings_book DESC')->limit(1)->fetch()->ratings_book;
+        $this->template->musicMax = $this->userModel->getTable()->order('ratings_music DESC')->limit(1)->fetch()->ratings_music;
+        $this->template->gameMax = $this->userModel->getTable()->order('ratings_game DESC')->limit(1)->fetch()->ratings_game;
 
 		parent::render();
 	}

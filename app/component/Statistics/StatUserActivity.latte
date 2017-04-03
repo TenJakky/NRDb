@@ -19,29 +19,28 @@
         <tr>
         {/if}
             <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
-            <td>{$temp->movie}</td>
-            <td>{$temp->series}</td>
-            <td>{$temp->season}</td>
-            <td>{$temp->book}</td>
-            <td>{$temp->music}</td>
-            <td>{$temp->game}</td>
-            <td>{$temp->total}</td>
+            <td>{$temp->ratings_movie}</td>
+            <td>{$temp->ratings_series}</td>
+            <td>{$temp->ratings_season}</td>
+            <td>{$temp->ratings_book}</td>
+            <td>{$temp->ratings_music}</td>
+            <td>{$temp->ratings_game}</td>
+            <td>{$temp->ratings_total}</td>
         </tr>
     {/foreach}
     </tbody>
 </table>
-
 <canvas id="userActivityChart"></canvas>
 <script>
     const statData = [
         {foreach $activeUsers as $temp}
         [
-            {$temp->movie},
-            {$temp->series},
-            {$temp->season},
-            {$temp->book},
-            {$temp->music},
-            {$temp->game}
+            {$temp->ratings_movie},
+            {$temp->ratings_series},
+            {$temp->ratings_season},
+            {$temp->ratings_book},
+            {$temp->ratings_music},
+            {$temp->ratings_game}
         ]
         {sep},{/sep}
         {/foreach}
@@ -51,12 +50,12 @@
         {
             label: {$temp->username},
             data: [
-                {$temp->movie / $movieMax},
-                {$temp->series / $seriesMax},
-                {$temp->season / $seasonMax},
-                {$temp->book / $bookMax},
-                {$temp->music / $musicMax},
-                {$temp->game / $gameMax}
+                {$temp->ratings_movie / ($movieMax ? $movieMax : 1)},
+                {$temp->ratings_series / ($seriesMax ? $seriesMax : 1)},
+                {$temp->ratings_season / ($seasonMax ? $seasonMax : 1)},
+                {$temp->ratings_book / ($bookMax ? $bookMax : 1)},
+                {$temp->ratings_music / ($musicMax ? $musicMax : 1)},
+                {$temp->ratings_game / ($gameMax ? $gameMax : 1)}
             ],
             backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
             borderColor: chartBorderColors[{$iterator->counter - 1}],
