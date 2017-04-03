@@ -13,6 +13,6 @@ final class BookList extends EntityList
         $this->model = $bookModel;
         $this->ratingModel = $ratingBookModel;
         $this->artistType = 'author';
-        $this->entityType = 'Book';
+        $this->entityType = 'book';
     }
 }
