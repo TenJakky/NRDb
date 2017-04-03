@@ -46,9 +46,4 @@ abstract class BaseRatingModel extends BaseModel
     {
         return $this->getTable()->where('user_id', $userId)->count();
     }
-
-    public function getMaxRatingCount()
-    {
-        return $this->getTable()->select('COUNT(*) AS `count`')->group('user_id')->order('count DESC')->limit(1)->fetch()->count;
-    }
 }
