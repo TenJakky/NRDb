@@ -4,57 +4,37 @@ namespace App\Component;
 
 class StatUserRadar extends BaseComponent
 {
-    /** @var \App\Model\RatingMovieModel */
-    protected $ratingMovieModel;
-
-    /** @var \App\Model\RatingSeriesModel */
-    protected $ratingSeriesModel;
-
-    /** @var \App\Model\RatingSeasonModel */
-    protected $ratingSeasonModel;
-
-    /** @var \App\Model\RatingBookModel */
-    protected $ratingBookModel;
-
-    /** @var \App\Model\RatingMusicModel */
-    protected $ratingMusicModel;
-
-    /** @var \App\Model\RatingGameModel */
-    protected $ratingGameModel;
-
+    /** @var \App\Model\UserModel */
+    protected $userModel;
 
     public function __construct(
-        \App\Model\RatingMovieModel $ratingMovieModel,
-        \App\Model\RatingSeriesModel $ratingSeriesModel,
-        \App\Model\RatingSeasonModel $ratingSeasonModel,
-        \App\Model\RatingBookModel $ratingBookModel,
-        \App\Model\RatingMusicModel $ratingMusicModel,
-        \App\Model\RatingGameModel $ratingGameModel)
+        \App\Model\UserModel $userModel)
     {
-        $this->ratingMovieModel = $ratingMovieModel;
-        $this->ratingSeriesModel = $ratingSeriesModel;
-        $this->ratingSeasonModel = $ratingSeasonModel;
-        $this->ratingBookModel = $ratingBookModel;
-        $this->ratingMusicModel = $ratingMusicModel;
-        $this->ratingGameModel = $ratingGameModel;
+        $this->userModel = $userModel;
     }
 
-    public function render()
+    public function render($user = null)
     {
-        $userId = $this->presenter->getParameter('id');
+        $this->template->statMovie = $user->ratings_movie;
+        $this->template->statSeries = $user->ratings_series;
+        $this->template->statSeason = $user->ratings_season;
+        $this->template->statBook = $user->ratings_book;
+        $this->template->statMusic = $user->ratings_music;
+        $this->template->statGame = $user->ratings_game;
 
-        $this->template->statMovie = $this->ratingMovieModel->getUserRatingCount($userId);
-        $this->template->statSeries = $this->ratingSeriesModel->getUserRatingCount($userId);
-        $this->template->statSeason = $this->ratingSeasonModel->getUserRatingCount($userId);
-        $this->template->statBook = $this->ratingBookModel->getUserRatingCount($userId);
-        $this->template->statMusic = $this->ratingMusicModel->getUserRatingCount($userId);
-        $this->template->statGame = $this->ratingGameModel->getUserRatingCount($userId);
-        $this->template->percentMovie = $this->template->statMovie  / $this->ratingMovieModel->getMaxRatingCount();
-        $this->template->percentSeries = $this->template->statSeries  / $this->ratingSeriesModel->getMaxRatingCount();
-        $this->template->percentSeason = $this->template->statSeason  / $this->ratingSeasonModel->getMaxRatingCount();
-        $this->template->percentBook = $this->template->statBook  / $this->ratingBookModel->getMaxRatingCount();
-        $this->template->percentMusic = $this->template->statMusic  / $this->ratingMusicModel->getMaxRatingCount();
-        $this->template->percentGame = $this->template->statGame / $this->ratingGameModel->getMaxRatingCount();
+        $movieMax = $this->userModel->getMaxRatings('movie');
+        $seriesMax = $this->userModel->getMaxRatings('series');
+        $seasonMax = $this->userModel->getMaxRatings('season');
+        $bookMax = $this->userModel->getMaxRatings('book');
+        $musicMax = $this->userModel->getMaxRatings('music');
+        $gameMax = $this->userModel->getMaxRatings('game');
+
+        $this->template->percentMovie = $movieMax ? $this->template->statMovie  / $movieMax : 0;
+        $this->template->percentSeries = $seriesMax ? $this->template->statSeries  / $seriesMax : 0;
+        $this->template->percentSeason = $seasonMax ?$this->template->statSeason  / $seasonMax : 0;
+        $this->template->percentBook = $bookMax ? $this->template->statBook  / $bookMax : 0;
+        $this->template->percentMusic = $musicMax ? $this->template->statMusic  / $musicMax : 0;
+        $this->template->percentGame = $gameMax ?$this->template->statGame / $gameMax : 0;
 
         parent::render();
     }
