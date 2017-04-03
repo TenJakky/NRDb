@@ -21,23 +21,23 @@ abstract class BaseEntityModel extends BaseModel
             ->limit($limit);
     }
 
-    public function getPersonTop(string $personType, int $personId)
+    public function getArtistTop(string $artistType, int $artistId)
     {
         $entity = substr($this->tableName, 4);
-        $joinTable = "jun_{$entity}2{$personType}";
+        $joinTable = "jun_{$entity}2{$artistType}";
 
         return $this
             ->getTable()
-            ->where(":{$joinTable}.person_id", $personId)
+            ->where(":{$joinTable}.artist_id", $artistId)
             ->group("{$this->tableName}.id")
             ->order("sum(:{$this->ratingTableName}.rating) DESC")
             ->fetch();
     }
 
-    public function getPersonAverage(string $personType, int $personId)
+    public function getArtistAverage(string $artistType, int $artistId)
     {
         $entity = substr($this->tableName, 4);
-        $joinTable = "jun_{$entity}2{$personType}";
+        $joinTable = "jun_{$entity}2{$artistType}";
 
         return $result = $this->query(
         "SELECT
@@ -47,9 +47,9 @@ abstract class BaseEntityModel extends BaseModel
         (sum({$this->ratingTableName}.rating) / count(*)) AS `subsum`
         FROM {$joinTable}
         LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$entity}_id = {$joinTable}.{$entity}_id
-        WHERE {$joinTable}.person_id = ?
+        WHERE {$joinTable}.artist_id = ?
         GROUP BY {$this->ratingTableName}.{$entity}_id
-        ) AS `subquery`", $personId)->fetch()->average;
+        ) AS `subquery`", $artistId)->fetch()->average;
     }
 
     public function getNotRated($userId, $limit = null)
