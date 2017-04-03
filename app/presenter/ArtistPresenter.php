@@ -2,12 +2,12 @@
 
 namespace App\Presenter;
 
-final class PersonPresenter extends BaseViewEditPresenter
+final class ArtistPresenter extends BaseViewEditPresenter
 {
     public function __construct(
-        \App\Model\PersonModel $personModel)
+        \App\Model\ArtistModel $artistModel)
     {
-        $this->model = $personModel;
+        $this->model = $artistModel;
     }
 
     public function actionEditPseudonym($id)
