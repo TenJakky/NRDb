@@ -12,7 +12,7 @@
 </section>
 <section>
     <table class="list">
-        {if $data->type === 'artist'}
+        {if $data->type === 'person'}
             <tr>
                 <th>Nationality</th>
                 <td>{$data->ref('def_country', 'country_id')->name}</td>
