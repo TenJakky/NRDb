@@ -1,31 +1,40 @@
-{define col-rating}
-<td>
-    {$ratingModel->getRating($row->id)|number: 2}
-</td>
+{define col-type}
+    <td>
+        {\App\Enum\EEntityType::ITEMS[$row->type]}
+    </td>
+{/define}
+
+{define col-role}
+    <td>
+        {\App\Enum\EArtistRole::ITEMS[$row->role]}
+    </td>
+{/define}
+
+{define col-year}
+    <td>
+        {$row->{$row->type}->year}
+    </td>
 {/define}
 
 {define col-original_title}
-<td>
-    <a href="{plink "{$eType}:view" $row->id}">{$row->original_title}</a>
-</td>
+    <td>
+        <a href="{plink ucfirst($row->type).':view' $row->{$row->type.'_id'}}">{$row->{$row->type}->original_title}</a>
+    </td>
+{/define}
+
+{define col-rating}
+    <td>
+    </td>
 {/define}
 
 {define col-my_rating}
-<td>
-    {var $rating => $ratingModel->getUserRating($row->id, $userId)}
-    {if $rating}
-        {$rating->rating}
-    {/if}
-</td>
+    <td>
+
+    </td>
 {/define}
 
 {define col-action}
     <td>
-        {var $rating => $ratingModel->getUserRating($row->id, $userId)}
-        {if $rating}
-            <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
-        {else}
-            <a href="{plink "{$eType}:rate" $row->id}">Rate</a>
-        {/if}
+
     </td>
 {/define}
