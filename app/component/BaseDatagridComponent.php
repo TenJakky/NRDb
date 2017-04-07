@@ -41,6 +41,7 @@ abstract class BaseDatagridComponent extends BaseComponent
         }
 
         $set = $this->model->findByArray($filters);
+
         if ($order[0])
         {
             $set->order(implode(' ', $order));
