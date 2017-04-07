@@ -1,75 +1,96 @@
 # after update
 
-CREATE TRIGGER `rating_movie_after_insert`
-AFTER INSERT ON `rating_movie`
-FOR EACH ROW
-  UPDATE `user` SET ratings_movie = ratings_movie + 1, ratings_total = ratings_total + 1
-  WHERE rating_movie.id = NEW.user_id;
+DELIMITER //
 
-CREATE TRIGGER `rating_series_after_insert`
-AFTER INSERT ON `rating_series`
+CREATE TRIGGER `rating_after_insert`
+AFTER INSERT ON `rating`
 FOR EACH ROW
-  UPDATE `user` SET ratings_series = ratings_series + 1, ratings_total = ratings_total + 1
-  WHERE rating_series.id = NEW.user_id;
+BEGIN
 
-CREATE TRIGGER `rating_season_after_insert`
-AFTER INSERT ON `rating_season`
-FOR EACH ROW
-  UPDATE `user` SET ratings_season = ratings_season + 1, ratings_total = ratings_total + 1
-  WHERE rating_season.id = NEW.user_id;
+  DECLARE var_type ENUM('movie', 'series', 'season', 'book', 'music',	'game');
+  DECLARE var_id INT;
 
-CREATE TRIGGER `rating_book_after_insert`
-AFTER INSERT ON `rating_book`
-FOR EACH ROW
-  UPDATE `user` SET ratings_book = ratings_book + 1, ratings_total = ratings_total + 1
-  WHERE rating_book.id = NEW.user_id;
+  SELECT id, type INTO var_id, var_type
+  FROM entity
+  WHERE id = NEW.entity_id;
 
-CREATE TRIGGER `rating_music_after_insert`
-AFTER INSERT ON `rating_music`
-FOR EACH ROW
-  UPDATE `user` SET ratings_music = ratings_music + 1, ratings_total = ratings_total + 1
-  WHERE rating_music.id = NEW.user_id;
+  CASE var_type
+  WHEN 'movie' THEN
+      UPDATE `user`
+      SET ratings_movie = ratings_movie + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+    WHEN 'series' THEN
+      UPDATE `user`
+      SET ratings_series = ratings_series + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+    WHEN 'season' THEN
+      UPDATE `user`
+      SET ratings_season = ratings_season + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+    WHEN 'book'
+    THEN
+      UPDATE `user`
+      SET ratings_book = ratings_book + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+    WHEN 'music' THEN
+      UPDATE `user`
+      SET ratings_music = ratings_music + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+    WHEN 'game' THEN
+      UPDATE `user`
+      SET ratings_game = ratings_game + 1, ratings_total = ratings_total + 1
+      WHERE `user`.id = NEW.user_id;
+  END CASE;
 
-CREATE TRIGGER `rating_game_after_insert`
-AFTER INSERT ON `rating_game`
-FOR EACH ROW
-  UPDATE `user` SET ratings_game = ratings_game + 1, ratings_total = ratings_total + 1
-  WHERE rating_game.id = NEW.user_id;
+  UPDATE `entity`
+  SET rating_count = rating_count + 1, rating_sum = rating_sum + NEW.value
+  WHERE `entity`.id = var_id;
+
+END//
+
 
 # after delete
 
-CREATE TRIGGER `rating_movie_after_delete`
-AFTER DELETE ON `rating_movie`
+CREATE TRIGGER `rating_after_delete`
+AFTER DELETE ON `rating`
 FOR EACH ROW
-  UPDATE `user` SET ratings_movie = ratings_movie - 1, ratings_total = ratings_total - 1
-  WHERE rating_movie.id = OLD.user_id;
+BEGIN
 
-CREATE TRIGGER `rating_series_after_delete`
-AFTER DELETE ON `rating_series`
-FOR EACH ROW
-  UPDATE `user` SET ratings_series = ratings_series - 1, ratings_total = ratings_total - 1
-  WHERE rating_series.id = OLD.user_id;
+  DECLARE var_type ENUM('movie', 'series', 'season', 'book', 'music',	'game');
+  DECLARE var_id INT;
 
-CREATE TRIGGER `rating_season_after_delete`
-AFTER DELETE ON `rating_season`
-FOR EACH ROW
-  UPDATE `user` SET ratings_season = ratings_season - 1, ratings_total = ratings_total - 1
-  WHERE rating_season.id = OLD.user_id;
+  SELECT id, type INTO var_id, var_type
+  FROM entity
+  WHERE id = NEW.entity_id;
 
-CREATE TRIGGER `rating_book_after_delete`
-AFTER DELETE ON `rating_book`
-FOR EACH ROW
-  UPDATE `user` SET ratings_book = ratings_book - 1, ratings_total = ratings_total - 1
-  WHERE rating_book.id = OLD.user_id;
+  CASE (SELECT type FROM entity WHERE id = OLD.entity_id)
+    WHEN 'movie' THEN
+      UPDATE `user` SET ratings_movie = ratings_movie - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+    WHEN 'series' THEN
+      UPDATE `user` SET ratings_series = ratings_series - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+    WHEN 'season' THEN
+      UPDATE `user` SET ratings_season = ratings_season - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+    WHEN 'book' THEN
+      UPDATE `user` SET ratings_book = ratings_book - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+    WHEN 'music' THEN
+      UPDATE `user` SET ratings_music = ratings_music - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+    WHEN 'game' THEN
+      UPDATE `user` SET ratings_game = ratings_game - 1, ratings_total = ratings_total - 1
+      WHERE `user`.id = OLD.user_id;
+  END CASE;
 
-CREATE TRIGGER `rating_music_after_delete`
-AFTER DELETE ON `rating_music`
-FOR EACH ROW
-  UPDATE `user` SET ratings_music = ratings_music - 1, ratings_total = ratings_total - 1
-  WHERE rating_music.id = OLD.user_id;
+  UPDATE `entity`
+  SET
+    rating_count = rating_count - 1,
+    rating_sum = rating_sum - OLD.value,
+    rating = (CASE rating_count WHEN 1 THEN 0 ELSE rating_sum - OLD.value / rating_count - 1 END)
+  WHERE `entity`.id = var_id;
 
-CREATE TRIGGER `rating_game_after_delete`
-AFTER DELETE ON `rating_game`
-FOR EACH ROW
-  UPDATE `user` SET ratings_game = ratings_game - 1, ratings_total = ratings_total - 1
-  WHERE rating_game.id = OLD.user_id;
+END//
+
+DELIMITER ;
