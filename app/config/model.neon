@@ -10,20 +10,5 @@ services:
 - App\Model\ArtistEntityModel
 - App\Model\GroupMemberModel
 
-- App\Model\MovieModel
-- App\Model\RatingMovieModel
-
-- App\Model\SeriesModel
-- App\Model\RatingSeriesModel
-
-- App\Model\SeasonModel
-- App\Model\RatingSeasonModel
-
-- App\Model\BookModel
-- App\Model\RatingBookModel
-
-- App\Model\MusicModel
-- App\Model\RatingMusicModel
-
-- App\Model\GameModel
-- App\Model\RatingGameModel
+- App\Model\EntityModel
+- App\Model\RatingModel
