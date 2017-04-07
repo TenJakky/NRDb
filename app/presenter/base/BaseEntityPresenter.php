@@ -4,12 +4,17 @@ namespace App\Presenter;
 
 abstract class BaseEntityPresenter extends BaseViewEditPresenter
 {
+    public function __construct(
+        \App\Model\EntityModel $model)
+    {
+        $this->model = $model;
+    }
+
     public function actionView($id)
     {
         parent::actionView($id);
 
         $this->template->entityModel = $this->model;
-        $this->template->ratingModel = $this->ratingModel;
     }
 
     public function actionRate($id = 0)
