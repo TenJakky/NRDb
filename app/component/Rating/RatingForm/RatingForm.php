@@ -2,13 +2,21 @@
 
 namespace App\Component;
 
-abstract class EntityRateForm extends BaseComponent
+class RatingForm extends BaseComponent
 {
-    /** @var \App\Model\BaseEntityModel */
+    /** @var \App\Model\EntityModel */
     protected $model;
 
-    /** @var \App\Model\BaseRatingModel */
+    /** @var \App\Model\RatingModel */
     protected $ratingModel;
+
+    public function __construct(
+        \App\Model\EntityModel $model,
+        \App\Model\RatingModel $ratingModel)
+    {
+        $this->model= $model;
+        $this->ratingModel = $ratingModel;
+    }
 
     public function render($entityId = 0, $ratingId = 0)
     {
@@ -25,7 +33,7 @@ abstract class EntityRateForm extends BaseComponent
         }
 
         $this->template->pname = $pname;
-        $this->template->setFile(__DIR__.'/EntityRateForm.latte');
+        $this->template->setFile(__DIR__ . '/EntityRateForm.latte');
         $this->template->render();
     }
 

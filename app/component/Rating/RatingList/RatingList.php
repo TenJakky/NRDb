@@ -2,15 +2,22 @@
 
 namespace App\Component;
 
-abstract class EntityRatingList extends BaseSmallDatagridComponent
+class RatingList extends BaseSmallDatagridComponent
 {
     /** @var int */
     protected $entityId = 0;
 
+    public function __construct(
+        \App\Model\RatingModel $ratingMovieModel)
+    {
+        parent::__construct();
+        $this->model = $ratingMovieModel;
+    }
+
     public function render($entityId = 0)
     {
         $this->entityId = $entityId;
-        $this->template->setFile(__DIR__.'/EntityRatingList.latte');
+        $this->template->setFile(__DIR__ . '/RatingList.latte');
         $this->template->render();
     }
 
