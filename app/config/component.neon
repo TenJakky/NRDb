@@ -26,80 +26,24 @@ services:
 
     artistForm:
         class: App\Component\ArtistForm
+    artistList:
+        class: App\Component\ArtistList
     artistWorks:
         class: App\Component\ArtistWorks
 
+    entityForm:
+            class: App\Component\EntityForm
     entityView:
         class: App\Component\EntityView
+    entityList:
+        class: App\Component\EntityList
+    entitySmallList:
+        class: App\Component\EntitySmallList
 
-    movieList:
-        class: App\Component\MovieList
-    seriesList:
-        class: App\Component\SeriesList
-    seasonList:
-        class: App\Component\SeasonList
-    bookList:
-        class: App\Component\BookList
-    musicList:
-        class: App\Component\MusicList
-    gameList:
-        class: App\Component\GameList
-
-    movieSmallList:
-        class: App\Component\MovieSmallList
-    seriesSmallList:
-        class: App\Component\SeriesSmallList
-    bookSmallList:
-       class: App\Component\BookSmallList
-    musicSmallList:
-       class: App\Component\MusicSmallList
-    gameSmallList:
-       class: App\Component\GameSmallList
-
-    movieForm:
-        class: App\Component\MovieForm
-        inject: yes
-    seriesForm:
-        class: App\Component\SeriesForm
-        inject: yes
-    seasonForm:
-        class: App\Component\SeasonForm
-        inject: yes
-    bookForm:
-        class: App\Component\BookForm
-        inject: yes
-    musicForm:
-        class: App\Component\MusicForm
-        inject: yes
-    gameForm:
-        class: App\Component\GameForm
-        inject: yes
-
-    movieRatingList:
-        class: App\Component\MovieRatingList
-    seriesRatingList:
-        class: App\Component\SeriesRatingList
-    seasonRatingList:
-        class: App\Component\SeasonRatingList
-    bookRatingList:
-        class: App\Component\BookRatingList
-    musicRatingList:
-        class: App\Component\MusicRatingList
-    gameRatingList:
-        class: App\Component\GameRatingList
-
-    movieRateForm:
-        class: App\Component\MovieRateForm
-    seriesRateForm:
-        class: App\Component\SeriesRateForm
-    seasonRateForm:
-        class: App\Component\SeasonRateForm
-    bookRateForm:
-        class: App\Component\BookRateForm
-    musicRateForm:
-        class: App\Component\MusicRateForm
-    gameRateForm:
-        class: App\Component\GameRateForm
+    ratingForm:
+            class: App\Component\RatingForm
+    ratingList:
+        class: App\Component\RatingList
 
     statElementCount:
         class: App\Component\StatElementCount
