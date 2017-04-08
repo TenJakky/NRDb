@@ -15,9 +15,9 @@ class Macros extends \Latte\Macros\MacroSet
             {
                 echo 
                 \'<li><a href="\'.
-                LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link("Artist:view", [$temp->id])).
+                LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link("Artist:view", [$temp->artist_id])).
                 \'">\'.
-                LR\Filters::escapeHtmlText(call_user_func($this->filters->artist, $temp->id)).
+                LR\Filters::escapeHtmlText(call_user_func($this->filters->artist, $temp->artist_id)).
                 \'</a></li>\';
             }
             echo "</ul>";

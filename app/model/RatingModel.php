@@ -23,7 +23,7 @@ class RatingModel extends BaseModel
     public function getWomenRating($entityId)
     {
         return $this->getTable()
-            ->select('sum(rating) / count(*) AS `rating`')
+            ->select('sum(value) / count(*) AS `rating`')
             ->where('entity_id', $entityId)
             ->where('user.gender', 'Female')
             ->fetch()->rating;
@@ -32,7 +32,7 @@ class RatingModel extends BaseModel
     public function getMenRating($entityId)
     {
         return $this->getTable()
-            ->select('sum(rating) / count(*) AS `rating`')
+            ->select('sum(value) / count(*) AS `rating`')
             ->where('entity_id', $entityId)
             ->where('user.gender', 'Male')
             ->fetch()->rating;
