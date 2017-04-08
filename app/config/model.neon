@@ -12,3 +12,6 @@ services:
 
 - App\Model\EntityModel
 - App\Model\RatingModel
+
+- App\Model\StatEntityModel
+- App\Model\StatRatingModel
