@@ -5,7 +5,7 @@ AFTER INSERT ON `entity`
 FOR EACH ROW
   BEGIN
 
-    UPDATE `entity_statistic`
+    UPDATE `stat_entity`
     SET rating_count = rating_count + 1
     WHERE type = NEW.type;
 
@@ -18,7 +18,7 @@ AFTER DELETE ON `entity`
 FOR EACH ROW
   BEGIN
 
-    UPDATE `entity_statistic`
+    UPDATE `stat_entity`
     SET rating_count = rating_count - 1
     WHERE type = OLD.type;
 
