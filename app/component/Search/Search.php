@@ -2,55 +2,34 @@
 
 namespace App\Component;
 
+
 class Search extends BaseComponent
 {
-	protected $movieModel;
-	protected $seriesModel;
-	protected $bookModel;
-	protected $musicModel;
-	protected $gameModel;
-	protected $personModel;
-	protected $groupModel;
+    /** @var  \App\Model\EntityModel */
+	protected $entityModel;
+
+    /** @var \App\Model\ArtistModel */
+    protected $artistModel;
 
 	public function __construct(
-		\App\Model\MovieModel $movieModel,
-		\App\Model\SeriesModel $seriesModel,
-		\App\Model\BookModel $bookModel,
-		\App\Model\MusicModel $musicModel,
-		\App\Model\GameModel $gameModel,
-		\App\Model\PersonModel $personModel,
-		\App\Model\GroupModel $groupModel)
+		\App\Model\EntityModel $entityModel,
+		\App\Model\ArtistModel $artistModel)
 	{
-		$this->movieModel = $movieModel;
-		$this->seriesModel = $seriesModel;
-		$this->bookModel = $bookModel;
-		$this->musicModel = $musicModel;
-		$this->gameModel = $gameModel;
-		$this->personModel = $personModel;
-		$this->groupModel = $groupModel;
+		$this->entityModel = $entityModel;
+		$this->artistModel = $artistModel;
 	}
 
 	private $flag = false;
 
-	private $searchMovie = array();
-	private $searchSeries = array();
-	private $searchBook = array();
-	private $searchMusic = array();
-	private $searchGame = array();
-	private $searchPerson = array();
-	private $searchGroup = array();
+	private $searchEntity = array();
+	private $searchArtist = array();
 
 	public function render()
 	{
 		$this->template->flag = $this->flag;
 
-		$this->template->searchMovie = $this->searchMovie;
-		$this->template->searchSeries = $this->searchSeries;
-		$this->template->searchBook = $this->searchBook;
-		$this->template->searchMusic = $this->searchMusic;
-		$this->template->searchGame = $this->searchGame;
-		$this->template->searchPerson = $this->searchPerson;
-		$this->template->searchGroup = $this->searchGroup;
+		$this->template->searchEntity = $this->searchEntity;
+		$this->template->searchArtist = $this->searchArtist;
 
 		parent::render();
 	}
@@ -63,41 +42,17 @@ class Search extends BaseComponent
 		{
 			$this->flag = true;
 
-			$this->searchMovie = $this->movieModel->getTable()
+			$this->searchEntity = $this->entityModel->getTable()
 			    ->whereOr(array(
 			    	'original_title LIKE' => "%$search%",
 			    	'english_title LIKE' => "%$search%",
 			    	'czech_title LIKE' => "%$search%"));
-		    
-		    $this->searchSeries = $this->seriesModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%",
-		    	'english_title LIKE' => "%$search%",
-		    	'czech_title LIKE' => "%$search%"));
-		    
-		    $this->searchBook = $this->bookModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%",
-		    	'english_title LIKE' => "%$search%",
-		    	'czech_title LIKE' => "%$search%"));
-		    
-		    $this->searchMusic = $this->musicModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%"));
-		    
-		    $this->searchGame = $this->gameModel->getTable()
-		    ->whereOr(array(
-		    	'original_title LIKE' => "%$search%"));
 
-		    $this->searchPerson = $this->personModel->getTable()
+		    $this->searchArtist = $this->artistModel->getTable()
 		    ->whereOr(array(
 		    	'name LIKE' => "%$search%",
 		    	'middlename LIKE' => "%$search%",
 		    	'surname LIKE' => "%$search%"));
-		    
-		    $this->searchGroup = $this->groupModel->getTable()
-		    ->whereOr(array(
-		    	'name LIKE' => "%$search%"));
 		}
 
 	    $this->redrawControl('search');
