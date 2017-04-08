@@ -29,11 +29,10 @@ class RatingForm extends BaseComponent
         }
         elseif ($entityId)
         {
-            $this['form']->setDefaults(array("{$pname}_id" => $entityId));
+            $this['form']->setDefaults(array("entity_id" => $entityId));
         }
 
-        $this->template->pname = $pname;
-        $this->template->setFile(__DIR__ . '/EntityRateForm.latte');
+        $this->template->setFile(__DIR__ . '/RatingForm.latte');
         $this->template->render();
     }
 
@@ -50,7 +49,7 @@ class RatingForm extends BaseComponent
 
         $form = new \Nette\Application\UI\Form();
         $form->addHidden('id');
-        $form->addSelect("{$pname}_id", $pName, $entities)
+        $form->addSelect("entity_id", $pName, $entities)
             ->setPrompt("Select {$pname}")
             ->setRequired();
         $rating = $form->addRadioList('rating', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
