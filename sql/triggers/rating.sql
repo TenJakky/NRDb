@@ -62,7 +62,7 @@ FOR EACH ROW
     SET
       rating_count = rating_count + 1,
       rating_sum = rating_sum + NEW.value,
-      rating = ((rating_sum + NEW.value) / (rating_count + 1))
+      rating = (rating_sum / rating_count)
     WHERE id = var_id;
 
     UPDATE `stat_entity`
@@ -135,7 +135,7 @@ FOR EACH ROW
     SET
       rating_count = rating_count - 1,
       rating_sum = rating_sum - OLD.value,
-      rating = (CASE rating_count WHEN 1 THEN 0 ELSE ((rating_sum - NEW.value) / (rating_count - 1)) END)
+      rating = (CASE rating_count WHEN 1 THEN 0 ELSE (rating_sum / rating_count) END)
     WHERE id = var_id;
 
     UPDATE `stat_entity`
