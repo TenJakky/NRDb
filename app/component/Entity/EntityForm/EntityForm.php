@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class EntityForm extends BaseComponent
+class EntityForm extends BaseComponent
 {
     /** @var \App\Model\BaseEntityModel */
     protected $model;
