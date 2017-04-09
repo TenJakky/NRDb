@@ -5,7 +5,7 @@
 {/if}
 
 <h2>{$data->rating|number: 2}</h2>
-{if $presenter->name == 'Series'}
+{if $data->type === 'series'}
     <h3>Average rating from seasons: {$ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
 {/if}
 <h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
@@ -19,10 +19,10 @@
 {/if}
 
 <section>
-    {if $presenter->name === 'Season'}
+    {if $data->type === 'season'}
         <ul class="inline-buttons">
             <li>
-                <a href="{plink Series:view $data->series_id}">← Series page</a>
+                <a href="{plink Entity:view $data->series_id}">← Series page</a>
             </li>
         </ul>
     {/if}
@@ -58,7 +58,7 @@
                 <td>{$data->czech_title}</td>
             </tr>
         {/if}
-        {if $presenter->name === 'Series'}
+        {if $data->type === 'series'}
             <tr>
                 <th>Status</th>
                 <td>{$data->active ? 'Running' : 'Finished'}</td>
@@ -80,7 +80,7 @@
             <tr>
                 <th>{\App\Enum\EArtistRole::ITEMS[$role]}</th>
                 <td>
-                    {if $presenter->name === 'Series'}
+                    {if $data->type === 'series'}
                         {var artists = $entityModel->getRole($data->id, $role)}
                     {else}
                         {var artists = $data->related('jun_artist2entity.entity_id')->where('role', $role)}
@@ -95,7 +95,7 @@
         </tr>
     </table>
 </section>
-{if $presenter->name === 'Series'}
+{if $data->type === 'series'}
     <section>
         <h2>Season List</h2>
         <ul class="inline-buttons">
