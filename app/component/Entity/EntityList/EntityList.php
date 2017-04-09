@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class EntityList extends BaseDatagridComponent
+class EntityList extends BaseDatagridComponent
 {
     /** @var \App\Model\BaseRatingModel */
     protected $ratingModel;
