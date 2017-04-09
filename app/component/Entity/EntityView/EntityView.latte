@@ -14,7 +14,7 @@
 {var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
 {if $rating}
     <h3>My rating:
-        {$rating->rating}
+        {$rating->value}
     </h3>
 {/if}
 

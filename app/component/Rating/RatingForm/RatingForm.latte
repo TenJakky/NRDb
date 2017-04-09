@@ -20,10 +20,10 @@
                 <td>{input "entity_id"}</td>
             </tr>
             <tr class="required">
-                <th>{label rating /}</th>
+                <th>{label value /}</th>
                 <td id="rating">
-                    {foreach $form['rating']->items as $key => $label}
-                        {input rating:$key}{label rating:$key title => $titles[$key] /}
+                    {foreach $form['value']->items as $key => $label}
+                        {input value:$key}{label value:$key title => $titles[$key] /}
                     {/foreach}
                  </td>
             </tr>

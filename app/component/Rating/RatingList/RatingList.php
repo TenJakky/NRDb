@@ -26,8 +26,8 @@ class RatingList extends BaseSmallDatagridComponent
         parent::createComponentDataGrid();
 
         $this->grid->addColumn('user_id', 'User')->enableSort();
-        $this->grid->addColumn('note', 'Note')->enableSort();
-        $this->grid->addColumn('rating', 'Rating')->enableSort();
+        $this->grid->addColumn('value', 'Value')->enableSort();
+        $this->grid->addColumn('note', 'Note');
         $this->grid->addColumn('date', 'Date')->enableSort(\Nextras\Datagrid\Datagrid::ORDER_DESC);
 
         $this->grid->addCellsTemplate(__DIR__ . '/RatingListCellsTemplate.latte');

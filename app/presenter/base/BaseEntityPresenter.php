@@ -4,10 +4,15 @@ namespace App\Presenter;
 
 abstract class BaseEntityPresenter extends BaseViewEditPresenter
 {
+    /** @var  \App\Model\RatingModel */
+    protected $ratingModel;
+
     public function __construct(
-        \App\Model\EntityModel $model)
+        \App\Model\EntityModel $model,
+        \App\Model\RatingModel $ratingModel)
     {
         $this->model = $model;
+        $this->ratingModel = $ratingModel;
     }
 
     public function actionView($id)
@@ -30,7 +35,7 @@ abstract class BaseEntityPresenter extends BaseViewEditPresenter
         $rating = $this->ratingModel->findByArray(array('user_id' => $this->getUser()->getId(), "{$name}_id" => $id));
         if ($rating->count('*') > 0)
         {
-            $this->presenter->redirect("{$this->name}:editRating", $rating->fetch()->id);
+            $this->presenter->redirect("Entity:editRating", $rating->fetch()->id);
         }
 
         $this->template->id = $id;

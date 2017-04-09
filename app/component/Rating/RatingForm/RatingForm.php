@@ -20,9 +20,6 @@ class RatingForm extends BaseComponent
 
     public function render($entityId = 0, $ratingId = 0)
     {
-        $pName = $this->presenter->getName();
-        $pname = lcfirst($pName);
-
         if ($ratingId)
         {
             $this['form']->setDefaults($this->ratingModel->findRow($ratingId));
@@ -38,9 +35,6 @@ class RatingForm extends BaseComponent
 
     public function createComponentForm()
     {
-        $pName = $this->presenter->getName();
-        $pname = lcfirst($pName);
-
         $userId = $this->presenter->getUser()->getId();
 
         $entities = $this->presenter->getAction() === 'rate' ?
@@ -49,10 +43,10 @@ class RatingForm extends BaseComponent
 
         $form = new \Nette\Application\UI\Form();
         $form->addHidden('id');
-        $form->addSelect("entity_id", $pName, $entities)
-            ->setPrompt("Select {$pname}")
+        $form->addSelect("entity_id", 'Entity', $entities)
+            ->setPrompt("Select Entity")
             ->setRequired();
-        $rating = $form->addRadioList('rating', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
+        $rating = $form->addRadioList('value', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
             ->setRequired();
         $rating->getContainerPrototype()->id = 'rating';
         $rating->getSeparatorPrototype()->setName(null);
@@ -65,9 +59,6 @@ class RatingForm extends BaseComponent
 
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
-        $pName = $this->presenter->getName();
-        $pname = lcfirst($pName);
-
         $data = $form->getValues();
         $data['user_id'] = $this->presenter->user->getId();
         $data['date'] = date('Y-m-d');
@@ -75,6 +66,6 @@ class RatingForm extends BaseComponent
         $this->ratingModel->save($data);
 
         $this->presenter->flashMessage('Rating successfully saved.', 'success');
-        $this->presenter->redirect("{$pName}:view", array('id' => $data["{$pname}_id"]));
+        $this->presenter->redirect("Entity:view", array('id' => $data["entity_id"]));
     }
 }
