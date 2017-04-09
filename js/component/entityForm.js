@@ -1,7 +1,6 @@
 $(document).ready(function ()
 {
     var formValues = [];
-    var span = '<span class="form-success">Successfully Submitted</span>';
 
     function storeValues()
     {
@@ -41,9 +40,7 @@ $(document).ready(function ()
     {
         restoreValues();
         $(el).find('select').chosen(chosenOptions);
-        $('#person_subform').hide();
-        $('#pseudonym_subform').hide();
-        $('#band_subform').hide();
+        $('#artist_subform').hide();
     });
     $.nette.ext('snippets').before(function (el)
     {
@@ -51,24 +48,8 @@ $(document).ready(function ()
     });
     $.nette.load();
 
-    $('#add_person').click(function()
+    $('#add_artist').click(function()
     {
-        $('#person_subform').toggle();
-        $('#pseudonym_subform').hide();
-        $('#band_subform').hide();
-    });
-
-    $('#add_pseudonym').click(function()
-    {
-        $('#person_subform').hide();
-        $('#pseudonym_subform').toggle();
-        $('#band_subform').hide();
-    });
-
-    $('#add_band').click(function()
-    {
-        $('#person_subform').hide();
-        $('#pseudonym_subform').hide();
-        $('#band_subform').toggle();
+        $('#artist_subform').toggle();
     });
 });

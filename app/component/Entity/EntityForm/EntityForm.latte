@@ -1,30 +1,16 @@
-<script type='text/javascript' src="/www/js/component/entityForm.js"></script>
+<script type='text/javascript' src="/js/component/entityForm.js"></script>
 
 <ul class="inline-buttons">
-    <li><a id="add_person" >Add person</a></li>
-    <li><a id="add_pseudonym" >Add pseudonym</a></li>
-    <li><a id="add_band" >Add band</a></li>
+    <li><a id="add_artist" >Add Artist</a></li>
 </ul>
 
 {snippet formSnippet}
     {control form}
 {/snippet}
 
-<div id="person_subform">
-    <h2>New Person</h2>
-    {control personForm}
-</div>
-
-<div id="pseudonym_subform">
-    <h2>New Pseudonym</h2>
-    {snippet pseudonymSnippet}
-        {control pseudonymForm}
-    {/snippet}
-</div>
-
-<div id="band_subform">
-    <h2>New Group</h2>
-    {snippet groupSnippet}
-        {control groupForm}
+<div id="artist_subform">
+    <h2>New Artist</h2>
+    {snippet artistSnippet}
+        {control artistForm}
     {/snippet}
 </div>
