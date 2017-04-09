@@ -2,35 +2,41 @@
 
 namespace App\Component;
 
-abstract class EntitySmallList extends BaseComponent
+class EntitySmallList extends \Nette\Application\UI\Control
 {
-    /** @var \App\Model\BaseEntityModel */
+    /** @var \App\Model\EntityModel */
     protected $model;
 
-    /** @var \App\Model\BaseRatingModel */
+    /** @var \App\Model\RatingModel */
     protected $ratingModel;
 
-    public function render($type = 0)
+    public function __construct(
+        \App\Model\EntityModel $entityModel,
+        \App\Model\RatingModel $ratingModel)
+    {
+        $this->model = $entityModel;
+        $this->ratingModel = $ratingModel;
+    }
+
+    public function render($entityType, $listType)
     {
         $perPage = $this->presenter->getUser()->getIdentity()->per_page_small;
         $userId = $this->presenter->getUser()->getId();
 
-        switch ($type)
+        switch ($listType)
         {
             default:
             case 'new':
-                $data = $this->model->getRecent($perPage)->fetchAll();
+                $data = $this->model->getRecent($perPage)->where('type', $entityType)->fetchAll();
                 break;
             case 'top':
-                $data = $this->model->getTop($perPage)->fetchAll();
+                $data = $this->model->getTop($perPage)->where('type', $entityType)->fetchAll();
                 break;
             case 'notRated':
-                $data = $this->model->getNotRated($userId, $perPage)->fetchAll();
+                $data = $this->model->getNotRated($userId, $perPage)->where('type', $entityType)->fetchAll();
                 break;
         }
 
-        $this->template->pName = $this->presenter->getName();
-        $this->template->userId = $userId;
         $this->template->ratingModel = $this->ratingModel;
         $this->template->entities = $data;
 

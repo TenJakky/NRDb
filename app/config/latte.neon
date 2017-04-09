@@ -4,8 +4,8 @@ latte:
 
 services:
 
-    - App\Filter\PersonFilter
+    - App\Filter\ArtistFilter
 
     nette.latteFactory:
         setup:
-            - addFilter(person, @App\Filter\PersonFilter)
+            - addFilter(artist, @App\Filter\ArtistFilter)

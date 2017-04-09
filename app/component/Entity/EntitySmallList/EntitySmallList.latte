@@ -1,11 +1,11 @@
 <table class="grid">
     <thead>
         <th>Original Title</th>
-        {if !in_array($pName, array('Music', 'Game'))}
+        {if !in_array($presenter->getName(), array('Music', 'Game'))}
             <th>English Title</th>
             <th>Czech Title</th>
         {/if}
-        {if $pName != 'Series'}
+        {if $presenter->getName() != 'Series'}
             <th class="center">Year</th>
         {/if}
         <th class="center">Rating</th>
@@ -15,26 +15,26 @@
     <tbody>
     {foreach $entities as $entity}
         <tr>
-            <td><a href="{plink "{$pName}:view" $entity->id}">{$entity->original_title}</a></td>
-            {if !in_array($pName, array('Music', 'Game'))}
+            <td><a href="{plink Entity:view $entity->id}">{$entity->original_title}</a></td>
+            {if !in_array($presenter->getName(), array('Music', 'Game'))}
                 <td>{$entity->english_title}</td>
                 <td>{$entity->czech_title}</td>
             {/if}
-            {if $pName != 'Series'}
+            {if $presenter->getName() != 'Series'}
                 <td class="center">{$entity->year}</td>
             {/if}
-            <td class="center">{$ratingModel->getRating($entity->id)|number:2}</td>
-            {var $rating => $ratingModel->getUserRating($entity->id, $userId)}
+            <td class="center">{$entity->rating|number:2}</td>
+            {var $rating => $ratingModel->getUserRating($entity->id, $user->getId())}
             <td class="center">
                 {if $rating}
-                    {$rating->rating}
+                    {$rating->value}
                 {/if}
             </td>
             <td>
                 {if $rating}
-                    <a href="{plink "{$pName}:editRating" $rating->id}">Edit rating</a>
+                    <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
                 {else}
-                    <a href="{plink "{$pName}:rate" $entity->id}">Rate</a>
+                    <a href="{plink Entity:rate $entity->id}">Rate</a>
                 {/if}
             </td>
         </tr>

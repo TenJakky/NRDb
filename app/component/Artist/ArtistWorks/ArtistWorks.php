@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class ArtistWorks extends BaseSmallDatagridComponent
+final class ArtistWorks extends BaseSmallDatagridComponent
 {
     /** @var \App\Model\BaseRatingModel */
     protected $ratingModel;
@@ -10,11 +10,10 @@ abstract class ArtistWorks extends BaseSmallDatagridComponent
     /** @var int */
     protected $artistId;
 
-    /** @var string */
-    protected $entityType;
-
-    /** @var string */
-    protected $artistType;
+    public function __construct(\App\Model\ArtistEntityModel $artistEntityModel)
+    {
+        $this->model = $artistEntityModel;
+    }
 
     public function render($artistId = 0)
     {
@@ -27,34 +26,17 @@ abstract class ArtistWorks extends BaseSmallDatagridComponent
     {
         parent::createComponentDataGrid();
 
-        $this->grid->addColumn('original_title', 'Original title');
-
-        if (!in_array($this->entityType, array('Music', 'Game')))
-        {
-            $this->grid->addColumn('english_title', 'English Title');
-            $this->grid->addColumn('czech_title', 'Czech Title');
-        }
-
+        $this->grid->addColumn('type', 'Type')->enableSort();
+        $this->grid->addColumn('role', 'Role')->enableSort();
         $this->grid->addColumn('year', 'Year');
+        $this->grid->addColumn('original_title', 'Original title');
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
         $this->grid->addCellsTemplate(__DIR__ . '/ArtistWorksCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
-                'userId' => $this->presenter->user->getId(),
-                'ratingModel' => $this->ratingModel,
-                'eType' => $this->entityType));
+                'ratingModel' => $this->ratingModel));
 
         return $this->grid;
-    }
-
-    public function getDataSource($filter, $order)
-    {
-        $pname = lcfirst($this->presenter->getName());
-
-        $entity = lcfirst($this->entityType);
-        $artist = $this->artistType;
-
-        return $this->model->findBy(":jun_{$entity}2{$artist}.{$pname}_id", $this->artistId)->order('year DESC');
     }
 }

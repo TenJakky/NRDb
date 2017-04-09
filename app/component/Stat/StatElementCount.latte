@@ -1,0 +1,51 @@
+<table class="grid">
+    <thead>
+        <tr>
+            <td></td>
+            <th># of elements</th>
+            <th># of ratings</th>
+            <th>0*</th><th>1*</th><th>2*</th><th>3*</th><th>4*</th><th>5*</th><th>6*</th><th>7*</th><th>8*</th><th>9*</th><th>10*</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $statEntity as $se}
+            <tr>
+                <th>{\App\Enum\EEntityType::ITEMS[$se->type]}</th>
+                <td>{$se->count}</td>
+                <td>{$se->rating_count}</td>
+                {foreach $statRating as $sr}
+                    <td>{$sr->{$se->type.'_count'}}</td>
+                {/foreach}
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+<h4>Plot amounts</h4>
+<ul class="inline-buttons">
+    <li><input type="button" value="# of elements" id="plotElement" /></li>
+    <li><input type="button" value="# of ratings" id="plotRating" /></li>
+</ul>
+
+<h4>Plot rating distribution</h4>
+<ul class="inline-buttons">
+    <li><input type="button" value="Movie" id="plotMovie" /></li>
+    <li><input type="button" value="Series" id="plotSeries" /></li>
+    <li><input type="button" value="Season" id="plotSeason" /></li>
+    <li><input type="button" value="Book" id="plotBook" /></li>
+    <li><input type="button" value="Music" id="plotMusic" /></li>
+    <li><input type="button" value="Game" id="plotGame" /></li>
+</ul>
+
+<canvas id="elementCountChart"></canvas>
+<script>
+    const elementData = [{foreach $statEntity as $se}{$se->count}{sep},{/sep}{/foreach}];
+    const ratingData = [{foreach $statEntity as $se}{$se->rating_count}{sep},{/sep}{/foreach}];
+    const movieData = [{foreach $statRating as $sr}{$sr->movie_count}{sep},{/sep}{/foreach}];
+    const seriesData = [{foreach $statRating as $sr}{$sr->series_count}{sep},{/sep}{/foreach}];
+    const seasonData = [{foreach $statRating as $sr}{$sr->season_count}{sep},{/sep}{/foreach}];
+    const bookData = [{foreach $statRating as $sr}{$sr->book_count}{sep},{/sep}{/foreach}];
+    const musicData = [{foreach $statRating as $sr}{$sr->music_count}{sep},{/sep}{/foreach}];
+    const gameData = [{foreach $statRating as $sr}{$sr->game_count}{sep},{/sep}{/foreach}];
+</script>
+<script type="text/javascript" src="/www/js/component/statElementCount.js"></script>

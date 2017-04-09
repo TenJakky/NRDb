@@ -60,8 +60,8 @@ abstract class EntityList extends BaseDatagridComponent
         {
             if ($k == 'artist')
             {
-                $filters['person.name LIKE ?'] = "%$v%";
-                $filters['person.surname LIKE ?'] = "%$v%";
+                $filters['artist.name LIKE ?'] = "%$v%";
+                $filters['artist.surname LIKE ?'] = "%$v%";
             }
             else
             {
@@ -77,7 +77,7 @@ abstract class EntityList extends BaseDatagridComponent
             {
                 $table = "jun_{$this->entityType}2{$this->artistType}";
 
-                $orders = ":{$table}.person.surname $order[1], :{$table}.person.name $order[1]";
+                $orders = ":{$table}.artist.surname $order[1], :{$table}.artist.name $order[1]";
 
                 if (in_array($this->entityType, array('music', 'game')))
                 {

@@ -1,0 +1,84 @@
+{layout ../@layout.latte}
+{block title}{$data->id|artist}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Artist:edit $data->id}">Edit details</a>
+        </li>
+    </ul>
+</section>
+<section>
+    <table class="list">
+        {if $data->type === 'person'}
+            <tr>
+                <th>Nationality</th>
+                <td>{$data->ref('def_country', 'country_id')->name}</td>
+            </tr>
+            <tr>
+                <th>Born</th>
+                <td>{$data->year_from}</td>
+            </tr>
+            <tr>
+                <th>Died</th>
+                <td>{$data->year_to}</td>
+            </tr>
+            <tr>
+                <th>Pseudonyms</th>
+                <td>
+                    {artistList $data->related('artist.artist_id')}
+                </td>
+            </tr>
+        {elseif $data->type === 'group'}
+            <tr>
+                <th>Years active</th>
+                <td>{if $data->year_from}{$data->year_from} - {$data->year_to ? $data->year_to : 'present'}{/if}</td>
+            </tr>
+            <tr>
+                <th>Members</th>
+                <td>
+                    {var $temp => $data->related('jun_group2member.group_id')->where('active', 1)}
+                    {memberList $temp}
+                </td>
+            </tr>
+            <tr>
+                <th>Former Members</th>
+                <td>
+                    {var $temp => $data->related('jun_group2member.group_id')->where('active', 0)}
+                    {memberList $temp}
+                </td>
+            </tr>
+        {else}
+            <tr>
+                <th>Pseudonym of</th>
+                <td>
+                    <a href="{plink Artist:view $data->id}">{$data->id|artist}</a>
+                </td>
+            </tr>
+        {/if}
+        {if $data->type !== 'group'}
+            <tr>
+                <th>Member of</th>
+                <td>
+                    <ul class="artist-list">
+                        {foreach $data->related('jun_group2member.member_id') as $temp}
+                            <li>
+                                <a href="{plink Artist:view $temp->group_id}">$temp->ref('artist', 'group_id')->name</a>
+                            </li>
+                        {/foreach}
+                    </ul>
+                </td>
+            </tr>
+        {/if}
+        <tr>
+            <th>Description</th>
+            <td>{$data->description}</td>
+        </tr>
+    </table>
+</section>
+<section>
+    <h2>Works</h2>
+    {control artistWorks $data->id}
+</section>

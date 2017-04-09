@@ -1,0 +1,68 @@
+<table class="grid table-fixed">
+    <thead>
+        <tr>
+            <td></td>
+            <th>Movie</th>
+            <th>Series</th>
+            <td>Season</td>
+            <th>Book</th>
+            <th>Music</th>
+            <th>Game</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {foreach $activeUsers as $temp}
+        {if $temp->id == $user->getId()}
+        <tr class="highlight">
+        {else}
+        <tr>
+        {/if}
+            <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
+            <td>{$temp->ratings_movie}</td>
+            <td>{$temp->ratings_series}</td>
+            <td>{$temp->ratings_season}</td>
+            <td>{$temp->ratings_book}</td>
+            <td>{$temp->ratings_music}</td>
+            <td>{$temp->ratings_game}</td>
+            <td>{$temp->ratings_total}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+<canvas id="userActivityChart"></canvas>
+<script>
+    const statData = [
+        {foreach $activeUsers as $temp}
+        [
+            {$temp->ratings_movie},
+            {$temp->ratings_series},
+            {$temp->ratings_season},
+            {$temp->ratings_book},
+            {$temp->ratings_music},
+            {$temp->ratings_game}
+        ]
+        {sep},{/sep}
+        {/foreach}
+    ];
+    const datasetData = [
+        {foreach $activeUsers as $temp}
+        {
+            label: {$temp->username},
+            data: [
+                {$movieMax ? $temp->ratings_movie / $movieMax : 0},
+                {$seriesMax ? $temp->ratings_series / $seriesMax : 0},
+                {$seasonMax ? $temp->ratings_season / $seasonMax : 0},
+                {$bookMax ? $temp->ratings_book / $bookMax : 0},
+                {$musicMax ? $temp->ratings_music / $musicMax : 0},
+                {$gameMax ? $temp->ratings_game / $gameMax : 0}
+            ],
+            backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
+            borderColor: chartBorderColors[{$iterator->counter - 1}],
+            borderWidth: 1
+        }
+        {sep},{/sep}
+        {/foreach}
+    ];
+</script>
+<script type="text/javascript" src="/www/js/component/statUserActivity.js"></script>

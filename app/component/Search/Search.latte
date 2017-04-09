@@ -28,39 +28,14 @@
 <input title="Global search" type="search" id="search" />
 <ul n:snippet="search" class="dropdown-list">
     {if $flag}
-        {foreach $searchMovie as $temp}
+        {foreach $searchEntity as $temp}
             <li>
-                <a href="{plink Movie:view $temp->id}">{$temp->original_title}</a>
+                <a href="{plink Entity:view $temp->id}">{$temp->original_title}</a>
             </li>
         {/foreach}
-        {foreach $searchSeries as $temp}
+        {foreach $searchArtist as $temp}
             <li>
-                <a href="{plink Series:view $temp->id}">{$temp->original_title}</a>
-            </li>
-        {/foreach}
-        {foreach $searchBook as $temp}
-            <li>
-                <a href="{plink Book:view $temp->id}">{$temp->original_title}</a>
-            </li>
-        {/foreach}
-        {foreach $searchMusic as $temp}
-            <li>
-                <a href="{plink Music:view $temp->id}">{$temp->original_title}</a>
-            </li>
-        {/foreach}
-        {foreach $searchGame as $temp}
-            <li>
-                <a href="{plink Game:view $temp->id}">{$temp->original_title}</a>
-            </li>
-        {/foreach}
-        {foreach $searchPerson as $temp}
-            <li>
-                <a href="{plink Person:view $temp->id}">{$temp->id|person}</a>
-            </li>
-        {/foreach}
-        {foreach $searchGroup as $temp}
-            <li>
-                <a href="{plink Group:view $temp->id}">{$temp->name}</a>
+                <a href="{plink Artist:view $temp->id}">{$temp->id|artist}</a>
             </li>
         {/foreach}
     {else}

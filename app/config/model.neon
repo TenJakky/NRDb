@@ -6,31 +6,12 @@ services:
 - App\Model\NewsModel
 - App\Model\IntroductionModel
 
-- App\Model\PersonModel
-- App\Model\GroupModel
+- App\Model\ArtistModel
+- App\Model\ArtistEntityModel
 - App\Model\GroupMemberModel
 
-- App\Model\MovieModel
-- App\Model\MovieDirectorModel
-- App\Model\MovieActorModel
-- App\Model\RatingMovieModel
+- App\Model\EntityModel
+- App\Model\RatingModel
 
-- App\Model\SeriesModel
-- App\Model\RatingSeriesModel
-
-- App\Model\SeasonModel
-- App\Model\SeasonDirectorModel
-- App\Model\SeasonActorModel
-- App\Model\RatingSeasonModel
-
-- App\Model\BookModel
-- App\Model\BookAuthorModel
-- App\Model\RatingBookModel
-
-- App\Model\MusicModel
-- App\Model\MusicInterpretModel
-- App\Model\RatingMusicModel
-
-- App\Model\GameModel
-- App\Model\GameDeveloperModel
-- App\Model\RatingGameModel
+- App\Model\StatEntityModel
+- App\Model\StatRatingModel
