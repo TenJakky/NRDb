@@ -28,18 +28,18 @@
     {/if}
     <ul class="inline-buttons">
         <li>
-            <a href="{plink "{$presenter->name}:default"}">← Overview page</a>
+            <a href="{plink ucfirst($data->type).':default'}">← Overview page</a>
         </li>
     </ul>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink "{$presenter->name}:edit" $data->id}">Edit details</a>
+            <a href="{plink Entity:edit $data->id}">Edit details</a>
         </li>
         <li>
             {if $rating}
-                <a href="{plink "{$presenter->name}:editRating" $rating->id}">Edit rating</a>
+                <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
             {else}
-                <a href="{plink "{$presenter->name}:rate" $data->id}">Rate</a>
+                <a href="{plink Entity:rate $data->id}">Rate</a>
             {/if}
         </li>
     </ul>
