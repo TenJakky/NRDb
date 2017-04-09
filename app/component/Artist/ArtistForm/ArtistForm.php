@@ -2,24 +2,22 @@
 
 namespace App\Component;
 
-final class GroupForm extends BaseComponent
+final class ArtistForm extends BaseComponent
 {
     /** @var \App\Model\GroupModel */
     protected $groupModel;
 
-    /** @var \App\Model\PersonModel */
-    protected $personModel;
+    /** @var \App\Model\ArtistModel */
+    protected $artistModel;
 
     /** @var \App\Model\GroupMemberModel */
     protected $groupMemberModel;
 
     public function __construct(
-        \App\Model\PersonModel $personModel,
-        \App\Model\GroupModel $groupModel,
+        \App\Model\ArtistModel $artistModel,
         \App\Model\GroupMemberModel $groupMemberModel)
     {
-        $this->personModel = $personModel;
-        $this->groupModel = $groupModel;
+        $this->artistModel = $artistModel;
         $this->groupMemberModel = $groupMemberModel;
     }
 

@@ -2,9 +2,9 @@
 
 namespace App\Component;
 
-abstract class ArtistList extends BaseDatagridComponent
+final class ArtistList extends BaseDatagridComponent
 {
-    /** @var \App\Model\BaseEntityModel */
+    /** @var \App\Model\EntityModel */
     protected $entityModel;
 
     /** @var string */
