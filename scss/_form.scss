@@ -127,11 +127,6 @@ form
     content: '★ ';
   }
 
-  &:not(:checked) > label:last-of-type:before
-  {
-    content: '👎';
-  }
-
   input:checked ~ label
   {
     color: $red;
