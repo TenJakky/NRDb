@@ -2,41 +2,37 @@
 
 namespace App\Component;
 
-class EntityList extends BaseDatagridComponent
+final class EntityList extends BaseDatagridComponent
 {
     /** @var \App\Model\BaseRatingModel */
     protected $ratingModel;
 
-    /** @var string */
-    protected $entityType;
-
-    /** @var string */
-    protected $artistType;
-
-    public function render()
+    public function __construct(
+        \App\Model\EntityModel $entityModel,
+        \App\Model\RatingModel $ratingModel)
     {
-        $this->template->setFile(__DIR__.'/EntityList.latte');
-        $this->template->render();
+        $this->model = $entityModel;
+        $this->ratingModel = $ratingModel;
     }
 
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();
 
-        if ($this->entityType === 'season')
+        if ($this->presenter->type === 'season')
         {
             $this->grid->addColumn('number', 'Number')->enableSort('asc');
         }
         else
         {
             $this->grid->addColumn('original_title', 'Original title')->enableSort();
-            if (!in_array($this->entityType, array('music', 'game')))
+            if (!in_array($this->presenter->type, array('music', 'game')))
             {
                 $this->grid->addColumn('english_title', 'English Title')->enableSort();
                 $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
             }
         }
-        $this->grid->addColumn('artist', ucfirst($this->artistType))->enableSort();
+        $this->grid->addColumn('artist', 'Artist')->enableSort();
         $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
@@ -44,11 +40,7 @@ class EntityList extends BaseDatagridComponent
 
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
-                'entityModel' => $this->model,
-                'ratingModel' => $this->ratingModel,
-                'eType' => ucfirst($this->entityType),
-                'etype' => $this->entityType,
-                'mtype' => $this->artistType));
+                'ratingModel' => $this->ratingModel));
         return $this->grid;
     }
 

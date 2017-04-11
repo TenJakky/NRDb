@@ -1,18 +1,18 @@
-{define col-original_title}
+{define col-number}
     <td>
-        <a href="{plink "{$eType}:view" $row->id}">{$row->original_title}</a>
+        <a href="{plink Season:view $row->id}">{$row->number}</a>
     </td>
 {/define}
 
-{define col-number}
+{define col-original_title}
     <td>
-        <a href="{plink "Season:view" $row->id}">{$row->number}</a>
+        <a href="{plink Entity:view $row->id}">{$row->original_title}</a>
     </td>
 {/define}
 
 {define col-artist}
     <td>
-        {artistList $row->related("jun_{$etype}2{$mtype}.{$etype}_id")}
+        {artistList $row->related("jun_artist2entity.entity_id")}
     </td>
 {/define}
 
@@ -28,7 +28,7 @@
 
 {define col-rating}
     <td class="center">
-        {$ratingModel->getRating($row->id)|number: 2}
+        {$row->rating|number: 2}
     </td>
 {/define}
 
@@ -38,9 +38,9 @@
 
 {define col-my_rating}
     <td class="center">
-        {var $rating => $ratingModel->getUserRating($row->id, $presenter->user->getId())}
+        {var $rating = $ratingModel->getUserRating($row->id, $user->id)}
         {if $rating}
-            {$rating->rating}
+            {$rating->value}
         {/if}
     </td>
 {/define}
@@ -51,11 +51,11 @@
 
 {define col-action}
     <td>
-        {var $rating => $ratingModel->getUserRating($row->id, $presenter->user->getId())}
+        {var $rating => $ratingModel->getUserRating($row->id, $user->id)}
         {if $rating}
-            <a href="{plink "{$eType}:editRating" $rating->id}">Edit rating</a>
+            <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
         {else}
-            <a href="{plink "{$eType}:rate" $row->id}">Rate</a>
+            <a href="{plink Entity:rate $row->id}">Rate</a>
         {/if}
     </td>
 {/define}
