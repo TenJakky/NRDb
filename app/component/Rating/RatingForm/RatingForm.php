@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class RatingForm extends BaseComponent
+final class RatingForm extends BaseComponent
 {
     /** @var \App\Model\EntityModel */
     protected $model;

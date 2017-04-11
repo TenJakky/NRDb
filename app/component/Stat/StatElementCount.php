@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class StatElementCount extends BaseComponent
+final class StatElementCount extends BaseComponent
 {
     /** @var \App\Model\StatEntityModel */
     protected $statEntityModel;

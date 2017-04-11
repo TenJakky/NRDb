@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class EntityModel extends BaseModel
+final class EntityModel extends BaseModel
 {
     /** @var  string */
     public $tableName = 'entity';

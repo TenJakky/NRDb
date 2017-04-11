@@ -3,7 +3,7 @@
 namespace App\Component;
 
 
-class Search extends BaseComponent
+final class Search extends BaseComponent
 {
     /** @var  \App\Model\EntityModel */
 	protected $entityModel;

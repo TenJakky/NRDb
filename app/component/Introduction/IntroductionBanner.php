@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class IntroductionBanner extends BaseComponent
+final class IntroductionBanner extends BaseComponent
 {
 	public function render()
 	{

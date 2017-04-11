@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class RatingList extends BaseSmallDatagridComponent
+final class RatingList extends BaseSmallDatagridComponent
 {
     /** @var int */
     protected $entityId = 0;

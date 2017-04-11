@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class StatUserRadar extends BaseComponent
+final class StatUserRadar extends BaseComponent
 {
     /** @var \App\Model\UserModel */
     protected $userModel;
