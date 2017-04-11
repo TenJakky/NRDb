@@ -34,7 +34,7 @@ final class EntityList extends BaseDatagridComponent
         }
         $this->grid->addColumn('artist', 'Artist')->enableSort();
         $this->grid->addColumn('year', 'Year')->enableSort();
-        $this->grid->addColumn('rating', 'Rating');
+        $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
 
@@ -46,7 +46,7 @@ final class EntityList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $filters = array();
+        $filters = ['type' => $this->presenter->type];
 
         foreach ($filter as $k => $v)
         {
@@ -75,10 +75,6 @@ final class EntityList extends BaseDatagridComponent
                 {
                     $orders = ":{$table}.group.name $order[1], ".$orders;
                 }
-            }
-            else if ($order[0] == 'rating')
-            {
-                $orders = "SUM(:rating_{$this->entityType}.rating / COUNT(*)) $order[1]";
             }
             else if ($order[0] == 'my_rating')
             {
