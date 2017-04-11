@@ -1,33 +1,62 @@
 <?php
 
 return [
-    'movie' => 'Film',
-    'movie_pl' => 'Filmy',
-    'movie_add' => 'Přidat film',
-    'movie_edit' => 'Upravit film',
-    'movie_list' => 'Seznam filmů',
-    'series' => 'Seriál',
-    'series_pl' => 'Seriály',
-    'series_add' => 'Přidat seriál',
-    'series_edit' => 'Upravit seriál',
-    'series_list' => 'Seznam seriálů',
-    'season' => 'Sezóna',
-    'season_pl' => 'Sezóny',
-    'book' => 'Kniha',
-    'book_pl' => 'Knihy',
-    'book_add' => 'Přidat knihu',
-    'book_edit' => 'Upravit knihu',
-    'book_list' => 'Seznam knih',
-    'music' => 'Hudba',
-    'music_pl' => 'Hudba',
-    'music_add' => 'Přidat hudbu',
-    'music_edit' => 'Upravit hudbu',
-    'music_list' => 'Seznam hudby',
-    'game' => 'Hra',
-    'game_pl' => 'Hry',
-    'game_add' => 'Přidat hru',
-    'game_edit' => 'Upravit hru',
-    'game_list' => 'Seznam her',
+    'locale' =>
+        [
+            'en' => ['gb', 'Angličtina'],
+            'cs' => ['cz', 'Čeština'],
+            'fr' => ['fr', 'Francouzština'],
+            'de' => ['de', 'Němčina'],
+            'ru' => ['ru', 'Ruština'],
+            'es' => ['es', 'Španělština']
+        ],
+    'gender' =>
+        [
+            'male' => 'Muž',
+            'female' => 'Žena'
+        ],
+    'entity' =>
+        [
+            'movie' => 'Film',
+            'series' => 'Seriál',
+            'season' => 'Sezóna',
+            'book' => 'Kniha',
+            'music' => 'Hudba',
+            'game' => 'Hra'
+        ],
+    'entity_pl' =>
+        [
+            'movie' => 'Filmy',
+            'series' => 'Seriály',
+            'season' => 'Sezóny',
+            'book' => 'Knihy',
+            'music' => 'Hudba',
+            'game' => 'Hry'
+        ],
+    'add' =>
+        [
+            'movie' => 'Přidat film',
+            'series' => 'Přidat seriál',
+            'book' => 'Přidat knihu',
+            'music' => 'Přidat hudbu',
+            'game' => 'Přidat hru',
+        ],
+    'edit' =>
+        [
+            'movie' => 'Upravit film',
+            'series' => 'Upravit seriál',
+            'book' => 'Upravit knihu',
+            'music' => 'Upravit hudbu',
+            'game' => 'Upravit hru',
+        ],
+    'list' =>
+        [
+            'movie' => 'Seznam filmů',
+            'series' => 'Seznam seriálů',
+            'book' => 'Seznam knih',
+            'music' => 'Seznam hudby',
+            'game' => 'Seznam her',
+        ],
 
     'artist' => 'Umělec',
     'artist_pl' => 'Umělci',
@@ -38,24 +67,17 @@ return [
     'categories' => 'Kategorie',
     'people' => 'Lidé',
     'stats' => 'Statistiky',
+    'credits' => 'Tvůrci',
+
+    'profile' => 'Profil',
     'settings' => 'Nastavení',
     'chng_pswrd' => 'Změna Hesla',
     'logout' => 'Odhlášení',
     'login' => 'Přihlášení',
-    'credits' => 'Tvůrci',
     'lang' => 'Jazyk',
+
     'news' => 'Novinky',
     'intro' => 'Úvod',
-
-    'locales' =>
-        [
-            'en' => ['gb', 'Angličtina'],
-            'cs' => ['cz', 'Čeština'],
-            'fr' => ['fr', 'Francouzština'],
-            'de' => ['de', 'Němčina'],
-            'ru' => ['ru', 'Ruština'],
-            'es' => ['es', 'Španělština']
-        ],
 
     'cred_head_1' => 'Vývojář',
     'cred_head_2' => 'Použité frameworky a knihovny',
