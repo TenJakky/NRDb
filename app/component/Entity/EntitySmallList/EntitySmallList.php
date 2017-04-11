@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class EntitySmallList extends \Nette\Application\UI\Control
+final class EntitySmallList extends \Nette\Application\UI\Control
 {
     /** @var \App\Model\EntityModel */
     protected $model;
@@ -10,20 +10,12 @@ class EntitySmallList extends \Nette\Application\UI\Control
     /** @var \App\Model\RatingModel */
     protected $ratingModel;
 
-    /** @var  string */
-    private $entityType;
-
     public function __construct(
         \App\Model\EntityModel $entityModel,
         \App\Model\RatingModel $ratingModel)
     {
         $this->model = $entityModel;
         $this->ratingModel = $ratingModel;
-    }
-
-    public function setEntityType($type)
-    {
-        $this->entityType = $type;
     }
 
     public function render($listType)
@@ -45,7 +37,7 @@ class EntitySmallList extends \Nette\Application\UI\Control
                 break;
         }
 
-        $data = $data->where('type', $this->entityType)->limit($perPage)->fetchAll();
+        $data = $data->where('type', $this->presenter->type)->limit($perPage)->fetchAll();
 
         $this->template->ratingModel = $this->ratingModel;
         $this->template->entities = $data;

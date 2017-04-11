@@ -28,11 +28,6 @@ final class EntityPresenter extends BaseViewEditPresenter
         }
     }
 
-    public function actionDefault()
-    {
-        $this['entitySmallList']->setEntityType($this->type);
-    }
-
     public function actionView($id)
     {
         parent::actionView($id);
