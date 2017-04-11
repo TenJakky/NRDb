@@ -32,7 +32,7 @@ final class EntityPresenter extends BaseViewEditPresenter
     {
         parent::actionView($id);
 
-        $this->template->entityModel = $this->model;
+        $this->template->ratingModel = $this->ratingModel;
     }
 
     public function actionRate($id = 0)

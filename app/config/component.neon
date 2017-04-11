@@ -34,8 +34,6 @@ services:
 
     entityForm:
             class: App\Component\EntityForm
-    entityView:
-        class: App\Component\EntityView
     entityList:
         class: App\Component\EntityList
     entitySmallList:
