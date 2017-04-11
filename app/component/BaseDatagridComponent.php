@@ -24,8 +24,12 @@ abstract class BaseDatagridComponent extends BaseComponent
         {
             $this->grid = new \Nextras\Datagrid\Datagrid;
         }
+
+        $this->grid->setRowPrimaryKey('id');
+
         $this->grid->addCellsTemplate(__DIR__.'/Paginator.latte');
         $this->grid->addCellsTemplate(__DIR__.'/TableTag.latte');
+        
         $this->grid->setDataSourceCallback(array($this, 'dataSource'));
         $this->grid->setPagination($this->perPage, array($this, 'dataSourceCount'));
     }

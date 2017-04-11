@@ -1,6 +1,6 @@
 {define col-type}
     <td>
-        {\App\Enum\EEntityType::ITEMS[$row->type]}
+        {$presenter->locale[$row->entity->type]}
     </td>
 {/define}
 
@@ -12,13 +12,13 @@
 
 {define col-year}
     <td>
-        {$row->{$row->type}->year}
+        {$row->entity->year}
     </td>
 {/define}
 
 {define col-original_title}
     <td>
-        <a href="{plink ucfirst($row->type).':view' $row->{$row->type.'_id'}}">{$row->{$row->type}->original_title}</a>
+        <a href="{plink Entity:view $row->entity_id}">{$row->entity->original_title}</a>
     </td>
 {/define}
 
