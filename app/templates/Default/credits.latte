@@ -1,20 +1,23 @@
 {layout ../@layout.latte}
-{block title}Credits{/block}
+{block title}{$presenter->locale['credits']}{/block}
 {block head}{/block}
 {block content}
 
 <section>
-    <h2>Credits</h2>
+    <h2>{$presenter->locale['cred_head_1']}</h2>
     <ul>
-        <li>This application is being developed by <a href="http://www.peldax.com">Václav Pelíšek</a>.</li>
-        <li>You can post your contributions or feedback at project's <a href="http://www.github.com/peldax/NRDb">Github repository</a>.</li>
+        <li>{$presenter->locale['cred_text_1']}<a href="http://www.peldax.com">Václav Pelíšek</a>.</li>
+        <li>{$presenter->locale['cred_text_2']}<a href="http://www.github.com/peldax/NRDb">{$presenter->locale['cred_github']}</a>.</li>
     </ul>
-    <h3>Frameworks and libraries used</h3>
+    <h2>{$presenter->locale['cred_head_2']}</h3>
     <ul>
         <li><a href="http://www.nette.org">Nette</a></li>
-        <li><a href="http://www.github.com/nextras/datagrid">Datagrid</a></li>
+        <li><a href="https://www.github.com/vojtech-dobes/nette.ajax.js">Nette Ajax JS</a></li>
+        <li><a href="https://www.github.com/nextras/datagrid">Nextras Datagrid</a></li>
         <li><a href="http://www.jquery.com">jQuery</a></li>
-        <li><a href="http://www.github.com/harvesthq/chosen">Chosen</a></li>
+        <li><a href="https://www.github.com/harvesthq/chosen">Chosen</a></li>
+        <li><a href="https://www.github.com/chartjs/Chart.js">Chart.js</a></li>
+        <li><a href="https://www.github.com/lipis/flag-icon-css">Flag icon CSS</a></li>
     </ul>
 </section>
 <section>

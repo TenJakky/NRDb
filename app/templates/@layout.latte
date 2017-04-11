@@ -70,7 +70,7 @@
                 <ul class="right">
                     {if $user->isLoggedIn()}
                         <li>
-                            <a href="{plink User:view $user->getId()}">{$user->getIdentity()->username}</a>
+                            <a href="{plink User:view $user->getId()}">{$presenter->locale['settings']}</a>
                         </li>
                         <li>
                             <a href="{plink Default:logout}">{$presenter->locale['logout']}</a>

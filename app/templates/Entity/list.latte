@@ -1,12 +1,12 @@
 {layout ../@layout.latte}
-{block title}Entity List{/block}
+{block title}{$presenter->locale[$presenter->type.'_list']}{/block}
 {block head}{/block}
 {block content}
 
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Entity:add}">Add entity</a>
+            <a href="{plink Entity:add}">{$presenter->locale[$presenter->type.'_add']}</a>
         </li>
     </ul>
 </section>
