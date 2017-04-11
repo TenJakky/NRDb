@@ -19,13 +19,4 @@ class EEntityType
         self::MUSIC => 'Music',
         self::GAME => 'Game'
     ];
-
-    const ITEMS_CZE = [
-        self::MOVIE => 'Film',
-        self::SERIES => 'Seriál',
-        self::SEASON => 'Sezóna',
-        self::BOOK => 'Kniha',
-        self::MUSIC => 'Hudba',
-        self::GAME => 'Hra'
-    ];
 }

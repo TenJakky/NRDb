@@ -13,10 +13,4 @@ class EUserRole
         self::MOD => 'Moderator',
         self::USER => 'User'
     ];
-
-    const ITEMS_CZE= [
-        self::ADMIN => 'Administrátor',
-        self::MOD => 'Moderátor',
-        self::USER => 'Uživatel'
-    ];
 }

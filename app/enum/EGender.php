@@ -11,9 +11,4 @@ class EGender
         self::MAN => 'Man',
         self::WOMAN => 'Woman'
     ];
-
-    const ITEMS_CZE = [
-        self::MAN => 'Muž',
-        self::WOMAN => 'Žena'
-    ];
 }

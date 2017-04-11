@@ -17,12 +17,4 @@ class EArtistRole
         self::INTERPRET => 'Interpret',
         self::DEVELOPER => 'Developer'
     ];
-
-    const ITEMS_CZE = [
-        self::ACTOR => 'Herec',
-        self::DIRECTOR => 'Režisér',
-        self::AUTHOR => 'Autor',
-        self::INTERPRET => 'Interpret',
-        self::DEVELOPER => 'Vývojář'
-    ];
 }
