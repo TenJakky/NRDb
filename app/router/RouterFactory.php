@@ -24,18 +24,18 @@ class RouterFactory
         $router[] = $frontRouter = new RouteList();
         $frontRouter[] = new Route('sitemap.xml', 'Default:sitemap');
 
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]login',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]login',
             'Default:login');
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]logout',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]logout',
             'Default:logout');
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]credits',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]credits',
             'Default:credits');
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]settings',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]settings',
             'Default:settings');
 
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
             'Entity:default');
-        $frontRouter[] = new Route('[<lang (en|cs|de)>/]<presenter>/<action>[/<id>]',
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]<presenter>/<action>[/<id>]',
             'Default:default');
 
         return $router;
