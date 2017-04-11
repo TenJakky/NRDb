@@ -27,10 +27,16 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'credits' => 'Credits',
+    'lang' => 'Language',
+
+    'en' => 'English',
+    'cs' => 'Czech',
+    'de' => 'German',
 
     // default:default
     'news' => 'News',
     'intro' => 'Introduction',
+    
     // default:settings
 
     // default:credits

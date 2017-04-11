@@ -19,6 +19,7 @@
     "nette.ajax.js": "^2.2.0",
     "chosen": "^1.6.2",
     "nextras.datagrid": "https://raw.githubusercontent.com/nextras/datagrid/master/js/nextras.datagrid.js",
-    "chart.js": "^2.5.0"
+    "chart.js": "^2.5.0",
+    "flag-icon-css": "^2.8.0"
   }
 }

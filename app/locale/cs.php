@@ -26,6 +26,11 @@ return [
     'logout' => 'Odhlášení',
     'login' => 'Přihlášení',
     'credits' => 'Tvůrci',
+    'lang' => 'Jazyk',
+
+    'en' => 'Angličtina',
+    'cs' => 'Čeština',
+    'de' => 'Němčina',
 
     'news' => 'Novinky',
     'intro' => 'Úvod',

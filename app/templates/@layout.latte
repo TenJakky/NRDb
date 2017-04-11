@@ -9,6 +9,7 @@
         <meta name="keywords" content="václav, pelíšek, pelda, peldax, ratings, movies, books, series, games" />
         <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700" />
+        <link rel="stylesheet" type="text/css" href="/bower/flag-icon-css/css/flag-icon.min.css" />
         <link rel="stylesheet" type="text/css" href="/scss/common.css" />
         <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/bower/chosen/chosen.jquery.js"></script>
@@ -82,6 +83,20 @@
                     {/if}
                     <li>
                         <a href="{plink Default:credits}">{$presenter->locale['credits']}</a>
+                    </li>
+                    <li class="dropdown">
+                        <a>{$presenter->locale['lang']}</a>
+                        <ul class="dropdown-list">
+                            <li>
+                                <a href="{plink this lang => en}"><span class="flag-icon flag-icon-gb"></span> {$presenter->locale['en']}</a>
+                            </li>
+                            <li>
+                                <a href="{plink this lang => cs}"><span class="flag-icon flag-icon-cz"></span> {$presenter->locale['cs']}</a>
+                            </li>
+                            <li>
+                                <a href="{plink this lang => de}"><span class="flag-icon flag-icon-de"></span> {$presenter->locale['de']}</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
