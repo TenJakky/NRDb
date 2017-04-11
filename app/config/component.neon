@@ -2,9 +2,10 @@ services:
 
     loginForm:
         class: App\Component\LoginForm
-
     settingsForm:
         class: App\Component\SettingsForm
+    passwordForm:
+        class: App\Component\PasswordForm
 
     newUserForm:
         class: App\Component\NewUserForm

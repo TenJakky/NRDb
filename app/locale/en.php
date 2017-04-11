@@ -39,10 +39,13 @@ return [
     'people' => 'People',
     'stats' => 'Statistics',
     'settings' => 'Settings',
+    'chng_pswrd' => 'Change Password',
     'logout' => 'Logout',
     'login' => 'Login',
     'credits' => 'Credits',
     'lang' => 'Language',
+    'news' => 'News',
+    'intro' => 'Introduction',
 
     'locales' =>
         [
@@ -53,9 +56,6 @@ return [
             'ru' => ['ru', 'Russian'],
             'es' => ['es', 'Spanish']
         ],
-
-    'news' => 'News',
-    'intro' => 'Introduction',
 
     'cred_head_1' => 'Developer',
     'cred_head_2' => 'Frameworks and libraries used',

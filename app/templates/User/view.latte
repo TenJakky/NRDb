@@ -5,11 +5,14 @@
 
 <section>
     <ul class="inline-buttons">
-        <li>
-            {if $data->id == $user->getId()}
+        {if $data->id == $user->getId()}
+            <li>
                 <a href="{plink Default:settings}">Change account settings</a>
-            {/if}
-        </li>
+            </li>
+            <li>
+                <a href="{plink Default:changePassword}">Change password</a>
+            </li>
+        {/if}
     </ul>
 </section>
 <section>

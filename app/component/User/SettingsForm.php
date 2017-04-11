@@ -18,12 +18,6 @@ final class SettingsForm extends BaseComponent
         $form = new \Nette\Application\UI\Form();
         $form->addProtection('Security token has expired, please submit the form again.');
 
-        $form->addHidden('id');
-
-        $pswd1 = $form->addPassword('password1', 'New password');
-        $pswd2 = $form->addPassword('password2', 'Password again');
-        $pswd2->addConditionOn($pswd1, \Nette\Forms\Form::FILLED)->setRequired();
-
         $form->addText('name', 'Name');
         $form->addText('surname', 'Surname');
         $form->addRadioList('gender', 'Gender', array('male'=>'Male', 'female'=>'Female'));
@@ -43,19 +37,7 @@ final class SettingsForm extends BaseComponent
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
         $values = $form->getValues();
-
-        if ($values['password1'])
-        {
-            if ($values['password1'] != $values['password2'])
-            {
-                $this->presenter->flashMessage('Passwords must match.', 'failure');
-                $this->presenter->redirect('Default:settings');
-            }
-            $values['password'] = \Nette\Security\Passwords::hash($values['password1']);
-        }
-
-        unset($values['password1']);
-        unset($values['password2']);
+        $values['id'] = $this->presenter->getUser()->getId();
 
         $this->userModel->save($values);
 

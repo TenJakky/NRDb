@@ -32,6 +32,8 @@ class RouterFactory
             'Default:credits');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]settings',
             'Default:settings');
+        $frontRouter[] = new Route('[<lang [a-z]{2}>/]change-password',
+            'Default:changePassword');
 
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
             'Entity:default');

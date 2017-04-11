@@ -39,10 +39,13 @@ return [
     'people' => 'Lidé',
     'stats' => 'Statistiky',
     'settings' => 'Nastavení',
+    'chng_pswrd' => 'Změna Hesla',
     'logout' => 'Odhlášení',
     'login' => 'Přihlášení',
     'credits' => 'Tvůrci',
     'lang' => 'Jazyk',
+    'news' => 'Novinky',
+    'intro' => 'Úvod',
 
     'locales' =>
         [
@@ -53,9 +56,6 @@ return [
             'ru' => ['ru', 'Ruština'],
             'es' => ['es', 'Španělština']
         ],
-
-    'news' => 'Novinky',
-    'intro' => 'Úvod',
 
     'cred_head_1' => 'Vývojář',
     'cred_head_2' => 'Použité frameworky a knihovny',
