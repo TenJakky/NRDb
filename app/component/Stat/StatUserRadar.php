@@ -22,19 +22,14 @@ class StatUserRadar extends BaseComponent
         $this->template->statMusic = $user->ratings_music;
         $this->template->statGame = $user->ratings_game;
 
-        $movieMax = $this->userModel->getMaxRatings('movie');
-        $seriesMax = $this->userModel->getMaxRatings('series');
-        $seasonMax = $this->userModel->getMaxRatings('season');
-        $bookMax = $this->userModel->getMaxRatings('book');
-        $musicMax = $this->userModel->getMaxRatings('music');
-        $gameMax = $this->userModel->getMaxRatings('game');
+        $max = $this->userModel->getMaxRatings();
 
-        $this->template->percentMovie = $movieMax ? $this->template->statMovie  / $movieMax : 0;
-        $this->template->percentSeries = $seriesMax ? $this->template->statSeries  / $seriesMax : 0;
-        $this->template->percentSeason = $seasonMax ?$this->template->statSeason  / $seasonMax : 0;
-        $this->template->percentBook = $bookMax ? $this->template->statBook  / $bookMax : 0;
-        $this->template->percentMusic = $musicMax ? $this->template->statMusic  / $musicMax : 0;
-        $this->template->percentGame = $gameMax ?$this->template->statGame / $gameMax : 0;
+        $this->template->percentMovie = $max->movie ? $this->template->statMovie  / $max->movie : 0;
+        $this->template->percentSeries = $max->series ? $this->template->statSeries  / $max->series : 0;
+        $this->template->percentSeason = $max->season ?$this->template->statSeason  / $max->season : 0;
+        $this->template->percentBook = $max->book ? $this->template->statBook  / $max->book : 0;
+        $this->template->percentMusic = $max->music ? $this->template->statMusic  / $max->music : 0;
+        $this->template->percentGame = $max->game ?$this->template->statGame / $max->game : 0;
 
         parent::render();
     }

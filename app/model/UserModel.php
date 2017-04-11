@@ -6,8 +6,16 @@ class UserModel extends BaseModel
 {
     public $tableName = 'user';
 
-    public function getMaxRatings($category)
+    public function getMaxRatings()
     {
-        return $this->getTable()->select("ratings_$category AS count")->order("ratings_$category DESC")->limit(1)->fetch()->count;
+        return $this->getTable()
+            ->select('
+            MAX(ratings_movie) AS movie,
+            MAX(ratings_series) AS series,
+            MAX(ratings_season) AS season,
+            MAX(ratings_book) AS book,
+            MAX(ratings_music) AS music,
+            MAX(ratings_game) AS game
+            ')->fetch();
     }
 }

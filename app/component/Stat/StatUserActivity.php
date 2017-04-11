@@ -16,13 +16,7 @@ class StatUserActivity extends BaseComponent
 	public function render()
 	{
 		$this->template->activeUsers = $this->userModel->getTable()->order('ratings_total DESC')->limit(5);
-
-        $this->template->movieMax = $this->userModel->getMaxRatings('movie');
-        $this->template->seriesMax = $this->userModel->getMaxRatings('series');
-        $this->template->seasonMax = $this->userModel->getMaxRatings('season');
-        $this->template->bookMax = $this->userModel->getMaxRatings('book');
-        $this->template->musicMax = $this->userModel->getMaxRatings('music');
-        $this->template->gameMax = $this->userModel->getMaxRatings('game');
+        $this->template->max = $this->userModel->getMaxRatings();
 
 		parent::render();
 	}

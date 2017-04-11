@@ -50,12 +50,12 @@
         {
             label: {$temp->username},
             data: [
-                {$movieMax ? $temp->ratings_movie / $movieMax : 0},
-                {$seriesMax ? $temp->ratings_series / $seriesMax : 0},
-                {$seasonMax ? $temp->ratings_season / $seasonMax : 0},
-                {$bookMax ? $temp->ratings_book / $bookMax : 0},
-                {$musicMax ? $temp->ratings_music / $musicMax : 0},
-                {$gameMax ? $temp->ratings_game / $gameMax : 0}
+                {$max->movie ? $temp->ratings_movie / $max->movie : 0},
+                {$max->series ? $temp->ratings_series / $max->series : 0},
+                {$max->season ? $temp->ratings_season / $max->season : 0},
+                {$max->book ? $temp->ratings_book / $max->book : 0},
+                {$max->music ? $temp->ratings_music / $max->music : 0},
+                {$max->game ? $temp->ratings_game / $max->game : 0},
             ],
             backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
             borderColor: chartBorderColors[{$iterator->counter - 1}],
