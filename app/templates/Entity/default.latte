@@ -1,15 +1,15 @@
 {layout ../@layout.latte}
-{block title}{$presenter->locale[$presenter->type.'_pl']}{/block}
+{block title}{$presenter->locale['entity_pl'][$presenter->type]}{/block}
 {block head}{/block}
 {block content}
 
 <section>
     <ul class="inline-buttons">
         <li>
-            <a href="{plink Entity:add}">{$presenter->locale[$presenter->type.'_add']}</a>
+            <a href="{plink Entity:add}">{$presenter->locale['add'][$presenter->type]}</a>
         </li>
         <li>
-            <a href="{plink Entity:list}">{$presenter->locale[$presenter->type.'_list']}</a>
+            <a href="{plink Entity:list}">{$presenter->locale['list'][$presenter->type]}</a>
         </li>
     </ul>
 </section>

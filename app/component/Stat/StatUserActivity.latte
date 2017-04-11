@@ -2,12 +2,9 @@
     <thead>
         <tr>
             <td></td>
-            <th>{$presenter->locale['movie']}</th>
-            <th>{$presenter->locale['series']}</th>
-            <td>{$presenter->locale['season']}</td>
-            <th>{$presenter->locale['book']}</th>
-            <th>{$presenter->locale['music']}</th>
-            <th>{$presenter->locale['game']}</th>
+            {foreach $presenter->locale['entity'] as $entity}
+                <th>{$entity}</th>
+            {/foreach}
             <th>Total</th>
         </tr>
     </thead>

@@ -31,21 +31,11 @@
                         <li class="dropdown">
                             <a>{$presenter->locale['categories']}</a>
                             <ul class="dropdown-list">
-                                <li>
-                                    <a href="{plink Entity:default type => movie}">{$presenter->locale['movie_pl']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Entity:default type => series}">{$presenter->locale['series_pl']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Entity:default type => book}">{$presenter->locale['book_pl']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Entity:default type => music}">{$presenter->locale['music_pl']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Entity:default type => game}">{$presenter->locale['game_pl']}</a>
-                                </li>
+                                {foreach $presenter->locale['entity_pl'] as $type => $pl}
+                                    <li>
+                                        <a href="{plink Entity:default type => $type}">{$pl}</a>
+                                    </li>
+                                {/foreach}
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -87,7 +77,7 @@
                     <li class="dropdown">
                         <a>{$presenter->locale['lang']}</a>
                         <ul class="dropdown-list">
-                            {foreach $presenter->locale['locales'] as $code => list($flag, $name)}
+                            {foreach $presenter->locale['locale'] as $code => list($flag, $name)}
                                 <li>
                                     <a href="{plink this lang => $code}"><span class="flag-icon flag-icon-{$flag}"></span> {$name}</a>
                                 </li>

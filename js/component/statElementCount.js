@@ -52,40 +52,12 @@ $(document).ready(function()
         amountOptions.options.title.text = 'Number of ratings by type';
         chart = new Chart(canvas, amountOptions);
     });
-    $('#plotMovie').click(function() {
+    $('.plotEntity').click(function() {
         chart.destroy();
-        distributionOptions.data.datasets[0].data = movieData;
-        distributionOptions.options.title.text = 'Distribution of movie ratings';
-        chart = new Chart(canvas, distributionOptions);
-    });
-    $('#plotSeries').click(function() {
-        chart.destroy();
-        distributionOptions.data.datasets[0].data = seriesData;
-        distributionOptions.options.title.text = 'Distribution of series ratings';
-        chart = new Chart(canvas, distributionOptions);
-    });
-    $('#plotSeason').click(function() {
-        chart.destroy();
-        distributionOptions.data.datasets[0].data = seasonData;
-        distributionOptions.options.title.text = 'Distribution of season ratings';
-        chart = new Chart(canvas, distributionOptions);
-    });
-    $('#plotBook').click(function() {
-        chart.destroy();
-        distributionOptions.data.datasets[0].data = bookData;
-        distributionOptions.options.title.text = 'Distribution of book ratings';
-        chart = new Chart(canvas, distributionOptions);
-    });
-    $('#plotMusic').click(function() {
-        chart.destroy();
-        distributionOptions.data.datasets[0].data = musicData;
-        distributionOptions.options.title.text = 'Distribution of music ratings';
-        chart = new Chart(canvas, distributionOptions);
-    });
-    $('#plotGame').click(function() {
-        chart.destroy();
-        distributionOptions.data.datasets[0].data = gameData;
-        distributionOptions.options.title.text = 'Distribution of game ratings';
+        const eType = $(this).data('type');
+        console.log(eType);
+        distributionOptions.data.datasets[0].data = entityData[eType];
+        distributionOptions.options.title.text = 'Distribution of ' + eType +' ratings';
         chart = new Chart(canvas, distributionOptions);
     });
 });

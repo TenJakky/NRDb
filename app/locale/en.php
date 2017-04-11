@@ -1,33 +1,63 @@
 <?php
 
 return [
-    'movie' => 'Movie',
-    'movie_pl' => 'Movies',
-    'movie_add' => 'Add movie',
-    'movie_edit' => 'Edit movie',
-    'movie_list' => 'List of movies',
-    'series' => 'Series',
-    'series_pl' => 'Series',
-    'series_add' => 'Add series',
-    'series_edit' => 'Edit series',
-    'series_list' => 'List of series',
-    'season' => 'Season',
-    'season_pl' => 'Seasons',
-    'book' => 'Book',
-    'book_pl' => 'Books',
-    'book_add' => 'Add book',
-    'book_edit' => 'Edit book',
-    'book_list' => 'List of books',
-    'music' => 'Music',
-    'music_pl' => 'Music',
-    'music_add' => 'Add music',
-    'music_edit' => 'Edit music',
-    'music_list' => 'List of music',
-    'game' => 'Game',
-    'game_pl' => 'Games',
-    'game_add' => 'Add game',
-    'game_edit' => 'Edit game',
-    'game_list' => 'List of games',
+
+    'locale' =>
+        [
+            'cs' => ['cz', 'Czech'],
+            'en' => ['gb', 'English'],
+            'fr' => ['fr', 'French'],
+            'de' => ['de', 'German'],
+            'ru' => ['ru', 'Russian'],
+            'es' => ['es', 'Spanish']
+        ],
+    'gender' =>
+        [
+            'male' => 'Male',
+            'female' => 'Female'
+        ],
+    'entity' =>
+        [
+            'movie' => 'Movie',
+            'series' => 'Series',
+            'season' => 'Season',
+            'book' => 'Book',
+            'music' => 'Music',
+            'game' => 'Game'
+        ],
+    'entity_pl' =>
+        [
+            'movie' => 'Movies',
+            'series' => 'Series',
+            'season' => 'Seasons',
+            'book' => 'Books',
+            'music' => 'Music',
+            'game' => 'Games'
+        ],
+    'add' =>
+        [
+            'movie' => 'Add movie',
+            'series' => 'Add series',
+            'book' => 'Add book',
+            'music' => 'Add music',
+            'game' => 'Add game',
+        ],
+    'edit' =>
+        [
+            'movie' => 'Edit movie',
+            'series' => 'Edit series',
+            'book' => 'Edit book',
+            'music' => 'Edit music',
+            'game' => 'Edit game',
+        ],
+    'list' =>
+        [
+            'movie' => 'List of movies',
+            'series' => 'List of series',
+            'book' => 'List of books',
+            'music' => 'List of music',
+            'game' => 'List of games',
+        ],
 
     'artist' => 'Artist',
     'artist_pl' => 'Artists',
@@ -46,16 +76,6 @@ return [
     'lang' => 'Language',
     'news' => 'News',
     'intro' => 'Introduction',
-
-    'locales' =>
-        [
-            'cs' => ['cz', 'Czech'],
-            'en' => ['gb', 'English'],
-            'fr' => ['fr', 'French'],
-            'de' => ['de', 'German'],
-            'ru' => ['ru', 'Russian'],
-            'es' => ['es', 'Spanish']
-        ],
 
     'cred_head_1' => 'Developer',
     'cred_head_2' => 'Frameworks and libraries used',
