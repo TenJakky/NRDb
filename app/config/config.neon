@@ -36,4 +36,3 @@ services:
 
     - App\Model\Authenticator
     authenticator: @App\Model\Authenticator
-

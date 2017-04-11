@@ -22,13 +22,13 @@
     {if $data->type === 'season'}
         <ul class="inline-buttons">
             <li>
-                <a href="{plink Entity:view $data->series_id}">← Series page</a>
+                <a href="{plink Entity:view $data->series_id}">← Series</a>
             </li>
         </ul>
     {/if}
     <ul class="inline-buttons">
         <li>
-            <a href="{plink ucfirst($data->type).':default'}">← Overview page</a>
+            <a href="{plink Entity:default type => $data->type}">← Overview</a>
         </li>
     </ul>
     <ul class="inline-buttons">

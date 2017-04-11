@@ -10,6 +10,9 @@ class EntitySmallList extends \Nette\Application\UI\Control
     /** @var \App\Model\RatingModel */
     protected $ratingModel;
 
+    /** @var  string */
+    private $entityType;
+
     public function __construct(
         \App\Model\EntityModel $entityModel,
         \App\Model\RatingModel $ratingModel)
@@ -18,7 +21,12 @@ class EntitySmallList extends \Nette\Application\UI\Control
         $this->ratingModel = $ratingModel;
     }
 
-    public function render($entityType, $listType)
+    public function setEntityType($type)
+    {
+        $this->entityType = $type;
+    }
+
+    public function render($listType)
     {
         $perPage = $this->presenter->getUser()->getIdentity()->per_page_small;
         $userId = $this->presenter->getUser()->getId();
@@ -27,15 +35,17 @@ class EntitySmallList extends \Nette\Application\UI\Control
         {
             default:
             case 'new':
-                $data = $this->model->getRecent($perPage)->where('type', $entityType)->fetchAll();
+                $data = $this->model->getRecent();
                 break;
             case 'top':
-                $data = $this->model->getTop($perPage)->where('type', $entityType)->fetchAll();
+                $data = $this->model->getTop();
                 break;
             case 'notRated':
-                $data = $this->model->getNotRated($userId, $perPage)->where('type', $entityType)->fetchAll();
+                $data = $this->model->getNotRated($userId);
                 break;
         }
+
+        $data = $data->where('type', $this->entityType)->limit($perPage)->fetchAll();
 
         $this->template->ratingModel = $this->ratingModel;
         $this->template->entities = $data;

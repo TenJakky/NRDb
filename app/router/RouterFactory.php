@@ -2,8 +2,7 @@
 
 namespace App;
 
-use Nette,
-    Nette\Application\Routers\RouteList,
+use Nette\Application\Routers\RouteList,
     Nette\Application\Routers\Route;
 
 /**
@@ -24,14 +23,21 @@ class RouterFactory
 
         $router[] = $frontRouter = new RouteList();
         $frontRouter[] = new Route('sitemap.xml', 'Default:sitemap');
-        $frontRouter[] = new Route('settings', 'Default:settings');
-        $frontRouter[] = new Route('credits', 'Default:credits');
-        $frontRouter[] = new Route('logout', 'Default:logout');
-        $frontRouter[] = new Route('login', 'Default:login');
 
-        $frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]login',
+            'Default:login');
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]logout',
+            'Default:logout');
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]credits',
+            'Default:credits');
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]settings',
+            'Default:settings');
+
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
+            'Entity:default');
+        $frontRouter[] = new Route('[<lang (en|cs|de)>/]<presenter>/<action>[/<id>]',
+            'Default:default');
 
         return $router;
     }
-
 }

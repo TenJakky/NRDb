@@ -7,18 +7,17 @@ class EntityModel extends BaseModel
     /** @var  string */
     public $tableName = 'entity';
 
-    public function getRecent($limit)
+    public function getRecent()
     {
-        return $this->getTable()->order('id DESC')->limit($limit);
+        return $this->getTable()->order('id DESC');
     }
 
-    public function getTop($limit)
+    public function getTop()
     {
         return $this
             ->getTable()
             ->group('id')
-            ->order('rating DESC')
-            ->limit($limit);
+            ->order('rating DESC');
     }
 
     public function getArtistTop(string $artistType, int $artistId)
@@ -50,14 +49,13 @@ class EntityModel extends BaseModel
         ) AS `subquery`", $artistId)->fetch()->average;
     }
 
-    public function getNotRated($userId, $limit = null)
+    public function getNotRated($userId)
     {
         return $this
             ->getTable()
             ->joinWhere(':rating', ':rating.user_id', $userId)
             ->where(':rating.user_id', null)
-            ->order('entity.id DESC')
-            ->limit($limit);
+            ->order('entity.id DESC');
     }
 
     public function getRated($userId, $limit = null)

@@ -25,41 +25,41 @@
                 {if $user->isLoggedIn()}
                     <ul>
                         <li>
-                            <a href="{plink Default:default}">Dashboard</a>
+                            <a href="{plink Default:default}">{$presenter->locale['dashboard']}</a>
                         </li>
                         <li class="dropdown">
-                            <a>Categories</a>
+                            <a>{$presenter->locale['categories']}</a>
                             <ul class="dropdown-list">
                                 <li>
-                                    <a href="{plink Movie:default}">Movie</a>
+                                    <a href="{plink Entity:default type => movie}">{$presenter->locale['movie_pl']}</a>
                                 </li>
                                 <li>
-                                    <a href="{plink Series:default}">Series</a>
+                                    <a href="{plink Entity:default type => series}">{$presenter->locale['series_pl']}</a>
                                 </li>
                                 <li>
-                                    <a href="{plink Book:default}">Book</a>
+                                    <a href="{plink Entity:default type => book}">{$presenter->locale['book_pl']}</a>
                                 </li>
                                 <li>
-                                    <a href="{plink Music:default}">Music</a>
+                                    <a href="{plink Entity:default type => music}">{$presenter->locale['music_pl']}</a>
                                 </li>
                                 <li>
-                                    <a href="{plink Game:default}">Game</a>
+                                    <a href="{plink Entity:default type => game}">{$presenter->locale['game_pl']}</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a>People</a>
+                            <a>{$presenter->locale['people']}</a>
                             <ul class="dropdown-list">
                                 <li>
-                                    <a href="{plink Artist:default}">Artists</a>
+                                    <a href="{plink Artist:default}">{$presenter->locale['artist_pl']}</a>
                                 </li>
                                 <li>
-                                    <a href="{plink User:default}">Users</a>
+                                    <a href="{plink User:default}">{$presenter->locale['user_pl']}</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{plink Statistics:default}">Statistics</a>
+                            <a href="{plink Statistics:default}">{$presenter->locale['stats']}</a>
                         </li>
                         <li class="dropdown">
                             {control search}
@@ -72,16 +72,16 @@
                             <a href="{plink User:view $user->getId()}">{$user->getIdentity()->username}</a>
                         </li>
                         <li>
-                            <a href="{plink Default:logout}">Log out</a>
+                            <a href="{plink Default:logout}">{$presenter->locale['logout']}</a>
                         </li>
-                        {if !in_array('User', $user->getRoles())}
+                        {*if !in_array('User', $user->getRoles())}
                             <li>
                                 <a href="{plink Admin:Default:default}">Administration</a>
                             </li>
-                        {/if}
+                        {/if*}
                     {/if}
                     <li>
-                        <a href="{plink Default:credits}">Credits</a>
+                        <a href="{plink Default:credits}">{$presenter->locale['credits']}</a>
                     </li>
                 </ul>
             </div>

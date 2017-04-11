@@ -16,7 +16,7 @@ final class SettingsForm extends BaseComponent
     public function createComponentForm()
     {
         $form = new \Nette\Application\UI\Form();
-        $form->addProtection('Security token has expired, please submit the form again');
+        $form->addProtection('Security token has expired, please submit the form again.');
 
         $form->addHidden('id');
 
@@ -26,7 +26,7 @@ final class SettingsForm extends BaseComponent
 
         $form->addText('name', 'Name');
         $form->addText('surname', 'Surname');
-        $form->addRadioList('gender', 'Gender', array('Male'=>'Male', 'Female'=>'Female'));
+        $form->addRadioList('gender', 'Gender', array('male'=>'Male', 'female'=>'Female'));
         $form->addSelect('country_id', 'Nationality', $this->countryModel->getTable()->fetchPairs('id', 'name'));
         $form->addTextArea('description', 'Description');
         $form->addText('per_page', 'Number of items per page');

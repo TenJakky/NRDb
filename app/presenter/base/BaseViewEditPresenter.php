@@ -9,7 +9,7 @@ abstract class BaseViewEditPresenter extends BaseViewPresenter
         if (!$this->model->findRow($id))
         {
             $this->flashMessage($this->getName() . ' not found', 'failure');
-            $this->redirect(':default');
+            $this->redirect('Entity:default');
         }
 
         $this->template->id = $id;

@@ -4,6 +4,7 @@ namespace App\Presenter;
 
 abstract class BaseViewPresenter extends BasePresenter
 {
+    /** @var  \App\Model\BaseModel */
     protected $model;
 
     public function actionView($id)

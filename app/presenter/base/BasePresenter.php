@@ -6,6 +6,12 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
+    /** @persistent */
+    public $lang;
+
+    /** @var  array */
+    public $locale;
+
     public function startup()
     {
         parent::startup();
@@ -14,18 +20,32 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         {
             $this->redirect('Default:login');
         }
+
+        switch ($this->lang)
+        {
+            default:
+            case 'en':
+                $this->locale = require getcwd().'/app/locale/en.php';
+                break;
+            case 'cs':
+                $this->locale = require getcwd().'/app/locale/cs.php';
+                break;
+            case 'de':
+                $this->locale = require getcwd().'/app/locale/de.php';
+                break;
+        }
     }
 
     public function flashMessage($message, $type = 'info')
     {
-        $f = parent::flashMessage($message, $type);
+        $flash = parent::flashMessage($message, $type);
 
         if ($this->isAjax())
         {
-            $this->redrawControl("flashMessages");
+            $this->redrawControl('flashMessages');
         }
 
-        return $f;
+        return $flash;
     }
 
     public function createComponent($name, array $args = null)
