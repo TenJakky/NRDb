@@ -68,10 +68,13 @@ return [
     'categories' => 'Categories',
     'people' => 'People',
     'stats' => 'Statistics',
+
+    'profile' => 'Profile',
     'settings' => 'Settings',
     'chng_pswrd' => 'Change Password',
     'logout' => 'Logout',
     'login' => 'Login',
+
     'credits' => 'Credits',
     'lang' => 'Language',
     'news' => 'News',

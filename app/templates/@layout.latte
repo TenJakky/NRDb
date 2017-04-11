@@ -59,11 +59,22 @@
                 {/if}
                 <ul class="right">
                     {if $user->isLoggedIn()}
-                        <li>
-                            <a href="{plink User:view $user->getId()}">{$user->identity->username}</a>
-                        </li>
-                        <li>
-                            <a href="{plink Default:logout}">{$presenter->locale['logout']}</a>
+                        <li class="dropdown">
+                            <a>{$user->identity->username}</a>
+                            <ul class="dropdown-list">
+                                <li>
+                                    <a href="{plink User:view $user->id}">{$presenter->locale['profile']}</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Default:settings}">{$presenter->locale['settings']}</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Default:changePassword}">{$presenter->locale['chng_pswrd']}</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Default:logout}">{$presenter->locale['logout']}</a>
+                                </li>
+                            </ul>
                         </li>
                         {*if !in_array('User', $user->getRoles())}
                             <li>
