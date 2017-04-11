@@ -34,7 +34,6 @@ return [
     'user' => 'User',
     'user_pl' => 'Users',
 
-    // layout
     'dashboard' => 'Dashboard',
     'categories' => 'Categories',
     'people' => 'People',
@@ -45,32 +44,32 @@ return [
     'credits' => 'Credits',
     'lang' => 'Language',
 
-    // locales
-    'en' => 'English',
-    'cs' => 'Czech',
-    'de' => 'German',
+    'locales' =>
+        [
+            'cs' => ['cz', 'Czech'],
+            'en' => ['gb', 'English'],
+            'fr' => ['fr', 'French'],
+            'de' => ['de', 'German'],
+            'ru' => ['ru', 'Russian'],
+            'es' => ['es', 'Spanish']
+        ],
 
-    // default:default
     'news' => 'News',
     'intro' => 'Introduction',
 
-    // default:credits
     'cred_head_1' => 'Developer',
     'cred_head_2' => 'Frameworks and libraries used',
     'cred_text_1' => 'This application is being developed by ',
-    'cred_text_2' => 'Contribute or share feedback at project\'s ',
+    'cred_text_2' => 'You can contribute or share feedback at project\'s ',
     'cred_github' => 'Github repository',
 
-    // entity:default
     'top_cat_1' => 'Recently added',
     'top_cat_2' => 'Top rated',
     'top_cat_3' => 'To rate',
 
-    // statistics:default
     'stat_head_1' => 'Number of elements and ratings',
     'stat_head_2' => 'Most active users',
 
-    // statElementCount
     'plot_cat_1' => 'Plot amounts',
     'plot_cat_2' => 'Plot rating distribution',
     '#_elem' => '# of elements',

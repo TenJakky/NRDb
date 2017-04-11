@@ -44,9 +44,15 @@ return [
     'credits' => 'Tvůrci',
     'lang' => 'Jazyk',
 
-    'en' => 'Angličtina',
-    'cs' => 'Čeština',
-    'de' => 'Němčina',
+    'locales' =>
+        [
+            'en' => ['gb', 'Angličtina'],
+            'cs' => ['cz', 'Čeština'],
+            'fr' => ['fr', 'Francouzština'],
+            'de' => ['de', 'Němčina'],
+            'ru' => ['ru', 'Ruština'],
+            'es' => ['es', 'Španělština']
+        ],
 
     'news' => 'Novinky',
     'intro' => 'Úvod',
@@ -54,7 +60,7 @@ return [
     'cred_head_1' => 'Vývojář',
     'cred_head_2' => 'Použité frameworky a knihovny',
     'cred_text_1' => 'Aplikaci vyvíjí ',
-    'cred_text_2' => 'Přispějte nebo sdělte názor v ',
+    'cred_text_2' => 'Můžete přispět nebo sdílet názor na projektovém ',
     'cred_github' => 'Github repozitáři',
 
     'top_cat_1' => 'Naposledy přidané',

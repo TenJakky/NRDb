@@ -87,15 +87,11 @@
                     <li class="dropdown">
                         <a>{$presenter->locale['lang']}</a>
                         <ul class="dropdown-list">
-                            <li>
-                                <a href="{plink this lang => en}"><span class="flag-icon flag-icon-gb"></span> {$presenter->locale['en']}</a>
-                            </li>
-                            <li>
-                                <a href="{plink this lang => cs}"><span class="flag-icon flag-icon-cz"></span> {$presenter->locale['cs']}</a>
-                            </li>
-                            <li>
-                                <a href="{plink this lang => de}"><span class="flag-icon flag-icon-de"></span> {$presenter->locale['de']}</a>
-                            </li>
+                            {foreach $presenter->locale['locales'] as $code => list($flag, $name)}
+                                <li>
+                                    <a href="{plink this lang => $code}"><span class="flag-icon flag-icon-{$flag}"></span> {$name}</a>
+                                </li>
+                            {/foreach}
                         </ul>
                     </li>
                 </ul>

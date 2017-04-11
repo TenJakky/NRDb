@@ -24,14 +24,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         switch ($this->lang)
         {
             default:
-            case 'en':
                 $this->locale = require getcwd().'/app/locale/en.php';
                 break;
+            case 'en':
             case 'cs':
-                $this->locale = require getcwd().'/app/locale/cs.php';
-                break;
             case 'de':
-                $this->locale = require getcwd().'/app/locale/de.php';
+            case 'es':
+            case 'fr':
+            case 'ru':
+                $this->locale = require getcwd()."/app/locale/{$this->lang}.php";
                 break;
         }
     }
