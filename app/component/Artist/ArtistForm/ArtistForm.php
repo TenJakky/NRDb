@@ -4,9 +4,6 @@ namespace App\Component;
 
 final class ArtistForm extends BaseComponent
 {
-    /** @var \App\Model\GroupModel */
-    protected $groupModel;
-
     /** @var \App\Model\ArtistModel */
     protected $artistModel;
 
@@ -25,11 +22,20 @@ final class ArtistForm extends BaseComponent
     {
         if ($id)
         {
-            $row = $this->groupModel->findRow($id);
-
+            $row = $this->artistModel->findRow($id);
             $data = $row->toArray();
-            $data['members'] = $row->related('jun_group2member.group_id')->where('active', 1)->fetchPairs('id', 'person_id');
-            $data['former_members'] = $row->related('jun_group2member.group_id')->where('active', 0)->fetchPairs('id', 'person_id');
+
+            if ($row->type === 'group')
+            {
+                $data['members'] = $row
+                    ->related('jun_group2member.group_id')
+                    ->where('active', 1)
+                    ->fetchPairs('id', 'member_id');
+                $data['former_members'] = $row
+                    ->related('jun_group2member.group_id')
+                    ->where('active', 0)
+                    ->fetchPairs('id', 'member_id');
+            }
 
             $this['form']->setDefaults($data);
         }
