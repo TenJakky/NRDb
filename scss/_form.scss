@@ -5,6 +5,11 @@
   border: 0;
 }
 
+div.selectize-control
+{
+  width: 51%;
+}
+
 input[type=number], input[type=text], textarea, input[type=password], input[type=date], input[type=search]
 {
   border: 1px solid $grey;
@@ -34,11 +39,6 @@ form
     content: " *";
   }
 
-  #person_form
-  {
-    display: none;
-  }
-
   table
   {
     width: 100%;
@@ -53,11 +53,6 @@ form
       td
       {
         padding: 5px;
-
-        div
-        {
-          display: inline;
-        }
 
         span.form-flash
         {
@@ -91,7 +86,7 @@ form
   }
 }
 
-#person_subform, #pseudonym_subform, #band_subform
+#artist_subform
 {
   display: none;
 }
