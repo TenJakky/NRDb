@@ -1,1 +1,63 @@
-{control form}
+{form form}
+    <table>
+        <tbody>
+            <tr class="required">
+                <th>{label type /}</th>
+                <td>{input type}</td>
+            </tr>
+            <tr class="required">
+                <th>{label name /}</th>
+                <td>{input name}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="personDetails" style="display: none">
+        <tbody>
+            <tr>
+                <th>{label middlename /}</th>
+                <td>{input middlename}</td>
+            </tr>
+            <tr class="required">
+                <th>{label surname /}</th>
+                <td>{input surname}</td>
+            </tr>
+            <tr class="required">
+                <th>{label country_id /}</th>
+                <td>{input country_id}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="pseudonymDetails" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label artist_id /}</th>
+                <td>{input artist_id}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="groupDetails" style="display: none">
+        <tbody>
+            <tr>
+                <th>{label members /}</th>
+                <td>{input members}</td>
+            </tr>
+            <tr>
+                <th>{label former_members /}</th>
+                <td>{input former_members}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <th>{label description /}</th>
+                <td>{input description}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{input submit}</td>
+            </tr>
+        </tbody>
+    </table>
+    {input id}
+{/form}

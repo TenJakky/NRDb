@@ -5,14 +5,10 @@
   border: 0;
 }
 
-div.selectize-control
-{
-  width: 51%;
-}
-
 input[type=number], input[type=text], textarea, input[type=password], input[type=date], input[type=search]
 {
   border: 1px solid $grey;
+  border-radius: 3px;
   outline: none;
   width: 47%;
 
@@ -30,6 +26,7 @@ textarea, input
 textarea
 {
   height: 100px;
+  resize: vertical;
 }
 
 form
@@ -42,6 +39,7 @@ form
   table
   {
     width: 100%;
+    table-layout: fixed;
 
     tr
     {
@@ -53,6 +51,16 @@ form
       td
       {
         padding: 5px;
+
+        &:nth-child(1)
+        {
+          width: 25%;
+        }
+
+        &:nth-child(2)
+        {
+          width: 75%;
+        }
 
         span.form-flash
         {

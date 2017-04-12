@@ -42,7 +42,7 @@
   }
 }
 
-input[type=button], input[type=submit]
+input[type=button], input[type=submit], button
 {
   border: 0;
   background: $black;
@@ -52,7 +52,7 @@ input[type=button], input[type=submit]
   padding: 10px 15px;
 }
 
-input[type=button]:hover, input[type=submit]:hover
+input[type=button]:hover, input[type=submit]:hover, button:hover
 {
   color: $grey;
   cursor: pointer;

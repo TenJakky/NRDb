@@ -48,15 +48,6 @@ Nette.showFormErrors = function (form, errors)
     }
 };
 
-Nette.toggle = function (id, visible) {
-    var el = $('#' + id);
-    if (visible) {
-        el.slideDown();
-    } else {
-        el.slideUp();
-    }
-};
-
 $(document).ready(function ()
 {
     $('select').selectize(selectizeOptions);

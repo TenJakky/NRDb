@@ -7,15 +7,20 @@ final class ArtistForm extends BaseComponent
     /** @var \App\Model\ArtistModel */
     protected $artistModel;
 
+    /** @var \App\Model\CountryModel */
+    protected $countryModel;
+
     /** @var \App\Model\GroupMemberModel */
     protected $groupMemberModel;
 
     public function __construct(
         \App\Model\ArtistModel $artistModel,
-        \App\Model\GroupMemberModel $groupMemberModel)
+        \App\Model\GroupMemberModel $groupMemberModel,
+        \App\Model\CountryModel $countryModel)
     {
         $this->artistModel = $artistModel;
         $this->groupMemberModel = $groupMemberModel;
+        $this->countryModel = $countryModel;
     }
 
     public function render($id = 0)
@@ -49,19 +54,55 @@ final class ArtistForm extends BaseComponent
         $form = new \Nette\Application\UI\Form();
 
         $form->addHidden('id');
+
+        $form->addRadioList('type', 'Type', ['person' => 'Person', 'pseudonym' => 'Pseudonym', 'group' => 'Group'])
+            ->setDefaultValue('person')
+            ->setRequired()
+            ->addCondition($form::EQUAL, 'person')
+                ->toggle('personDetails')
+            ->endCondition()
+            ->addCondition($form::EQUAL, 'pseudonym')
+                ->toggle('pseudonymDetails')
+            ->endCondition()
+            ->addCondition($form::EQUAL, 'group')
+                ->toggle('groupDetails');
+
         $form->addText('name', 'Name')
+            ->setAttribute('placeholder', 'Enter name')
             ->setRequired();
-        $form->addText('year_from', 'Year formed')
+
+        $form->addText('middlename', 'Middle name')
+            ->setAttribute('placeholder', 'Enter middle name');
+        $form->addText('surname', 'Surname')
+            ->setAttribute('placeholder', 'Enter surname')
+            ->addConditionOn($form['type'], $form::EQUAL, 'person')
+                ->setRequired();
+        $form->addSelect('country_id', 'Country', $this->countryModel->fetchSelectBox())
+            ->setPrompt('Select country')
+            ->addConditionOn($form['type'], $form::EQUAL, 'person')
+                ->setRequired();
+
+        $form->addSelect('artist_id', 'Pseudonym of', $this->artistModel->fetchPersonSelectBox())
+            ->setPrompt('Select person')
+            ->addConditionOn($form['type'], $form::EQUAL, 'pseudonym')
+                ->setRequired();
+
+        $form->addMultiSelect('members', 'Members', $this->artistModel->fetchAllSelectBox())
+            ->setAttribute('placeholder', 'Choose members');
+        $form->addMultiSelect('former_members', 'Former Members', $this->artistModel->fetchAllSelectBox())
+            ->setAttribute('placeholder', 'Choose former members');
+
+        $form->addTextArea('description', 'Description')
+            ->setAttribute('placeholder', 'Enter description');
+
+        /*$form->addText('year_from', 'Year formed')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
                 ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
         $form->addText('year_to', 'Year disbanded')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
-                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
-        $form->addText('description', 'Description');
-        $form->addMultiSelect('members', 'Members', $this->personModel->fetchAllSelectBox());
-        $form->addMultiSelect('former_members', 'Former Members', $this->personModel->fetchAllSelectBox());
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);*/
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
