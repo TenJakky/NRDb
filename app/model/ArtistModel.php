@@ -6,11 +6,11 @@ final class ArtistModel extends BaseModel
 {
     public $tableName = 'artist';
 
-    public function fetchSelectBox()
+    public function fetchPersonSelectBox()
     {
         return $this->getTable()
             ->select("id, concat_ws(' ', name, middlename, surname) AS name")
-            ->where('type', 'artist')
+            ->where('type', 'person')
             ->order('surname ASC')
             ->fetchPairs('id', 'name');
     }
@@ -18,9 +18,16 @@ final class ArtistModel extends BaseModel
     public function fetchPseudonymSelectBox()
     {
         return $this->getTable()
-            ->select("id, concat_ws(' ', name, middlename, surname) AS name")
             ->where('type', 'pseudonym')
-            ->order('surname ASC')
+            ->order('name ASC')
+            ->fetchPairs('id', 'name');
+    }
+
+    public function fetchGroupSelectBox()
+    {
+        return $this->getTable()
+            ->where('type', 'group')
+            ->order('name ASC')
             ->fetchPairs('id', 'name');
     }
 

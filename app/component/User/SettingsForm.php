@@ -21,7 +21,7 @@ final class SettingsForm extends BaseComponent
         $form->addText('name', 'Name');
         $form->addText('surname', 'Surname');
         $form->addRadioList('gender', 'Gender', array('male'=>'Male', 'female'=>'Female'));
-        $form->addSelect('country_id', 'Nationality', $this->countryModel->getTable()->fetchPairs('id', 'name'));
+        $form->addSelect('country_id', 'Nationality', $this->countryModel->fetchSelectBox());
         $form->addTextArea('description', 'Description');
         $form->addText('per_page', 'Number of items per page');
         $form->addText('per_page_small', 'Number of items in small lists');
