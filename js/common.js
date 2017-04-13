@@ -41,7 +41,7 @@ Nette.showFormErrors = function (form, errors)
 
         if (elem.nodeName == 'SELECT')
         {
-            $(elem).trigger('chosen:activate');
+            $(elem).parent().find('input[type="text"]').trigger('click');
             return;
         }
         $(elem).focus();
