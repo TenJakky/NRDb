@@ -20,6 +20,7 @@
     "nextras.datagrid": "https://raw.githubusercontent.com/nextras/datagrid/master/js/nextras.datagrid.js",
     "chart.js": "^2.5.0",
     "flag-icon-css": "^2.8.0",
-    "selectize": "selectize.js#^0.12.4"
+    "selectize": "selectize.js#^0.12.4",
+    "iCheck": "icheck#^1.0.2"
   }
 }

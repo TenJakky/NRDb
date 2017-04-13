@@ -4,6 +4,11 @@ const selectizeOptions =
     create: false,
     plugins: ['clear_selection']
 };
+const icheckOptions =
+{
+    checkboxClass: 'icheckbox_square-red',
+    radioClass: 'iradio_square-red'
+};
 
 Chart.defaults.global.legend.display = false;
 Chart.defaults.global.title.display = true;
@@ -50,7 +55,19 @@ Nette.showFormErrors = function (form, errors)
 
 $(document).ready(function ()
 {
+    const radio = 'input[type="radio"]';
+
     $('select').selectize(selectizeOptions);
+
+    $(radio).iCheck(icheckOptions);
+    $(radio).on('ifChanged', function (event) {
+
+        event = document.createEvent("HTMLEvents");
+        event.initEvent("change", true, true);
+        event.eventName = "change";
+
+        this.dispatchEvent(event);
+    });
 
     $.nette.ext('flash', {
         complete: function () {
