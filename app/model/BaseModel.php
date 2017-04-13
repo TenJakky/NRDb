@@ -17,31 +17,49 @@ abstract class BaseModel extends Nette\Object
         $this->context = $context;
     }
 
+    /**
+     * @return \Nette\Database\Context
+     */
     public function getConnection()
     {
         return $this->context;
     }
 
+    /**
+     * @return string
+     */
     public function getTableName()
     {
         return $this->tableName;
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getTable()
     {
         return $this->context->table($this->tableName);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function findByArray(array $by)
     {
         return $this->getTable()->where($by);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function findBy($row, $value)
     {
         return $this->getTable()->where($row, $value);
     }
 
+    /**
+     * @return \Nette\Database\Table\ActiveRow
+     */
     public function findRow($id)
     {
         return $this->getTable()->where('id', (int) $id)->fetch();
@@ -52,11 +70,17 @@ abstract class BaseModel extends Nette\Object
         return $this->context->query($sql, ...$params);
     }
 
+    /**
+     * @return int
+     */
     public function count()
     {
         return $this->getTable()->count();
     }
 
+    /**
+     * @return \Nette\Database\Table\ActiveRow
+     */
     public function insert($data)
     {
         return $this->getTable()->insert($data);
@@ -64,9 +88,12 @@ abstract class BaseModel extends Nette\Object
 
     public function delete($id)
     {
-        return $this->findByArray(array($this->getTable()->getPrimary() => (int) $id))->delete();
+        return $this->findByArray([$this->getTable()->getPrimary() => (int) $id])->delete();
     }
 
+    /**
+     * @return int
+     */
     public function save($data)
     {
         if (isset($data['id']) && $data['id'] != 0)
