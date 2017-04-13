@@ -41,7 +41,7 @@ return [
             'book' => 'Add book',
             'music' => 'Add music',
             'game' => 'Add game',
-            'artist', 'Add artist'
+            'artist' => 'Add artist'
         ],
     'edit' =>
         [
@@ -51,7 +51,7 @@ return [
             'book' => 'Edit book',
             'music' => 'Edit music',
             'game' => 'Edit game',
-            'artist', 'Edit artist'
+            'artist' => 'Edit artist'
         ],
     'list' =>
         [
@@ -61,7 +61,7 @@ return [
             'book' => 'List of books',
             'music' => 'List of music',
             'game' => 'List of games',
-            'artist', 'List of artists'
+            'artist' => 'List of artists'
         ],
 
     'artist' => 'Artist',
