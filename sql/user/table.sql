@@ -22,6 +22,7 @@ CREATE TABLE `user` (
 
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `nationality` (`country_id`),
   ADD KEY `ratings_total` (`ratings_total`),
   ADD KEY `ratings_movie` (`ratings_movie`),

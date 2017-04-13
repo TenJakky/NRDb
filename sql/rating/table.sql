@@ -9,6 +9,7 @@ CREATE TABLE `rating` (
 
 ALTER TABLE `rating`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`,`entity_id`),
   ADD KEY `date` (`date`),
   ADD KEY `value` (`value`),
   ADD KEY `user_id` (`user_id`),
