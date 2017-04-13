@@ -13,14 +13,19 @@ final class ArtistForm extends BaseComponent
     /** @var \App\Model\GroupMemberModel */
     protected $groupMemberModel;
 
+    /** @var \Nette\Database\Connection */
+    protected $connection;
+
     public function __construct(
         \App\Model\ArtistModel $artistModel,
         \App\Model\GroupMemberModel $groupMemberModel,
-        \App\Model\CountryModel $countryModel)
+        \App\Model\CountryModel $countryModel,
+        \Nette\Database\Connection $connection)
     {
         $this->artistModel = $artistModel;
         $this->groupMemberModel = $groupMemberModel;
         $this->countryModel = $countryModel;
+        $this->connection = $connection;
     }
 
     public function render($id = 0)
@@ -68,41 +73,44 @@ final class ArtistForm extends BaseComponent
                 ->toggle('groupDetails');
 
         $form->addText('name', 'Name')
-            ->setAttribute('placeholder', 'Enter name')
             ->setRequired();
 
-        $form->addText('middlename', 'Middle name')
-            ->setAttribute('placeholder', 'Enter middle name');
+        $form->addText('middlename', 'Middle name');
         $form->addText('surname', 'Surname')
-            ->setAttribute('placeholder', 'Enter surname')
             ->addConditionOn($form['type'], $form::EQUAL, 'person')
                 ->setRequired();
         $form->addSelect('country_id', 'Country', $this->countryModel->fetchSelectBox())
             ->setPrompt('Select country')
             ->addConditionOn($form['type'], $form::EQUAL, 'person')
                 ->setRequired();
+        $form->addText('born', 'Born')
+            ->addCondition($form::FILLED)
+                ->addRule($form::INTEGER, 'Year must be integer.')
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
+        $form->addText('died', 'Died')
+            ->addCondition($form::FILLED)
+                ->addRule($form::INTEGER, 'Year must be integer.')
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
 
         $form->addSelect('artist_id', 'Pseudonym of', $this->artistModel->fetchPersonSelectBox())
             ->setPrompt('Select person')
             ->addConditionOn($form['type'], $form::EQUAL, 'pseudonym')
                 ->setRequired();
 
-        $form->addMultiSelect('members', 'Members', $this->artistModel->fetchAllSelectBox())
-            ->setAttribute('placeholder', 'Choose members');
-        $form->addMultiSelect('former_members', 'Former Members', $this->artistModel->fetchAllSelectBox())
-            ->setAttribute('placeholder', 'Choose former members');
-
-        $form->addTextArea('description', 'Description')
-            ->setAttribute('placeholder', 'Enter description');
-
-        /*$form->addText('year_from', 'Year formed')
+        $form->addText('year_from', 'Year formed')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
                 ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
         $form->addText('year_to', 'Year disbanded')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
-                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);*/
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
+        $form->addMultiSelect('members', 'Members', $this->artistModel->fetchAllSelectBox())
+            ->setAttribute('placeholder', 'Choose members');
+        $form->addMultiSelect('former_members', 'Former Members', $this->artistModel->fetchAllSelectBox())
+            ->setAttribute('placeholder', 'Choose former members');
+
+        $form->addTextArea('description', 'Description');
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -114,31 +122,62 @@ final class ArtistForm extends BaseComponent
     {
         $data = $form->getValues();
 
-        $members = $data['members'];
-        $formerMembers = $data['former_members'];
-        unset($data['members']);
-        unset($data['former_members']);
+        $this->connection->beginTransaction();
 
-        $id = $this->groupModel->save($data);
-
-        $this->groupMemberModel->findBy('group_id', $id)->delete();
-        foreach ($members as $member)
+        switch ($data['type'])
         {
-            $this->groupMemberModel->insert(array(
-                'person_id' => $member,
-                'group_id' => $id
-            ));
-        }
-        foreach ($formerMembers as $member)
-        {
-            $this->groupMemberModel->insert(array(
-                'person_id' => $member,
-                'group_id' => $id,
-                'active' => 0
-            ));
+            case 'person':
+                $id = $this->artistModel->save([
+                    'id' => $data['id'],
+                    'type' => $data['type'],
+                    'name' => $data['name'],
+                    'middlename' => $data['middlename'],
+                    'surname' => $data['surname'],
+                    'country_id' => $data['country_id'],
+                    'year_from' => $data['born'],
+                    'year_to' => $data['died'],
+                    'description' => $data['description']
+                ]);
+                break;
+            case 'pseudonym':
+                $id = $this->artistModel->save([
+                    'id' => $data['id'],
+                    'type' => $data['type'],
+                    'artist_id' => $data['artist_id'],
+                    'description' => $data['description']
+                ]);
+                break;
+            case 'group':
+                $id = $this->artistModel->save([
+                    'id' => $data['id'],
+                    'type' => $data['type'],
+                    'name' => $data['name'],
+                    'year_from' => $data['year_from'],
+                    'year_to' => $data['year_to'],
+                    'description' => $data['description']
+                ]);
+                $this->groupMemberModel->findBy('artist_id', $id)->delete();
+                foreach ($data['members'] as $member)
+                {
+                    $this->groupMemberModel->insert(array(
+                        'member_id' => $member,
+                        'group_id' => $id
+                    ));
+                }
+                foreach ($data['former_members'] as $member)
+                {
+                    $this->groupMemberModel->insert(array(
+                        'member_id' => $member,
+                        'group_id' => $id,
+                        'active' => 0
+                    ));
+                }
+                break;
         }
 
-        $this->presenter->flashMessage('Group successfully saved.', 'success');
+        $this->connection->commit();
+
+        $this->presenter->flashMessage('Artist successfully saved.', 'success');
 
         if ($this->presenter->isAjax())
         {
@@ -146,6 +185,6 @@ final class ArtistForm extends BaseComponent
             return;
         }
 
-        $this->presenter->redirect('Group:view', array('id' => $id));
+        $this->presenter->redirect('Artist:view', array('id' => $id));
     }
 }
