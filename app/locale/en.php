@@ -37,25 +37,31 @@ return [
         [
             'movie' => 'Add movie',
             'series' => 'Add series',
+            'season' => 'Add season',
             'book' => 'Add book',
             'music' => 'Add music',
             'game' => 'Add game',
+            'artist', 'Add artist'
         ],
     'edit' =>
         [
             'movie' => 'Edit movie',
             'series' => 'Edit series',
+            'season' => 'Edit season',
             'book' => 'Edit book',
             'music' => 'Edit music',
             'game' => 'Edit game',
+            'artist', 'Edit artist'
         ],
     'list' =>
         [
             'movie' => 'List of movies',
             'series' => 'List of series',
+            'season' => 'List of seasons',
             'book' => 'List of books',
             'music' => 'List of music',
             'game' => 'List of games',
+            'artist', 'List of artists'
         ],
 
     'artist' => 'Artist',

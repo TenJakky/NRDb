@@ -37,25 +37,31 @@ return [
         [
             'movie' => 'Přidat film',
             'series' => 'Přidat seriál',
+            'season' => 'Přidat sezónu',
             'book' => 'Přidat knihu',
             'music' => 'Přidat hudbu',
             'game' => 'Přidat hru',
+            'artist' => 'Přidat umělce'
         ],
     'edit' =>
         [
             'movie' => 'Upravit film',
             'series' => 'Upravit seriál',
+            'season' => 'Upravit sezónu',
             'book' => 'Upravit knihu',
             'music' => 'Upravit hudbu',
             'game' => 'Upravit hru',
+            'artist' => 'Upravit umělce'
         ],
     'list' =>
         [
             'movie' => 'Seznam filmů',
             'series' => 'Seznam seriálů',
+            'season' => 'Seznam sezón',
             'book' => 'Seznam knih',
             'music' => 'Seznam hudby',
             'game' => 'Seznam her',
+            'artist' => 'Seznam umělců'
         ],
 
     'artist' => 'Umělec',
