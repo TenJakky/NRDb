@@ -3,7 +3,11 @@
         <tbody>
             <tr class="required">
                 <th>{label type /}</th>
-                <td>{input type}</td>
+                <td>
+                    {foreach $form[type]->items as $key => $label}
+                        <label n:name="type:$key" class="radioItem"><input n:name="type:$key" />{$label}</label>
+                    {/foreach}
+                </td>
             </tr>
             <tr class="required">
                 <th>{label name /}</th>

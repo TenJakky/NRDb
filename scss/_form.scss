@@ -90,6 +90,12 @@ form
           border: 2px solid $success-border
         }
 
+        label.radioItem
+        {
+          display: block;
+          margin: 5px 0;
+        }
+
         span.error
         {
           display: none;
