@@ -60,7 +60,7 @@ final class ArtistForm extends BaseComponent
 
         $form->addHidden('id');
 
-        $form->addRadioList('type', 'Type', ['person' => ' Person', 'pseudonym' => ' Pseudonym', 'group' => ' Group'])
+        $form->addRadioList('type', 'Type', ['person' => 'Person', 'pseudonym' => 'Pseudonym', 'group' => 'Group'])
             ->setDefaultValue('person')
             ->setRequired()
             ->addCondition($form::EQUAL, 'person')
