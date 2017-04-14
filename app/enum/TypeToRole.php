@@ -2,17 +2,27 @@
 
 namespace App\Enum;
 
-use App\Enum\EEntityType as E;
-use App\Enum\EArtistRole as A;
-
 class TypeToRole
 {
+	const ACTOR = 'actor';
+    const DIRECTOR = 'director';
+    const AUTHOR = 'author';
+    const INTERPRET = 'interpret';
+    const DEVELOPER = 'developer';
+
+    const MOVIE = 'movie';
+    const SERIES = 'series';
+    const SEASON = 'season';
+    const BOOK = 'book';
+    const MUSIC = 'music';
+    const GAME = 'game';
+
     const ROLES = [
-        E::MOVIE => [A::ACTOR, A::DIRECTOR],
-        E::SERIES => [A::ACTOR, A::DIRECTOR],
-        E::SEASON => [A::ACTOR, A::DIRECTOR],
-        E::BOOK => [A::AUTHOR],
-        E::MUSIC => [A::INTERPRET],
-        E::GAME => [A::DEVELOPER]
+        self::MOVIE => [self::ACTOR, self::DIRECTOR],
+        self::SERIES => [self::ACTOR, self::DIRECTOR],
+        self::SEASON => [self::ACTOR, self::DIRECTOR],
+        self::BOOK => [self::AUTHOR],
+        self::MUSIC => [self::INTERPRET],
+        self::GAME => [self::DEVELOPER]
     ];
 }
