@@ -12,7 +12,10 @@ log/*
 
 .idea/*
 
+scss/dist/*
+js/dist/*
+
 app/config/database.neon
+
 *.lock
-*.css
-*.map
+

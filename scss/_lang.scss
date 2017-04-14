@@ -9,6 +9,17 @@
     {
       padding: 4px 8px;
       width: 150px;
+      text-align: left;
+
+      & > input
+      {
+        display: none;
+      }
+    }
+
+    & > div.selectize-dropdown
+    {
+      text-align: left;
     }
   }
 }
