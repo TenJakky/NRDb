@@ -80,14 +80,17 @@ function getCountryCode(code)
     }
 }
 
+function flashFadeOut()
+{
+    $('.flash').delay(2000).fadeTo('slow', 0, 'linear').slideUp('slow', 'linear')
+}
+
 $(document).ready(function ()
 {
+    flashFadeOut();
+
     $.nette.ext('flash', {
-        complete: function () {
-            $('.flash').animate({
-                opacity: 1.0
-            }, 2000).fadeOut(1000);
-        }
+        complete: flashFadeOut
     });
     $.nette.init();
 
@@ -122,9 +125,10 @@ $(document).ready(function ()
             });
         }, 300));
 
+    var select = $('select:not(#langInput)');
     var langInput = $('#langInput');
 
-    $('select:not(#langInput)').selectize(selectizeOptions);
+    select.selectize(selectizeOptions);
     langInput.selectize({
         labelField: 'name',
         valueField: 'code',
