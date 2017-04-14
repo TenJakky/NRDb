@@ -24,7 +24,7 @@ $(document).ready(function()
                 callbacks: {
                     label: function (label, data)
                     {
-                        var text = `User has rated ${ statData[label.index]} ${ data.labels[label.index]} elements, `;
+                        var text = 'User has rated '+statData[label.index]+' '+data.labels[label.index]+'  elements, ';
                         if (label.yLabel === 1)
                         {
                             return text + 'he is currently the best user in this category.';

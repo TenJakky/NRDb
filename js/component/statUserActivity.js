@@ -21,7 +21,7 @@ $(document).ready(function()
                 callbacks: {
                     label: function (label, data)
                     {
-                        var text = `User ${ data.datasets[label.datasetIndex].label} has rated ${ statData[label.datasetIndex][label.index]} ${ data.labels[label.index]} elements, `;
+                        var text = 'User '+data.datasets[label.datasetIndex].label+' has rated '+statData[label.datasetIndex][label.index]+' '+data.labels[label.index]+' elements, ';
                         if (label.yLabel === 1)
                         {
                             return text + 'he is currently the best user in this category.';
@@ -33,7 +33,7 @@ $(document).ready(function()
                     },
                     title: function(title, data)
                     {
-                        return `${ data.labels[title[0].index]} - ${ data.datasets[title[0].datasetIndex].label}`;
+                        return data.labels[title[0].index]+' - '+data.datasets[title[0].datasetIndex].label;
                     }
                 }
             }
