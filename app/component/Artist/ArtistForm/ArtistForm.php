@@ -64,13 +64,13 @@ final class ArtistForm extends BaseComponent
             ->setDefaultValue('person')
             ->setRequired()
             ->addCondition($form::EQUAL, 'person')
-                ->toggle('personDetails')
+                ->toggle('personSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'pseudonym')
-                ->toggle('pseudonymDetails')
+                ->toggle('pseudonymSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'group')
-                ->toggle('groupDetails');
+                ->toggle('groupSection');
 
         $form->addText('name', 'Name')
             ->setRequired();
