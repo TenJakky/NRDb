@@ -2,7 +2,6 @@
 
 namespace App\Component;
 
-
 final class Search extends BaseComponent
 {
     /** @var  \App\Model\EntityModel */
@@ -36,7 +35,7 @@ final class Search extends BaseComponent
 
 	public function handleSearch()
 	{
-		$search = $this->presenter->getPost()['search'];
+		$search = $this->presenter->getParameter('search');
 
 		if ($search)
 		{

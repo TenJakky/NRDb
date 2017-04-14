@@ -2,6 +2,8 @@ const selectizeOptions =
 {
     delimiter: ', ',
     create: false,
+    persist: false,
+    preload: true,
     plugins: ['clear_selection']
 };
 const icheckOptions =
@@ -53,22 +55,33 @@ Nette.showFormErrors = function (form, errors)
     }
 };
 
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+function getCountryCode(code)
+{
+    switch(code)
+    {
+        case 'cs': return 'cz';
+        case 'en': return 'gb';
+        default: return code;
+    }
+}
+
 $(document).ready(function ()
 {
-    const radio = 'input[type="radio"]';
-
-    $('select').selectize(selectizeOptions);
-
-    $(radio).iCheck(icheckOptions);
-    $(radio).on('ifChanged', function (event) {
-
-        event = document.createEvent("HTMLEvents");
-        event.initEvent("change", true, true);
-        event.eventName = "change";
-
-        this.dispatchEvent(event);
-    });
-
     $.nette.ext('flash', {
         complete: function () {
             $('.flash').animate({
@@ -77,4 +90,56 @@ $(document).ready(function ()
         }
     });
     $.nette.init();
+
+    var radio = $('input[type="radio"]');
+    var searchInput = $('#searchInput');
+    var langInput = $('#langInput');
+
+    radio.iCheck(icheckOptions);
+    radio.on('ifChanged', function (event) {
+
+        event = document.createEvent('HTMLEvents');
+        event.initEvent('change', true, true);
+        event.eventName = 'change';
+
+        this.dispatchEvent(event);
+    });
+
+    searchInput.keyup(
+        debounce(function()
+        {
+            var value = $(this).val();
+
+            $.nette.ajax(
+            {
+                traditional: true,
+                url: searchUrl,
+                method: 'GET',
+                data:
+                {
+                    search: value
+                }
+            });
+        }, 300));
+
+    $('select:not(#langInput)').selectize(selectizeOptions);
+    langInput.selectize({
+        labelField: 'name',
+        valueField: 'code',
+        render: {
+            item: function(item, escape) {
+                return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
+            },
+            option: function(item, escape) {
+                return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
+            }
+        },
+    });
+
+    langInput.change(function()
+    {
+        var array = window.location.pathname.split('/');
+        array[1] = this.value;
+        window.location.href = array.join('/');
+    });
 });

@@ -56,9 +56,7 @@
                         <li>
                             <a href="{plink Statistics:default}">{$presenter->locale['stats']}</a>
                         </li>
-                        <li class="dropdown">
-                            {control search}
-                        </li>
+                        {control search}
                     </ul>
                 {/if}
                 <ul class="right">
@@ -89,16 +87,7 @@
                     <li>
                         <a href="{plink Default:credits}">{$presenter->locale['credits']}</a>
                     </li>
-                    <li class="dropdown">
-                        <a>{$presenter->locale['lang']}</a>
-                        <ul class="dropdown-list">
-                            {foreach $presenter->locale['locale'] as $code => list($flag, $name)}
-                                <li>
-                                    <a href="{plink this lang => $code}"><span class="flag-icon flag-icon-{$flag}"></span> {$name}</a>
-                                </li>
-                            {/foreach}
-                        </ul>
-                    </li>
+                    {control lang}
                 </ul>
             </div>
         </nav>

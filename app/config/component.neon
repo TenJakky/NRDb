@@ -24,6 +24,8 @@ services:
         class: App\Component\Changelog
     search:
         class: App\Component\Search
+    lang:
+        class: App\Component\Lang
 
     artistForm:
         class: App\Component\ArtistForm

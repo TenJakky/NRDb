@@ -1,0 +1,24 @@
+<li class="dropdown" id="search" >
+    <input title="Global search" type="search" id="searchInput"/>
+    <ul n:snippet="search" class="dropdown-list">
+        {if $flag}
+            {foreach $searchEntity as $temp}
+                <li>
+                    <a href="{plink Entity:view $temp->id}">{$temp->original_title}</a>
+                </li>
+            {/foreach}
+            {foreach $searchArtist as $temp}
+                <li>
+                    <a href="{plink Artist:view $temp->id}">{$temp->id|artist}</a>
+                </li>
+            {/foreach}
+        {else}
+            <li>
+                <p>No results</p>
+            </li>
+        {/if}
+    </ul>
+    <script>
+        var searchUrl = {link search!};
+    </script>
+</li>

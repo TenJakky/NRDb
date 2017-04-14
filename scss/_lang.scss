@@ -1,0 +1,14 @@
+#lang
+{
+  & > div.selectize-control
+  {
+    margin-top: 6px;
+    width: 150px;
+
+    & > div.selectize-input
+    {
+      padding: 4px 8px;
+      width: 150px;
+    }
+  }
+}
