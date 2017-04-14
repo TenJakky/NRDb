@@ -33,6 +33,14 @@ return [
             'music' => 'Hudba',
             'game' => 'Hry'
         ],
+    'role' => 
+        [
+            'director' => 'Režisér',
+            'actor' => 'Herec',
+            'author' => 'Spisovatel',
+            'interpret' => 'Interpret',
+            'developer' => 'Vývojář',
+        ],
     'add' =>
         [
             'movie' => 'Přidat film',

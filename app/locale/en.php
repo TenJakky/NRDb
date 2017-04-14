@@ -33,6 +33,14 @@ return [
             'music' => 'Music',
             'game' => 'Games'
         ],
+    'role' => 
+        [
+            'director' => 'Director',
+            'actor' => 'Actor',
+            'author' => 'Writer',
+            'interpret' => 'Interpret',
+            'developer' => 'Developer',
+        ],
     'add' =>
         [
             'movie' => 'Add movie',

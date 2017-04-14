@@ -6,7 +6,7 @@
 
 {define col-role}
     <td>
-        {\App\Enum\EArtistRole::ITEMS[$row->role]}
+        {$presenter->locale['role'][$row->role]}
     </td>
 {/define}
 

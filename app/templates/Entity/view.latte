@@ -86,7 +86,7 @@
         {/if}
         {foreach \App\Enum\TypeToRole::ROLES[$data->type] as $role}
             <tr>
-                <th>{\App\Enum\EArtistRole::ITEMS[$role]}</th>
+                <th>{$presenter->locale['role'][$role]}</th>
                 <td>
                     {var artists = $data->related('jun_artist2entity.entity_id')->where('role', $role)}
                     {artistList $artists}
