@@ -91,9 +91,7 @@ $(document).ready(function ()
     });
     $.nette.init();
 
-    var radio = $('input[type="radio"]');
-    var searchInput = $('#searchInput');
-    var langInput = $('#langInput');
+    var radio = $('input[type="radio"]:not(.rating)');
 
     radio.iCheck(icheckOptions);
     radio.on('ifChanged', function (event) {
@@ -104,6 +102,8 @@ $(document).ready(function ()
 
         this.dispatchEvent(event);
     });
+
+    var searchInput = $('#searchInput');
 
     searchInput.keyup(
         debounce(function()
@@ -121,6 +121,8 @@ $(document).ready(function ()
                 }
             });
         }, 300));
+
+    var langInput = $('#langInput');
 
     $('select:not(#langInput)').selectize(selectizeOptions);
     langInput.selectize({

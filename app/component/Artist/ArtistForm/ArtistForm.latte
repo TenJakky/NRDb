@@ -5,7 +5,7 @@
                 <th>{label type /}</th>
                 <td>
                     {foreach $form[type]->items as $key => $label}
-                        <label n:name="type:$key" class="radioItem"><input n:name="type:$key" />{$label}</label>
+                        <label n:name="type:$key" class="blockRadioItem"><input n:name="type:$key" />{$label}</label>
                     {/foreach}
                 </td>
             </tr>

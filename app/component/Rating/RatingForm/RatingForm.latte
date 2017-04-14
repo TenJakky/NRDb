@@ -21,10 +21,12 @@
             </tr>
             <tr class="required">
                 <th>{label value /}</th>
-                <td id="rating">
-                    {foreach $form['value']->items as $key => $label}
-                        {input value:$key}{label value:$key title => $titles[$key] /}
-                    {/foreach}
+                <td>
+                    <div id="rating">
+                        {foreach $form['value']->items as $key => $label}
+                            <input n:name="value:$key" class="rating" /><label n:name="value:$key" title="{$titles[$key]}"></label>
+                        {/foreach}
+                    </div>
                  </td>
             </tr>
             <tr>
