@@ -67,4 +67,12 @@ final class EntityModel extends BaseModel
             ->order('entity.id DESC')
             ->limit($limit);
     }
+
+    public function fetchSeriesSelectBox()
+    {
+        return $this
+            ->getTable()
+            ->where('type', 'series')
+            ->fetchPairs('id', 'original_title');
+    }
 }

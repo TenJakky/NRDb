@@ -83,9 +83,21 @@ form
           border: 2px solid $success-border
         }
 
-        .iradio_square-red
+        .iradio_square-red, .icheckbox_square-red
         {
-          margin-right: 10px;
+          margin-right: 8px;
+        }
+
+        div.radioContainer
+        {
+          display: block;
+          margin-bottom: 6px;
+
+          label.inlineRadioItem
+          {
+            display: inline-block;
+            width: 17%;
+          }
         }
 
         label.blockRadioItem

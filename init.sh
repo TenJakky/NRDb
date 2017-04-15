@@ -4,8 +4,10 @@ composer install
 
 bower install
 
+echo 'Compiles SCSS'
 sassc scss/common.scss > scss/dist/common.css
 
+echo 'Minify JS'
 uglifyjs js/common.js                       > js/dist/common.min.js
 uglifyjs js/selectize-plugins.js            > js/dist/selectize-plugins.min.js
 uglifyjs js/component/entityForm.js         > js/dist/entityForm.min.js

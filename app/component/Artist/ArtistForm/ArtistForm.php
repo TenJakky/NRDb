@@ -105,9 +105,9 @@ final class ArtistForm extends BaseComponent
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
                 ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
-        $form->addMultiSelect('members', 'Members', $this->artistModel->fetchAllSelectBox())
+        $form->addMultiSelect('member', 'Members', $this->artistModel->fetchSelectBox())
             ->setAttribute('placeholder', 'Choose members');
-        $form->addMultiSelect('former_members', 'Former Members', $this->artistModel->fetchAllSelectBox())
+        $form->addMultiSelect('former_member', 'Former Members', $this->artistModel->fetchSelectBox())
             ->setAttribute('placeholder', 'Choose former members');
 
         $form->addTextArea('description', 'Description');
@@ -143,6 +143,7 @@ final class ArtistForm extends BaseComponent
                 $id = $this->artistModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
+                    'name' => $data['name'],
                     'artist_id' => $data['artist_id'],
                     'description' => $data['description']
                 ]);
@@ -156,15 +157,18 @@ final class ArtistForm extends BaseComponent
                     'year_to' => $data['year_to'],
                     'description' => $data['description']
                 ]);
-                $this->groupMemberModel->findBy('artist_id', $id)->delete();
-                foreach ($data['members'] as $member)
+                if ($data['id'])
+                {
+                    $this->groupMemberModel->findBy('artist_id', $id)->delete();
+                }
+                foreach ($data['member'] as $member)
                 {
                     $this->groupMemberModel->insert(array(
                         'member_id' => $member,
                         'group_id' => $id
                     ));
                 }
-                foreach ($data['former_members'] as $member)
+                foreach ($data['former_member'] as $member)
                 {
                     $this->groupMemberModel->insert(array(
                         'member_id' => $member,

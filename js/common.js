@@ -82,7 +82,25 @@ function getCountryCode(code)
 
 function flashFadeOut()
 {
-    $('.flash').delay(2000).fadeTo('slow', 0, 'linear').slideUp('slow', 'linear')
+    $('.flash').delay(2000).fadeTo('slow', 0, 'linear').slideUp('slow', 'linear', function() { $(this).remove(); });
+}
+
+function refreshPlugins(context)
+{
+    var checkInputs = $(context).find('input[type="radio"]:not(.rating), input[type="checkbox"]');
+
+    checkInputs.iCheck(icheckOptions);
+    checkInputs.on('ifChanged', function (event)
+    {
+        event = document.createEvent('HTMLEvents');
+        event.initEvent('change', true, true);
+        event.eventName = 'change';
+
+        this.dispatchEvent(event);
+    });
+
+    var selectInputs = $(context).find('select:not(#langInput)');
+    selectInputs.selectize(selectizeOptions);
 }
 
 $(document).ready(function ()
@@ -94,24 +112,16 @@ $(document).ready(function ()
     });
     $.nette.init();
 
-    var radio = $('input[type="radio"]:not(.rating)');
-
-    radio.iCheck(icheckOptions);
-    radio.on('ifChanged', function (event) {
-
-        event = document.createEvent('HTMLEvents');
-        event.initEvent('change', true, true);
-        event.eventName = 'change';
-
-        this.dispatchEvent(event);
-    });
-
     var searchInput = $('#searchInput');
-
     searchInput.keyup(
         debounce(function()
         {
             var value = $(this).val();
+
+            if (value.length < 3)
+            {
+                return;
+            }
 
             $.nette.ajax(
             {
@@ -125,10 +135,8 @@ $(document).ready(function ()
             });
         }, 300));
 
-    var select = $('select:not(#langInput)');
-    var langInput = $('#langInput');
 
-    select.selectize(selectizeOptions);
+    var langInput = $('#langInput');
     langInput.selectize({
         labelField: 'name',
         valueField: 'code',
@@ -141,11 +149,12 @@ $(document).ready(function ()
             }
         },
     });
-
     langInput.change(function()
     {
         var array = window.location.pathname.split('/');
         array[1] = this.value;
         window.location.href = array.join('/');
     });
+
+    refreshPlugins(document.body);
 });

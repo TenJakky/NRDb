@@ -1,84 +1,130 @@
 <ul class="inline-buttons">
-    <li><a id="add_artist" >Add Artist</a></li>
+    <li><a id="add_artist" >{$presenter->locale['add']['artist']}</a></li>
 </ul>
 
 {snippet formSnippet}
-    {form form}
-        <table>
-            <tbody>
-                <tr class="required">
-                    <th>{label type /}</th>
-                    <td>
-                        {foreach $form[type]->items as $key => $label}
-                            <label n:name="type:$key" class="blockRadioItem"><input n:name="type:$key" />{$label}</label>
-                        {/foreach}
-                    </td>
-                </tr>
-                <tr class="required">
-                    <th>{label original_title /}</th>
-                    <td>{input original_title}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="langSection" style="display: none">
-            <tbody>
-                <tr class="required">
-                    <th>{label english_title /}</th>
-                    <td>{input english_title}</td>
-                </tr>
-                <tr>
-                    <th>{label czech_title /}</th>
-                    <td>{input czech_title}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="seriesSection" style="display: none">
-            <tbody>
-                <tr class="required">
-                    <th>{label series_active /}</th>
-                    <td>{input series_active}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="seasonSection" style="display: none">
-            <tbody>
-                <tr class="required">
-                    <th>{label series_id /}</th>
-                    <td>{input series_id}</td>
-                </tr>
-                <tr class="required">
-                    <th>{label season_number /}</th>
-                    <td>{input season_number}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table id="yearSection" style="display: none">
-            <tbody>
-                <tr class="required">
-                    <th>{label year /}</th>
-                    <td>{input year}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table>
-            <tbody>
-                <tr>
-                    <th>{label description /}</th>
-                    <td>{input description}</td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td>{input submit}</td>
-                </tr>
-            </tbody>
-        </table>
-        {input id}
-    {/form}
+{form form}
+    <table>
+        <tbody>
+            <tr class="required">
+                <th>{label type /}</th>
+                <td>
+                    <div class="radioContainer">
+                    {foreach $form[type]->items as $key => $label}
+                        <label n:name="type:$key" class="inlineRadioItem"><input n:name="type:$key" />{$label}</label>
+                        {if $iterator->counter === 3}
+                            </div>
+                            <div class="radioContainer">
+                        {/if}
+                    {/foreach}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="titleSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label original_title /}</th>
+                <td>{input original_title}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="langSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label english_title /}</th>
+                <td>{input english_title}</td>
+            </tr>
+            <tr>
+                <th>{label czech_title /}</th>
+                <td>{input czech_title}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="seriesSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label series_active /}</th>
+                <td>{input series_active}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="seasonSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label series_id /}</th>
+                <td>{input series_id}</td>
+            </tr>
+            <tr class="required">
+                <th>{label season_number /}</th>
+                <td>{input season_number}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="yearSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label year /}</th>
+                <td>{input year}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="movieSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label director /}</th>
+                <td>{input director}</td>
+            </tr>
+            <tr>
+                <th>{label actor /}</th>
+                <td>{input actor}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="bookSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label author /}</th>
+                <td>{input author}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="musicSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label interpret /}</th>
+                <td>{input interpret}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="gameSection" style="display: none">
+        <tbody>
+            <tr class="required">
+                <th>{label developer /}</th>
+                <td>{input developer}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <th>{label description /}</th>
+                <td>{input description}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{input submit}</td>
+            </tr>
+        </tbody>
+    </table>
+    {input id}
+{/form}
 {/snippet}
 
 <div id="artist_subform">
-    <h2>New Artist</h2>
-    {snippet artistSnippet}
+    <h2>{$presenter->locale['add']['artist']}</h2>
+    {snippet artistFormSnippet}
         {control artistForm}
     {/snippet}
 </div>

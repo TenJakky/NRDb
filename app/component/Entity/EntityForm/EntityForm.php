@@ -46,7 +46,7 @@ final class EntityForm extends BaseComponent
     public function redrawSnippets()
     {
         $this->redrawControl('formSnippet');
-        $this->redrawControl('artistSnippet');
+        $this->redrawControl('artistFormSnippet');
     }
 
     public function render($id = 0)
@@ -56,7 +56,7 @@ final class EntityForm extends BaseComponent
             $row = $this->entityModel->findRow($id);
             $data = $row->toArray();
 
-            foreach (\App\Enum\Type2Role::ROLES[$row->type] as $role)
+            foreach (\App\Enum\TypeToRole::ROLES[$row->type] as $role)
             {
                 $data[$role] = $row
                     ->related('jun_artist2entity')
@@ -78,19 +78,40 @@ final class EntityForm extends BaseComponent
         $form->addHidden('id');
 
         $form->addRadioList('type', 'Type', $this->presenter->locale['entity'])
-            ->setDefaultValue('movie')
+            ->setDefaultValue($this->presenter->type)
             ->setRequired()
-            ->addCondition($form::EQUAL, ['movie', 'series', 'book'])
+            ->addCondition($form::EQUAL, 'movie')
+                ->toggle('titleSection')
                 ->toggle('langSection')
+                ->toggle('yearSection')
+                ->toggle('movieSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'series')
+                ->toggle('titleSection')
+                ->toggle('langSection')
                 ->toggle('seriesSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'season')
                 ->toggle('seasonSection')
+                ->toggle('yearSection')
+                ->toggle('movieSection')
             ->endCondition()
-            ->addCondition($form::EQUAL, ['movie', 'season', 'book', 'music', 'game'])
-                ->toggle('yearSection');
+            ->addCondition($form::EQUAL, 'book')
+                ->toggle('titleSection')
+                ->toggle('langSection')
+                ->toggle('yearSection')
+                ->toggle('bookSection')
+            ->endCondition()
+            ->addCondition($form::EQUAL, 'music')
+                ->toggle('titleSection')
+                ->toggle('yearSection')
+                ->toggle('musicSection')
+            ->endCondition()
+            ->addCondition($form::EQUAL, 'game')
+                ->toggle('titleSection')
+                ->toggle('yearSection')
+                ->toggle('gameSection')
+            ->endCondition();
 
         $form->addText('original_title', 'Original title')
             ->setRequired();
@@ -100,11 +121,11 @@ final class EntityForm extends BaseComponent
                 ->setRequired();
         $form->addText('czech_title', 'Czech title');
 
-        $form->addText('series_active', 'Active')
+        $form->addCheckbox('series_active', 'Active')
             ->addConditionOn($form['type'], $form::EQUAL, 'series')
                 ->setRequired();
 
-        $form->addText('series_id', 'Series')
+        $form->addSelect('series_id', 'Series', $this->entityModel->fetchSeriesSelectBox())
             ->addConditionOn($form['type'], $form::EQUAL, 'season')
                 ->setRequired();
         $form->addText('season_number', 'Season number')
@@ -117,6 +138,30 @@ final class EntityForm extends BaseComponent
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
                 ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
+
+        $artists = $this->artistModel->fetchSelectBox();
+
+        $form->addMultiSelect('director', 'Director', $artists)
+            ->setAttribute('placeholder', 'Choose directors')
+            ->addConditionOn($form['type'], $form::EQUAL, ['movie', 'season'])
+                ->setRequired();
+        $form->addMultiSelect('actor', 'Actor', $artists)
+            ->setAttribute('placeholder', 'Choose actors');
+
+        $form->addMultiSelect('author', 'Writer', $artists)
+            ->setAttribute('placeholder', 'Choose writers')
+            ->addConditionOn($form['type'], $form::EQUAL, 'book')
+                ->setRequired();
+
+        $form->addMultiSelect('interpret', 'Interpret', $artists)
+            ->setAttribute('placeholder', 'Choose interprets')
+            ->addConditionOn($form['type'], $form::EQUAL, 'music')
+                ->setRequired();
+
+        $form->addMultiSelect('developer', 'Developer', $artists)
+            ->setAttribute('placeholder', 'Choose developers')
+            ->addConditionOn($form['type'], $form::EQUAL, 'game')
+                ->setRequired();
 
         $form->addTextArea('description', 'Description');
 
@@ -132,60 +177,74 @@ final class EntityForm extends BaseComponent
 
         $this->connection->beginTransaction();
 
+        if ($data['id'])
+        {
+            $this->artistEntityModel->findBy('entity_id', $data['id'])->delete();
+        }
+
         switch ($data['type'])
         {
-            case 'person':
-                $id = $this->artistModel->save([
+            default:
+            case 'movie':
+            case 'book':
+                $id = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
-                    'name' => $data['name'],
-                    'middlename' => $data['middlename'],
-                    'surname' => $data['surname'],
-                    'country_id' => $data['country_id'],
-                    'year_from' => $data['born'],
-                    'year_to' => $data['died'],
+                    'original_title' => $data['original_title'],
+                    'english_title' => $data['english_title'],
+                    'czech_title' => $data['czech_title'],
+                    'year' => $data['year_from'],
                     'description' => $data['description']
                 ]);
                 break;
-            case 'pseudonym':
-                $id = $this->artistModel->save([
+            case 'series':
+                $id = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
-                    'artist_id' => $data['artist_id'],
+                    'original_title' => $data['original_title'],
+                    'english_title' => $data['english_title'],
+                    'czech_title' => $data['czech_title'],
+                    'series_active' => $data['series_active'],
                     'description' => $data['description']
                 ]);
                 break;
-            case 'group':
-                $id = $this->artistModel->save([
+            case 'season':
+                $id = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
-                    'name' => $data['name'],
-                    'year_from' => $data['year_from'],
-                    'year_to' => $data['year_to'],
+                    'series_id' => $data['series_id'],
+                    'season_number' => $data['season_number'],
+                    'year' => $data['year_from'],
                     'description' => $data['description']
                 ]);
-                $this->groupMemberModel->findBy('artist_id', $id)->delete();
-                foreach ($data['members'] as $member)
-                {
-                    $this->groupMemberModel->insert(array(
-                        'member_id' => $member,
-                        'group_id' => $id
-                    ));
-                }
-                foreach ($data['former_members'] as $member)
-                {
-                    $this->groupMemberModel->insert(array(
-                        'member_id' => $member,
-                        'group_id' => $id,
-                        'active' => 0
-                    ));
-                }
                 break;
+            case 'music':
+            case 'game':
+                $id = $this->entityModel->save([
+                    'id' => $data['id'],
+                    'type' => $data['type'],
+                    'original_title' => $data['original_title'],
+                    'year' => $data['year_from'],
+                    'description' => $data['description']
+                ]);
+                break;
+        }
+
+        foreach (\App\Enum\TypeToRole::ROLES[$data['role']] as $role)
+        {
+            foreach ($data[$role] as $member)
+            {
+                $this->artistEntityModel->insert(array(
+                    'entity_id' => $member,
+                    'artist_id' => $id,
+                    'role' => $role
+                ));
+            }
         }
 
         $this->connection->commit();
 
-        $this->presenter->flashMessage('Artist successfully saved.', 'success');
+        $this->presenter->flashMessage('Entity successfully saved.', 'success');
 
         if ($this->presenter->isAjax())
         {

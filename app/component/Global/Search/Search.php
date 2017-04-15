@@ -48,10 +48,10 @@ final class Search extends BaseComponent
 			    	'czech_title LIKE' => "%$search%"));
 
 		    $this->searchArtist = $this->artistModel->getTable()
-		    ->whereOr(array(
-		    	'name LIKE' => "%$search%",
-		    	'middlename LIKE' => "%$search%",
-		    	'surname LIKE' => "%$search%"));
+                ->whereOr(array(
+                    'name LIKE' => "%$search%",
+                    'middlename LIKE' => "%$search%",
+                    'surname LIKE' => "%$search%"));
 		}
 
 	    $this->redrawControl('search');

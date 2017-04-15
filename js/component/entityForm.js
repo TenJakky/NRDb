@@ -2,13 +2,15 @@ $(document).ready(function ()
 {
     var formValues = [];
 
-    function storeValues()
-    {
+    var formInputs =
         $('form')
         .filter(':first')
         .find('input, textarea, select')
-        .not('input[type="button"], input[type="submit"], input[name="_do"]')
-        .each(function()
+        .not('input[type="button"], input[type="submit"], input[name="_do"]');
+
+    function storeValues()
+    {
+        formInputs.each(function()
         {
             if ($(this).parent().hasClass('search-field'))
             {
@@ -21,11 +23,7 @@ $(document).ready(function ()
     function restoreValues()
     {
         var index = 0;
-        $('form')
-        .filter(':first')
-        .find('input, textarea, select')
-        .not('input[type="button"], input[type="submit"], input[name="_do"]')
-        .each(function()
+        formInputs.each(function()
         {
             if ($(this).parent().hasClass('search-field'))
             {
@@ -38,18 +36,31 @@ $(document).ready(function ()
 
     $.nette.ext('snippets').after(function (el)
     {
-        restoreValues();
-        $(el).find('select').chosen(chosenOptions);
-        $('#artist_subform').hide();
+        if ($(el).attr('id') === 'snippet-entityForm-formSnippet')
+        {
+            restoreValues();
+            refreshPlugins(el);
+            $('#artist_subform').hide();
+            return;
+        }
+
+        if ($(el).attr('id') === 'snippet-entityForm-artistFormSnippet')
+        {
+            refreshPlugins(el);
+        }
     });
     $.nette.ext('snippets').before(function (el)
     {
-        storeValues();
+        if ($(el).attr('id') === 'snippet-entityForm-formSnippet')
+        {
+            storeValues();
+            return;
+        }
     });
     $.nette.load();
 
     $('#add_artist').click(function()
     {
-        $('#artist_subform').toggle();
+        $('#artist_subform').toggle().find('form').trigger('reset');;
     });
 });

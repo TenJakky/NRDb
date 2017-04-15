@@ -4,9 +4,11 @@
             <tr class="required">
                 <th>{label type /}</th>
                 <td>
+                    <div class="radioContainer">
                     {foreach $form[type]->items as $key => $label}
-                        <label n:name="type:$key" class="blockRadioItem"><input n:name="type:$key" />{$label}</label>
+                        <label n:name="type:$key" class="inlineRadioItem"><input n:name="type:$key" />{$label}</label>
                     {/foreach}
+                    </div>
                 </td>
             </tr>
             <tr class="required">
@@ -58,12 +60,12 @@
                 <td>{input year_to}</td>
             </tr>
             <tr>
-                <th>{label members /}</th>
-                <td>{input members}</td>
+                <th>{label member /}</th>
+                <td>{input member}</td>
             </tr>
             <tr>
-                <th>{label former_members /}</th>
-                <td>{input former_members}</td>
+                <th>{label former_member /}</th>
+                <td>{input former_member}</td>
             </tr>
         </tbody>
     </table>

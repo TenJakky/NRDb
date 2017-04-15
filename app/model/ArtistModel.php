@@ -31,7 +31,7 @@ final class ArtistModel extends BaseModel
             ->fetchPairs('id', 'name');
     }
 
-    public function fetchAllSelectBox()
+    public function fetchSelectBox()
     {
         return $this->getTable()
             ->select("id, concat_ws(' ', name, middlename, surname) AS name")
