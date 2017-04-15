@@ -6,8 +6,8 @@ div.selectize-control
 }
 
 .selectize-dropdown .active {
-  background-color: #cc1d24;
-  color: #ffffff;
+  background: $red none no-repeat;
+  color: $white;
 }
 
 .selectize-control.single .selectize-input {
@@ -15,6 +15,12 @@ div.selectize-control
   box-shadow: none;
   background: $white none;
   filter: none;
+}
+
+.selectize-control.multi .selectize-input [data-value]
+{
+  background: $red none no-repeat;
+  border: 1px solid $failure-border;
 }
 
 .selectize-control.single .selectize-input, .selectize-input

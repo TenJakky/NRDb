@@ -61,7 +61,7 @@ final class EntityForm extends BaseComponent
                 $data[$role] = $row
                     ->related('jun_artist2entity')
                     ->where('role', $role)
-                    ->fetchPairs('id', 'member_id');
+                    ->fetchPairs('id', 'artist_id');
             }
 
             $this['form']->setDefaults($data);
@@ -193,7 +193,7 @@ final class EntityForm extends BaseComponent
                     'original_title' => $data['original_title'],
                     'english_title' => $data['english_title'],
                     'czech_title' => $data['czech_title'],
-                    'year' => $data['year_from'],
+                    'year' => $data['year'],
                     'description' => $data['description']
                 ]);
                 break;
@@ -214,7 +214,7 @@ final class EntityForm extends BaseComponent
                     'type' => $data['type'],
                     'series_id' => $data['series_id'],
                     'season_number' => $data['season_number'],
-                    'year' => $data['year_from'],
+                    'year' => $data['year'],
                     'description' => $data['description']
                 ]);
                 break;
@@ -224,19 +224,19 @@ final class EntityForm extends BaseComponent
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
-                    'year' => $data['year_from'],
+                    'year' => $data['year'],
                     'description' => $data['description']
                 ]);
                 break;
         }
 
-        foreach (\App\Enum\TypeToRole::ROLES[$data['role']] as $role)
+        foreach (\App\Enum\TypeToRole::ROLES[$data['type']] as $role)
         {
-            foreach ($data[$role] as $member)
+            foreach ($data[$role] as $artist)
             {
                 $this->artistEntityModel->insert(array(
-                    'entity_id' => $member,
-                    'artist_id' => $id,
+                    'entity_id' => $id,
+                    'artist_id' => $artist,
                     'role' => $role
                 ));
             }
@@ -252,6 +252,6 @@ final class EntityForm extends BaseComponent
             return;
         }
 
-        $this->presenter->redirect('Artist:view', array('id' => $id));
+        $this->presenter->redirect('Entity:rate', array('id' => $id));
     }
 }
