@@ -246,10 +246,9 @@ final class EntityForm extends BaseComponent
 
         $this->presenter->flashMessage('Entity successfully saved.', 'success');
 
-        if ($this->presenter->isAjax())
+        if ($this->presenter->action === 'edit')
         {
-            $this->presenter->redrawControl('flash');
-            return;
+            $this->presenter->redirect('Entity:view', array('id' => $id));
         }
 
         $this->presenter->redirect('Entity:rate', array('id' => $id));
