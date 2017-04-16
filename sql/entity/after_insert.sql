@@ -6,7 +6,7 @@ FOR EACH ROW
   BEGIN
 
     UPDATE `stat_entity`
-    SET rating_count = rating_count + 1
+    SET count = count + 1
     WHERE type = NEW.type;
 
   END//
