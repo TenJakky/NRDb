@@ -12,7 +12,9 @@
 
 {define col-artist}
     <td>
-        {artistList $row->related("jun_artist2entity.entity_id")}
+        {var artists = $row->related("jun_artist2entity.entity_id")->where('role', \App\Enum\TypeToRole::LIST_ROLE[$row->type])}
+        {dump $artists}
+        {artistList $artists}
     </td>
 {/define}
 

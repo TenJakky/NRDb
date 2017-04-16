@@ -25,4 +25,13 @@ class TypeToRole
         self::MUSIC => [self::INTERPRET],
         self::GAME => [self::DEVELOPER]
     ];
+
+    const LIST_ROLE = [
+        self::MOVIE => self::DIRECTOR,
+        self::SERIES => self::DIRECTOR,
+        self::SEASON => self::DIRECTOR,
+        self::BOOK => self::AUTHOR,
+        self::MUSIC => self::INTERPRET,
+        self::GAME => self::DEVELOPER
+    ];
 }

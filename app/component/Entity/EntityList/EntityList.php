@@ -4,8 +4,14 @@ namespace App\Component;
 
 final class EntityList extends BaseDatagridComponent
 {
-    /** @var \App\Model\BaseRatingModel */
+    /** @var \App\Model\RatingModel */
     protected $ratingModel;
+
+    /** @var  string */
+    protected $type;
+
+    /** @var  int */
+    protected $seriesId;
 
     public function __construct(
         \App\Model\EntityModel $entityModel,
@@ -15,18 +21,26 @@ final class EntityList extends BaseDatagridComponent
         $this->ratingModel = $ratingModel;
     }
 
+    public function render($type = null, $param = null)
+    {
+        $this->type = $type ? $type : $this->presenter->type;
+        $this->seriesId = $param;
+
+        parent::render();
+    }
+
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();
 
-        if ($this->presenter->type === 'season')
+        if ($this->type === 'season')
         {
-            $this->grid->addColumn('number', 'Number')->enableSort('asc');
+            $this->grid->addColumn('season_number', 'Number')->enableSort('asc');
         }
         else
         {
             $this->grid->addColumn('original_title', 'Original title')->enableSort();
-            if (!in_array($this->presenter->type, array('music', 'game')))
+            if (!in_array($this->type, array('music', 'game')))
             {
                 $this->grid->addColumn('english_title', 'English Title')->enableSort();
                 $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
@@ -37,7 +51,6 @@ final class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
-
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
                 'ratingModel' => $this->ratingModel));
@@ -46,7 +59,12 @@ final class EntityList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $filters = ['type' => $this->presenter->type];
+        $filters = ['type' => $this->type];
+
+        if ($this->type === 'season')
+        {
+            $filters['season_series_id'] = $this->seriesId;
+        }
 
         foreach ($filter as $k => $v)
         {
@@ -67,19 +85,17 @@ final class EntityList extends BaseDatagridComponent
         {
             if ($order[0] == 'artist')
             {
-                $table = "jun_{$this->entityType}2{$this->artistType}";
+                $orders = ":jun_artist2entity.artist.surname $order[1], :jun_artist2entity.artist.name $order[1]";
 
-                $orders = ":{$table}.artist.surname $order[1], :{$table}.artist.name $order[1]";
-
-                if (in_array($this->entityType, array('music', 'game')))
+                if (in_array($this->type, array('music', 'game')))
                 {
-                    $orders = ":{$table}.group.name $order[1], ".$orders;
+                    $orders = ":jun_artist2entity.artist.name $order[1], ".$orders;
                 }
             }
             else if ($order[0] == 'my_rating')
             {
-                $set->joinWhere(":rating_{$this->entityType}", ":rating_{$this->entityType}.user_id", $this->presenter->getUser()->getId());
-                $orders = ":rating_{$this->entityType}.rating $order[1]";
+                $set->joinWhere(":rating", ":rating.user_id", $this->presenter->getUser()->getId());
+                $orders = ":rating.value $order[1]";
             }
             else
             {

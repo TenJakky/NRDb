@@ -40,6 +40,4 @@ class Macros extends \Latte\Macros\MacroSet
             ');
         });
     }
-
-
 }
