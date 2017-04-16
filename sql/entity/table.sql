@@ -8,7 +8,7 @@ CREATE TABLE `entity` (
   `year` year(4) NOT NULL,
   `image_file` varchar(255) DEFAULT NULL,
   `series_active` tinyint(1) unsigned DEFAULT NULL,
-  `series_id` int(11) unsigned DEFAULT NULL,
+  `season_series_id` int(11) unsigned DEFAULT NULL,
   `season_number` int(11) unsigned DEFAULT NULL,
   `rating_count` int(11) unsigned NOT NULL,
   `rating_sum` int(11) unsigned NOT NULL,
@@ -19,8 +19,8 @@ ALTER TABLE `entity`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `year` (`year`),
-  ADD KEY `series_id` (`series_id`),
+  ADD KEY `season_series_id` (`season_series_id`),
   ADD KEY `rating` (`rating`);
 
 ALTER TABLE `entity`
-  ADD CONSTRAINT `entity_ibfk_1` FOREIGN KEY (`series_id`) REFERENCES `entity` (`id`);
+  ADD CONSTRAINT `entity_ibfk_1` FOREIGN KEY (`season_series_id`) REFERENCES `entity` (`id`);

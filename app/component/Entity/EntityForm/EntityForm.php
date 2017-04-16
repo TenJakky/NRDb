@@ -125,7 +125,7 @@ final class EntityForm extends BaseComponent
             ->addConditionOn($form['type'], $form::EQUAL, 'series')
                 ->setRequired();
 
-        $form->addSelect('series_id', 'Series', $this->entityModel->fetchSeriesSelectBox())
+        $form->addSelect('season_series_id', 'Series', $this->entityModel->fetchSeriesSelectBox())
             ->addConditionOn($form['type'], $form::EQUAL, 'season')
                 ->setRequired();
         $form->addText('season_number', 'Season number')
@@ -212,7 +212,7 @@ final class EntityForm extends BaseComponent
                 $id = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
-                    'series_id' => $data['series_id'],
+                    'season_series_id' => $data['season_series_id'],
                     'season_number' => $data['season_number'],
                     'year' => $data['year'],
                     'description' => $data['description']
