@@ -42,8 +42,12 @@ final class ArtistWorks extends BaseSmallDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $filter['artist_id'] = $this->artistId;
+        $set = $this->model->findByArray(['artist_id' => $this->artistId]);
 
-        return parent::getDataSource($filter, $order);
+        if ($order[0])
+        {
+            $set->order(implode(' ', $order));
+        }
+        return $set;
     }
 }

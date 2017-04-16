@@ -34,24 +34,12 @@ abstract class BaseDatagridComponent extends BaseComponent
         $this->grid->setPagination($this->perPage, array($this, 'dataSourceCount'));
     }
 
-    public function getDataSource($filter, $order)
-    {
-        $filters = array();
-        foreach ($filter as $k => $v) {
-            if ($k == 'id' || is_array($v))
-                $filters[$k] = $v;
-            else
-                $filters[$k. ' LIKE ?'] = "%$v%";
-        }
-
-        $set = $this->model->findByArray($filters);
-
-        if ($order[0])
-        {
-            $set->order(implode(' ', $order));
-        }
-        return $set;
-    }
+    /**
+     * @param $filter array
+     * @param $order array
+     * @return \Nette\Database\Table\Selection
+     */
+    abstract public function getDataSource($filter, $order);
 
     public function dataSource($filter, $order, \Nette\Utils\Paginator $paginator = null)
     {
