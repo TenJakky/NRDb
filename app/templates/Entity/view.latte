@@ -9,7 +9,7 @@
     </div>
 {/if}
 
-<h2>{$data->rating|number: 2}</h2>
+<h2>{$data|rating}</h2>
 {if $data->type === 'series'}
     <h3>Average rating from seasons: {$ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
 {/if}

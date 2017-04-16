@@ -23,7 +23,7 @@
             {if $presenter->getName() != 'Series'}
                 <td class="center">{$entity->year}</td>
             {/if}
-            <td class="center">{$entity->rating|number:2}</td>
+            <td class="center">{$entity|rating}</td>
             {var $rating => $ratingModel->getUserRating($entity->id, $user->getId())}
             <td class="center">
                 {if $rating}

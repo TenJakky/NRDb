@@ -4,8 +4,10 @@ latte:
 
 services:
 
-    - App\Filter\ArtistFilter
+    - App\Latte\ArtistFilter
+    - App\Latte\RatingFilter
 
     nette.latteFactory:
         setup:
-            - addFilter(artist, @App\Filter\ArtistFilter)
+            - addFilter(artist, @App\Latte\ArtistFilter)
+            - addFilter(rating, @App\Latte\RatingFilter)
