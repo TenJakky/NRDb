@@ -9,7 +9,7 @@
             {/foreach}
             {foreach $searchArtist as $temp}
                 <li>
-                    <a href="{plink Artist:view $temp->id}">{$temp->id|artist}</a>
+                    <a href="{plink Artist:view $temp->id}">{$temp|artist}</a>
                 </li>
             {/foreach}
         {else}

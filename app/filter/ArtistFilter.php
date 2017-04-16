@@ -11,8 +11,8 @@ class ArtistFilter extends \Nette\Object
         $this->artistModel = $artistModel;
     }
 
-    public function __invoke($id)
+    public function __invoke(\Nette\Database\Table\ActiveRow $artist)
     {
-        return $this->artistModel->getTable()->select("concat_ws(' ', name, middlename, surname) AS name")->wherePrimary($id)->fetch()->name;
+        return implode(' ', array_filter([$artist->name, $artist->middlename, $artist->surname]));
     }
 }

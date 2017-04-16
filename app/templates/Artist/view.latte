@@ -1,5 +1,5 @@
 {layout ../@layout.latte}
-{block title}{$data->id|artist}{/block}
+{block title}{$data|artist}{/block}
 {block head}{/block}
 {block content}
 
@@ -54,7 +54,7 @@
             <tr>
                 <th>Pseudonym of</th>
                 <td>
-                    <a href="{plink Artist:view $data->id}">{$data->id|artist}</a>
+                    <a href="{plink Artist:view $data->id}">{$data->person|artist}</a>
                 </td>
             </tr>
         {/if}
