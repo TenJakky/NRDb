@@ -10,8 +10,8 @@
 {/if}
 
 <h2>{$data|rating}</h2>
-{if $data->type === 'series'}
-    <h3>Average rating from seasons: {$ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
+{if $data->type === 'series' && false}
+    <h3>Average rating from seasons: { $ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
 {/if}
 <h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
 <h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
@@ -27,7 +27,7 @@
     {if $data->type === 'season'}
         <ul class="inline-buttons">
             <li>
-                <a href="{plink Entity:view $data->season_series_id}">← Series</a>
+                <a href="{plink Entity:view $data->season_series_id, type => series}">← Series</a>
             </li>
         </ul>
     {/if}
@@ -75,7 +75,7 @@
             {if $range}
                 <tr>
                     <th>Year</th>
-                    <td>{$range->min} - {$data->active ? 'present' : $range->max}</td>
+                    <td>{$range->min} - {$data->series_active ? 'present' : $range->max}</td>
                 </tr>
             {/if}
         {else}
@@ -104,14 +104,10 @@
         <h2>Season List</h2>
         <ul class="inline-buttons">
             <li>
-                <a href="{plink Season:add $data->id}">Add season</a>
-            </li>
-            <li>
-                <a href="{plink Season:rate $data->id}">Add rating</a>
-                <a href="{plink Season:rate $data->id}">Add rating</a>
+                <a href="{plink Entity:add type => season}">Add season</a>
             </li>
         </ul>
-        {control seasonList $data->id}
+        {control entityList 'season', $data->id}
     </section>
 {/if}
 <section>

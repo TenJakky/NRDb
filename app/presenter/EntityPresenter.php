@@ -32,6 +32,11 @@ final class EntityPresenter extends BaseViewEditPresenter
     {
         parent::actionView($id);
 
+        if ($this->template->data['type'] === 'season')
+        {
+            $this->redirect('Entity:view', ['id' => $this->template->data['season_series_id'], 'type' => 'series']);
+        }
+
         $this->template->ratingModel = $this->ratingModel;
     }
 

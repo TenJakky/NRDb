@@ -46,7 +46,7 @@ final class EntityList extends BaseDatagridComponent
                 $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
             }
         }
-        $this->grid->addColumn('artist', 'Artist')->enableSort();
+        $this->grid->addColumn('artist', \App\Enum\TypeToRole::LIST_ROLE[$this->type])->enableSort();
         $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
