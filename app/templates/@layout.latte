@@ -35,9 +35,9 @@
                         <li class="dropdown">
                             <a>{$presenter->locale['categories']}</a>
                             <ul class="dropdown-list">
-                                {foreach $presenter->locale['entity_pl'] as $type => $pl}
+                                {foreach \App\Enum\Category::ITEMS as $type}
                                     <li>
-                                        <a href="{plink Entity:default type => $type}">{$pl}</a>
+                                        <a href="{plink Entity:default type => $type}">{$presenter->locale['entity_pl'][$type]}</a>
                                     </li>
                                 {/foreach}
                             </ul>
