@@ -18,9 +18,9 @@ class TypeToRole
     const GAME = 'game';
 
     const ROLES = [
-        self::MOVIE => [self::ACTOR, self::DIRECTOR],
-        self::SERIES => [self::ACTOR, self::DIRECTOR],
-        self::SEASON => [self::ACTOR, self::DIRECTOR],
+        self::MOVIE => [self::DIRECTOR, self::ACTOR],
+        self::SERIES => [],
+        self::SEASON => [self::DIRECTOR, self::ACTOR],
         self::BOOK => [self::AUTHOR],
         self::MUSIC => [self::INTERPRET],
         self::GAME => [self::DEVELOPER]
