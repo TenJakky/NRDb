@@ -53,8 +53,16 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="{plink Statistics:default}">{$presenter->locale['stats']}</a>
+                        <li class="dropdown">
+                            <a>{$presenter->locale['other']}</a>
+                            <ul class="dropdown-list">
+                                <li>
+                                    <a href="{plink Statistics:default}">{$presenter->locale['stats']}</a>
+                                </li>
+                                <li>
+                                    <a href="{plink Credits:default}">{$presenter->locale['credits']}</a>
+                                </li>
+                            </ul>
                         </li>
                         {control search}
                     </ul>
@@ -84,9 +92,6 @@
                             </li>
                         {/if*}
                     {/if}
-                    <li>
-                        <a href="{plink Default:credits}">{$presenter->locale['credits']}</a>
-                    </li>
                     {control lang}
                 </ul>
             </div>

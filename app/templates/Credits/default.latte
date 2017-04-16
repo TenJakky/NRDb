@@ -1,0 +1,25 @@
+{layout ../@layout.latte}
+{block title}{$presenter->locale['credits']}{/block}
+{block head}{/block}
+{block content}
+
+<section>
+    <h2>{$presenter->locale['cred_head_1']}</h2>
+    <ul>
+        <li>{$presenter->locale['cred_text_1']}<a href="http://www.peldax.com">Václav Pelíšek</a>.</li>
+        <li>{$presenter->locale['cred_text_2']}<a href="http://www.github.com/peldax/NRDb">{$presenter->locale['cred_github']}</a>.</li>
+    </ul>
+    <h2>{$presenter->locale['cred_head_2']}</h2>
+        <ul>
+            <li><a href="http://www.nette.org">Nette</a></li>
+            <li><a href="https://www.github.com/vojtech-dobes/nette.ajax.js">Nette Ajax JS</a></li>
+            <li><a href="https://www.github.com/nextras/datagrid">Nextras Datagrid</a></li>
+            <li><a href="http://www.jquery.com">jQuery</a></li>
+            <li><a href="https://www.github.com/harvesthq/chosen">Chosen</a></li>
+            <li><a href="https://www.github.com/chartjs/Chart.js">Chart.js</a></li>
+            <li><a href="https://www.github.com/lipis/flag-icon-css">Flag icon CSS</a></li>
+        </ul>
+</section>
+<section>
+    {control changelog}
+</section>

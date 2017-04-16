@@ -28,8 +28,6 @@ class RouterFactory
             'Default:login');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]logout',
             'Default:logout');
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]credits',
-            'Default:credits');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]settings',
             'Default:settings');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]change-password',

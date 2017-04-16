@@ -80,6 +80,7 @@ return [
     'dashboard' => 'Nástěnka',
     'categories' => 'Kategorie',
     'people' => 'Lidé',
+    'other' => 'Ostatní',
     'stats' => 'Statistiky',
     'credits' => 'Tvůrci',
 

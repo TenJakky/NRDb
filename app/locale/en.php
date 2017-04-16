@@ -80,6 +80,7 @@ return [
     'dashboard' => 'Dashboard',
     'categories' => 'Categories',
     'people' => 'People',
+    'other' => 'Other',
     'stats' => 'Statistics',
     'credits' => 'Credits',
 
