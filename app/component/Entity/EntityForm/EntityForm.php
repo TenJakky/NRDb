@@ -114,7 +114,8 @@ final class EntityForm extends BaseComponent
             ->endCondition();
 
         $form->addText('original_title', 'Original title')
-            ->setRequired();
+            ->addConditionOn($form['type'], $form::NOT_EQUAL, 'season')
+                ->setRequired();
 
         $form->addText('english_title', 'English title')
             ->addConditionOn($form['type'], $form::EQUAL, ['movie', 'series', 'book'])
@@ -130,7 +131,10 @@ final class EntityForm extends BaseComponent
                 ->setRequired();
         $form->addText('season_number', 'Season number')
             ->addConditionOn($form['type'], $form::EQUAL, 'season')
-                ->setRequired();
+                ->setRequired()
+            ->addCondition($form::FILLED)
+                ->addRule($form::INTEGER, 'Season number must be integer.');
+
 
         $form->addText('year', 'Year')
             ->addConditionOn($form['type'], $form::EQUAL, ['movie', 'season', 'book', 'music', 'game'])
