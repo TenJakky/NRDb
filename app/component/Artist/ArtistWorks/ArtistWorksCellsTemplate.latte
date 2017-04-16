@@ -11,9 +11,13 @@
 {/define}
 
 {define col-year}
-    <td>
+    <td class="center">
         {$row->entity->year}
     </td>
+{/define}
+
+{define col-head-class-year}
+    center
 {/define}
 
 {define col-original_title}
@@ -23,18 +27,36 @@
 {/define}
 
 {define col-rating}
-    <td>
+    <td class="center">
+        {$row->entity->rating}
     </td>
 {/define}
 
-{define col-my_rating}
-    <td>
+{define col-head-class-rating}
+    center
+{/define}
 
+
+{define col-my_rating}
+    <td class="center">
+        {var $rating = $ratingModel->getUserRating($row->entity_id, $user->id)}
+        {if $rating}
+            {$rating->value}
+        {/if}
     </td>
+{/define}
+
+{define col-head-class-my_rating}
+    center
 {/define}
 
 {define col-action}
     <td>
-
+        {var $rating => $ratingModel->getUserRating($row->entity_id, $user->id)}
+        {if $rating}
+            <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
+        {else}
+            <a href="{plink Entity:rate $row->entity_id}">Rate</a>
+        {/if}
     </td>
 {/define}
