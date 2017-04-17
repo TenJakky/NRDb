@@ -18,6 +18,14 @@
                 {/foreach}
             </tr>
         {/foreach}
+        <tr>
+            <th>{$presenter->locale['total']}</th>
+            <td>{$se->total_count}</td>
+            <td>{$se->total_rating_count}</td>
+            {foreach $statRating as $sr}
+                <td>{$sr->count}</td>
+            {/foreach}
+        </tr>
     </tbody>
 </table>
 

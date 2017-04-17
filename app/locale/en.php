@@ -94,6 +94,8 @@ return [
     'news' => 'News',
     'intro' => 'Introduction',
 
+    'total' => 'Total',
+
     'cred_head_1' => 'Developer',
     'cred_head_2' => 'Frameworks and libraries used',
     'cred_text_1' => 'This application is being developed by ',

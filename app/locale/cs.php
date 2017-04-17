@@ -94,6 +94,8 @@ return [
     'news' => 'Novinky',
     'intro' => 'Úvod',
 
+    'total' => 'Celkem',
+
     'cred_head_1' => 'Vývojář',
     'cred_head_2' => 'Použité frameworky a knihovny',
     'cred_text_1' => 'Aplikaci vyvíjí ',

@@ -20,7 +20,7 @@ final class StatElementCount extends BaseComponent
 
     public function render()
     {
-        $this->template->statEntity = $this->statEntityModel->getTable();
+        $this->template->statEntity = $this->statEntityModel->getRatingData();
         $this->template->statRating = $this->statRatingModel->getTable();
 
         parent::render();
