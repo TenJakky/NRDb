@@ -24,6 +24,11 @@
 {
   @extend .table;
 
+  td:last-of-type
+  {
+    padding: 0 5px;
+  }
+
   tbody
   {
     tr:hover
@@ -36,6 +41,7 @@
 .list
 {
   @extend .table;
+
   table-layout: fixed;
 }
 
@@ -44,14 +50,24 @@
   background-color: $lightRed;
 }
 
-.artist-list
+.table-list
 {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.season-list
+.artist-list
 {
-  @extend .artist-list;
+  @extend .table-list;
+}
+
+.action-list
+{
+  @extend .table-list;
+
+  li
+  {
+    margin: 5px 0;
+  }
 }

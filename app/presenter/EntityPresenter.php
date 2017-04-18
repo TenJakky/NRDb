@@ -42,18 +42,16 @@ final class EntityPresenter extends BaseViewEditPresenter
 
     public function actionRate($id = 0)
     {
-        $name = lcfirst($this->name);
-
-        if ($id != 0 && !$this->model->findRow($id))
+        if ($id === 0 || !$this->model->findRow($id))
         {
-            $this->presenter->flashMessage("Entity not found.", 'failure');
-            $this->presenter->redirect("Entity:default");
+            $this->flashMessage("Entity not found.", 'failure');
+            $this->redirect("Entity:default");
         }
 
-        $rating = $this->ratingModel->findByArray(array('user_id' => $this->getUser()->getId(), "{$name}_id" => $id));
+        $rating = $this->ratingModel->findByArray(array('user_id' => $this->getUser()->getId(), "entity_id" => $id));
         if ($rating->count() > 0)
         {
-            $this->presenter->redirect("Entity:editRating", $rating->fetch()->id);
+            $this->redirect("Entity:editRating", $rating->fetch()->id);
         }
 
         $this->template->id = $id;
@@ -62,12 +60,29 @@ final class EntityPresenter extends BaseViewEditPresenter
     public function actionEditRating($id)
     {
         $rating = $this->ratingModel->findRow($id);
-        if ($rating->user_id !== $this->user->getId())
+
+        $this->redirect('');
+
+        if (!$rating || $rating->user_id !== $this->user->getId())
         {
-            $this->presenter->flashMessage('You cannot edit rating of someone else.', 'failure');
-            $this->presenter->redirect("{$this->name}:default");
+            $this->flashMessage('You cannot edit rating of someone else.', 'failure');
+            $this->redirect("Entity:default");
         }
 
         $this->template->ratingId = $id;
+    }
+
+    public function actionRemoveRating($id)
+    {
+        $rating = $this->ratingModel->findRow($id);
+        if (!$rating || $rating->user_id !== $this->user->getId())
+        {
+            $this->flashMessage('You cannot remove rating of someone else.', 'failure');
+            $this->redirect("Entity:default");
+        }
+
+        $rating->delete();
+
+        $this->redirect("Entity:default");
     }
 }

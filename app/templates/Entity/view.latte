@@ -43,13 +43,18 @@
         <li>
             <a href="{plink Entity:edit $data->id}">Edit details</a>
         </li>
-        <li>
-            {if $rating}
+        {if $rating}
+            <li>
                 <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
-            {else}
+            </li>
+            <li>
+                <a href="{plink Entity:removeRating $rating->id}">Remove rating</a>
+            </li>
+        {else}
+            <li>
                 <a href="{plink Entity:rate $data->id}">Rate</a>
-            {/if}
-        </li>
+            </li>
+        {/if}
     </ul>
 </section>
 <section>

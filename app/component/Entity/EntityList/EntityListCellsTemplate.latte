@@ -54,7 +54,10 @@
     <td>
         {var $rating => $ratingModel->getUserRating($row->id, $user->id)}
         {if $rating}
-            <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
+            <ul class="action-list">
+                <li><a href="{plink Entity:editRating $rating->id}">Edit rating</a></li>
+                <li><a href="{plink Entity:removeRating $rating->id}">Remove rating</a></li>
+            </ul>
         {else}
             <a href="{plink Entity:rate $row->id}">Rate</a>
         {/if}
