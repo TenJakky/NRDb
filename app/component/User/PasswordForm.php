@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class PasswordForm extends BaseComponent
+final class PasswordForm extends BaseRenderComponent
 {
     protected $userModel;
 

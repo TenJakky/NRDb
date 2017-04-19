@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class EntitySmallList extends \Nette\Application\UI\Control
+final class EntitySmallList extends BaseComponent
 {
     /** @var \App\Model\EntityModel */
     protected $model;

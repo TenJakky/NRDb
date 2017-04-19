@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class SettingsForm extends BaseComponent
+final class SettingsForm extends BaseRenderComponent
 {
     protected $userModel;
     protected $countryModel;

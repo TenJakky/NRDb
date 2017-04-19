@@ -13,7 +13,7 @@ final class StatUserRadar extends BaseComponent
         $this->userModel = $userModel;
     }
 
-    public function render($user = null)
+    public function render(\Nette\Database\Table\ActiveRow $user)
     {
         $this->template->statMovie = $user->ratings_movie;
         $this->template->statSeries = $user->ratings_series;
@@ -31,6 +31,7 @@ final class StatUserRadar extends BaseComponent
         $this->template->percentMusic = $max->music ? $this->template->statMusic  / $max->music : 0;
         $this->template->percentGame = $max->game ?$this->template->statGame / $max->game : 0;
 
-        parent::render();
+        $this->template->setFile('StatUserRadar.latte');
+        $this->template->render();
     }
 }

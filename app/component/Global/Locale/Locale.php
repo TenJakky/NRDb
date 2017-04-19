@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Locale extends BaseComponent
+final class Locale extends BaseRenderComponent
 {
 
 }

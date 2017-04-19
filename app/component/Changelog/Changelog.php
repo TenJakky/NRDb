@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Changelog extends BaseComponent
+final class Changelog extends BaseRenderComponent
 {
     protected $changelogModel;
 
@@ -12,10 +12,8 @@ final class Changelog extends BaseComponent
         $this->changelogModel = $changelogModel;
     }
 
-    public function render()
+    public function beforeRender()
     {
         $this->template->changes = $this->changelogModel->getTable()->order('date DESC')->limit(5);
-
-        parent::render();
     }
 }

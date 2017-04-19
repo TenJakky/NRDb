@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Search extends BaseComponent
+final class Search extends BaseRenderComponent
 {
     /** @var  \App\Model\EntityModel */
 	protected $entityModel;
@@ -18,19 +18,20 @@ final class Search extends BaseComponent
 		$this->artistModel = $artistModel;
 	}
 
+    /** @var bool */
 	private $flag = false;
 
+    /** @var array */
 	private $searchEntity = array();
+
+    /** @var array */
 	private $searchArtist = array();
 
-	public function render()
+	public function beforeRender()
 	{
 		$this->template->flag = $this->flag;
-
 		$this->template->searchEntity = $this->searchEntity;
 		$this->template->searchArtist = $this->searchArtist;
-
-		parent::render();
 	}
 
 	public function handleSearch()

@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class LoginForm extends BaseComponent
+final class LoginForm extends BaseRenderComponent
 {
     public function createComponentForm()
     {

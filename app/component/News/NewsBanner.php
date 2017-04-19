@@ -2,10 +2,7 @@
 
 namespace App\Component;
 
-final class NewsBanner extends BaseComponent
+final class NewsBanner extends BaseRenderComponent
 {
-	public function render()
-	{
-		
-	}
+
 }

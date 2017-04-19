@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class StatElementCount extends BaseComponent
+final class StatElementCount extends BaseRenderComponent
 {
     /** @var \App\Model\StatEntityModel */
     protected $statEntityModel;
@@ -18,11 +18,9 @@ final class StatElementCount extends BaseComponent
         $this->statRatingModel = $statRatingModel;
     }
 
-    public function render()
+    public function beforeRender()
     {
         $this->template->statEntity = $this->statEntityModel->getRatingData();
         $this->template->statRating = $this->statRatingModel->getTable();
-
-        parent::render();
     }
 }

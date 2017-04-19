@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class NewsForm extends BaseComponent
+final class NewsForm extends BaseRenderComponent
 {
 	
 }

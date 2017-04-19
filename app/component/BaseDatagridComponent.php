@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class BaseDatagridComponent extends BaseComponent
+abstract class BaseDatagridComponent extends BaseRenderComponent
 {
     /** @var \Nextras\Datagrid\Datagrid */
     protected $grid;

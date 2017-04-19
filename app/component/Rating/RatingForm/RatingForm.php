@@ -42,7 +42,9 @@ final class RatingForm extends BaseComponent
             $this->model->getRated($userId)->fetchPairs('id', 'original_title');
 
         $form = new \Nette\Application\UI\Form();
+
         $form->addHidden('id');
+
         $form->addSelect("entity_id", 'Entity', $entities)
             ->setPrompt("Select Entity")
             ->setRequired();
