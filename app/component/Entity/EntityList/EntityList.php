@@ -2,16 +2,15 @@
 
 namespace App\Component;
 
+use Tracy\Debugger;
+
 final class EntityList extends BaseDatagridComponent
 {
     /** @var \App\Model\RatingModel */
     protected $ratingModel;
 
-    /** @var  string */
+    /** @var string */
     protected $type;
-
-    /** @var  int */
-    protected $seriesId;
 
     public function __construct(
         \App\Model\EntityModel $entityModel,
@@ -21,12 +20,14 @@ final class EntityList extends BaseDatagridComponent
         $this->ratingModel = $ratingModel;
     }
 
-    public function render($type = null, $param = null)
+    public function attached($presenter)
     {
-        $this->type = $type ? $type : $this->presenter->type;
-        $this->seriesId = $param;
+        $this->type =
+            $presenter->getName() === 'Entity' &&
+            $presenter->getAction() === 'view' &&
+            $presenter->type === 'series' ? 'season' : $presenter->type;
 
-        parent::render();
+        parent::attached($presenter);
     }
 
     public function createComponentDataGrid()
@@ -46,7 +47,7 @@ final class EntityList extends BaseDatagridComponent
                 $this->grid->addColumn('czech_title', 'Czech Title')->enableSort();
             }
         }
-        $this->grid->addColumn('artist', \App\Enum\TypeToRole::LIST_ROLE[$this->type])->enableSort();
+        $this->grid->addColumn('artist', $this->presenter->locale['role'][\App\Enum\TypeToRole::LIST_ROLE[$this->type]]);
         $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
@@ -63,36 +64,14 @@ final class EntityList extends BaseDatagridComponent
 
         if ($this->type === 'season')
         {
-            $filters['season_series_id'] = $this->seriesId;
-        }
-
-        foreach ($filter as $k => $v)
-        {
-            if ($k == 'artist')
-            {
-                $filters['artist.name LIKE ?'] = "%$v%";
-                $filters['artist.surname LIKE ?'] = "%$v%";
-            }
-            else
-            {
-                $filters[$k . ' LIKE ?'] = "%$v%";
-            }
+            $filters['season_series_id'] = $this->presenter->getParameter('id');
         }
 
         $set = $this->model->findByArray($filters);
 
         if ($order[0])
         {
-            if ($order[0] == 'artist')
-            {
-                $orders = ":jun_artist2entity.artist.surname $order[1], :jun_artist2entity.artist.name $order[1]";
-
-                if (in_array($this->type, array('music', 'game')))
-                {
-                    $orders = ":jun_artist2entity.artist.name $order[1], ".$orders;
-                }
-            }
-            else if ($order[0] == 'my_rating')
+            if ($order[0] == 'my_rating')
             {
                 $set->joinWhere(":rating", ":rating.user_id", $this->presenter->getUser()->getId());
                 $orders = ":rating.value $order[1]";
