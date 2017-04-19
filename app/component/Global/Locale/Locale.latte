@@ -1,0 +1,7 @@
+<li id="locale">
+    <select id="localeInput">
+        {foreach \App\Enum\Locale::ITEMS as $code => $flag}
+            <option {if $code === $presenter->lang}selected="selected"{/if} value="{$code}" data-flag="{$flag}">{$presenter->locale['locale'][$code]}</option>
+        {/foreach}
+    </select>
+</li>

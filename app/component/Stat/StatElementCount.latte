@@ -37,8 +37,8 @@
 
 <h4>{$presenter->locale['plot_cat_2']}</h4>
 <ul class="inline-buttons">
-    {foreach $presenter->locale['entity'] as $key => $entity}
-        <li><input type="button" value="{$entity}" class="plotEntity" data-type="{$key}" /></li>
+    {foreach \App\Enum\EntityType::ITEMS as $type}
+        <li><input type="button" value="{$presenter->locale['entity'][$type]}" class="plotEntity" data-type="{$type}" /></li>
     {/foreach}
 </ul>
 

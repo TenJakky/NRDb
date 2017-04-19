@@ -3,17 +3,25 @@
 return [
     'locale' =>
         [
-            'en' => ['gb', 'Angličtina'],
-            'cs' => ['cz', 'Čeština'],
-            'fr' => ['fr', 'Francouzština'],
-            'de' => ['de', 'Němčina'],
-            'ru' => ['ru', 'Ruština'],
-            'es' => ['es', 'Španělština']
+            'en' => 'Angličtina',
+            'cs' => 'Čeština',
+            'fr' => 'Francouzština',
+            'de' => 'Němčina',
+            'ru' => 'Ruština',
+            'es' => 'Španělština'
         ],
     'gender' =>
         [
             'male' => 'Muž',
             'female' => 'Žena'
+        ],
+    'role' =>
+        [
+            'director' => 'Režisér',
+            'actor' => 'Herec',
+            'author' => 'Spisovatel',
+            'interpret' => 'Interpret',
+            'developer' => 'Vývojář',
         ],
     'entity' =>
         [
@@ -32,14 +40,6 @@ return [
             'book' => 'Knihy',
             'music' => 'Hudba',
             'game' => 'Hry'
-        ],
-    'role' => 
-        [
-            'director' => 'Režisér',
-            'actor' => 'Herec',
-            'author' => 'Spisovatel',
-            'interpret' => 'Interpret',
-            'developer' => 'Vývojář',
         ],
     'add' =>
         [
@@ -70,6 +70,20 @@ return [
             'music' => 'Seznam hudby',
             'game' => 'Seznam her',
             'artist' => 'Seznam umělců'
+        ],
+    'attr' =>
+        [
+            'entity' =>
+                [
+
+                ],
+            'artist' =>
+                [
+                ],
+            'user' =>
+                [
+
+                ]
         ],
 
     'artist' => 'Umělec',

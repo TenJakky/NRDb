@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <td></td>
-            {foreach $presenter->locale['entity'] as $entity}
-                <th>{$entity}</th>
+            {foreach \App\Enum\EntityType::ITEMS as $type}
+                <th>{$presenter->locale['entity'][$type]}</th>
             {/foreach}
             <th>Total</th>
         </tr>

@@ -99,7 +99,7 @@ function refreshPlugins(context)
         this.dispatchEvent(event);
     });
 
-    var selectInputs = $(context).find('select:not(#langInput)');
+    var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
 }
 
@@ -136,8 +136,8 @@ $(document).ready(function ()
         }, 300));
 
 
-    var langInput = $('#langInput');
-    langInput.selectize({
+    var localeInput = $('#localeInput');
+    localeInput.selectize({
         labelField: 'name',
         valueField: 'code',
         render: {
@@ -149,7 +149,7 @@ $(document).ready(function ()
             }
         },
     });
-    langInput.change(function()
+    localeInput.change(function()
     {
         var array = window.location.pathname.split('/');
         array[1] = this.value;

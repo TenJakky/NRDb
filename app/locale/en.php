@@ -3,17 +3,25 @@
 return [
     'locale' =>
         [
-            'cs' => ['cz', 'Czech'],
-            'en' => ['gb', 'English'],
-            'fr' => ['fr', 'French'],
-            'de' => ['de', 'German'],
-            'ru' => ['ru', 'Russian'],
-            'es' => ['es', 'Spanish']
+            'cs' => 'Czech',
+            'en' => 'English',
+            'fr' => 'French',
+            'de' => 'German',
+            'ru' => 'Russian',
+            'es' => 'Spanish'
         ],
     'gender' =>
         [
             'male' => 'Male',
             'female' => 'Female'
+        ],
+    'role' =>
+        [
+            'director' => 'Director',
+            'actor' => 'Actor',
+            'author' => 'Writer',
+            'interpret' => 'Interpret',
+            'developer' => 'Developer',
         ],
     'entity' =>
         [
@@ -32,14 +40,6 @@ return [
             'book' => 'Books',
             'music' => 'Music',
             'game' => 'Games'
-        ],
-    'role' => 
-        [
-            'director' => 'Director',
-            'actor' => 'Actor',
-            'author' => 'Writer',
-            'interpret' => 'Interpret',
-            'developer' => 'Developer',
         ],
     'add' =>
         [

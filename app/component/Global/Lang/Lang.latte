@@ -1,7 +1,0 @@
-<li id="lang">
-    <select id="langInput">
-        {foreach $presenter->locale['locale'] as $code => list($flag, $name)}
-            <option {if $code === $presenter->lang}selected="selected"{/if} value="{$code}" data-flag="{$flag}">{$name}</option>
-        {/foreach}
-    </select>
-</li>

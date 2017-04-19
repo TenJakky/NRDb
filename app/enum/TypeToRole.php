@@ -2,36 +2,26 @@
 
 namespace App\Enum;
 
+use App\Enum\EntityType as ET;
+use App\Enum\ArtistRole as AR;
+
 class TypeToRole
 {
-	const ACTOR = 'actor';
-    const DIRECTOR = 'director';
-    const AUTHOR = 'author';
-    const INTERPRET = 'interpret';
-    const DEVELOPER = 'developer';
-
-    const MOVIE = 'movie';
-    const SERIES = 'series';
-    const SEASON = 'season';
-    const BOOK = 'book';
-    const MUSIC = 'music';
-    const GAME = 'game';
-
     const ROLES = [
-        self::MOVIE => [self::DIRECTOR, self::ACTOR],
-        self::SERIES => [],
-        self::SEASON => [self::DIRECTOR, self::ACTOR],
-        self::BOOK => [self::AUTHOR],
-        self::MUSIC => [self::INTERPRET],
-        self::GAME => [self::DEVELOPER]
+        ET::MOVIE => [AR::DIRECTOR, AR::ACTOR],
+        ET::SERIES => [],
+        ET::SEASON => [AR::DIRECTOR, AR::ACTOR],
+        ET::BOOK => [AR::AUTHOR],
+        ET::MUSIC => [AR::INTERPRET],
+        ET::GAME => [AR::DEVELOPER]
     ];
 
     const LIST_ROLE = [
-        self::MOVIE => self::DIRECTOR,
-        self::SERIES => self::DIRECTOR,
-        self::SEASON => self::DIRECTOR,
-        self::BOOK => self::AUTHOR,
-        self::MUSIC => self::INTERPRET,
-        self::GAME => self::DEVELOPER
+        ET::MOVIE => AR::DIRECTOR,
+        ET::SERIES => AR::DIRECTOR,
+        ET::SEASON => AR::DIRECTOR,
+        ET::BOOK => AR::AUTHOR,
+        ET::MUSIC => AR::INTERPRET,
+        ET::GAME => AR::DEVELOPER
     ];
 }
