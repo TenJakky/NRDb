@@ -22,7 +22,7 @@
             <tr class="required">
                 <th>{label value /}</th>
                 <td>
-                    <div id="rating">
+                    <div class="rating">
                         {foreach $form['value']->items as $key => $label}
                             <input n:name="value:$key" class="rating" /><label n:name="value:$key" title="{$titles[$key]}"></label>
                         {/foreach}
