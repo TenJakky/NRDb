@@ -1,6 +1,6 @@
 {define col-type}
     <td>
-        {$presenter->locale['entity'][$row->entity->type]}
+        {$presenter->locale['entity'][$row->type]}
     </td>
 {/define}
 
@@ -12,7 +12,7 @@
 
 {define col-year}
     <td class="center">
-        {$row->entity->year}
+        {$row->year}
     </td>
 {/define}
 
@@ -22,13 +22,13 @@
 
 {define col-original_title}
     <td>
-        <a href="{plink Entity:view $row->entity_id}">{$row->entity->original_title}</a>
+        <a href="{plink Entity:view $row->entity_id}">{$row->original_title}</a>
     </td>
 {/define}
 
 {define col-rating}
     <td class="center">
-        {$row->entity->rating}
+        {$row->rating}
     </td>
 {/define}
 
@@ -39,10 +39,7 @@
 
 {define col-my_rating}
     <td class="center">
-        {var $rating = $ratingModel->getUserRating($row->entity_id, $user->id)}
-        {if $rating}
-            {$rating->value}
-        {/if}
+        {$row->my_rating}
     </td>
 {/define}
 
@@ -52,11 +49,13 @@
 
 {define col-action}
     <td>
-        {var $rating => $ratingModel->getUserRating($row->entity_id, $user->id)}
-        {if $rating}
-            <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
+        {if $row->my_rating_id}
+            <ul class="action-list">
+                <li><a href="{plink Entity:editRating $row->my_rating_id}">Edit rating</a></li>
+                <li><a href="{plink Entity:removeRating $row->my_rating_id}">Remove rating</a></li>
+            </ul>
         {else}
-            <a href="{plink Entity:rate $row->entity_id}">Rate</a>
+            <a href="{plink Entity:rate $row->id}">Rate</a>
         {/if}
     </td>
 {/define}

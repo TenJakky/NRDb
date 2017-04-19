@@ -39,10 +39,7 @@
 
 {define col-my_rating}
     <td class="center">
-        {var $rating = $ratingModel->getUserRating($row->id, $user->id)}
-        {if $rating}
-            {$rating->value}
-        {/if}
+        {$row->my_rating}
     </td>
 {/define}
 
@@ -52,11 +49,10 @@
 
 {define col-action}
     <td>
-        {var $rating => $ratingModel->getUserRating($row->id, $user->id)}
-        {if $rating}
+        {if $row->my_rating_id}
             <ul class="action-list">
-                <li><a href="{plink Entity:editRating $rating->id}">Edit rating</a></li>
-                <li><a href="{plink Entity:removeRating $rating->id}">Remove rating</a></li>
+                <li><a href="{plink Entity:editRating $row->my_rating_id}">Edit rating</a></li>
+                <li><a href="{plink Entity:removeRating $row->my_rating_id}">Remove rating</a></li>
             </ul>
         {else}
             <a href="{plink Entity:rate $row->id}">Rate</a>

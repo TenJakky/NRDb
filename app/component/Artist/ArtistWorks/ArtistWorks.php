@@ -7,20 +7,10 @@ final class ArtistWorks extends BaseSmallDatagridComponent
     /** @var \App\Model\RatingModel */
     protected $ratingModel;
 
-    /** @var int */
-    protected $artistId;
-
     public function __construct(\App\Model\ArtistEntityModel $artistEntityModel, \App\Model\RatingModel $ratingModel)
     {
         $this->model = $artistEntityModel;
         $this->ratingModel = $ratingModel;
-    }
-
-    public function render($artistId = 0)
-    {
-        $this->artistId = $artistId;
-        $this->template->setFile(__DIR__.'/ArtistWorks.latte');
-        $this->template->render();
     }
 
     public function createComponentDataGrid()
@@ -30,7 +20,7 @@ final class ArtistWorks extends BaseSmallDatagridComponent
         $this->grid->addColumn('type', 'Type')->enableSort();
         $this->grid->addColumn('role', 'Role')->enableSort();
         $this->grid->addColumn('original_title', 'Original title')->enableSort();
-        $this->grid->addColumn('year', 'Year')->enableSort('desc');
+        $this->grid->addColumn('year', 'Year')->enableSort();
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
@@ -42,20 +32,16 @@ final class ArtistWorks extends BaseSmallDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $set = $this->model->findByArray(['artist_id' => $this->artistId]);
+        $set = $this->model->getTable();
+        $set->alias('entity:rating', 'r');
+        $set->select('jun_artist2entity.*, entity.*, r.value AS my_rating, r.id AS my_rating_id');
+        $set->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId());
+
+        $set->where('artist_id', $this->presenter->getParameter('id'));
 
         if ($order[0])
         {
-            switch ($order[0])
-            {
-                case 'type':
-                case 'year':
-                case 'original_title':
-                case 'rating':
-                    return $set->order("entity.$order[0] $order[1]");
-                default:
-                    return $set->order(implode(' ', $order));
-            }
+            $set->order(implode(' ', $order));
         }
 
         return $set;

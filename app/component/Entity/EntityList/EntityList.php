@@ -25,7 +25,8 @@ final class EntityList extends BaseDatagridComponent
         $this->type =
             $presenter->getName() === 'Entity' &&
             $presenter->getAction() === 'view' &&
-            $presenter->type === 'series' ? 'season' : $presenter->type;
+            $presenter->type === 'series' ?
+            'season' : $presenter->type;
 
         parent::attached($presenter);
     }
@@ -60,28 +61,21 @@ final class EntityList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $filters = ['type' => $this->type];
+        $set = $this->model->getTable();
+        $set->alias(':rating', 'r');
+        $set->select('entity.*, r.value AS my_rating, r.id AS my_rating_id');
+        $set->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId());
+
+        $set->where('type', $this->type);
 
         if ($this->type === 'season')
         {
-            $filters['season_series_id'] = $this->presenter->getParameter('id');
+            $set->where('season_series_id', $this->presenter->getParameter('id'));
         }
-
-        $set = $this->model->findByArray($filters);
 
         if ($order[0])
         {
-            if ($order[0] == 'my_rating')
-            {
-                $set->joinWhere(":rating", ":rating.user_id", $this->presenter->getUser()->getId());
-                $orders = ":rating.value $order[1]";
-            }
-            else
-            {
-                $orders = implode(' ', $order);
-            }
-
-            $set->order($orders);
+            $set->order(implode(' ', $order));
         }
 
         return $set;
