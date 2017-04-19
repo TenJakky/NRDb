@@ -3,8 +3,6 @@ CREATE TABLE `def_changelog` (
   `message` text NOT NULL,
   `version` varchar(255) NOT NULL,
   `major` tinyint(4) NOT NULL DEFAULT '0',
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE `def_changelog`
-  ADD PRIMARY KEY (`id`);

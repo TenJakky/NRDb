@@ -17,11 +17,11 @@ CREATE TABLE `user` (
   `ratings_season` int(10) unsigned NOT NULL DEFAULT '0',
   `ratings_book` int(10) unsigned NOT NULL DEFAULT '0',
   `ratings_music` int(10) unsigned NOT NULL DEFAULT '0',
-  `ratings_game` int(10) unsigned NOT NULL DEFAULT '0'
+  `ratings_game` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD KEY `nationality` (`country_id`),
   ADD KEY `ratings_total` (`ratings_total`),
@@ -33,4 +33,4 @@ ALTER TABLE `user`
   ADD KEY `ratings_series` (`ratings_series`);
 
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `def_country` (`id`);
+  ADD CONSTRAINT `user_fk_1` FOREIGN KEY (`country_id`) REFERENCES `def_country` (`id`) ON DELETE RESTRICT;

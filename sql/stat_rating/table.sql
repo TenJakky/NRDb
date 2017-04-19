@@ -7,9 +7,9 @@ CREATE TABLE `stat_rating` (
   `season_count` int(11) unsigned NOT NULL DEFAULT '0',
   `book_count` int(11) unsigned NOT NULL DEFAULT '0',
   `music_count` int(11) unsigned NOT NULL DEFAULT '0',
-  `game_count` int(11) unsigned NOT NULL DEFAULT '0'
+  `game_count` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `stat_rating`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `value` (`value`);

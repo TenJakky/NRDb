@@ -4,11 +4,11 @@ CREATE TABLE `rating` (
   `entity_id` int(10) unsigned NOT NULL,
   `value` smallint(6) unsigned NOT NULL,
   `note` int(11) DEFAULT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `rating`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id_2` (`user_id`,`entity_id`),
   ADD KEY `date` (`date`),
   ADD KEY `value` (`value`),
@@ -16,5 +16,5 @@ ALTER TABLE `rating`
   ADD KEY `entity_id` (`entity_id`);
 
 ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`entity_id`) REFERENCES `entity` (`id`);
+  ADD CONSTRAINT `rating_fk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT,
+  ADD CONSTRAINT `rating_fk_2` FOREIGN KEY (`entity_id`) REFERENCES `entity` (`id`) ON DELETE RESTRICT;

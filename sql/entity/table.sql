@@ -12,15 +12,15 @@ CREATE TABLE `entity` (
   `season_number` int(11) unsigned DEFAULT NULL,
   `rating_count` int(11) unsigned NOT NULL,
   `rating_sum` int(11) unsigned NOT NULL,
-  `rating` double unsigned NOT NULL DEFAULT '0'
+  `rating` double unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `entity`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `year` (`year`),
   ADD KEY `season_series_id` (`season_series_id`),
   ADD KEY `rating` (`rating`);
 
 ALTER TABLE `entity`
-  ADD CONSTRAINT `entity_ibfk_1` FOREIGN KEY (`season_series_id`) REFERENCES `entity` (`id`);
+  ADD CONSTRAINT `entity_fk_1` FOREIGN KEY (`season_series_id`) REFERENCES `entity` (`id`) ON DELETE RESTRICT;
