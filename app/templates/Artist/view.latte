@@ -28,7 +28,7 @@
             <tr>
                 <th>Pseudonyms</th>
                 <td>
-                    {artistList $data->related('artist.artist_id')}
+                    {pseudonymList $data->related('artist.artist_id')}
                 </td>
             </tr>
         {elseif $data->type === 'group'}

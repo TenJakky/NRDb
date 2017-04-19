@@ -61,8 +61,6 @@ final class EntityPresenter extends BaseViewEditPresenter
     {
         $rating = $this->ratingModel->findRow($id);
 
-        $this->redirect('');
-
         if (!$rating || $rating->user_id !== $this->user->getId())
         {
             $this->flashMessage('You cannot edit rating of someone else.', 'failure');
