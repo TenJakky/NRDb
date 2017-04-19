@@ -13,31 +13,28 @@
         <th>Action</th>
     </thead>
     <tbody>
-    {foreach $entities as $entity}
+    {foreach $entities as $row}
         <tr>
-            <td><a href="{plink Entity:view $entity->id}">{$entity->original_title}</a></td>
+            <td><a href="{plink Entity:view $row->id}">{$row->original_title}</a></td>
             {if !in_array($presenter->getName(), array('Music', 'Game'))}
-                <td>{$entity->english_title}</td>
-                <td>{$entity->czech_title}</td>
+                <td>{$row->english_title}</td>
+                <td>{$row->czech_title}</td>
             {/if}
             {if $presenter->getName() != 'Series'}
-                <td class="center">{$entity->year}</td>
+                <td class="center">{$row->year}</td>
             {/if}
-            <td class="center">{$entity|rating}</td>
-            {var $rating => $ratingModel->getUserRating($entity->id, $user->getId())}
+            <td class="center">{$row|rating}</td>
             <td class="center">
-                {if $rating}
-                    {$rating->value}
-                {/if}
+                {$row->my_rating}
             </td>
             <td>
-                {if $rating}
+                {if $row->my_rating_id}
                     <ul class="action-list">
-                        <li><a href="{plink Entity:editRating $rating->id}">Edit rating</a></li>
-                        <li><a href="{plink Entity:removeRating $rating->id}">Remove rating</a></li>
+                        <li><a href="{plink Entity:editRating $row->my_rating_id}">Edit rating</a></li>
+                        <li><a href="{plink Entity:removeRating $row->my_rating_id}">Remove rating</a></li>
                     </ul>
                 {else}
-                    <a href="{plink Entity:rate $entity->id}">Rate</a>
+                    <a href="{plink Entity:rate $row->id}">Rate</a>
                 {/if}
             </td>
         </tr>

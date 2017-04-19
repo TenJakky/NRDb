@@ -27,13 +27,13 @@ final class EntitySmallList extends \Nette\Application\UI\Control
         {
             default:
             case 'new':
-                $data = $this->model->getRecent();
+                $data = $this->model->getSmallListRecent($userId);
                 break;
             case 'top':
-                $data = $this->model->getTop();
+                $data = $this->model->getSmallListTop($userId);
                 break;
             case 'notRated':
-                $data = $this->model->getNotRated($userId);
+                $data = $this->model->getSmallListNotRated($userId);
                 break;
         }
 

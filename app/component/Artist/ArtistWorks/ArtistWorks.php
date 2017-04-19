@@ -32,12 +32,11 @@ final class ArtistWorks extends BaseSmallDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $set = $this->model->getTable();
-        $set->alias('entity:rating', 'r');
-        $set->select('jun_artist2entity.*, entity.*, r.value AS my_rating, r.id AS my_rating_id');
-        $set->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId());
-
-        $set->where('artist_id', $this->presenter->getParameter('id'));
+        $set = $this->model->getTable()
+            ->alias('entity:rating', 'r')
+            ->select('jun_artist2entity.*, entity.*, r.value AS my_rating, r.id AS my_rating_id')
+            ->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId())
+            ->where('artist_id', $this->presenter->getParameter('id'));
 
         if ($order[0])
         {

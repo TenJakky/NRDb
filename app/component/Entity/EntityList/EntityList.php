@@ -61,12 +61,11 @@ final class EntityList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $set = $this->model->getTable();
-        $set->alias(':rating', 'r');
-        $set->select('entity.*, r.value AS my_rating, r.id AS my_rating_id');
-        $set->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId());
-
-        $set->where('type', $this->type);
+        $set = $this->model->getTable()
+            ->alias(':rating', 'r')
+            ->select('entity.*, r.value AS my_rating, r.id AS my_rating_id')
+            ->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId())
+            ->where('type', $this->type);
 
         if ($this->type === 'season')
         {

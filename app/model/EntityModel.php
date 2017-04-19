@@ -12,60 +12,48 @@ final class EntityModel extends BaseModel
         return $this->getTable()->order('id DESC');
     }
 
+    public function getSmallListRecent($userId)
+    {
+        return $this->getRecent()
+            ->alias(':rating', 'r')
+            ->select('entity.*, r.value AS my_rating, r.id AS my_rating_id')
+            ->joinWhere('r', 'r.user_id', $userId);
+    }
+
     public function getTop()
     {
-        return $this
-            ->getTable()
-            ->group('id')
-            ->order('rating DESC');
+        return $this->getTable()->order('rating DESC');
     }
 
-    public function getArtistTop(string $artistType, int $artistId)
+    public function getSmallListTop($userId)
     {
-        return $this
-            ->getTable()
-            ->where(':jun_artist2entity.artist_id', $artistId)
-            ->where(':jun_artist2entity.role', $artistType)
-            ->group('entity.id')
-            ->order('rating DESC')
-            ->fetch();
+        return $this->getTop()
+            ->alias(':rating', 'r')
+            ->select('entity.*, r.value AS my_rating, r.id AS my_rating_id')
+            ->joinWhere('r', 'r.user_id', $userId);
     }
 
-    public function getArtistAverage(string $artistType, int $artistId)
+    public function getRated($userId)
     {
-        $entity = substr($this->tableName, 4);
-        $joinTable = "jun_{$entity}2{$artistType}";
-
-        return $result = $this->query(
-        "SELECT
-        sum(`subsum`) / count(*) AS `average`
-        FROM (
-        SELECT 
-        (sum({$this->ratingTableName}.rating) / count(*)) AS `subsum`
-        FROM {$joinTable}
-        LEFT JOIN {$this->ratingTableName} ON {$this->ratingTableName}.{$entity}_id = {$joinTable}.{$entity}_id
-        WHERE {$joinTable}.artist_id = ?
-        GROUP BY {$this->ratingTableName}.{$entity}_id
-        ) AS `subquery`", $artistId)->fetch()->average;
+        return $this->getTable()
+            ->alias(':rating', 'r')
+            ->joinWhere('r', 'r.user_id', $userId)
+            ->where('r.user_id', $userId)
+            ->order('entity.id DESC');
     }
 
     public function getNotRated($userId)
     {
-        return $this
-            ->getTable()
-            ->joinWhere(':rating', ':rating.user_id', $userId)
-            ->where(':rating.user_id', null)
+        return $this->getTable()
+            ->alias(':rating', 'r')
+            ->joinWhere('r', 'r.user_id', $userId)
+            ->where('r.user_id', null)
             ->order('entity.id DESC');
     }
 
-    public function getRated($userId, $limit = null)
+    public function getSmallListNotRated($userId)
     {
-        return $this
-            ->getTable()
-            ->joinWhere(':rating', ':rating.user_id', $userId)
-            ->where(':rating.user_id', $userId)
-            ->order('entity.id DESC')
-            ->limit($limit);
+        return $this->getNotRated($userId)->select('entity.*, r.value AS my_rating, r.id AS my_rating_id');
     }
 
     public function fetchSeriesSelectBox()
