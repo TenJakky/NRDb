@@ -54,10 +54,10 @@ main
 {
   width: 1000px;
   margin: 60px auto auto auto;
-  padding: 0;
-  min-height: -webkit-calc(100vh - 60px);
-  min-height:    -moz-calc(100vh - 60px);
-  min-height:         calc(100vh - 60px);
+  padding: 0 0 150px 0;
+  min-height: -webkit-calc(100vh - 210px);
+  min-height:    -moz-calc(100vh - 210px);
+  min-height:         calc(100vh - 210px);
 
   header
   {
