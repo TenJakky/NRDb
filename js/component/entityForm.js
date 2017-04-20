@@ -42,7 +42,7 @@ $(document).ready(function ()
         {
             restoreValues();
             refreshPlugins(el);
-            $('#artist_subform').hide();
+            $.magnificPopup.close();
         }
 
         if ($(el).attr('id') === 'snippet-entityForm-artistFormSnippet')
@@ -59,8 +59,5 @@ $(document).ready(function ()
     });
     $.nette.load();
 
-    $('#add_artist').click(function()
-    {
-        $('#artist_subform').toggle().find('form').trigger('reset');;
-    });
+    $('#add_artist').magnificPopup({items: { src:'#artistSubform'}});
 });

@@ -87,6 +87,20 @@ footer
   }
 }
 
+.hidden
+{
+  display: none;
+}
+
+.white-popup
+{
+  position: relative;
+  background: #FFF;
+  margin: 20px auto;
+  padding: 30px;
+  max-width: 600px;
+}
+
 @import "nav";
 @import "buttons";
 @import "tables";

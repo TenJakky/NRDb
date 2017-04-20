@@ -6,7 +6,7 @@ const selectizeOptions =
     preload: true,
     plugins: ['clear_selection']
 };
-const icheckOptions =
+const iCheckOptions =
 {
     checkboxClass: 'icheckbox_square-red',
     radioClass: 'iradio_square-red'
@@ -89,7 +89,7 @@ function refreshPlugins(context)
 {
     var checkInputs = $(context).find('input[type="radio"]:not(.rating), input[type="checkbox"]');
 
-    checkInputs.iCheck(icheckOptions);
+    checkInputs.iCheck(iCheckOptions);
     checkInputs.on('ifChanged', function (event)
     {
         event = document.createEvent('HTMLEvents');

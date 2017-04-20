@@ -122,10 +122,12 @@
 {/form}
 {/snippet}
 
-<div id="artist_subform">
-    <h2>{$presenter->locale['add']['artist']}</h2>
-    {snippet artistFormSnippet}
-        {control artistForm}
-    {/snippet}
+<div class="hidden">
+    <div id="artistSubform" class="white-popup">
+        <h2>{$presenter->locale['add']['artist']}</h2>
+        {snippet artistFormSnippet}
+            {control artistForm}
+        {/snippet}
+    </div>
 </div>
 <script type='text/javascript' src="/js/dist/entityForm.min.js"></script>
