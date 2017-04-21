@@ -1,0 +1,4 @@
+database:
+    dsn: 'mysql:host=XXX;dbname=XXX'
+    user: XXX
+    password: "XXX"

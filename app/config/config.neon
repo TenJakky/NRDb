@@ -29,6 +29,7 @@ latte:
 
 extensions:
     nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension
+    reCaptcha: ReCaptchaControl\DI\Extension
 
 services:
     - App\RouterFactory

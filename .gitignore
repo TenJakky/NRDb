@@ -16,6 +16,7 @@ scss/dist/*
 js/dist/*
 
 app/config/database.neon
+app/config/recaptcha.neon
 
 *.lock
 
