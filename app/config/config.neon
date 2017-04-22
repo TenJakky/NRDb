@@ -4,6 +4,7 @@ parameters:
 
 includes:
     - database.neon
+    - recaptcha.neon
 
     - parameters.neon
     - model.neon

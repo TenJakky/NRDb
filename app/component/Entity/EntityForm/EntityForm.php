@@ -49,11 +49,11 @@ final class EntityForm extends BaseComponent
         $this->redrawControl('artistFormSnippet');
     }
 
-    public function render($id = 0)
+    public function render($entityId = 0)
     {
-        if ($id)
+        if ($entityId)
         {
-            $row = $this->entityModel->findRow($id);
+            $row = $this->entityModel->findRow($entityId);
             $data = $row->toArray();
 
             foreach (\App\Enum\TypeToRole::ROLES[$row->type] as $role)
@@ -75,20 +75,18 @@ final class EntityForm extends BaseComponent
     {
         $form = new \Nette\Application\UI\Form();
 
-        $form->addHidden('id');
-
         $form->addRadioList('type', 'Type', $this->presenter->locale['entity'])
             ->setDefaultValue($this->presenter->type)
             ->setRequired()
             ->addCondition($form::EQUAL, 'movie')
                 ->toggle('titleSection')
-                ->toggle('titleSection')
+                ->toggle('localeTitleSection')
                 ->toggle('yearSection')
                 ->toggle('movieSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'series')
                 ->toggle('titleSection')
-                ->toggle('titleSection')
+                ->toggle('localeTitleSection')
                 ->toggle('seriesSection')
             ->endCondition()
             ->addCondition($form::EQUAL, 'season')
@@ -98,7 +96,7 @@ final class EntityForm extends BaseComponent
             ->endCondition()
             ->addCondition($form::EQUAL, 'book')
                 ->toggle('titleSection')
-                ->toggle('titleSection')
+                ->toggle('localeTitleSection')
                 ->toggle('yearSection')
                 ->toggle('bookSection')
             ->endCondition()
@@ -168,6 +166,7 @@ final class EntityForm extends BaseComponent
                 ->setRequired();
 
         $form->addTextArea('description', 'Description');
+        $form->addReCaptcha('captcha', NULL, 'Please prove you are not a robot.');
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
@@ -178,6 +177,7 @@ final class EntityForm extends BaseComponent
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
         $data = $form->getValues();
+        $data['id'] = $this->presenter->getId();
 
         $this->connection->beginTransaction();
 

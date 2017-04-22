@@ -41,6 +41,7 @@ form
       th
       {
         text-align: left;
+        position: relative;
       }
 
       td
@@ -60,34 +61,6 @@ form
         div.selectize-control
         {
           display: inline-flex;
-        }
-
-        span.error
-        {
-          display: none;
-        }
-
-        span.form-flash
-        {
-          padding: 10px;
-          margin: 15px;
-          border-radius: 10px;
-        }
-
-        span.form-error
-        {
-          @extend .form-flash;
-
-          background-color: $failure;
-          border: 2px solid $failure-border
-        }
-
-        span.form-success
-        {
-          @extend .form-flash;
-
-          background-color: $success;
-          border: 2px solid $success-border
         }
 
         .iradio_square-red, .icheckbox_square-red

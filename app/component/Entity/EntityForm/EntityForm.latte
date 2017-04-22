@@ -4,6 +4,9 @@
 
 {snippet formSnippet}
 {form form}
+    <ul class="form-errors" n:if="$form->hasErrors()">
+        <li class="form-error" n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
     <table>
         <tbody>
             <tr class="required">
@@ -30,7 +33,7 @@
             </tr>
         </tbody>
     </table>
-    <table id="titleSection" style="display: none">
+    <table id="localeTitleSection" style="display: none">
         <tbody>
             <tr class="required">
                 <th>{label english_title /}</th>
@@ -114,11 +117,14 @@
             </tr>
             <tr>
                 <th></th>
+                <td>{input captcha}</td>
+            </tr>
+            <tr>
+                <th></th>
                 <td>{input submit}</td>
             </tr>
         </tbody>
     </table>
-    {input id}
 {/form}
 {/snippet}
 

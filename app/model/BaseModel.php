@@ -44,9 +44,9 @@ abstract class BaseModel extends Nette\Object
     /**
      * @return \Nette\Database\Table\Selection
      */
-    public function findByArray(array $by)
+    public function findByArray(array $filter)
     {
-        return $this->getTable()->where($by);
+        return $this->getTable()->where($filter);
     }
 
     /**
@@ -60,9 +60,9 @@ abstract class BaseModel extends Nette\Object
     /**
      * @return \Nette\Database\Table\ActiveRow
      */
-    public function findRow($id)
+    public function findRow($rowId)
     {
-        return $this->getTable()->where('id', (int) $id)->fetch();
+        return $this->getTable()->where('id', (int) $rowId)->fetch();
     }
 
     public function query($sql, ...$params)
@@ -86,9 +86,9 @@ abstract class BaseModel extends Nette\Object
         return $this->getTable()->insert($data);
     }
 
-    public function delete($id)
+    public function delete($rowId)
     {
-        return $this->findByArray([$this->getTable()->getPrimary() => (int) $id])->delete();
+        return $this->findByArray([$this->getTable()->getPrimary() => (int) $rowId])->delete();
     }
 
     /**

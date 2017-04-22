@@ -15,14 +15,11 @@
   "license": "AGPLv3",
   "dependencies": {
     "jquery": "^3.1.1",
-    "nette-forms": "^2.4.2",
     "nette.ajax.js": "^2.2.0",
-    "nextras.datagrid": "https://raw.githubusercontent.com/nextras/datagrid/master/js/nextras.datagrid.js",
     "chart.js": "^2.5.0",
     "flag-icon-css": "^2.8.0",
     "selectize": "selectize.js#^0.12.4",
     "iCheck": "icheck#^1.0.2",
-    "magnific-popup": "^1.1.0",
-    "uestla-recaptcha-control": "^6.0.0"
+    "magnific-popup": "^1.1.0"
   }
 }

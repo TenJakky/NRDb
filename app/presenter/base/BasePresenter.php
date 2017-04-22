@@ -70,4 +70,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         return $this->context->getByType('Nette\Http\Request')->getPost();
     }
+
+    public function getId()
+    {
+        return $this->getParameter('id');
+    }
 }

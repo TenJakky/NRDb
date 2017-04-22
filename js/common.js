@@ -35,11 +35,11 @@ const chartBorderColors =
 
 Nette.showFormErrors = function (form, errors)
 {
-    $(form).find('span.form-error').remove();
+    $(form).find('ul.form-errors, span.form-error').remove();
 
     for (var i = 0; i < errors.length; i++)
     {
-        $(errors[i].element).parent().append('<span class="form-error">' + errors[i].message + '</span>');
+        $(errors[i].element).parent().parent().find('th').append('<span class="form-error">' + errors[i].message + '</span>');
     }
 
     if (errors.length > 0)
@@ -80,9 +80,14 @@ function getCountryCode(code)
     }
 }
 
+jQuery.fn.fade = function()
+{
+    this.fadeTo('slow', 0, 'linear').slideUp('slow', 'linear', function() { $(this).remove(); });
+};
+
 function flashFadeOut()
 {
-    $('.flash').delay(2000).fadeTo('slow', 0, 'linear').slideUp('slow', 'linear', function() { $(this).remove(); });
+    $('.flash').delay(2000).fade();
 }
 
 function refreshPlugins(context)
