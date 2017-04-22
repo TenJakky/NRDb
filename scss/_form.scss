@@ -1,7 +1,6 @@
 textarea, input
 {
   box-sizing: border-box;
-
   padding: 8px 10px;
 }
 
@@ -26,6 +25,11 @@ input[type=number], input[type=text], textarea, input[type=password], input[type
 
 form
 {
+  &:not(.popup)
+  {
+    width: 80%;
+  }
+
   label.required:after, tr.required > th > label:after
   {
     content: " *";
