@@ -6,19 +6,20 @@ CREATE TABLE `artist` (
   `middlename` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `country_id` int(11) unsigned DEFAULT NULL,
-  `year_from` year(4) DEFAULT NULL,
-  `year_to` year(4) DEFAULT NULL,
+  `year_from` SMALLINT(4) unsigned DEFAULT NULL,
+  `year_to` SMALLINT(4) unsigned DEFAULT NULL,
   `description` text,
-  `image_file` varchar(255) DEFAULT NULL,
+  `image_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `artist`
-  ADD KEY `nationality` (`country_id`),
+  ADD KEY `country_id` (`country_id`),
   ADD KEY `type` (`type`),
   ADD KEY `person_id` (`artist_id`),
-  ADD FULLTEXT KEY `fulltext` (`name`,`middlename`,`surname`);
+  ADD KEY `image_id` (`image_id`);
 
 ALTER TABLE `artist`
   ADD CONSTRAINT `artist_fk_1` FOREIGN KEY (`country_id`) REFERENCES `def_country` (`id`) ON DELETE RESTRICT,
-  ADD CONSTRAINT `artist_fk_2` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`) ON DELETE RESTRICT;
+  ADD CONSTRAINT `artist_fk_2` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`) ON DELETE RESTRICT,
+  ADD CONSTRAINT `artist_fk_3` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`) ON DELETE RESTRICT;

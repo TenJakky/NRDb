@@ -9,6 +9,7 @@ CREATE TABLE `user` (
   `country_id` int(11) unsigned NOT NULL,
   `gender` enum('male','female') DEFAULT NULL,
   `description` text,
+  `image_id` int(11) unsigned DEFAULT NULL,
   `per_page` int(11) unsigned NOT NULL DEFAULT '10',
   `per_page_small` int(11) unsigned NOT NULL DEFAULT '5',
   `ratings_total` int(10) unsigned NOT NULL DEFAULT '0',
@@ -23,7 +24,8 @@ CREATE TABLE `user` (
 
 ALTER TABLE `user`
   ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `nationality` (`country_id`),
+  ADD KEY `country_id` (`country_id`),
+  ADD KEY `image_id` (`image_id`),
   ADD KEY `ratings_total` (`ratings_total`),
   ADD KEY `ratings_movie` (`ratings_movie`),
   ADD KEY `ratings_game` (`ratings_game`),
@@ -33,4 +35,5 @@ ALTER TABLE `user`
   ADD KEY `ratings_series` (`ratings_series`);
 
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_fk_1` FOREIGN KEY (`country_id`) REFERENCES `def_country` (`id`) ON DELETE RESTRICT;
+  ADD CONSTRAINT `user_fk_1` FOREIGN KEY (`country_id`) REFERENCES `def_country` (`id`) ON DELETE RESTRICT,
+  ADD CONSTRAINT `user_fk_2` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`) ON DELETE RESTRICT;
