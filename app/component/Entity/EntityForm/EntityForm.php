@@ -38,14 +38,30 @@ final class EntityForm extends BaseComponent
         $form = parent::createComponent($name, $args);
 
         $form['form']->getElementPrototype()->addClass('ajax popup');
-        $form['form']->onSuccess[] = [$this, 'redrawSnippets'];
+        $form['form']->onSuccess[] = [$this, 'artistFormSuccess'];
+        $form['form']->onError[] = [$this, 'artistFormError'];
     
         return $form;
     }
 
-    public function redrawSnippets()
+    public function artistFormSuccess()
     {
+        foreach ($this['artistForm']['form']->getControls() as $control)
+        {
+            if ($control->getName() === 'type')
+            {
+                $control->setValue('person');
+                continue;
+            }
+            $control->setValue(null);
+        }
+
         $this->redrawControl('formSnippet');
+        $this->redrawControl('artistFormSnippet');
+    }
+
+    public function artistFormError()
+    {
         $this->redrawControl('artistFormSnippet');
     }
 

@@ -28,13 +28,18 @@ final class ArtistForm extends BaseComponent
         $this->connection = $connection;
     }
 
-    public function render($id = 0)
+    public function render($artistId = 0)
     {
-        if ($id)
+        if ($artistId)
         {
-            $row = $this->artistModel->findRow($id);
+            $row = $this->artistModel->findRow($artistId);
             $data = $row->toArray();
 
+            if ($row->type === 'person')
+            {
+                $data['born'] = $row->year_from;
+                $data['died'] = $row->year_to;
+            }
             if ($row->type === 'group')
             {
                 $data['members'] = $row
@@ -111,6 +116,7 @@ final class ArtistForm extends BaseComponent
             ->setAttribute('placeholder', 'Choose former members');
 
         $form->addTextArea('description', 'Description');
+        $form->addReCaptcha('captcha', NULL, 'Please prove you are not a robot.');
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];

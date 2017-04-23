@@ -90,8 +90,10 @@ function flashFadeOut()
     $('.flash').delay(2000).fade();
 }
 
-function refreshPlugins(context)
+function refreshPlugins(context, recaptcha)
 {
+    recaptcha = typeof recaptcha === 'undefined' ? false : recaptcha;
+
     var checkInputs = $(context).find('input[type="radio"]:not(.rating), input[type="checkbox"]');
 
     checkInputs.iCheck(iCheckOptions);
@@ -106,6 +108,11 @@ function refreshPlugins(context)
 
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
+
+    if (recaptcha)
+    {
+        g_ReCaptchaOnLoad();
+    }
 }
 
 $(document).ready(function ()
