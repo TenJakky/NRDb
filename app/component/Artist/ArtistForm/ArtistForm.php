@@ -122,7 +122,6 @@ final class ArtistForm extends BaseComponent
             ->setAttribute('placeholder', 'Choose former members');
 
         $form->addTextArea('description', 'Description');
-        $form->addReCaptcha('captcha', NULL, 'Please prove you are not a robot.');
 
         $form->addSubmit('submit', 'Submit');
         $form->onSuccess[] = [$this, 'formSubmitted'];
