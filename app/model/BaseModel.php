@@ -96,7 +96,7 @@ abstract class BaseModel extends Nette\Object
      */
     public function save($data)
     {
-        if (isset($data['id']) && $data['id'] != 0)
+        if (isset($data['id']) && $data['id'])
         {
             $data['id'] = (int) $data['id'];
             $this->getTable()->where('id', $data['id'])->update($data);
