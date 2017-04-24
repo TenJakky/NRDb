@@ -25,7 +25,7 @@ input[type=number], input[type=text], textarea, input[type=password], input[type
 
 form
 {
-  &:not(.popup)
+  &:not(.popup, .datagrid)
   {
     width: 80%;
   }
