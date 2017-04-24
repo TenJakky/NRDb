@@ -2,6 +2,8 @@
 
 namespace App\Component;
 
+use App\Validator\CoreValidator;
+
 final class ArtistForm extends BaseComponent
 {
     /** @var \App\Model\ArtistModel */
@@ -39,6 +41,8 @@ final class ArtistForm extends BaseComponent
             {
                 $data['born'] = $row->year_from;
                 $data['died'] = $row->year_to;
+                unset($data['year_from']);
+                unset($data['year_to']);
             }
             if ($row->type === 'group')
             {
@@ -95,7 +99,8 @@ final class ArtistForm extends BaseComponent
         $form->addText('died', 'Died')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
-                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4)
+                ->addRule(CoreValidator::GREATER_EQUAL, 'Year is not in range.', 'born');
 
         $form->addSelect('artist_id', 'Pseudonym of', $this->artistModel->fetchPersonSelectBox())
             ->setPrompt('Select person')
@@ -109,7 +114,8 @@ final class ArtistForm extends BaseComponent
         $form->addText('year_to', 'Year disbanded')
             ->addCondition($form::FILLED)
                 ->addRule($form::INTEGER, 'Year must be integer.')
-                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4);
+                ->addRule($form::MAX_LENGTH, 'Year cannot be longer than 4 digits.', 4)
+                ->addRule(CoreValidator::GREATER_EQUAL, 'Year is not in range.', 'year_from');
         $form->addMultiSelect('member', 'Members', $this->artistModel->fetchSelectBox())
             ->setAttribute('placeholder', 'Choose members');
         $form->addMultiSelect('former_member', 'Former Members', $this->artistModel->fetchSelectBox())
