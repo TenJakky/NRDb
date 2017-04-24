@@ -31,7 +31,7 @@ final class StatUserRadar extends BaseComponent
         $this->template->percentMusic = $max->music ? $this->template->statMusic  / $max->music : 0;
         $this->template->percentGame = $max->game ?$this->template->statGame / $max->game : 0;
 
-        $this->template->setFile('StatUserRadar.latte');
+        $this->template->setFile(__DIR__.'/StatUserRadar.latte');
         $this->template->render();
     }
 }
