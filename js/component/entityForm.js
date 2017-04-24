@@ -41,13 +41,13 @@ $(document).ready(function ()
         if ($(el).attr('id') === 'snippet-entityForm-formSnippet')
         {
             restoreValues();
-            refreshPlugins(el, true);
+            refreshPlugins(el);
             $.magnificPopup.close();
         }
 
         if ($(el).attr('id') === 'snippet-entityForm-artistFormSnippet')
         {
-            refreshPlugins(el, true);
+            refreshPlugins(el);
         }
     });
     $.nette.ext('snippets').before(function (el)

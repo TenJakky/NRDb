@@ -6,7 +6,7 @@ abstract class BaseComponent extends \Nette\Application\UI\Control
 {
     protected function getPost()
     {
-        return $this->presenter->getContext()->getByType('Nette\Http\Request')->getPost();
+        return $this->presenter->getPost();
     }
 
     public function createComponent($name, array $args = null)
