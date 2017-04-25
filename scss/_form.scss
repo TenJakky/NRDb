@@ -25,10 +25,7 @@ input[type=number], input[type=text], textarea, input[type=password], input[type
 
 form
 {
-  &:not(.popup, .datagrid)
-  {
-    width: 80%;
-  }
+  width: 80%;
 
   label.required:after, tr.required > th > label:after
   {
@@ -87,4 +84,9 @@ form
       }
     }
   }
+}
+
+div.grid form, div.white-popup form
+{
+  width: 100%;
 }

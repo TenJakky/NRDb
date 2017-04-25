@@ -35,14 +35,14 @@ services:
         class: App\Component\ArtistWorks
 
     entityForm:
-            class: App\Component\EntityForm
+        class: App\Component\EntityForm
     entityList:
         class: App\Component\EntityList
     entitySmallList:
         class: App\Component\EntitySmallList
 
     ratingForm:
-            class: App\Component\RatingForm
+        class: App\Component\RatingForm
     ratingList:
         class: App\Component\RatingList
 

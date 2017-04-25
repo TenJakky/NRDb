@@ -1,4 +1,4 @@
-{redefine pagination}
+{define pagination}
 {*******************************}
 {var $page => $paginator->getPage()}
 {if $paginator->pageCount < 2}
@@ -38,4 +38,4 @@
         <li><a href="{link paginate!, 'page' => $paginator->page + 1}" rel="next">{$control->translate(Next)} »</a></li>
     {/if}
 </ul>
-{/redefine}
+{/define}

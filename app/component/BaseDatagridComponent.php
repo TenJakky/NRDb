@@ -29,6 +29,7 @@ abstract class BaseDatagridComponent extends BaseRenderComponent
 
         $this->grid->addCellsTemplate(__DIR__.'/Paginator.latte');
         $this->grid->addCellsTemplate(__DIR__.'/TableTag.latte');
+        $this->grid->addCellsTemplate(__DIR__.'/EmptyResult.latte');
         
         $this->grid->setDataSourceCallback(array($this, 'dataSource'));
         $this->grid->setPagination($this->perPage, array($this, 'dataSourceCount'));

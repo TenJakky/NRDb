@@ -27,6 +27,12 @@
   td:last-of-type
   {
     padding: 0 5px;
+
+    &.empty-result
+    {
+      padding: 15px;
+    }
+
   }
 
   tbody
