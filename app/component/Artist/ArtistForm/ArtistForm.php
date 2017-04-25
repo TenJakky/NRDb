@@ -138,7 +138,7 @@ final class ArtistForm extends BaseComponent
         switch ($data['type'])
         {
             case 'person':
-                $id = $this->artistModel->save([
+                $artistId = $this->artistModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'name' => $data['name'],
@@ -151,7 +151,7 @@ final class ArtistForm extends BaseComponent
                 ]);
                 break;
             case 'pseudonym':
-                $id = $this->artistModel->save([
+                $artistId = $this->artistModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'name' => $data['name'],
@@ -160,7 +160,7 @@ final class ArtistForm extends BaseComponent
                 ]);
                 break;
             case 'group':
-                $id = $this->artistModel->save([
+                $artistId = $this->artistModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'name' => $data['name'],
@@ -170,20 +170,20 @@ final class ArtistForm extends BaseComponent
                 ]);
                 if ($data['id'])
                 {
-                    $this->groupMemberModel->findBy('artist_id', $id)->delete();
+                    $this->groupMemberModel->findBy('artist_id', $artistId)->delete();
                 }
                 foreach ($data['member'] as $member)
                 {
                     $this->groupMemberModel->insert(array(
                         'member_id' => $member,
-                        'group_id' => $id
+                        'group_id' => $artistId
                     ));
                 }
                 foreach ($data['former_member'] as $member)
                 {
                     $this->groupMemberModel->insert(array(
                         'member_id' => $member,
-                        'group_id' => $id,
+                        'group_id' => $artistId,
                         'active' => 0
                     ));
                 }
@@ -200,6 +200,6 @@ final class ArtistForm extends BaseComponent
             return;
         }
 
-        $this->presenter->redirect('Artist:view', array('id' => $id));
+        $this->presenter->redirect('Artist:view', array('id' => $artistId));
     }
 }

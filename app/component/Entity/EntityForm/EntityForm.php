@@ -206,7 +206,7 @@ final class EntityForm extends BaseComponent
             default:
             case 'movie':
             case 'book':
-                $id = $this->entityModel->save([
+                $entityId = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -217,7 +217,7 @@ final class EntityForm extends BaseComponent
                 ]);
                 break;
             case 'series':
-                $id = $this->entityModel->save([
+                $entityId = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -228,7 +228,7 @@ final class EntityForm extends BaseComponent
                 ]);
                 break;
             case 'season':
-                $id = $this->entityModel->save([
+                $entityId = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'season_series_id' => $data['season_series_id'],
@@ -239,7 +239,7 @@ final class EntityForm extends BaseComponent
                 break;
             case 'music':
             case 'game':
-                $id = $this->entityModel->save([
+                $entityId = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -254,7 +254,7 @@ final class EntityForm extends BaseComponent
             foreach ($data[$role] as $artist)
             {
                 $this->artistEntityModel->insert(array(
-                    'entity_id' => $id,
+                    'entity_id' => $entityId,
                     'artist_id' => $artist,
                     'role' => $role
                 ));
@@ -267,9 +267,9 @@ final class EntityForm extends BaseComponent
 
         if ($this->presenter->action === 'edit')
         {
-            $this->presenter->redirect('Entity:view', array('id' => $id));
+            $this->presenter->redirect('Entity:view', array('id' => $entityId));
         }
 
-        $this->presenter->redirect('Entity:rate', array('id' => $id));
+        $this->presenter->redirect('Entity:rate', array('id' => $entityId));
     }
 }
