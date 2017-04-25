@@ -111,6 +111,8 @@ function refreshPlugins(context, recaptcha)
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
 
+function renderLocaleItem(item, escape) {
+    return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
 }
 
 $(document).ready(function ()
@@ -151,12 +153,8 @@ $(document).ready(function ()
         labelField: 'name',
         valueField: 'code',
         render: {
-            item: function(item, escape) {
-                return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
-            },
-            option: function(item, escape) {
-                return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
-            }
+            item: renderLocaleItem,
+            option: renderLocaleItem
         }
     });
     localeInput.change(function()
