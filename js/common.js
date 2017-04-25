@@ -46,7 +46,7 @@ Nette.showFormErrors = function (form, errors)
     {
         var elem = errors[0].element;
 
-        if (elem.nodeName == 'SELECT')
+        if (elem.nodeName === 'SELECT')
         {
             $(elem).parent().find('input[type="text"]').trigger('click');
             return;
@@ -157,7 +157,7 @@ $(document).ready(function ()
             option: function(item, escape) {
                 return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
             }
-        },
+        }
     });
     localeInput.change(function()
     {
