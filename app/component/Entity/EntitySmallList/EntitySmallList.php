@@ -27,13 +27,13 @@ final class EntitySmallList extends BaseComponent
         {
             default:
             case 'new':
-                $data = $this->model->getSmallListRecent($userId);
+                $data = $this->model->getRecentWithRating($userId);
                 break;
             case 'top':
-                $data = $this->model->getSmallListTop($userId);
+                $data = $this->model->getTopWithRating($userId);
                 break;
             case 'notRated':
-                $data = $this->model->getSmallListNotRated($userId);
+                $data = $this->model->getNotRatedWithRating($userId);
                 break;
         }
 

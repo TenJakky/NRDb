@@ -2,8 +2,6 @@
 
 namespace App\Component;
 
-use Tracy\Debugger;
-
 final class EntityList extends BaseDatagridComponent
 {
     /** @var \App\Model\RatingModel */
@@ -61,11 +59,7 @@ final class EntityList extends BaseDatagridComponent
 
     public function getDataSource($filter, $order)
     {
-        $set = $this->model->getTable()
-            ->alias(':rating', 'r')
-            ->select('entity.*, r.value AS my_rating, r.id AS my_rating_id')
-            ->joinWhere('r', 'r.user_id', $this->presenter->getUser()->getId())
-            ->where('type', $this->type);
+        $set = $this->model->getByTypeWithRating($this->type, $this->presenter->getUser()->getId());
 
         if ($this->type === 'season')
         {
