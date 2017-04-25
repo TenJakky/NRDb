@@ -92,10 +92,12 @@ function flashFadeOut()
 
 function refreshPlugins(context, recaptcha)
 {
-    recaptcha = typeof recaptcha === 'undefined' ? false : recaptcha;
+    if (typeof recaptcha !== 'undefined' && recaptcha)
+    {
+        g_ReCaptchaOnLoad();
+    }
 
     var checkInputs = $(context).find('input[type="radio"]:not(.rating), input[type="checkbox"]');
-
     checkInputs.iCheck(iCheckOptions);
     checkInputs.on('ifChanged', function (event)
     {
