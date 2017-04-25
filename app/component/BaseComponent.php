@@ -19,9 +19,7 @@ abstract class BaseComponent extends \Nette\Application\UI\Control
         {
             return $this->presenter->getContext()->createService($name, $args);
         }
-        else
-        {
-            return $this->presenter->getContext()->createService($name);
-        }
+
+        return $this->presenter->getContext()->createService($name);
     }
 }

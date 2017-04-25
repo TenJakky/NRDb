@@ -60,10 +60,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         {
             return $this->context->createService($name, $args);
         }
-        else
-        {
-            return $this->context->createService($name);
-        }
+
+        return $this->context->createService($name);
     }
 
     public function getPost()
