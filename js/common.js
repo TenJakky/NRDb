@@ -111,10 +111,6 @@ function refreshPlugins(context, recaptcha)
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
 
-    if (recaptcha)
-    {
-        g_ReCaptchaOnLoad();
-    }
 }
 
 $(document).ready(function ()
