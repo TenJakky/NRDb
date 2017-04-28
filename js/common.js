@@ -164,5 +164,7 @@ $(document).ready(function ()
         window.location.href = array.join('/');
     });
 
+    $('.ajax-popup').magnificPopup({type: 'ajax'});
+
     refreshPlugins(document.body);
 });
