@@ -59,5 +59,5 @@ $(document).ready(function ()
     });
     $.nette.load();
 
-    $('#add_artist').magnificPopup({items: { src:'#artistSubform'}});
+    $('#addArtist').magnificPopup({items: { src:'#artistForm'}});
 });
