@@ -52,15 +52,15 @@ abstract class BaseModel extends Nette\Object
     /**
      * @return \Nette\Database\Table\Selection
      */
-    public function findBy($row, $value)
+    public function findBy($column, $value)
     {
-        return $this->getTable()->where($row, $value);
+        return $this->getTable()->where($column, $value);
     }
 
     /**
      * @return \Nette\Database\Table\ActiveRow
      */
-    public function findRow($rowId)
+    public function findRow(int $rowId)
     {
         return $this->getTable()->where('id', (int) $rowId)->fetch();
     }
@@ -81,7 +81,7 @@ abstract class BaseModel extends Nette\Object
     /**
      * @return \Nette\Database\Table\ActiveRow
      */
-    public function insert($data)
+    public function insert(array $data)
     {
         return $this->getTable()->insert($data);
     }
@@ -92,19 +92,19 @@ abstract class BaseModel extends Nette\Object
     }
 
     /**
-     * @return int
+     * @return \Nette\Database\Table\ActiveRow
      */
-    public function save($data)
+    public function save(array $data)
     {
         if (isset($data['id']) && $data['id'])
         {
             $data['id'] = (int) $data['id'];
-            $this->getTable()->wherePrimary($data['id'])->update($data);
-            return $data['id'];
+            $row = $this->getTable()->wherePrimary($data['id']);
+            $row->update($data);
+            return $row->fetch();
         }
         unset($data['id']);
-        $row = $this->insert($data);
-        return $row->id;
+        return $this->insert($data);
     }
 
     public function getColumns()

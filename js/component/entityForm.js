@@ -44,8 +44,7 @@ $(document).ready(function ()
             refreshPlugins(el);
             $.magnificPopup.close();
         }
-
-        if ($(el).attr('id') === 'snippet-entityForm-artistFormSnippet')
+        else
         {
             refreshPlugins(el);
         }

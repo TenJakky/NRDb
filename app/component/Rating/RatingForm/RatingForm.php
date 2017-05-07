@@ -43,15 +43,9 @@ final class RatingForm extends BaseRenderComponent
 
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
-        if ($form->isSubmitted()->getName() === 'remove' && $this->presenter->getAction() === 'editRating')
-        {
-            $this->ratingModel->findRow($this->presenter->getId())->delete();
-            $this->presenter->redirect('Default:closeFancy');
-        }
-
         $data = $form->getValues();
-        $data['user_id'] = $this->presenter->user->getId();
         $data['date'] = date('Y-m-d');
+        $data['user_id'] = $this->presenter->user->getId();
 
         switch ($this->presenter->getAction())
         {
@@ -62,9 +56,17 @@ final class RatingForm extends BaseRenderComponent
             default: return;
         }
 
-        $this->ratingModel->save($data);
+        if ($form->isSubmitted()->getName() === 'remove' && $this->presenter->getAction() === 'editRating')
+        {
+            $this->ratingModel->findRow($this->presenter->getId())->delete();
+
+            $this->presenter->flashMessage('Rating successfully removed.', 'success');
+            $this->presenter->redirect('Entity:closeFancy', ['entityList', $data['entity_id']]);
+        }
+
+        $row = $this->ratingModel->save($data);
 
         $this->presenter->flashMessage('Rating successfully saved.', 'success');
-        $this->presenter->redirect('Entity:closeFancy', ['entityList', 1]);
+        $this->presenter->redirect('Entity:closeFancy', ['entityList', $row->entity_id]);
     }
 }

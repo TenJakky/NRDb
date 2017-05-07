@@ -47,17 +47,17 @@ final class EntityPresenter extends BaseViewEditPresenter
         if (!$entity)
         {
             $this->flashMessage('Entity not found.', 'failure');
-            $this->redirect('Entity:default');
+            $this->redirect(':closeFancy');
         }
 
         $rating = $this->ratingModel->findByArray([
             'user_id' => $this->getUser()->getId(),
             'entity_id' => $id
-        ]);
+        ])->fetch();
 
-        if ($rating->count() > 0)
+        if ($rating)
         {
-            $this->redirect('Entity:editRating', $rating->fetch()->id);
+            $this->redirect('Entity:editRating', $rating->id);
         }
     }
 
@@ -67,8 +67,8 @@ final class EntityPresenter extends BaseViewEditPresenter
 
         if (!$rating || $rating->user_id !== $this->user->getId())
         {
-            $this->flashMessage('You cannot edit rating of someone else.', 'failure');
-            $this->redirect('Entity:default');
+            $this->flashMessage('You cannot edit this rating.', 'failure');
+            $this->redirect(':closeFancy');
         }
     }
 }
