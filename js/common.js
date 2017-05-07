@@ -110,6 +110,9 @@ function refreshPlugins(context, recaptcha)
 
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
+
+    $(context).find('.iframePopup').magnificPopup({type: 'iframe'});
+    $(context).find('.ajaxPopup').magnificPopup({type: 'ajax'});
 }
 
 function renderLocaleItem(item, escape) {
@@ -120,6 +123,10 @@ $(document).ready(function ()
 {
     flashFadeOut();
 
+    $.nette.ext('snippets').after(function (el)
+    {
+        refreshPlugins(el);
+    });
     $.nette.ext('flash', {
         complete: flashFadeOut
     });
@@ -164,9 +171,6 @@ $(document).ready(function ()
         array[1] = this.value;
         window.location.href = array.join('/');
     });
-
-    $('.iframePopup').magnificPopup({type: 'iframe'});
-    $('.ajaxPopup').magnificPopup({type: 'ajax'});
 
     refreshPlugins(document.body);
 });
