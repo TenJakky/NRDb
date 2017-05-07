@@ -22,6 +22,8 @@ final class RatingForm extends BaseRenderComponent
     {
         $form = new \Nette\Application\UI\Form();
 
+        $form->addHidden('control', $this->presenter->getParameter('control'));
+
         $rating = $form->addRadioList('value', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
             ->setRequired();
         $rating->getContainerPrototype()->id = 'rating';
@@ -47,26 +49,39 @@ final class RatingForm extends BaseRenderComponent
         $data['date'] = date('Y-m-d');
         $data['user_id'] = $this->presenter->user->getId();
 
+        $controlName = $data['control'];
+        unset($data['control']);
+
         switch ($this->presenter->getAction())
         {
             case 'rate':
-                $data['entity_id'] = $this->presenter->getId(); break;
+                $data['entity_id'] = $this->presenter->getId();
+                $row = $this->ratingModel->save($data);
+                $this->presenter->flashMessage('Rating successfully saved.', 'success');
+                break;
             case 'editRating':
-                $data['id'] = $this->presenter->getId(); break;
+                $row = $this->ratingModel->findRow($this->presenter->getId());
+                if ($form->isSubmitted()->getName() === 'remove')
+                {
+                    $row->delete();
+                    $this->presenter->flashMessage('Rating successfully removed.', 'success');
+                    break;
+                }
+                $row->update($data);
+                $this->presenter->flashMessage('Rating successfully updated.', 'success');
+                break;
             default: return;
         }
 
-        if ($form->isSubmitted()->getName() === 'remove' && $this->presenter->getAction() === 'editRating')
+        switch ($controlName)
         {
-            $this->ratingModel->findRow($this->presenter->getId())->delete();
-
-            $this->presenter->flashMessage('Rating successfully removed.', 'success');
-            $this->presenter->redirect('Entity:closeFancy', ['entityList', $data['entity_id']]);
+            case 'entityList':
+            case 'entitySmallList':
+                $redraw = [$controlName, $row->entity_id]; break;
+            default:
+                $redraw = [$controlName];
         }
 
-        $row = $this->ratingModel->save($data);
-
-        $this->presenter->flashMessage('Rating successfully saved.', 'success');
-        $this->presenter->redirect('Entity:closeFancy', ['entityList', $row->entity_id]);
+        $this->presenter->redirect('Entity:closeFancy', $redraw);
     }
 }

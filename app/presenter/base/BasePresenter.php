@@ -83,6 +83,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         if ($this->isAjax() && $controlName)
         {
+            if (method_exists($this, 'redraw'.ucfirst($controlName)))
+            {
+                $this->{'redraw'.ucfirst($controlName)}();
+            }
+
             $this->redrawControl($controlName);
         }
     }
@@ -95,7 +100,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-    public function actionCloseFancy($controlName = null, $rowId = null)
+    public function actionCloseFancy($control = null, $rowId = null)
     {
         $this->getFlashSession()->setExpiration(time() + 5);
 
@@ -104,16 +109,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->redrawControl = false;
         $this->template->redrawRow = false;
 
-        if ($controlName && $rowId)
+        if ($control && $rowId)
         {
             $this->template->redrawRow = true;
-            $this->template->redrawRowName = $controlName;
-            $this->template->redrawRowId = $rowId;
+            $this->template->control = $control;
+            $this->template->rowId = $rowId;
         }
-        elseif ($controlName)
+        elseif ($control)
         {
             $this->template->redrawControl = true;
-            $this->template->redrawControlName = $controlName;
+            $this->template->control = $control;
         }
     }
 }

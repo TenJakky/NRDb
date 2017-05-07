@@ -62,7 +62,7 @@ abstract class BaseModel extends Nette\Object
      */
     public function findRow(int $rowId)
     {
-        return $this->getTable()->where('id', (int) $rowId)->fetch();
+        return $this->getTable()->wherePrimary($rowId)->fetch();
     }
 
     public function query($sql, ...$params)
@@ -79,9 +79,9 @@ abstract class BaseModel extends Nette\Object
     }
 
     /**
-     * @return \Nette\Database\Table\ActiveRow
+     * @return \Nette\Database\Table\IRow
      */
-    public function insert(array $data)
+    public function insert($data)
     {
         return $this->getTable()->insert($data);
     }
@@ -92,9 +92,9 @@ abstract class BaseModel extends Nette\Object
     }
 
     /**
-     * @return \Nette\Database\Table\ActiveRow
+     * @return \Nette\Database\Table\IRow
      */
-    public function save(array $data)
+    public function save($data)
     {
         if (isset($data['id']) && $data['id'])
         {

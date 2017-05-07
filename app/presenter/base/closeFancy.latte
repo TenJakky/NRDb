@@ -3,7 +3,7 @@
         window.parent.$.nette.ajax({
             method: 'GET',
             traditional: true,
-            url: {link :redrawControl! $redrawControlName}
+            url: {plink :redrawControl! $control}
         });
     {/if}
 
@@ -11,7 +11,7 @@
         window.parent.$.nette.ajax({
             method: 'GET',
             traditional: true,
-            url: {link :redrawRow! $redrawRowName, $redrawRowId}
+            url: {plink :redrawRow! $control, $rowId}
         });
     {/if}
 

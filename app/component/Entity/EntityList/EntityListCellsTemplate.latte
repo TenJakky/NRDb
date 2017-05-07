@@ -38,9 +38,9 @@
 {define col-action}
     <td>
         {if $row->my_rating_id}
-            <a class="iframePopup" href="{plink Entity:editRating $row->my_rating_id}">Edit rating</a>
+            <a class="iframePopup" href="{plink Entity:editRating $row->my_rating_id, control => entityList}">Edit rating</a>
         {else}
-            <a class="iframePopup" href="{plink Entity:rate $row->id}">Rate</a>
+            <a class="iframePopup" href="{plink Entity:rate $row->id, control => entityList}">Rate</a>
         {/if}
     </td>
 {/define}
