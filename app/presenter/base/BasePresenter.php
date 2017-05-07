@@ -78,4 +78,42 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         return $this->getParameter('id');
     }
+
+    public function handleRedrawControl(string $controlName)
+    {
+        if ($this->isAjax() && $controlName)
+        {
+            $this->redrawControl($controlName);
+        }
+    }
+
+    public function handleRedrawRow(string $controlName, int $rowId)
+    {
+        \Tracy\Debugger::barDump('here');
+        if ($this->isAjax() && $controlName && $rowId)
+        {
+            \Tracy\Debugger::barDump($rowId);
+            $this[$controlName]['dataGrid']->redrawRow($rowId);
+        }
+    }
+
+    public function actionCloseFancy($controlName = null, $rowId = null)
+    {
+        $this->template->setFile(__DIR__.'/closeFancy.latte');
+
+        $this->template->redrawControl = false;
+        $this->template->redrawRow = false;
+
+        if ($controlName && $rowId)
+        {
+            $this->template->redrawRow = true;
+            $this->template->redrawRowName = $controlName;
+            $this->template->redrawRowId = $rowId;
+        }
+        elseif ($controlName)
+        {
+            $this->template->redrawControl = true;
+            $this->template->redrawControlName = $controlName;
+        }
+    }
 }

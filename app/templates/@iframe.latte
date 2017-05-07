@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{$presenter->lang}">
+<head>
+    <title>{include title} | ratings.peldax.com</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Václav Pelíšek" />
+    <meta name="description" content="Website used for storing ratings and recommendations of movies, books, TV series, games and more." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="václav, pelíšek, pelda, peldax, ratings, movies, books, series, games" />
+    <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700" />
+    <link rel="stylesheet" type="text/css" href="/bower/flag-icon-css/css/flag-icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/bower/selectize/dist/css/selectize.default.css" />
+    <link rel="stylesheet" type="text/css" href="/bower/iCheck/skins/square/red.css" />
+    <link rel="stylesheet" type="text/css" href="/bower/magnific-popup/dist/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="/scss/dist/common.css" />
+    <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower/nette.ajax.js/nette.ajax.js"></script>
+    <script type="text/javascript" src="/vendor/nette/forms/src/assets/netteForms.min.js"></script>
+    <script type="text/javascript" src="/vendor/peldax/datagrid/js/nextras.datagrid.js"></script>
+    <script type="text/javascript" src="/vendor/uestla/recaptcha-control/src/assets/recaptcha.js"></script>
+    <script type="text/javascript" src="/bower/selectize/dist/js/standalone/selectize.min.js"></script>
+    <script type="text/javascript" src="/bower/iCheck/icheck.min.js"></script>
+    <script type="text/javascript" src="/bower/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/bower/chart.js/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="/js/dist/selectize-plugins.min.js"></script>
+    <script type="text/javascript" src="/js/dist/coreValidator.min.js"></script>
+    <script type="text/javascript" src="/js/dist/common.min.js"></script>
+    {include head}
+</head>
+<body class="white-popup">
+    <div id="flasharea">
+        {snippet flash}
+            {foreach $flashes as $flash}
+                <div class="flash {$flash->type}">{$flash->message}</div>
+            {/foreach}
+        {/snippet}
+    </div>
+    <header>
+        <h1>{include title}</h1>
+    </header>
+    {include content}
+</body>
+</html>

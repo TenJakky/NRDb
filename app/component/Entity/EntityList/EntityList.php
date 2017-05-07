@@ -54,6 +54,7 @@ final class EntityList extends BaseDatagridComponent
         $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
         $this->grid->setTemplateParameters(array(
                 'ratingModel' => $this->ratingModel));
+
         return $this->grid;
     }
 

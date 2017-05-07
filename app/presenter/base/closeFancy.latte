@@ -1,0 +1,19 @@
+<script>
+    {if $redrawControl}
+        parent.$.nette.ajax({
+            method: 'GET',
+            traditional: true,
+            url: {link :redrawControl! $redrawControlName}
+        });
+    {/if}
+
+    {if $redrawRow}
+        parent.$.nette.ajax({
+            method: 'GET',
+            traditional: true,
+            url: {link :redrawRow! $redrawRowName, $redrawRowId}
+        });
+    {/if}
+
+    window.parent.$.magnificPopup.close();
+</script>
