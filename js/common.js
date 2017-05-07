@@ -110,6 +110,7 @@ function refreshPlugins(context, recaptcha)
 
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
+}
 
 function renderLocaleItem(item, escape) {
     return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
@@ -164,7 +165,8 @@ $(document).ready(function ()
         window.location.href = array.join('/');
     });
 
-    $('.ajax-popup').magnificPopup({type: 'ajax'});
+    $('.iframePopup').magnificPopup({type: 'iframe'});
+    $('.ajaxPopup').magnificPopup({type: 'ajax'});
 
     refreshPlugins(document.body);
 });

@@ -25,7 +25,10 @@ input[type=number], input[type=text], textarea, input[type=password], input[type
 
 form
 {
-  width: 80%;
+  &:not(.popup)
+  {
+    width: 80%;
+  }
 
   label.required:after, tr.required > th > label:after
   {
