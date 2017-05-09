@@ -92,7 +92,7 @@ abstract class BaseModel extends Nette\Object
     }
 
     /**
-     * @return \Nette\Database\Table\IRow
+     * @return \Nette\Database\Table\ActiveRow
      */
     public function save($data)
     {
