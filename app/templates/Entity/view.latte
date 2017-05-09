@@ -9,21 +9,18 @@
     </div>
 {/if}
 
-<h2>{$data|rating}</h2>
-{if $data->type === 'series' && false}
-    <h3>Average rating from seasons: { $ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
-{/if}
-<h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
-<h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
+<section n:snippet="ratingSection">
+    <h2>{$data|rating}</h2>
+    {if $data->type === 'series' && false}
+        <h3>Average rating from seasons: { $ratingModel->getRatingFromSeasons($data->id)|number:2}</h3>
+    {/if}
+    <h3>Men's rating: {$ratingModel->getMenRating($data->id)|number: 2}</h3>
+    <h3>Women's rating: {$ratingModel->getWomenRating($data->id)|number: 2}</h3>
 
-{var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
-{if $rating}
-    <h3>My rating:
-        {$rating->value}
-    </h3>
-{/if}
-
-<section>
+    {var $rating => $ratingModel->getUserRating($data->id, $user->getId())}
+    {if $rating}
+        <h3>My rating: {$rating->value}</h3>
+    {/if}
     {if $data->type === 'season'}
         <ul class="inline-buttons">
             <li>
@@ -45,14 +42,11 @@
         </li>
         {if $rating}
             <li>
-                <a href="{plink Entity:editRating $rating->id}">Edit rating</a>
-            </li>
-            <li>
-                <a href="{plink Entity:removeRating $rating->id}">Remove rating</a>
+                <a class="iframePopup" href="{plink Entity:editRating $rating->id, control => ratingSection}">Edit rating</a>
             </li>
         {else}
             <li>
-                <a href="{plink Entity:rate $data->id}">Rate</a>
+                <a class="iframePopup" href="{plink Entity:rate $data->id, control => ratingSection}">Rate</a>
             </li>
         {/if}
     </ul>
