@@ -65,11 +65,12 @@ final class EntityForm extends BaseComponent
         $this->redrawControl('artistFormSnippet');
     }
 
-    public function render($entityId = 0)
+    public function render()
     {
-        if ($entityId)
+        $row = $this->entityModel->findRow($this->presenter->getId());
+
+        if ($row)
         {
-            $row = $this->entityModel->findRow($entityId);
             $data = $row->toArray();
 
             foreach (\App\Enum\TypeToRole::ROLES[$row->type] as $role)
