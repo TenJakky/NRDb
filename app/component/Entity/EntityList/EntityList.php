@@ -4,18 +4,13 @@ namespace App\Component;
 
 final class EntityList extends BaseDatagridComponent
 {
-    /** @var \App\Model\RatingModel */
-    protected $ratingModel;
-
     /** @var string */
     protected $type;
 
     public function __construct(
-        \App\Model\EntityModel $entityModel,
-        \App\Model\RatingModel $ratingModel)
+        \App\Model\EntityModel $entityModel)
     {
         $this->model = $entityModel;
-        $this->ratingModel = $ratingModel;
     }
 
     public function attached($presenter)
@@ -51,9 +46,7 @@ final class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__ . '/EntityListCellsTemplate.latte');
-        $this->grid->setTemplateParameters(array(
-                'ratingModel' => $this->ratingModel));
+        $this->grid->addCellsTemplate(__DIR__ . '/@cells.latte');
 
         return $this->grid;
     }
