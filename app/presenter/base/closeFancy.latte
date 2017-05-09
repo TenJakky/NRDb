@@ -1,18 +1,10 @@
 <script>
     {if $redrawControl}
-        window.parent.$.nette.ajax({
-            method: 'GET',
-            traditional: true,
-            url: {plink :redrawControl! $control}
-        });
+        window.parent.redrawControl({$control});
     {/if}
 
     {if $redrawRow}
-        window.parent.$.nette.ajax({
-            method: 'GET',
-            traditional: true,
-            url: {plink :redrawRow! $control, $rowId}
-        });
+        window.parent.redrawRow({$control}, {$rowId});
     {/if}
 
     window.parent.$.magnificPopup.close();

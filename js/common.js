@@ -174,3 +174,21 @@ $(document).ready(function ()
 
     refreshPlugins(document.body);
 });
+
+function redrawControl(control)
+{
+    $.nette.ajax({
+        method: 'GET',
+        traditional: true,
+        url: redrawControlUrl + '&control=' + control
+    });
+}
+
+function redrawRow(control, rowId)
+{
+    $.nette.ajax({
+        method: 'GET',
+        traditional: true,
+        url: redrawRowUrl + '&control=' + control + '&rowId=' + rowId
+});
+}

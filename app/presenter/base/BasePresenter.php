@@ -79,24 +79,24 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         return $this->getParameter('id');
     }
 
-    public function handleRedrawControl(string $controlName)
+    public function handleRedrawControl(string $control = null)
     {
-        if ($this->isAjax() && $controlName)
+        if ($this->isAjax() && $control)
         {
-            if (method_exists($this, 'redraw'.ucfirst($controlName)))
+            if (method_exists($this, 'redraw'.ucfirst($control)))
             {
-                $this->{'redraw'.ucfirst($controlName)}();
+                $this->{'redraw'.ucfirst($control)}();
             }
 
-            $this->redrawControl($controlName);
+            $this->redrawControl($control);
         }
     }
 
-    public function handleRedrawRow(string $controlName, int $rowId)
+    public function handleRedrawRow(string $control = null, int $rowId = null)
     {
-        if ($this->isAjax() && $controlName && $rowId)
+        if ($this->isAjax() && $control && $rowId)
         {
-            $this[$controlName]['dataGrid']->redrawRow($rowId);
+            $this[$control]['dataGrid']->redrawRow($rowId);
         }
     }
 
