@@ -25,17 +25,14 @@ input[type=number], input[type=text], textarea, input[type=password], input[type
 
 form
 {
-  &:not(.popup)
-  {
-    width: 80%;
-  }
+  width: 80%;
 
   label.required:after, tr.required > th > label:after
   {
     content: " *";
   }
 
-  table
+  table:not(.grid)
   {
     width: 100%;
     table-layout: fixed;
@@ -89,7 +86,7 @@ form
   }
 }
 
-div.grid form, div.white-popup form
+div.grid form, .white-popup form
 {
   width: 100%;
 }
