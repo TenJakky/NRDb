@@ -38,8 +38,12 @@ services:
         class: App\Component\EntityForm
     entityList:
         class: App\Component\EntityList
-    entitySmallList:
-        class: App\Component\EntitySmallList
+    recentEntitySmallList:
+        class: App\Component\RecentEntitySmallList
+    topEntitySmallList:
+        class: App\Component\TopEntitySmallList
+    notRatedEntitySmallList:
+        class: App\Component\NotRatedEntitySmallList
 
     ratingForm:
         class: App\Component\RatingForm

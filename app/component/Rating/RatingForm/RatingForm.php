@@ -76,7 +76,9 @@ final class RatingForm extends BaseRenderComponent
         switch ($controlName)
         {
             case 'entityList':
-            case 'entitySmallList':
+            case 'recentEntitySmallList':
+            case 'topEntitySmallList':
+            case 'notRatedEntitySmallList':
                 $redraw = [$controlName, $row->entity_id]; break;
             default:
                 $redraw = [$controlName];
