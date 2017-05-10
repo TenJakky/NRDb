@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RatingForm extends BaseComponent
+final class RatingForm extends BaseRenderComponent
 {
     /** @var \App\Model\EntityModel */
     protected $model;
@@ -18,42 +18,26 @@ final class RatingForm extends BaseComponent
         $this->ratingModel = $ratingModel;
     }
 
-    public function render($entityId = 0, $ratingId = 0)
-    {
-        if ($ratingId)
-        {
-            $this['form']->setDefaults($this->ratingModel->findRow($ratingId));
-        }
-        elseif ($entityId)
-        {
-            $this['form']->setDefaults(array("entity_id" => $entityId));
-        }
-
-        $this->template->setFile(__DIR__ . '/RatingForm.latte');
-        $this->template->render();
-    }
-
     public function createComponentForm()
     {
-        $userId = $this->presenter->getUser()->getId();
-
-        $entities = $this->presenter->getAction() === 'rate' ?
-            $this->model->getNotRated($userId)->fetchPairs('id', 'original_title') :
-            $this->model->getRated($userId)->fetchPairs('id', 'original_title');
-
         $form = new \Nette\Application\UI\Form();
 
-        $form->addHidden('id');
+        $form->addHidden('control', $this->presenter->getParameter('control'));
 
-        $form->addSelect("entity_id", 'Entity', $entities)
-            ->setPrompt("Select Entity")
-            ->setRequired();
         $rating = $form->addRadioList('value', 'Rating', array_combine(range(10, 0, -1), range(10, 0, -1)))
             ->setRequired();
         $rating->getContainerPrototype()->id = 'rating';
         $rating->getSeparatorPrototype()->setName(null);
+
         $form->addTextArea('note', 'Note');
         $form->addSubmit('submit', 'Submit');
+
+        if ($this->presenter->getAction() === 'editRating')
+        {
+            $form->setDefaults($this->ratingModel->findRow($this->presenter->getId()));
+            $form->addSubmit('remove', 'Remove rating');
+        }
+
         $form->onSuccess[] = [$this, 'formSubmitted'];
 
         return $form;
@@ -62,12 +46,44 @@ final class RatingForm extends BaseComponent
     public function formSubmitted(\Nette\Application\UI\Form $form)
     {
         $data = $form->getValues();
-        $data['user_id'] = $this->presenter->user->getId();
         $data['date'] = date('Y-m-d');
+        $data['user_id'] = $this->presenter->user->getId();
 
-        $this->ratingModel->save($data);
+        $controlName = $data['control'];
+        unset($data['control']);
 
-        $this->presenter->flashMessage('Rating successfully saved.', 'success');
-        $this->presenter->redirect("Entity:view", array('id' => $data["entity_id"]));
+        switch ($this->presenter->getAction())
+        {
+            case 'rate':
+                $data['entity_id'] = $this->presenter->getId();
+                $row = $this->ratingModel->save($data);
+                $this->presenter->flashMessage('Rating successfully saved.', 'success');
+                break;
+            case 'editRating':
+                $row = $this->ratingModel->findRow($this->presenter->getId());
+                if ($form->isSubmitted()->getName() === 'remove')
+                {
+                    $row->delete();
+                    $this->presenter->flashMessage('Rating successfully removed.', 'success');
+                    break;
+                }
+                $row->update($data);
+                $this->presenter->flashMessage('Rating successfully updated.', 'success');
+                break;
+            default: return;
+        }
+
+        switch ($controlName)
+        {
+            case 'entityList':
+            case 'recentEntitySmallList':
+            case 'topEntitySmallList':
+            case 'notRatedEntitySmallList':
+                $redraw = [$controlName, $row->entity_id]; break;
+            default:
+                $redraw = [$controlName];
+        }
+
+        $this->presenter->redirect('Entity:closeFancy', $redraw);
     }
 }

@@ -7,12 +7,12 @@ class RatingModel extends BaseModel
     /** @var string */
     public $tableName = 'rating';
 
-    public function getUserRating($entityId, $userId)
+    public function getUserRating(int $entityId, int $userId)
     {
         return $this->findByArray(array('entity_id' => $entityId, 'user_id' => $userId))->fetch();
     }
 
-    public function getRating($entityId)
+    public function getRating(int $entityId)
     {
         return $this->getTable()
             ->select('`rating`')
@@ -20,7 +20,7 @@ class RatingModel extends BaseModel
             ->fetch()->rating;
     }
 
-    public function getWomenRating($entityId)
+    public function getWomenRating(int $entityId)
     {
         return $this->getTable()
             ->select('sum(value) / count(*) AS `rating`')
@@ -29,7 +29,7 @@ class RatingModel extends BaseModel
             ->fetch()->rating;
     }
 
-    public function getMenRating($entityId)
+    public function getMenRating(int $entityId)
     {
         return $this->getTable()
             ->select('sum(value) / count(*) AS `rating`')

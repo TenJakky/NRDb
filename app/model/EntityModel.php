@@ -13,6 +13,9 @@ final class EntityModel extends BaseModel
             ->where('type', $type);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getByTypeWithRating(string $type, int $userId)
     {
         return $this->getByType($type)
@@ -21,11 +24,17 @@ final class EntityModel extends BaseModel
             ->joinWhere('r', 'r.user_id', $userId);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getRecent()
     {
         return $this->getTable()->order('id DESC');
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getRecentWithRating(int $userId)
     {
         return $this->getRecent()
@@ -34,11 +43,17 @@ final class EntityModel extends BaseModel
             ->joinWhere('r', 'r.user_id', $userId);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getTop()
     {
         return $this->getTable()->order('rating DESC');
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getTopWithRating(int $userId)
     {
         return $this->getTop()
@@ -47,6 +62,9 @@ final class EntityModel extends BaseModel
             ->joinWhere('r', 'r.user_id', $userId);
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getRated(int $userId)
     {
         return $this->getTable()
@@ -56,6 +74,9 @@ final class EntityModel extends BaseModel
             ->order('entity.id DESC');
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function getNotRated(int $userId)
     {
         return $this->getTable()
@@ -66,13 +87,17 @@ final class EntityModel extends BaseModel
     }
 
     /**
-     * Rating will of course be null, but its important to keep consistency.
+     * Rating will of course be null, but I want keep consistency.
+     * @return \Nette\Database\Table\Selection
      */
     public function getNotRatedWithRating(int $userId)
     {
         return $this->getNotRated($userId)->select('entity.*, r.value AS my_rating, r.id AS my_rating_id');
     }
 
+    /**
+     * @return \Nette\Database\Table\Selection
+     */
     public function fetchSeriesSelectBox()
     {
         return $this

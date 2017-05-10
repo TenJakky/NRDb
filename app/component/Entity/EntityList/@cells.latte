@@ -1,9 +1,3 @@
-{define col-number}
-    <td>
-        <a href="{plink Season:view $row->id}">{$row->number}</a>
-    </td>
-{/define}
-
 {define col-original_title}
     <td>
         <a href="{plink Entity:view $row->id}">{$row->original_title}</a>
@@ -23,18 +17,10 @@
     </td>
 {/define}
 
-{define col-head-class-year}
-    center
-{/define}
-
 {define col-rating}
     <td class="center">
         {$row|rating}
     </td>
-{/define}
-
-{define col-head-class-rating}
-    center
 {/define}
 
 {define col-my_rating}
@@ -43,19 +29,12 @@
     </td>
 {/define}
 
-{define col-head-class-my_rating}
-    center
-{/define}
-
 {define col-action}
     <td>
         {if $row->my_rating_id}
-            <ul class="action-list">
-                <li><a href="{plink Entity:editRating $row->my_rating_id}">Edit rating</a></li>
-                <li><a href="{plink Entity:removeRating $row->my_rating_id}">Remove rating</a></li>
-            </ul>
+            <a class="iframePopup" href="{plink Entity:editRating $row->my_rating_id, control => entityList}">Edit rating</a>
         {else}
-            <a href="{plink Entity:rate $row->id}">Rate</a>
+            <a class="iframePopup" href="{plink Entity:rate $row->id, control => entityList}">Rate</a>
         {/if}
     </td>
 {/define}

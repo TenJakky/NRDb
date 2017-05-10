@@ -2,46 +2,38 @@
 
 namespace App\Component;
 
-final class EntitySmallList extends BaseComponent
+abstract class EntitySmallList extends BaseSmallDatagridComponent
 {
-    /** @var \App\Model\EntityModel */
-    protected $model;
-
-    /** @var \App\Model\RatingModel */
-    protected $ratingModel;
+    /** @var bool */
+    protected $paginationEnabled = false;
 
     public function __construct(
-        \App\Model\EntityModel $entityModel,
-        \App\Model\RatingModel $ratingModel)
+        \App\Model\EntityModel $entityModel)
     {
         $this->model = $entityModel;
-        $this->ratingModel = $ratingModel;
     }
 
-    public function render($listType)
+    public function createComponentDataGrid()
     {
-        $perPage = $this->presenter->getUser()->getIdentity()->per_page_small;
-        $userId = $this->presenter->getUser()->getId();
+        parent::createComponentDataGrid();
 
-        switch ($listType)
+        $this->grid->addColumn('original_title', 'Original title');
+        if (!in_array($this->presenter->type, array('music', 'game')))
         {
-            default:
-            case 'new':
-                $data = $this->model->getRecentWithRating($userId);
-                break;
-            case 'top':
-                $data = $this->model->getTopWithRating($userId);
-                break;
-            case 'notRated':
-                $data = $this->model->getNotRatedWithRating($userId);
-                break;
+            $this->grid->addColumn('english_title', 'English Title');
+            $this->grid->addColumn('czech_title', 'Czech Title');
         }
+        $this->grid->addColumn('year', 'Year');
+        $this->grid->addColumn('rating', 'Rating');
+        $this->grid->addColumn('my_rating', 'My Rating');
+        $this->grid->addColumn('action', 'Action');
+        $this->grid->addCellsTemplate(__DIR__.'/@cells.latte');
 
-        $data = $data->where('type', $this->presenter->type)->limit($perPage)->fetchAll();
+        return $this->grid;
+    }
 
-        $this->template->ratingModel = $this->ratingModel;
-        $this->template->entities = $data;
-
+    public function render()
+    {
         $this->template->setFile(__DIR__.'/EntitySmallList.latte');
         $this->template->render();
     }

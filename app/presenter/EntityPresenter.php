@@ -40,21 +40,25 @@ final class EntityPresenter extends BaseViewEditPresenter
         $this->template->ratingModel = $this->ratingModel;
     }
 
-    public function actionRate($id = 0)
+    public function actionRate($id)
     {
-        if ($id === 0 || !$this->model->findRow($id))
+        $entity = $this->model->findRow($id);
+
+        if (!$entity)
         {
-            $this->flashMessage("Entity not found.", 'failure');
-            $this->redirect("Entity:default");
+            $this->flashMessage('Entity not found.', 'failure');
+            $this->redirect(':closeFancy');
         }
 
-        $rating = $this->ratingModel->findByArray(array('user_id' => $this->getUser()->getId(), "entity_id" => $id));
-        if ($rating->count() > 0)
-        {
-            $this->redirect("Entity:editRating", $rating->fetch()->id);
-        }
+        $rating = $this->ratingModel->findByArray([
+            'user_id' => $this->getUser()->getId(),
+            'entity_id' => $id
+        ])->fetch();
 
-        $this->template->id = $id;
+        if ($rating)
+        {
+            $this->redirect('Entity:editRating', $rating->id);
+        }
     }
 
     public function actionEditRating($id)
@@ -63,24 +67,8 @@ final class EntityPresenter extends BaseViewEditPresenter
 
         if (!$rating || $rating->user_id !== $this->user->getId())
         {
-            $this->flashMessage('You cannot edit rating of someone else.', 'failure');
-            $this->redirect("Entity:default");
+            $this->flashMessage('You cannot edit this rating.', 'failure');
+            $this->redirect(':closeFancy');
         }
-
-        $this->template->ratingId = $id;
-    }
-
-    public function actionRemoveRating($id)
-    {
-        $rating = $this->ratingModel->findRow($id);
-        if (!$rating || $rating->user_id !== $this->user->getId())
-        {
-            $this->flashMessage('You cannot remove rating of someone else.', 'failure');
-            $this->redirect("Entity:default");
-        }
-
-        $rating->delete();
-
-        $this->redirect("Entity:default");
     }
 }

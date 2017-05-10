@@ -1,5 +1,5 @@
 <ul class="inline-buttons">
-    <li><a id="add_artist" >{$presenter->locale['add']['artist']}</a></li>
+    <li><a id="addArtist" >{$presenter->locale['add']['artist']}</a></li>
 </ul>
 
 {snippet formSnippet}
@@ -125,7 +125,7 @@
 {/snippet}
 
 <div class="hidden">
-    <div id="artistSubform" class="white-popup">
+    <div id="artistForm" class="white-popup">
         <h2>{$presenter->locale['add']['artist']}</h2>
         {snippet artistFormSnippet}
             {control artistForm}

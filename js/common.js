@@ -111,6 +111,10 @@ function refreshPlugins(context, recaptcha)
     var selectInputs = $(context).find('select:not(#localeInput)');
     selectInputs.selectize(selectizeOptions);
 
+    $(context).find('.iframePopup').magnificPopup({type: 'iframe'});
+    $(context).find('.ajaxPopup').magnificPopup({type: 'ajax'});
+}
+
 function renderLocaleItem(item, escape) {
     return '<div><span class="flag-icon flag-icon-' + escape(getCountryCode(item.code)) + '"></span>&nbsp;' + escape(item.name) + '</div>';
 }
@@ -119,6 +123,10 @@ $(document).ready(function ()
 {
     flashFadeOut();
 
+    $.nette.ext('snippets').after(function (el)
+    {
+        refreshPlugins(el);
+    });
     $.nette.ext('flash', {
         complete: flashFadeOut
     });
@@ -166,3 +174,21 @@ $(document).ready(function ()
 
     refreshPlugins(document.body);
 });
+
+function redrawControl(control)
+{
+    $.nette.ajax({
+        method: 'GET',
+        traditional: true,
+        url: redrawControlUrl + '&control=' + control
+    });
+}
+
+function redrawRow(control, rowId)
+{
+    $.nette.ajax({
+        method: 'GET',
+        traditional: true,
+        url: redrawRowUrl + '&control=' + control + '&rowId=' + rowId
+});
+}

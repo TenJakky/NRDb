@@ -12,13 +12,9 @@
 10=> 'Masterpiece',
 )}
 
-{form form}
+{form form class => 'ajax popup'}
     <table>
         <tbody>
-            <tr class="required">
-                <th>{label entity_id /}</th>
-                <td>{input entity_id}</td>
-            </tr>
             <tr class="required">
                 <th>{label value /}</th>
                 <td>
@@ -35,9 +31,13 @@
             </tr>
             <tr>
                 <th></th>
-                <td><input type="submit" name="_submit" value="Submit" class="button"></td>
+                <td>
+                    {input submit}
+                    {ifset $form['remove']}
+                        {input remove style => 'float:right'}
+                    {/ifset}
+                </td>
             </tr>
         </tbody>
     </table>
-    {input id}
 {/form}

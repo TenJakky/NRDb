@@ -65,11 +65,12 @@ final class EntityForm extends BaseComponent
         $this->redrawControl('artistFormSnippet');
     }
 
-    public function render($entityId = 0)
+    public function render()
     {
-        if ($entityId)
+        $row = $this->entityModel->findRow($this->presenter->getId());
+
+        if ($row)
         {
-            $row = $this->entityModel->findRow($entityId);
             $data = $row->toArray();
 
             foreach (\App\Enum\TypeToRole::ROLES[$row->type] as $role)
@@ -206,7 +207,7 @@ final class EntityForm extends BaseComponent
             default:
             case 'movie':
             case 'book':
-                $entityId = $this->entityModel->save([
+                $entity = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -217,7 +218,7 @@ final class EntityForm extends BaseComponent
                 ]);
                 break;
             case 'series':
-                $entityId = $this->entityModel->save([
+                $entity = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -228,7 +229,7 @@ final class EntityForm extends BaseComponent
                 ]);
                 break;
             case 'season':
-                $entityId = $this->entityModel->save([
+                $entity = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'season_series_id' => $data['season_series_id'],
@@ -239,7 +240,7 @@ final class EntityForm extends BaseComponent
                 break;
             case 'music':
             case 'game':
-                $entityId = $this->entityModel->save([
+                $entity = $this->entityModel->save([
                     'id' => $data['id'],
                     'type' => $data['type'],
                     'original_title' => $data['original_title'],
@@ -254,7 +255,7 @@ final class EntityForm extends BaseComponent
             foreach ($data[$role] as $artist)
             {
                 $this->artistEntityModel->insert(array(
-                    'entity_id' => $entityId,
+                    'entity_id' => $entity->id,
                     'artist_id' => $artist,
                     'role' => $role
                 ));
@@ -267,9 +268,9 @@ final class EntityForm extends BaseComponent
 
         if ($this->presenter->action === 'edit')
         {
-            $this->presenter->redirect('Entity:view', array('id' => $entityId));
+            $this->presenter->redirect('Entity:view', array('id' => $entity->id));
         }
 
-        $this->presenter->redirect('Entity:rate', array('id' => $entityId));
+        $this->presenter->redirect('Entity:rate', array('id' => $entity->id));
     }
 }
