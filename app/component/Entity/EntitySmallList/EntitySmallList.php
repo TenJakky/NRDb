@@ -27,7 +27,7 @@ abstract class EntitySmallList extends BaseSmallDatagridComponent
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__.'/@cells.latte');
+        $this->grid->addCellsTemplate(__DIR__.'/../@cells.latte');
 
         return $this->grid;
     }

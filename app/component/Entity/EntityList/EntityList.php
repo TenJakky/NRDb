@@ -46,7 +46,7 @@ final class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__ . '/@cells.latte');
+        $this->grid->addCellsTemplate(__DIR__ . '/../@cells.latte');
 
         return $this->grid;
     }
