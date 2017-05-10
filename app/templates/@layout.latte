@@ -23,9 +23,13 @@
         <script type="text/javascript" src="/bower/iCheck/icheck.min.js"></script>
         <script type="text/javascript" src="/bower/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="/bower/chart.js/dist/Chart.min.js"></script>
-        <script type="text/javascript" src="/js/dist/selectize-plugins.min.js"></script>
+        <script type="text/javascript" src="/js/dist/selectizePlugins.min.js"></script>
         <script type="text/javascript" src="/js/dist/coreValidator.min.js"></script>
         <script type="text/javascript" src="/js/dist/common.min.js"></script>
+        <script>
+            const redrawRowUrl = {plink :redrawRow!};
+            const redrawControlUrl = {plink :redrawControl!};
+        </script>
         {include head}
     </head>
     <body>
@@ -117,9 +121,5 @@
             <p><a href="http://www.peldax.com">www.peldax.com</a></p>
             <p>Václav Pelíšek, 2016</p>
         </footer>
-        <script>
-            const redrawRowUrl = {plink :redrawRow!};
-            const redrawControlUrl = {plink :redrawControl!};
-        </script>
     </body>
 </html>

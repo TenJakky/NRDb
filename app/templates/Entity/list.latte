@@ -1,6 +1,8 @@
 {layout ../@layout.latte}
 {block title}{$presenter->locale['list'][$presenter->type]}{/block}
-{block head}{/block}
+{block head}
+    <link rel="stylesheet" type="text/css" href="/scss/dist/entityList.css" />
+{/block}
 {block content}
 
 <section>

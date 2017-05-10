@@ -1,0 +1,51 @@
+@import "../colors";
+
+div.entitySmallList
+{
+  table.grid
+  {
+    table-layout: auto;
+
+    tr
+    {
+      th, td
+      {
+        &:nth-child(n + 4)
+        {
+          text-align: center;
+        }
+      }
+      td
+      {
+        &:nth-child(1)
+        {
+          width: 22%;
+        }
+        &:nth-child(2)
+        {
+          width: 22%;
+        }
+        &:nth-child(3)
+        {
+          width: 22%;
+        }
+        &:nth-child(4)
+        {
+          width: 5%;
+        }
+        &:nth-child(5)
+        {
+          width: 10%;
+        }
+        &:nth-child(6)
+        {
+          width: 9%;
+        }
+        &:nth-child(7)
+        {
+          width: 10%;
+        }
+      }
+    }
+  }
+}

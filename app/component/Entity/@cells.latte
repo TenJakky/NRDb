@@ -1,32 +1,30 @@
 {define col-original_title}
-    <td>
-        <a href="{plink Entity:view $row->id}">{$row->original_title}</a>
-    </td>
+    <td><a href="{plink Entity:view $row->id}">{$row->original_title}</a></td>
+{/define}
+
+{define col-english_title}
+    <td>{$row->english_title}</td>
+{/define}
+
+{define col-czech_title}
+    <td>{$row->czech_title}</td>
 {/define}
 
 {define col-artist}
-    <td>
-        {var artists = $row->related("jun_artist2entity.entity_id")->where('role', \App\Enum\TypeToRole::LIST_ROLE[$row->type])}
-        {artistList $artists}
-    </td>
+    {var artists = $row->related("jun_artist2entity.entity_id")->where('role', \App\Enum\TypeToRole::LIST_ROLE[$row->type])}
+    <td>{artistList $artists}</td>
 {/define}
 
 {define col-year}
-    <td class="center">
-        {$row->year}
-    </td>
+    <td>{$row->year}</td>
 {/define}
 
 {define col-rating}
-    <td class="center">
-        {$row|rating}
-    </td>
+    <td>{$row|rating}</td>
 {/define}
 
 {define col-my_rating}
-    <td class="center">
-        {$row->my_rating}
-    </td>
+    <td>{$row->my_rating}</td>
 {/define}
 
 {define col-action}
