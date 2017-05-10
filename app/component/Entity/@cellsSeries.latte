@@ -1,13 +1,13 @@
-{redefine col-artist}
+{define col-artist}
     <td>
         {artistList $entityModel->getDirectors($row->id)}
     </td>
-{/redefine}
+{/define}
 
-{redefine col-year}
+{define col-year}
     <td class="center">
         {ifset $row->year_min}
             {$row->year_min} - {$row->active ? 'present' : $row->year_max}
         {/ifset}
     </td>
-{/redefine}
+{/define}
