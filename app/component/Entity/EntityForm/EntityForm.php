@@ -67,10 +67,9 @@ final class EntityForm extends BaseComponent
 
     public function render()
     {
-        $row = $this->entityModel->findRow($this->presenter->getId());
-
-        if ($row)
+        if ($this->presenter->getId())
         {
+            $row = $this->entityModel->findRow($this->presenter->getId());
             $data = $row->toArray();
 
             foreach (\App\Enum\TypeToRole::ROLES[$row->type] as $role)
