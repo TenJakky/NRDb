@@ -37,39 +37,27 @@
             <div>
                 {if $user->isLoggedIn()}
                     <ul>
-                        <li>
-                            <a href="{plink Default:default}">{$presenter->locale['dashboard']}</a>
-                        </li>
+                        <li><a href="{plink Default:default}">{$presenter->locale['dashboard']}</a></li>
                         <li class="dropdown">
                             <a>{$presenter->locale['categories']}</a>
                             <ul class="dropdown-list">
                                 {foreach \App\Enum\Category::ITEMS as $type}
-                                    <li>
-                                        <a href="{plink Entity:default type => $type}">{$presenter->locale['entity_pl'][$type]}</a>
-                                    </li>
+                                    <li><a href="{plink Entity:default type => $type}">{$presenter->locale['entity_pl'][$type]}</a></li>
                                 {/foreach}
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a>{$presenter->locale['people']}</a>
                             <ul class="dropdown-list">
-                                <li>
-                                    <a href="{plink Artist:default}">{$presenter->locale['artist_pl']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink User:default}">{$presenter->locale['user_pl']}</a>
-                                </li>
+                                <li><a href="{plink Artist:default}">{$presenter->locale['artist_pl']}</a></li>
+                                <li><a href="{plink User:default}">{$presenter->locale['user_pl']}</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a>{$presenter->locale['other']}</a>
                             <ul class="dropdown-list">
-                                <li>
-                                    <a href="{plink Statistics:default}">{$presenter->locale['stats']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Credits:default}">{$presenter->locale['credits']}</a>
-                                </li>
+                                <li><a href="{plink Statistics:default}">{$presenter->locale['stats']}</a></li>
+                                <li><a href="{plink Credits:default}">{$presenter->locale['credits']}</a></li>
                             </ul>
                         </li>
                         {control search}
@@ -80,18 +68,10 @@
                         <li class="dropdown">
                             <a>{$user->identity->username}</a>
                             <ul class="dropdown-list">
-                                <li>
-                                    <a href="{plink User:view $user->id}">{$presenter->locale['profile']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Default:settings}">{$presenter->locale['settings']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Default:changePassword}">{$presenter->locale['chng_pswrd']}</a>
-                                </li>
-                                <li>
-                                    <a href="{plink Default:logout}">{$presenter->locale['logout']}</a>
-                                </li>
+                                <li><a href="{plink User:view $user->id}">{$presenter->locale['profile']}</a></li>
+                                <li><a href="{plink Default:settings}">{$presenter->locale['settings']}</a></li>
+                                <li><a href="{plink Default:changePassword}">{$presenter->locale['chng_pswrd']}</a></li>
+                                <li><a href="{plink Default:logout}">{$presenter->locale['logout']}</a></li>
                             </ul>
                         </li>
                         {*if !in_array('User', $user->getRoles())}
@@ -106,7 +86,7 @@
         </nav>
         <main>
             <div id="flasharea">
-                {snippet flash}
+                {snippet flashMessages}
                     {foreach $flashes as $flash}
                         <div class="flash {$flash->type}">{$flash->message}</div>
                     {/foreach}
