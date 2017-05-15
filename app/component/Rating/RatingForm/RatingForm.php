@@ -18,6 +18,13 @@ final class RatingForm extends BaseRenderComponent
         $this->ratingModel = $ratingModel;
     }
 
+    public function attached($presenter)
+    {
+        parent::attached($presenter);
+
+        $presenter->addStyle('/scss/dist/ratingForm.css');
+    }
+
     public function createComponentForm()
     {
         $form = new \Nette\Application\UI\Form();

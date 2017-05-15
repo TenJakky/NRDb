@@ -28,6 +28,13 @@ final class EntityForm extends BaseComponent
         $this->connection = $connection;
     }
 
+    public function attached($presenter)
+    {
+        parent::attached($presenter);
+
+        $presenter->addScript('/js/dist/entityForm.min.js');
+    }
+
     public function createComponent($name, array $args = null)
     {
         if ($name === 'form')
@@ -37,7 +44,7 @@ final class EntityForm extends BaseComponent
 
         $form = parent::createComponent($name, $args);
 
-        $form['form']->getElementPrototype()->addClass('ajax popup');
+        $form['form']->getElementPrototype()->addClass('ajax');
         $form['form']->onSuccess[] = [$this, 'artistFormSuccess'];
         $form['form']->onError[] = [$this, 'artistFormError'];
     

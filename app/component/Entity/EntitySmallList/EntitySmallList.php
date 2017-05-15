@@ -13,6 +13,13 @@ abstract class EntitySmallList extends BaseSmallDatagridComponent
         $this->model = $entityModel;
     }
 
+    public function attached($presenter)
+    {
+        parent::attached($presenter);
+
+        $presenter->addStyle('/scss/dist/entitySmallList.css');
+    }
+
     public function createComponentDataGrid()
     {
         parent::createComponentDataGrid();

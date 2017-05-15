@@ -12,6 +12,28 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var  array */
     public $locale;
 
+    /** @var  array */
+    public $styles = [];
+
+    /** @var  array */
+    public $scripts = [];
+
+    public function addStyle(string $path)
+    {
+        if (!in_array($path, $this->styles))
+        {
+            $this->styles[] = $path;
+        }
+    }
+
+    public function addScript(string $path)
+    {
+        if (!in_array($path, $this->scripts))
+        {
+            $this->scripts[] = $path;
+        }
+    }
+
     public function startup()
     {
         parent::startup();
@@ -25,8 +47,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         {
             default:
                 $this->lang = 'en';
-                $this->locale = require getcwd().'/app/locale/en.php';
-                break;
             case 'en':
             case 'cs':
             case 'de':

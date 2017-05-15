@@ -14,7 +14,6 @@
     <script type="text/javascript" src="/js/dist/selectizePlugins.min.js"></script>
     <script type="text/javascript" src="/js/dist/coreValidator.min.js"></script>
     <script type="text/javascript" src="/js/dist/common.min.js"></script>
-    {include head}
 </head>
 <body class="white-popup">
     <div id="flasharea">
@@ -28,5 +27,11 @@
         <h1>{include title}</h1>
     </header>
     {include content}
+    {foreach $presenter->styles as $style}
+        <link rel="stylesheet" type="text/css" href="{$style}" />
+    {/foreach}
+    {foreach $presenter->scripts as $script}
+        <script type="text/javascript" src="{$script}"></script>
+    {/foreach}
 </body>
 </html>

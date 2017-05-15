@@ -15,13 +15,15 @@ final class EntityList extends BaseDatagridComponent
 
     public function attached($presenter)
     {
+        parent::attached($presenter);
+
         $this->type =
             $presenter->getName() === 'Entity' &&
             $presenter->getAction() === 'view' &&
             $presenter->type === 'series' ?
-            'season' : $presenter->type;
+                'season' : $presenter->type;
 
-        parent::attached($presenter);
+        $presenter->addStyle('/scss/dist/entityList.css');
     }
 
     public function createComponentDataGrid()
