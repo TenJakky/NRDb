@@ -91,6 +91,6 @@ final class RatingForm extends BaseRenderComponent
                 $redraw = [$controlName];
         }
 
-        $this->presenter->redirect('Entity:closeFancy', $redraw);
+        $this->presenter->forward('Entity:closeFancy', $redraw);
     }
 }
