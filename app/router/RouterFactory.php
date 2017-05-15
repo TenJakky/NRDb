@@ -24,10 +24,6 @@ class RouterFactory
         $router[] = $frontRouter = new RouteList();
         $frontRouter[] = new Route('sitemap.xml', 'Default:sitemap');
 
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]login',
-            'Default:login');
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]logout',
-            'Default:logout');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]settings',
             'Default:settings');
         $frontRouter[] = new Route('[<lang [a-z]{2}>/]change-password',

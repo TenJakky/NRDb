@@ -57,6 +57,7 @@ final class LoginForm extends BaseRenderComponent
         $this->logLoginModel->insert($log);
 
         $this->presenter->flashMessage('Successfully logged in.', 'success');
+        $this->presenter->restoreRequest($this->presenter->backlink);
         $this->presenter->redirect('Default:default');
     }
 }
