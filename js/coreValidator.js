@@ -1,6 +1,6 @@
 function getArgsVal(elem, args)
 {
-    $(elem).closest('form').find('input[name="'+args+'"]').val()
+    return $(elem).closest('form').find('input[name="'+args+'"]').val();
 }
 
 Nette.validators.AppValidatorCoreValidator_greaterEqual = function(elem, args, val)
