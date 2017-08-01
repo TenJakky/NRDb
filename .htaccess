@@ -6,10 +6,6 @@
 	RewriteEngine On
 	RewriteBase /
 
-	# use HTTPS
-	# RewriteCond %{HTTPS} !on
-	# RewriteRule .? https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
 	RewriteRule /\.|^\.(?!well-known/) - [F]
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d

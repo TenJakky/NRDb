@@ -1,0 +1,25 @@
+{block title}{$presenter->locale['entity_pl'][$presenter->type]}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Entity:add}">{$presenter->locale['add'][$presenter->type]}</a>
+        </li>
+        <li>
+            <a href="{plink Entity:list}">{$presenter->locale['list'][$presenter->type]}</a>
+        </li>
+    </ul>
+</section>
+<section>
+    <h2>{$presenter->locale['top_cat_1']}</h2>
+    {control recentEntitySmallList}
+</section>
+<section>
+    <h2>{$presenter->locale['top_cat_2']}</h2>
+    {control topEntitySmallList}
+</section>
+<section>
+    <h2>{$presenter->locale['top_cat_3']}</h2>
+    {control notRatedEntitySmallList}
+</section>

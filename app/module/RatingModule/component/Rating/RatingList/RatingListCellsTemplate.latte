@@ -1,0 +1,17 @@
+{redefine row-class}
+    {if $row->user_id === $userId}
+        highlight
+    {/if}
+{/redefine}
+
+{define col-user_id}
+    <td>
+        <a href="{plink User:view $row->id}">{$row->user->username}</a>
+    </td>
+{/define}
+
+{define col-date}
+    <td>
+        {$row->date|date:'%d.%m.%Y'}
+    </td>
+{/define}

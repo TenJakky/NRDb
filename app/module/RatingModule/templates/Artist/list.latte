@@ -1,0 +1,14 @@
+
+{block title}{$presenter->locale['list']['artist']}{/block}
+{block content}
+
+<section>
+    <ul class="inline-buttons">
+        <li>
+            <a href="{plink Artist:add}">{$presenter->locale['add']['artist']}</a>
+        </li>
+    </ul>
+</section>
+<section>
+    {control artistList}
+</section>

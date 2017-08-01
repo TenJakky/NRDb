@@ -1,0 +1,57 @@
+<table class="grid">
+    <thead>
+        <tr>
+            <td></td>
+            <th>{$presenter->locale['#_elem']}</th>
+            <th>{$presenter->locale['#_rating']}</th>
+            <th>0*</th><th>1*</th><th>2*</th><th>3*</th><th>4*</th><th>5*</th><th>6*</th><th>7*</th><th>8*</th><th>9*</th><th>10*</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $statEntity as $se}
+            <tr>
+                <th>{$presenter->locale['entity'][$se->type]}</th>
+                <td>{$se->count}</td>
+                <td>{$se->rating_count}</td>
+                {foreach $statRating as $sr}
+                    <td>{$sr->{$se->type.'_count'}}</td>
+                {/foreach}
+            </tr>
+        {/foreach}
+        <tr>
+            <th>{$presenter->locale['total']}</th>
+            <td>{$se->total_count}</td>
+            <td>{$se->total_rating_count}</td>
+            {foreach $statRating as $sr}
+                <td>{$sr->count}</td>
+            {/foreach}
+        </tr>
+    </tbody>
+</table>
+
+<h4>{$presenter->locale['plot_cat_1']}</h4>
+<ul class="inline-buttons">
+    <li><input type="button" value="{$presenter->locale['#_elem']}" id="plotElement" /></li>
+    <li><input type="button" value="{$presenter->locale['#_rating']}" id="plotRating" /></li>
+</ul>
+
+<h4>{$presenter->locale['plot_cat_2']}</h4>
+<ul class="inline-buttons">
+    {foreach \App\Enum\EntityType::ITEMS as $type}
+        <li><input type="button" value="{$presenter->locale['entity'][$type]}" class="plotEntity" data-type="{$type}" /></li>
+    {/foreach}
+</ul>
+
+<canvas id="elementCountChart"></canvas>
+<script n:nonce>
+    const elementData = [{foreach $statEntity as $se}{$se->count}{sep},{/sep}{/foreach}];
+    const ratingData = [{foreach $statEntity as $se}{$se->rating_count}{sep},{/sep}{/foreach}];
+    const entityData = {
+        movie: [{foreach $statRating as $sr}{$sr->movie_count}{sep},{/sep}{/foreach}],
+        series: [{foreach $statRating as $sr}{$sr->series_count}{sep},{/sep}{/foreach}],
+        season: [{foreach $statRating as $sr}{$sr->season_count}{sep},{/sep}{/foreach}],
+        book: [{foreach $statRating as $sr}{$sr->book_count}{sep},{/sep}{/foreach}],
+        music: [{foreach $statRating as $sr}{$sr->music_count}{sep},{/sep}{/foreach}],
+        game: [{foreach $statRating as $sr}{$sr->game_count}{sep},{/sep}{/foreach}]
+    };
+</script>

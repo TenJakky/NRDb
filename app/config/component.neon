@@ -26,6 +26,8 @@ services:
         class: App\Component\Search
     locale:
         class: App\Component\Locale
+    menu:
+        class: App\Component\Menu
 
     artistForm:
         class: App\Component\ArtistForm

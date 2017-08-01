@@ -1,0 +1,64 @@
+<table class="grid table-fixed">
+    <thead>
+        <tr>
+            <td></td>
+            {foreach \App\Enum\EntityType::ITEMS as $type}
+                <th>{$presenter->locale['entity'][$type]}</th>
+            {/foreach}
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {foreach $activeUsers as $temp}
+        {if $temp->id === $user->getId()}
+        <tr class="highlight">
+        {else}
+        <tr>
+        {/if}
+            <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
+            <td>{$temp->ratings_movie}</td>
+            <td>{$temp->ratings_series}</td>
+            <td>{$temp->ratings_season}</td>
+            <td>{$temp->ratings_book}</td>
+            <td>{$temp->ratings_music}</td>
+            <td>{$temp->ratings_game}</td>
+            <td>{$temp->ratings_total}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+<canvas id="userActivityChart"></canvas>
+<script>
+    const statData = [
+        {foreach $activeUsers as $temp}
+        [
+            {$temp->ratings_movie},
+            {$temp->ratings_series},
+            {$temp->ratings_season},
+            {$temp->ratings_book},
+            {$temp->ratings_music},
+            {$temp->ratings_game}
+        ]
+        {sep},{/sep}
+        {/foreach}
+    ];
+    const datasetData = [
+        {foreach $activeUsers as $temp}
+        {
+            label: {$temp->username},
+            data: [
+                {$max->movie ? $temp->ratings_movie / $max->movie : 0},
+                {$max->series ? $temp->ratings_series / $max->series : 0},
+                {$max->season ? $temp->ratings_season / $max->season : 0},
+                {$max->book ? $temp->ratings_book / $max->book : 0},
+                {$max->music ? $temp->ratings_music / $max->music : 0},
+                {$max->game ? $temp->ratings_game / $max->game : 0},
+            ],
+            backgroundColor: chartBackgroundColors[{$iterator->counter - 1}],
+            borderColor: chartBorderColors[{$iterator->counter - 1}],
+            borderWidth: 1
+        }
+        {sep},{/sep}
+        {/foreach}
+    ];
+</script>

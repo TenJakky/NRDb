@@ -18,21 +18,21 @@ class RouterFactory
     {
         $router = new RouteList();
 
-        $router[] = $adminRouter = new RouteList('Admin');
-        $adminRouter[] = new Route('admin/<presenter>/<action>[/<id>]', 'Default:default');
-
-        $router[] = $frontRouter = new RouteList();
+        $frontRouter = new RouteList();
         $frontRouter[] = new Route('sitemap.xml', 'Default:sitemap');
+        /*$frontRouter[] = new Route('[<lang [a-z]{2}>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
+            'Entity:default');*/
 
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]settings',
-            'Default:settings');
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]change-password',
-            'Default:changePassword');
+        $adminRouter = new RouteList();
+        $adminRouter[] = new Route('[<lang [a-z]{2}>/]<module>/<presenter>/<action>[/<id>]', [
+            'module' => 'Www',
+            'presenter' => 'Default',
+            'action' => 'default',
+            'lang' => 'en'
+        ]);
 
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]<type (movie|series|season|book|music|game)>/<action>[/<id>]',
-            'Entity:default');
-        $frontRouter[] = new Route('[<lang [a-z]{2}>/]<presenter>/<action>[/<id>]',
-            'Default:default');
+        $router[] = $frontRouter;
+        $router[] = $adminRouter;
 
         return $router;
     }

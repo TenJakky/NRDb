@@ -1,0 +1,12 @@
+
+{block title}{$presenter->locale['stats']}{/block}
+{block content}
+
+<section>
+    <h2>{$presenter->locale['stat_head_1']}</h2>
+    {control statElementCount}
+</section>
+<section>
+    <h2>{$presenter->locale['stat_head_2']}</h2>
+    {control statUserActivity}
+</section>
