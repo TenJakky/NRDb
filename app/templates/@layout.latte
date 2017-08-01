@@ -14,73 +14,11 @@
         <link rel="stylesheet" type="text/css" href="/bower/iCheck/skins/square/red.css" />
         <link rel="stylesheet" type="text/css" href="/bower/magnific-popup/dist/magnific-popup.css" />
         <link rel="stylesheet" type="text/css" href="/scss/dist/common.css" />
-        <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/bower/nette.ajax.js/nette.ajax.js"></script>
-        <script type="text/javascript" src="/vendor/nette/forms/src/assets/netteForms.min.js"></script>
-        <script type="text/javascript" src="/vendor/peldax/datagrid/js/nextras.datagrid.js"></script>
-        <script type="text/javascript" src="/vendor/uestla/recaptcha-control/src/assets/recaptcha.js"></script>
-        <script type="text/javascript" src="/bower/selectize/dist/js/standalone/selectize.min.js"></script>
-        <script type="text/javascript" src="/bower/iCheck/icheck.min.js"></script>
-        <script type="text/javascript" src="/bower/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-        <script type="text/javascript" src="/bower/chart.js/dist/Chart.min.js"></script>
-        <script type="text/javascript" src="/js/dist/selectizePlugins.min.js"></script>
-        <script type="text/javascript" src="/js/dist/coreValidator.min.js"></script>
-        <script type="text/javascript" src="/js/dist/common.min.js"></script>
-        <script>
-            const redrawRowUrl = {plink :redrawRow!};
-            const redrawControlUrl = {plink :redrawControl!};
-        </script>
     </head>
     <body>
         <nav>
             <div>
-                {if $user->isLoggedIn()}
-                    <ul>
-                        <li><a href="{plink Default:default}">{$presenter->locale['dashboard']}</a></li>
-                        <li class="dropdown">
-                            <a>{$presenter->locale['categories']}</a>
-                            <ul class="dropdown-list">
-                                {foreach \App\Enum\Category::ITEMS as $type}
-                                    <li><a href="{plink Entity:default type => $type}">{$presenter->locale['entity_pl'][$type]}</a></li>
-                                {/foreach}
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a>{$presenter->locale['people']}</a>
-                            <ul class="dropdown-list">
-                                <li><a href="{plink Artist:default}">{$presenter->locale['artist_pl']}</a></li>
-                                <li><a href="{plink User:default}">{$presenter->locale['user_pl']}</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a>{$presenter->locale['other']}</a>
-                            <ul class="dropdown-list">
-                                <li><a href="{plink Statistics:default}">{$presenter->locale['stats']}</a></li>
-                                <li><a href="{plink Credits:default}">{$presenter->locale['credits']}</a></li>
-                            </ul>
-                        </li>
-                        {control search}
-                    </ul>
-                {/if}
-                <ul class="right">
-                    {if $user->isLoggedIn()}
-                        <li class="dropdown">
-                            <a>{$user->identity->username}</a>
-                            <ul class="dropdown-list">
-                                <li><a href="{plink User:view $user->id}">{$presenter->locale['profile']}</a></li>
-                                <li><a href="{plink Default:settings}">{$presenter->locale['settings']}</a></li>
-                                <li><a href="{plink Default:changePassword}">{$presenter->locale['chng_pswrd']}</a></li>
-                                <li><a href="{plink Sign:out}">{$presenter->locale['logout']}</a></li>
-                            </ul>
-                        </li>
-                        {*if !in_array('User', $user->getRoles())}
-                            <li>
-                                <a href="{plink Admin:Default:default}">Administration</a>
-                            </li>
-                        {/if*}
-                    {/if}
-                    {control locale}
-                </ul>
+                {control menu}
             </div>
         </nav>
         <main>
@@ -100,11 +38,18 @@
             <p><a href="http://www.peldax.com">www.peldax.com</a></p>
             <p>Václav Pelíšek, 2016</p>
         </footer>
-        {foreach $presenter->styles as $style}
-            <link rel="stylesheet" type="text/css" href="{$style}" />
+
+        {foreach $presenter->getStyles() as $style}
+        <link rel="stylesheet" type="text/css" href="{$style}" />
         {/foreach}
-        {foreach $presenter->scripts as $script}
-            <script type="text/javascript" src="{$script}"></script>
+        <script n:nonce>const redrawRowUrl = {plink :redrawRow!};const redrawControlUrl = {plink :redrawControl!};</script>
+        {foreach $presenter->getScripts() as $script}
+            <script n:nonce
+                    crossorigin="anonymous"
+                    integrity="{$presenter::generateChecksum(getcwd() . $script)}"
+                    type="text/javascript"
+                    src="{$script}">
+            </script>
         {/foreach}
     </body>
 </html>

@@ -17,11 +17,12 @@
     }
   ],
   "require": {
-    "php" : ">=7.0",
+    "php" : ">=7.1",
     "nette/nette": ">=2.4.0",
     "peldax/datagrid": "dev-master",
     "nextras/forms": "@dev",
-    "uestla/recaptcha-control": "^6.0"
+    "uestla/recaptcha-control": "^6.0",
+    "roave/security-advisories": "dev-master"
   },
   "minimum-stability": "stable"
 }

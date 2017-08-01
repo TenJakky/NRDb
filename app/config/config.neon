@@ -1,11 +1,6 @@
-parameters:
-    appName: NRDb
-    appTitle: 'NRDb'
-
 includes:
     - database.neon
     - recaptcha.neon
-
     - parameters.neon
     - model.neon
     - component.neon
@@ -21,8 +16,32 @@ application:
         *: App\*Module\Presenter\*Presenter
 
 session:
-    name: %appName%
+    name: peldax
     expiration: 14 days
+
+http:
+    frames: 'SAMEORIGIN'
+    headers:
+        Server: 'peldax.com'
+        X-Powered-By: 'peldax.com'
+
+        #Strict-Transport-Security: max-age=3600; includeSubDomains; preload
+        #Public-Key-Pins:
+        X-Xss-Protection: '1;mode=block;'
+        X-Content-Type-Options: 'nosniff'
+        Referrer-Policy: 'origin-when-cross-origin'
+    csp:
+        script-src: [
+            nonce
+            https://www.google.com/recaptcha/
+            ]
+        style-src: [
+            self
+            unsafe-inline
+            ]
+        frame-src: [
+            https://www.google.com/recaptcha/
+            ]
 
 extensions:
     nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension
