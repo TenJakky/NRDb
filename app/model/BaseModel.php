@@ -17,106 +17,66 @@ abstract class BaseModel extends Nette\Object
         $this->context = $context;
     }
 
-    /**
-     * @return \Nette\Database\Context
-     */
-    public function getConnection()
+    public function getConnection() : Nette\Database\Context
     {
         return $this->context;
     }
 
-    /**
-     * @return string
-     */
-    public function getTableName()
+    public function getTableName() : string
     {
         return $this->tableName;
     }
 
-    /**
-     * @return \Nette\Database\Table\Selection
-     */
-    public function getTable()
+    public function getTable() : Nette\Database\Table\Selection
     {
         return $this->context->table($this->tableName);
     }
 
-    /**
-     * @return \Nette\Database\Table\Selection
-     */
-    public function findByArray(array $filter)
+    public function findByArray(array $filter) : Nette\Database\Table\Selection
     {
         return $this->getTable()->where($filter);
     }
 
-    /**
-     * @return \Nette\Database\Table\Selection
-     */
-    public function findBy($column, $value)
+    public function findBy(string $column, mixed $value) : Nette\Database\Table\Selection
     {
         return $this->getTable()->where($column, $value);
     }
 
-    /**
-     * @return \Nette\Database\Table\ActiveRow
-     */
-    public function findRow(int $rowId)
+    public function findRow(int $rowId) : Nette\Database\Table\Selection
     {
-        return $this->getTable()->wherePrimary($rowId)->fetch();
+        return $this->getTable()->wherePrimary($rowId);
     }
 
-    public function query($sql, ...$params)
+    public function query($sql, ...$params) : Nette\Database\ResultSet
     {
         return $this->context->query($sql, ...$params);
     }
 
-    /**
-     * @return int
-     */
-    public function count()
+    public function count() : int
     {
         return $this->getTable()->count();
     }
 
-    /**
-     * @return \Nette\Database\Table\IRow
-     */
-    public function insert($data)
+    public function insert($data) : Nette\Database\IRow
     {
         return $this->getTable()->insert($data);
     }
 
-    public function delete($rowId)
+    public function delete($rowId) : void
     {
-        return $this->findByArray([$this->getTable()->getPrimary() => (int) $rowId])->delete();
+        $this->findRow($rowId)->delete();
     }
 
-    /**
-     * @return \Nette\Database\Table\ActiveRow
-     */
-    public function save($data)
+    public function save($data) : Nette\Database\IRow
     {
         if (isset($data['id']) && $data['id'])
         {
             $data['id'] = (int) $data['id'];
-            $row = $this->getTable()->wherePrimary($data['id']);
+            $row = $this->findRow($data['id']);
             $row->update($data);
-            return $row->fetch();
+            return $row;
         }
         unset($data['id']);
         return $this->insert($data);
-    }
-
-    public function getColumns()
-    {
-        $columns = $this->context->getConnection()->getSupplementalDriver()->getColumns($this->getTableName());
-
-        $columnsResult = array();
-        foreach ($columns as $column)
-        {
-            $columnsResult[] = $column['name'];
-        }
-
-        return $columnsResult;
     }
 }
