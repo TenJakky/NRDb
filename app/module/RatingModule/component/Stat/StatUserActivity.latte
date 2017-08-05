@@ -10,12 +10,8 @@
     </thead>
     <tbody>
     {foreach $activeUsers as $temp}
-        {if $temp->id === $user->getId()}
-        <tr class="highlight">
-        {else}
-        <tr>
-        {/if}
-            <td><a href="{plink User:view $temp->id}">{$temp->username}</a></td>
+        <tr {if $temp->id === $user->getId()}class="highlight"{/if}>
+            <td><a href="{plink :User:Profile:view $temp->id}">{$temp->username}</a></td>
             <td>{$temp->ratings_movie}</td>
             <td>{$temp->ratings_series}</td>
             <td>{$temp->ratings_season}</td>
