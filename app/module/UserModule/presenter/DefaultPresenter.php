@@ -2,7 +2,7 @@
 
 namespace App\UserModule\Presenter;
 
-final class DefaultPresenter extends \App\Presenter\BasePresenter
+final class DefaultPresenter extends \App\Presenter\BaseAuthPresenter
 {
     public function actionDefault()
     {

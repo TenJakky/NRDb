@@ -12,6 +12,4 @@ $configurator->createRobotLoader()
 	->register();
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 
-\Nette\Forms\Rules::$defaultMessages[\Nette\Application\UI\Form::FILLED] = "%label is required.";
-
 return $configurator->createContainer();

@@ -1,7 +1,7 @@
 <?php
 
-namespace App\RatingModule\Presenter;
+namespace App\AppModule\Presenter;
 
-final class StatisticsPresenter extends \App\Presenter\BasePresenter
+final class StatisticsPresenter extends \App\Presenter\BaseAuthPresenter
 {
 }
