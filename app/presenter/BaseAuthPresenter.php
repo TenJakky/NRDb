@@ -4,7 +4,7 @@ namespace App\Presenter;
 
 abstract class BaseAuthPresenter extends BasePresenter
 {
-    public function startup() : void
+    public function startup()
     {
         if (!$this->user->isLoggedIn() && $this->getName())
         {

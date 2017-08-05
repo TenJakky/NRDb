@@ -29,7 +29,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         '/js/dist/common.min.js'
     ];
 
-    public function addStyle(string $path) : void
+    public function addStyle(string $path)
     {
         if (!in_array($path, $this->styles, true))
         {
@@ -37,7 +37,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
     }
 
-    public function addScript(string $path) : void
+    public function addScript(string $path)
     {
         if (!in_array($path, $this->scripts, true))
         {
@@ -60,7 +60,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return 'sha256-' . base64_encode(hash_file('sha256', $path, true));
     }
 
-    public function startup() : void
+    public function startup()
     {
         parent::startup();
 
@@ -121,7 +121,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return (int) $this->getParameter('id');
     }
 
-    public function handleRedrawControl(string $control = null) : void
+    public function handleRedrawControl(string $control = null)
     {
         if ($control && $this->isAjax())
         {
@@ -134,7 +134,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
     }
 
-    public function handleRedrawRow(string $control = null, int $rowId = null) : void
+    public function handleRedrawRow(string $control = null, int $rowId = null)
     {
         if ($this->isAjax() && $control && $rowId)
         {
@@ -145,7 +145,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
     }
 
-    public function actionCloseFancy($control = null, $rowId = null) : void
+    public function actionCloseFancy($control = null, $rowId = null)
     {
         $this->getFlashSession()->setExpiration(time() + 5);
 

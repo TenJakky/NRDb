@@ -18,7 +18,7 @@ final class EntityPresenter extends \App\Presenter\BaseViewEditPresenter
         $this->ratingModel = $ratingModel;
     }
 
-    public function startup() : void
+    public function startup()
     {
         parent::startup();
 

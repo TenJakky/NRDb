@@ -62,7 +62,7 @@ abstract class BaseModel extends Nette\Object
         return $this->getTable()->insert($data);
     }
 
-    public function delete($rowId) : void
+    public function delete($rowId)
     {
         $this->findRow($rowId)->delete();
     }
