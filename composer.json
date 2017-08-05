@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php" : ">=7.1",
+    "php" : ">=7.0",
     "nette/nette": ">=2.4.0",
     "peldax/datagrid": "dev-master",
     "nextras/forms": "@dev",

@@ -1,17 +1,18 @@
 includes:
+    - local.neon
     - database.neon
-    - recaptcha.neon
-    - parameters.neon
+    - forms.neon
+    - latte.neon
     - model.neon
     - component.neon
-    - latte.neon
+    - recaptcha.neon
+    - parameters.neon
 
 php:
     date.timezone: Europe/Prague
 
 application:
     errorPresenter: Error
-    catchExceptions: false
     mapping:
         *: App\*Module\Presenter\*Presenter
 
@@ -19,7 +20,7 @@ session:
     name: peldax
     expiration: 14 days
     savePath: '%tempDir%/sessions'
-    cookieSecure: true
+    cookieHttpOnly: true
 
 http:
     frames: 'SAMEORIGIN'
@@ -36,16 +37,13 @@ http:
         default-src: [ self ]
         img-src: [ self ]
         media-src: [ self ]
+        connect-src: [ self ]
         font-src: [
             self
             https://fonts.gstatic.com/ ]
         frame-src: [
             self
             https://www.google.com/recaptcha/ ]
-        style-src: [
-            self
-            https://fonts.googleapis.com/
-            unsafe-inline ]
         script-src: [
             nonce
             https://www.google.com/recaptcha/ ]
@@ -57,12 +55,6 @@ http:
         form-action: [ self ]
         frame-ancestors: [ self ]
         block-all-mixed-content: []
-
-forms:
-    messages:
-        FILLED: 'Please complete mandatory field.'
-        MIN_LENGTH: 'Please enter a value of at least %d characters.'
-        EMAIL: '%label must be valid e-mail'
 
 extensions:
     nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension

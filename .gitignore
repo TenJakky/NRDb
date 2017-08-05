@@ -15,6 +15,7 @@ log/*
 scss/dist/*
 js/dist/*
 
+app/config/local.neon
 app/config/database.neon
 app/config/recaptcha.neon
 

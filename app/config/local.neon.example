@@ -1,0 +1,12 @@
+application:
+    catchExceptions: false
+
+session:
+    cookieSecure: false
+
+http:
+    csp:
+        style-src: [
+            self
+            https://fonts.googleapis.com/
+            unsafe-inline ]
