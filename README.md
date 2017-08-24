@@ -4,6 +4,7 @@
 [![license](https://img.shields.io/github/license/peldax/NRDb.svg?maxAge=3600)](https://github.com/peldax/NRDb/blob/master/LICENSE)
 
 [![Code Climate](https://codeclimate.com/github/peldax/NRDb/badges/gpa.svg)](https://codeclimate.com/github/peldax/NRDb)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/peldax/NRDb/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/peldax/NRDb/?branch=master)
 
 [//]: #[![Downloads](https://img.shields.io/github/downloads/peldax/NRDb/total.svg?maxAge=60)]()
 
