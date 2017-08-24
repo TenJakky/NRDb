@@ -17,16 +17,14 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
     protected $scripts = [
         '/bower/jquery/dist/jquery.min.js',
         '/bower/nette.ajax.js/nette.ajax.js',
-        '/vendor/nette/forms/src/assets/netteForms.min.js',
-        '/vendor/peldax/datagrid/js/nextras.datagrid.js',
-        '/vendor/uestla/recaptcha-control/src/assets/recaptcha.js',
+        '/bower/nette-forms/src/assets/netteForms.min.js',
         '/bower/selectize/dist/js/standalone/selectize.min.js',
         '/bower/iCheck/icheck.min.js',
         '/bower/magnific-popup/dist/jquery.magnific-popup.min.js',
         '/bower/chart.js/dist/Chart.min.js',
-        '/js/dist/selectizePlugins.min.js',
-        '/js/dist/coreValidator.min.js',
-        '/js/dist/common.min.js'
+        '/js/selectizePlugins.min.js',
+        '/js/coreValidator.min.js',
+        '/js/common.min.js'
     ];
 
     public function addStyle(string $path)
@@ -55,14 +53,11 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return $this->scripts;
     }
 
-    public static function generateChecksum(string $path)
-    {
-        return 'sha256-' . base64_encode(hash_file('sha256', $path, true));
-    }
-
     public function startup()
     {
         parent::startup();
+
+        $this->autoCanonicalize = false;
 
         switch ((string) $this->lang)
         {
@@ -74,7 +69,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             case 'es':
             case 'fr':
             case 'ru':
-                $this->locale = require getcwd() . "/app/locale/{$this->lang}.php";
+                $this->locale = require __DIR__ . "/../locale/{$this->lang}.php";
                 break;
         }
     }
@@ -177,6 +172,36 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             return $primary;
         }
 
+        return self::getDefaultLayout();
+    }
+
+    public static function getDefaultLayout() : string
+    {
         return __DIR__ . '/../templates/@layout.latte';
+    }
+
+    public static function getAjaxLayout() : string
+    {
+        return __DIR__ . '/../templates/@ajax.latte';
+    }
+
+    public static function getIframeLayout() : string
+    {
+        return __DIR__ . '/../templates/@iframe.latte';
+    }
+
+    public static function getCoreLayout() : string
+    {
+        return __DIR__ .'/../templates/@core.latte';
+    }
+
+    public static function generateChecksum(string $path) : string
+    {
+        return 'sha256-' . base64_encode(hash_file('sha256', $path, true));
+    }
+
+    public function getModule() : string
+    {
+        return substr($this->getName(), 0, strpos($this->getName(), ':'));
     }
 }

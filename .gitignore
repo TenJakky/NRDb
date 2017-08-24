@@ -1,5 +1,5 @@
-bower/*
-!bower/.htaccess
+www/bower/*
+!www/bower/.htaccess
 
 vendor/*
 !vendor/.htaccess
@@ -12,8 +12,8 @@ log/*
 
 .idea/*
 
-scss/dist/*
-js/dist/*
+www/scss/*.css
+www/js/*.min.js
 
 app/config/local.neon
 app/config/database.neon

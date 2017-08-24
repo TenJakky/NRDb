@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="{$presenter->lang}">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700" />
-    <link rel="stylesheet" type="text/css" href="/bower/selectize/dist/css/selectize.default.css" />
-    <link rel="stylesheet" type="text/css" href="/bower/iCheck/skins/square/red.css" />
-    <link rel="stylesheet" type="text/css" href="/scss/dist/iframe.css" />
-    <script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower/nette.ajax.js/nette.ajax.js"></script>
-    <script type="text/javascript" src="/vendor/nette/forms/src/assets/netteForms.min.js"></script>
-    <script type="text/javascript" src="/bower/selectize/dist/js/standalone/selectize.min.js"></script>
-    <script type="text/javascript" src="/bower/iCheck/icheck.min.js"></script>
-    <script type="text/javascript" src="/js/dist/selectizePlugins.min.js"></script>
-    <script type="text/javascript" src="/js/dist/coreValidator.min.js"></script>
-    <script type="text/javascript" src="/js/dist/common.min.js"></script>
-</head>
-<body class="white-popup">
+{layout @core.latte}
+
+{block bodyContent}
+
+<div class="white-popup">
     <div id="flasharea">
         {snippet flash}
             {foreach $flashes as $flash}
@@ -26,12 +13,6 @@
     <header>
         <h1>{include title}</h1>
     </header>
+
     {include content}
-    {foreach $presenter->styles as $style}
-        <link rel="stylesheet" type="text/css" href="{$style}" />
-    {/foreach}
-    {foreach $presenter->scripts as $script}
-        <script type="text/javascript" src="{$script}"></script>
-    {/foreach}
-</body>
-</html>
+</div>

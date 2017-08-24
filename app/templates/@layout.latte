@@ -1,56 +1,27 @@
-<!DOCTYPE html>
-<html lang="{$presenter->lang}">
-    <head>
-        <title>{include title} | ratings.peldax.com</title>
-        <base href="{$baseUrl}">
-        <meta charset="UTF-8" />
-        <meta name="author" content="Václav Pelíšek" />
-        <meta name="description" content="peldax's multifunctional personal website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="václav, pelíšek, pelda, peldax" />
-        <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,700" />
-        <link rel="stylesheet" type="text/css" href="/bower/flag-icon-css/css/flag-icon.min.css" />
-        <link rel="stylesheet" type="text/css" href="/bower/selectize/dist/css/selectize.default.css" />
-        <link rel="stylesheet" type="text/css" href="/bower/iCheck/skins/square/red.css" />
-        <link rel="stylesheet" type="text/css" href="/bower/magnific-popup/dist/magnific-popup.css" />
-        <link rel="stylesheet" type="text/css" href="/scss/dist/common.css" />
-    </head>
-    <body>
-        <nav>
-            <div>
-                {control menu}
-            </div>
-        </nav>
-        <main>
-            <div id="flasharea">
-                {snippet flashMessages}
-                    {foreach $flashes as $flash}
-                        <div class="flash {$flash->type}">{$flash->message}</div>
-                    {/foreach}
-                {/snippet}
-            </div>
-            <header>
-                <h1>{include title}</h1>
-            </header>
-            {include content}
-        </main>
-        <footer>
-            <p><a href="http://www.peldax.com">www.peldax.com</a></p>
-            <p>Václav Pelíšek, 2016</p>
-        </footer>
+{layout @core.latte}
 
-        {foreach $presenter->getStyles() as $style}
-        <link rel="stylesheet" type="text/css" href="{$style}" />
-        {/foreach}
-        <script n:nonce>const redrawRowUrl = {plink :redrawRow!};const redrawControlUrl = {plink :redrawControl!};</script>
-        {foreach $presenter->getScripts() as $script}
-            <script n:nonce
-                    crossorigin="anonymous"
-                    integrity="{$presenter::generateChecksum(getcwd() . $script)}"
-                    type="text/javascript"
-                    src="{$script}">
-            </script>
-        {/foreach}
-    </body>
-</html>
+{block bodyContent}
+
+<nav>
+    <div>
+        {control menu}
+    </div>
+</nav>
+<main>
+    <div id="flasharea">
+        {snippet flashMessages}
+            {foreach $flashes as $flash}
+                <div class="flash {$flash->type}">{$flash->message}</div>
+            {/foreach}
+        {/snippet}
+    </div>
+    <header>
+        <h1>{include title}</h1>
+    </header>
+
+    {include content}
+</main>
+<footer>
+    <p><a href="{$baseUrl}">www.peldax.com</a></p>
+    <p>Václav Pelíšek, 2017</p>
+</footer>
