@@ -1,12 +1,7 @@
 includes:
     - local.neon
-    - database.neon
-    - forms.neon
-    - latte.neon
     - model.neon
     - component.neon
-    - recaptcha.neon
-    - parameters.neon
 
 php:
     date.timezone: Europe/Prague
@@ -56,6 +51,16 @@ http:
         frame-ancestors: [ self ]
         block-all-mixed-content: []
 
+forms:
+    messages:
+        FILLED: 'Please complete mandatory field.'
+        MIN_LENGTH: 'Please enter a value of at least %d characters.'
+        EMAIL: '%label must be valid e-mail'
+
+latte:
+    macros:
+        - App\Latte\Macros::install
+
 extensions:
     nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension
     reCaptcha: ReCaptchaControl\DI\Extension
@@ -66,3 +71,11 @@ services:
 
     - App\Model\Authenticator
     authenticator: @App\Model\Authenticator
+
+    - App\Latte\ArtistFilter
+    - App\Latte\RatingFilter
+
+    nette.latteFactory:
+        setup:
+            - addFilter(artist, @App\Latte\ArtistFilter)
+            - addFilter(rating, @App\Latte\RatingFilter)
