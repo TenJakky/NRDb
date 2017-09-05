@@ -31,7 +31,7 @@ http:
 
         Strict-Transport-Security: 'max-age=15768000; includeSubDomains; preload'
         #Public-Key-Pins:
-        X-Frame-Options: SAMEORIGIN
+        X-Frame-Options: 'SAMEORIGIN'
         X-Xss-Protection: '1; mode=block'
         X-Content-Type-Options: 'nosniff'
         Referrer-Policy: 'strict-origin'
