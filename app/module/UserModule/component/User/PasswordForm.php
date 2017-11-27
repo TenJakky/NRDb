@@ -6,7 +6,7 @@ final class PasswordForm extends BaseRenderComponent
 {
     protected $userModel;
 
-    public function __construct(\App\Model\Authenticator $userModel)
+    public function __construct(\Peldax\NetteInit\Authenticator $userModel)
     {
         $this->userModel = $userModel;
     }

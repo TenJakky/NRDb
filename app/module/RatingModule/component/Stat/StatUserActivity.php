@@ -8,7 +8,7 @@ final class StatUserActivity extends BaseRenderComponent
 	protected $userModel;
 
     public function __construct(
-        \App\Model\UserModel $userModel)
+        \Peldax\NetteInit\Authenticator $userModel)
     {
         $this->userModel = $userModel;
 	}

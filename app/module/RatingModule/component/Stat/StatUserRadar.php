@@ -2,26 +2,21 @@
 
 namespace App\Component;
 
-final class StatUserRadar extends BaseComponent
+final class StatUserRadar extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var \App\Model\UserModel */
     protected $userModel;
 
     public function __construct(
-        \App\Model\UserModel $userModel)
+        \Peldax\NetteInit\Authenticator $userModel)
     {
         $this->userModel = $userModel;
     }
 
-    public function attached($presenter)
+    public function render()
     {
-        parent::attached($presenter);
+        $user = $this->userModel->findRow($this->getPresenter()->getUser()->getId());
 
-        $presenter->addScript('/js/component/statUserRadar.js');
-    }
-
-    public function render(\Nette\Database\Table\ActiveRow $user)
-    {
         $this->template->statMovie = $user->ratings_movie;
         $this->template->statSeries = $user->ratings_series;
         $this->template->statSeason = $user->ratings_season;

@@ -45,7 +45,7 @@ main
     padding: 0 0 0.2em 0;
   }
 
-  .header p:first-of-type > span:first-of-type
+  .header p:first-of-type > span
   {
     font-weight: 400;
     color: $red;
@@ -57,7 +57,7 @@ main
     color: $dark;
   }
 
-  .intro a, .intro p
+  .text p
   {
     font-size: 17px;
   }

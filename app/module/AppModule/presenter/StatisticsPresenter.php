@@ -2,6 +2,6 @@
 
 namespace App\AppModule\Presenter;
 
-final class StatisticsPresenter extends \App\Presenter\BaseAuthPresenter
+final class StatisticsPresenter extends \Peldax\NetteInit\Presenter\BaseAuthPresenter
 {
 }

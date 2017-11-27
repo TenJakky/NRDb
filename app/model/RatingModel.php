@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class RatingModel extends BaseModel
+class RatingModel extends \Peldax\NetteInit\Model\BaseModel
 {
     /** @var string */
     public $tableName = 'rating';

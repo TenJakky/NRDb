@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class CountryModel extends BaseModel
+final class CountryModel extends \Peldax\NetteInit\Model\BaseModel
 {
     public $tableName = 'def_country';
 

@@ -2,7 +2,7 @@
 
 namespace App\UserModule\Presenter;
 
-final class SignPresenter extends \App\Presenter\BasePresenter
+final class SignPresenter extends \Peldax\NetteInit\Presenter\BasePresenter
 {
     /** @persistent */
     public $backlink;

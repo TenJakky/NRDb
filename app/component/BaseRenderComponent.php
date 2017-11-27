@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class BaseRenderComponent extends BaseComponent
+abstract class BaseRenderComponent extends \Peldax\NetteInit\Component\BaseComponent
 {
     public function beforeRender()
     {

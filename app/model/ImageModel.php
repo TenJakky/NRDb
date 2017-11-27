@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class ImageModel extends BaseModel
+final class ImageModel extends \Peldax\NetteInit\Model\BaseModel
 {
     public $tableName = 'image';
 }

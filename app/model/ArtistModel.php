@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class ArtistModel extends BaseModel
+final class ArtistModel extends \Peldax\NetteInit\Model\BaseModel
 {
     public $tableName = 'artist';
 

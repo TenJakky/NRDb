@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class NewsModel extends BaseModel
+final class NewsModel extends \Peldax\NetteInit\Model\BaseModel
 {
     public $tableName = 'adm_news';
 }

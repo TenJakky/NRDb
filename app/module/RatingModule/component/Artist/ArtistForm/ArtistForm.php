@@ -4,7 +4,7 @@ namespace App\Component;
 
 use App\Validator\CoreValidator;
 
-final class ArtistForm extends BaseComponent
+final class ArtistForm extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var \App\Model\ArtistModel */
     protected $artistModel;

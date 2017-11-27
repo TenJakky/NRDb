@@ -2,6 +2,6 @@
 
 namespace App\WwwModule\Presenter;
 
-final class AboutPresenter extends \App\Presenter\BasePresenter
+final class AboutPresenter extends \Peldax\NetteInit\Presenter\BasePresenter
 {
 }
