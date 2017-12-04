@@ -14,7 +14,7 @@ final class RatingList extends BaseSmallDatagridComponent
         $this->model = $ratingMovieModel;
     }
 
-    public function render($entityId = 0)
+    public function render($entityId = 0) : void
     {
         $this->entityId = $entityId;
         $this->template->setFile(__DIR__ . '/RatingList.latte');

@@ -13,9 +13,9 @@ final class StatUserRadar extends \Peldax\NetteInit\Component\BaseComponent
         $this->userModel = $userModel;
     }
 
-    public function render()
+    public function render() : void
     {
-        $user = $this->userModel->findRow($this->getPresenter()->getUser()->getId());
+        $user = $this->userModel->findRow($this->getPresenter()->getUser()->getId())->fetch();
 
         $this->template->statMovie = $user->ratings_movie;
         $this->template->statSeries = $user->ratings_series;

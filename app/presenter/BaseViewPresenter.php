@@ -18,7 +18,7 @@ abstract class BaseViewPresenter extends \Peldax\NetteInit\Presenter\BaseAuthPre
         $this->template->data = $data;
     }
 
-    public function notFound()
+    protected function notFound()
     {
         $this->flashMessage('Requested item was not found.', 'failure');
         $this->redirect(':default');

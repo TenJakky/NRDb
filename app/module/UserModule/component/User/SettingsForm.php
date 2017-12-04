@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class SettingsForm extends BaseRenderComponent
+final class SettingsForm extends \Peldax\NetteInit\Component\BaseComponent
 {
     protected $userModel;
     protected $countryModel;

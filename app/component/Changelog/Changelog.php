@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Changelog extends BaseRenderComponent
+final class Changelog extends \Peldax\NetteInit\Component\BaseComponent
 {
     protected $changelogModel;
 
@@ -12,7 +12,7 @@ final class Changelog extends BaseRenderComponent
         $this->changelogModel = $changelogModel;
     }
 
-    public function beforeRender()
+    public function beforeRender() : void
     {
         $this->template->changes = $this->changelogModel->getTable()->order('date DESC')->limit(5);
     }

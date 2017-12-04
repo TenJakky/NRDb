@@ -10,7 +10,7 @@ final class ArtistList extends BaseDatagridComponent
     /** @var string */
     protected $artistType;
 
-    public function render()
+    public function render() : void
     {
         $this->template->setFile(__DIR__ . '/ArtistList.latte');
         $this->template->render();

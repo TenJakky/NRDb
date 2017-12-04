@@ -72,7 +72,7 @@ final class EntityForm extends \Peldax\NetteInit\Component\BaseComponent
         $this->redrawControl('artistFormSnippet');
     }
 
-    public function render()
+    public function render() : void
     {
         if ($this->getPresenter()->getId())
         {

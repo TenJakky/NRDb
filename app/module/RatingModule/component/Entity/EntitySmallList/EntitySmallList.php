@@ -39,7 +39,7 @@ abstract class EntitySmallList extends BaseSmallDatagridComponent
         return $this->grid;
     }
 
-    public function render()
+    public function render() : void
     {
         $this->template->setFile(__DIR__.'/EntitySmallList.latte');
         $this->template->render();

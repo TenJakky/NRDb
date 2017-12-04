@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class StatElementCount extends BaseRenderComponent
+final class StatElementCount extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var \App\Model\StatEntityModel */
     protected $statEntityModel;
@@ -25,7 +25,7 @@ final class StatElementCount extends BaseRenderComponent
         $presenter->addScript('/js/component/statElementCount.js');
     }
 
-    public function beforeRender()
+    public function beforeRender() : void
     {
         $this->template->statEntity = $this->statEntityModel->getRatingData();
         $this->template->statRating = $this->statRatingModel->getTable();

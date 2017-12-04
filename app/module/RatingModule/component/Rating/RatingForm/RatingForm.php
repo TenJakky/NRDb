@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class RatingForm extends BaseRenderComponent
+final class RatingForm extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var \App\Model\EntityModel */
     protected $model;

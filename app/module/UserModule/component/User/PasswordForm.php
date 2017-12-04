@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class PasswordForm extends BaseRenderComponent
+final class PasswordForm extends \Peldax\NetteInit\Component\BaseComponent
 {
     protected $userModel;
 

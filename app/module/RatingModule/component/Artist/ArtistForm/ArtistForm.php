@@ -30,7 +30,7 @@ final class ArtistForm extends \Peldax\NetteInit\Component\BaseComponent
         $this->connection = $connection;
     }
 
-    public function render($artistId = 0)
+    public function render($artistId = 0) : void
     {
         if ($artistId)
         {

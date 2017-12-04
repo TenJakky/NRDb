@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-abstract class BaseDatagridComponent extends BaseRenderComponent
+abstract class BaseDatagridComponent extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var \Nextras\Datagrid\Datagrid */
     protected $grid;

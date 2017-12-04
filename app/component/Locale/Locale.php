@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Locale extends BaseRenderComponent
+final class Locale extends \Peldax\NetteInit\Component\BaseComponent
 {
 
 }

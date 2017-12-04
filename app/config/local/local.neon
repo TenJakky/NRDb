@@ -1,5 +1,9 @@
 includes:
     - sensitive.neon
+    - model.neon
+
+extensions:
+    webmod: App\Extension\ModuleLoader
 
 application:
     catchExceptions: false
@@ -15,45 +19,26 @@ http:
             unsafe-inline ]
 
 parameters:
-    domain: localhost.com
-    cookieName: peldaxcom
-    appName: peldax.com
-    appNameShort: PLX
+    domain: 'localhost.com'
+    sessionName: 'peldaxcom'
+    appName: 'PELDAX.com'
+    appNameShort: 'PLX'
     appDescription: 'peldax.com - personal multi-purpose webpage'
     appKeywords: 'personal, webpage, peldax, application'
     appAuthor: 'peldax.com'
 
+    homepageDest: ':App:Default:default'
     userProfileDest: ':User:Profile:view'   # false or dest
+    signInRedirect: ':User:Default:default'
+    signOutRedirect: ':User:Sign:in'
     signInDest: ':User:Sign:in'
     signOutDest: ':User:Sign:out'
 
-    configMenu:
-
 services:
-
-    - App\Model\CountryModel
-    - App\Model\ChangelogModel
-
-    - App\Model\NewsModel
-    - App\Model\IntroductionModel
-
-    - App\Model\ArtistModel
-    - App\Model\ArtistEntityModel
-    - App\Model\GroupMemberModel
-
-    - App\Model\EntityModel
-    - App\Model\RatingModel
-
-    - App\Model\StatEntityModel
-    - App\Model\StatRatingModel
-
-    - App\Model\ImageModel
-    - App\Model\ImageObjectModel
-
-    - App\Model\LogLoginModel
 
     loginForm:
         class: Peldax\NetteInit\Component\LoginForm
+
     settingsForm:
         class: App\Component\SettingsForm
     passwordForm:
@@ -74,12 +59,10 @@ services:
 
     changelog:
         class: App\Component\Changelog
-    search:
-        class: App\Component\Search
+    #search:
+    #    class: App\Component\Search
     locale:
         class: App\Component\Locale
-    menu:
-        class: App\Component\Menu
 
     artistForm:
         class: App\Component\ArtistForm

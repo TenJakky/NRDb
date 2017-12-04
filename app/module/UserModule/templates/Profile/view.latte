@@ -1,20 +1,16 @@
 {block title}{$data->username}{/block}
 {block content}
 
+{if $data->id === $user->getId()}
+    <section>
+        <div class="btn-group pull-right">
+                <a href="{plink Settings:default}" class="btn btn-primary">Change account settings</a>
+                <a href="{plink Settings:password}" class="btn btn-primary">Change password</a>
+        </div>
+    </section>
+{/if}
 <section>
-    <ul class="inline-buttons">
-        {if $data->id === $user->getId()}
-            <li>
-                <a href="{plink Settings:default}">Change account settings</a>
-            </li>
-            <li>
-                <a href="{plink Settings:password}">Change password</a>
-            </li>
-        {/if}
-    </ul>
-</section>
-<section>
-    <table class="list">
+    <table class="table">
         <tr>
             <th>Name</th>
             <td>{$data->name} {$data->surname}</td>
@@ -41,6 +37,4 @@
         {/if}
     </table>
 </section>
-<section>
-    {control statUserRadar $data}
-</section>
+

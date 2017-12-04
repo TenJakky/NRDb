@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Search extends BaseRenderComponent
+final class Search extends \Peldax\NetteInit\Component\BaseComponent
 {
     /** @var  \App\Model\EntityModel */
 	protected $entityModel;
@@ -27,7 +27,7 @@ final class Search extends BaseRenderComponent
     /** @var array */
 	private $searchArtist = array();
 
-	public function beforeRender()
+	public function beforeRender() : void
 	{
 		$this->template->flag = $this->flag;
 		$this->template->searchEntity = $this->searchEntity;

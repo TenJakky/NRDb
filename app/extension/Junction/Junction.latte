@@ -1,0 +1,53 @@
+<div class="container junction">
+    <div class="row">
+        {foreach $items as $name => $entry}
+                {continueIf isset($entry['role']) && !$user->isInRole($entry['role'])}
+                <div class="col-md-2">
+                    <div class="junction-block">
+                        <a href="{plink $entry['dest']}">
+                            <div>{icon $entry['icon']}</div>
+                            <h2>{$name}</h2>
+                        </a>
+                    </div>
+                </div>
+        {/foreach}
+    </div>
+</div>
+<style>
+    .junction a:hover, a:focus {
+        color: #2a6496;
+        text-decoration: none;
+    }
+    .junction .junction-block{
+        position: relative;
+        overflow: hidden;
+        margin: 15px auto;
+    }
+    .junction .junction-block a {
+        background-color: #e74c3c;
+        border-radius: 5px;
+        display: block;
+        padding: 30px 10px;
+        text-align: center;
+        width: 100%;
+    }
+    .junction .junction-block a:hover{
+        background-color: rgba(231, 76, 60, 0.8);
+        border-radius: 5px;
+    }
+
+    .junction .junction-block a > div {
+        color: #fff;
+        display: inline-block;
+        font-size: 28px;
+        margin: 0 0 20px;
+    }
+
+    .junction .junction-block h2 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 400;
+        margin:0;
+        padding:0;
+    }
+</style>
