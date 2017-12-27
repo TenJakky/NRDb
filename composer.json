@@ -12,12 +12,15 @@
   ],
   "repositories": [
     {
-      "type": "git",
+      "type": "vcs",
       "url": "https://github.com/peldax/nette-init"
     }
   ],
   "require": {
     "peldax/nette-init": "dev-master"
+  },
+  "config": {
+    "discard-changes": true
   },
   "scripts": {
     "post-update-cmd": "Peldax\\NetteInit\\Deploy::init",
