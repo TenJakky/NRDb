@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class StatElementCount extends \Peldax\NetteInit\Component\BaseComponent
+final class StatElementCount extends \Nepttune\Component\BaseComponent
 {
     /** @var \App\Model\StatEntityModel */
     protected $statEntityModel;

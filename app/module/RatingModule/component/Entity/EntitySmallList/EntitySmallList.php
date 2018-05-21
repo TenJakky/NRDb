@@ -2,25 +2,19 @@
 
 namespace App\Component;
 
-abstract class EntitySmallList extends BaseSmallDatagridComponent
+use Ublaboo\DataGrid\DataGrid;
+
+abstract class EntitySmallList extends \Nepttune\Component\BaseListComponent
 {
     /** @var bool */
     protected $paginationEnabled = false;
 
-    public function __construct(
-        \App\Model\EntityModel $entityModel)
+    public function __construct(\App\Model\EntityModel $entityModel)
     {
         $this->model = $entityModel;
     }
 
-    public function attached($presenter)
-    {
-        parent::attached($presenter);
-
-        $presenter->addStyle('/scss/dist/entitySmallList.css');
-    }
-
-    public function createComponentDataGrid()
+    public function modifyList(DataGrid $grid) : DataGrid
     {
         parent::createComponentDataGrid();
 
@@ -34,14 +28,7 @@ abstract class EntitySmallList extends BaseSmallDatagridComponent
         $this->grid->addColumn('rating', 'Rating');
         $this->grid->addColumn('my_rating', 'My Rating');
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__.'/../@cells.latte');
 
-        return $this->grid;
-    }
-
-    public function render() : void
-    {
-        $this->template->setFile(__DIR__.'/EntitySmallList.latte');
-        $this->template->render();
+        return $grid;
     }
 }

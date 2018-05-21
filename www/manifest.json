@@ -1,0 +1,26 @@
+{
+  "short_name": "Peldax.com",
+  "name": "Peldax.com web application and presentation",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#333333",
+  "theme_color": "#CC1D24",
+  "display": "standalone",
+  "orientation": "landscape"
+}

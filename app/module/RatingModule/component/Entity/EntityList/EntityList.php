@@ -2,7 +2,9 @@
 
 namespace App\Component;
 
-final class EntityList extends BaseDatagridComponent
+use Ublaboo\DataGrid\DataGrid;
+
+final class EntityList extends \Nepttune\Component\BaseListComponent
 {
     /** @var string */
     protected $type;
@@ -26,10 +28,8 @@ final class EntityList extends BaseDatagridComponent
         $presenter->addStyle('/scss/dist/entityList.css');
     }
 
-    public function createComponentDataGrid()
+    public function modifyList(DataGrid $grid) : DataGrid
     {
-        parent::createComponentDataGrid();
-
         if ($this->type === 'season')
         {
             $this->grid->addColumn('season_number', 'Number')->enableSort('asc');
@@ -48,25 +48,7 @@ final class EntityList extends BaseDatagridComponent
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__ . '/../@cells.latte');
 
         return $this->grid;
-    }
-
-    public function getDataSource($filter, $order)
-    {
-        $set = $this->model->getByTypeWithRating($this->type, $this->getPresenter()->getUser()->getId());
-
-        if ($this->type === 'season')
-        {
-            $set->where('season_series_id', $this->getPresenter()->getParameter('id'));
-        }
-
-        if ($order[0])
-        {
-            $set->order(implode(' ', $order));
-        }
-
-        return $set;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Changelog extends \Peldax\NetteInit\Component\BaseComponent
+final class Changelog extends \Nepttune\Component\BaseComponent
 {
     protected $changelogModel;
 

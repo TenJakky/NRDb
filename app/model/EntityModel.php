@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class EntityModel extends \Peldax\NetteInit\Model\BaseModel
+final class EntityModel extends \Nepttune\Model\BaseModel
 {
     /** @var  string */
     public $tableName = 'entity';

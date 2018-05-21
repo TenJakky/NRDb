@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class EntityForm extends \Peldax\NetteInit\Component\BaseComponent
+final class EntityForm extends \Nepttune\Component\BaseComponent
 {
     /** @var \App\Model\EntityModel */
     protected $entityModel;

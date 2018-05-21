@@ -1,0 +1,187 @@
+$red: #cc1d24;
+$dark: #333333;
+
+html, body
+{
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+aside
+{
+    z-index: 99;
+}
+
+div.body
+{
+    z-index: 100;
+
+    transition: margin 0.5s ease;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+
+    &.transition
+    {
+        margin-left: 250px;
+    }
+
+    nav
+    {
+        bottom: auto;
+        right: 0;
+        top: 0;
+        left: 0;
+
+        .link-nav, .link-nav:hover
+        {
+            color: $dark
+        }
+    }
+
+    main
+    {
+        background-color: rgba(0,0,0,0.8);
+        border-top-right-radius: 50px;
+        width: 950px;
+
+        bottom: 0;
+        right: auto;
+        top: auto;
+        left: 0;
+    }
+}
+
+ul, ol
+{
+    list-style: none !important;
+}
+
+h3
+{
+    font-size: 1.5rem;
+}
+
+a, a:hover
+{
+    text-decoration: none;
+}
+
+.unavailable
+{
+    opacity: 0.6;
+    cursor: default !important;
+}
+
+.highlight
+{
+    font-weight: 700;
+    color: $red;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.red {
+    color: $red;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+.dark {
+    color: $dark;
+
+    &:hover {
+        color: $dark;
+    }
+}
+
+.white {
+    color: white;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.bg-dark {
+    background-color: $dark;
+}
+
+.border-dark {
+    border-right: 1px solid $dark
+}
+
+.us-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.fs-17 {
+    font-size: 1.7rem;
+}
+
+.fs-16 {
+    font-size: 1.6rem;
+}
+
+.fs-15 {
+    font-size: 1.5rem;
+}
+
+.fs-14 {
+    font-size: 1.4rem;
+}
+
+.fs-13 {
+    font-size: 1.3rem;
+}
+
+.fs-12 {
+    font-size: 1.2rem;
+}
+
+.fs-11 {
+    font-size: 1.1rem;
+}
+
+.mx-1-neg
+{
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+}
+
+.mx-2-neg
+{
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+[data-toggle="tooltip"]
+{
+    border-bottom: 1px dotted;
+}

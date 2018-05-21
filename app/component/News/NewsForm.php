@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class NewsForm extends \Peldax\NetteInit\Component\BaseComponent
+final class NewsForm extends \Nepttune\Component\BaseComponent
 {
 	
 }

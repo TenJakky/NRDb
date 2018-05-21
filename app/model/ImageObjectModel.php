@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class ImageObjectModel extends \Peldax\NetteInit\Model\BaseModel
+final class ImageObjectModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'jun_image2object';
 }

@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class IntroductionBanner extends \Peldax\NetteInit\Component\BaseComponent
+final class IntroductionBanner extends \Nepttune\Component\BaseComponent
 {
 
 }

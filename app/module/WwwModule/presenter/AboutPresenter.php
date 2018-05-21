@@ -2,6 +2,12 @@
 
 namespace App\WwwModule\Presenter;
 
-final class AboutPresenter extends \Peldax\NetteInit\Presenter\BasePresenter
+final class AboutPresenter extends \Nepttune\Presenter\BasePresenter implements \Nepttune\TI\ISitemap
 {
+    use \Nepttune\TI\TSitemap;
+
+    /**
+     * @sitemap
+     */
+    public function actionDefault() {}
 }

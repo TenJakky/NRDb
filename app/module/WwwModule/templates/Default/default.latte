@@ -1,23 +1,42 @@
 {block title}Homepage{/block}
+{block font}<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Mono:700" />{/block}
+{block extra}
 
-{block content}
-
-<nav>
-    <ul>
-        <li><a href="{plink About:default}">
-                <div class="box"></div>
-                <p>ABOUT ME</p>
-            </a>
-        </li><li class="space">
-            <a href="{plink Gallery:default}">
-                <div class="box"></div>
-                <p>GALLERY</p>
-            </a>
-        </li><li>
-            <a href="{plink :App:Default:default}">
-                <div class="box"></div>
-                <p>APP</p>
-            </a>
-        </li>
-    </ul>
-</nav>
+<ul class="p-0 m-5 position-absolute text-uppercase main-menu" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink About:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">{_www.about}</span>
+        </a>
+    </li>
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink Sport:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">{_www.sport}</span>
+        </a>
+    </li>
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink Business:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">{_www.business}</span>
+        </a>
+    </li>
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink Projects:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">{_www.projects}</span>
+        </a>
+    </li>
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink Gallery:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">{_www.gallery}</span>
+        </a>
+    </li>
+    <li>
+        <a class="d-block white" itemprop="url" href="{plink :App:Default:default}">
+            <div class="box d-inline-block bg-white"></div>
+            <span class="font-weight-bold" itemprop="name">APP</span>
+        </a>
+    </li>
+</ul>

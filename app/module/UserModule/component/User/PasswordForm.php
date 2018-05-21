@@ -2,11 +2,11 @@
 
 namespace App\Component;
 
-final class PasswordForm extends \Peldax\NetteInit\Component\BaseComponent
+final class PasswordForm extends \Nepttune\Component\BaseComponent
 {
     protected $userModel;
 
-    public function __construct(\Peldax\NetteInit\Authenticator $userModel)
+    public function __construct(\Nepttune\Model\Authenticator $userModel)
     {
         $this->userModel = $userModel;
     }

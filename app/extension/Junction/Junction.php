@@ -2,7 +2,7 @@
 
 namespace App\Extension;
 
-final class Junction extends \Peldax\NetteInit\Component\BaseComponent
+final class Junction extends \Nepttune\Component\BaseComponent
 {
     protected $items;
 

@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class CountryModel extends \Peldax\NetteInit\Model\BaseModel
+final class CountryModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'def_country';
 

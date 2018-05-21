@@ -2,12 +2,12 @@
 
 namespace App\Component;
 
-final class NewUserForm extends \Peldax\NetteInit\Component\BaseComponent
+final class NewUserForm extends \Nepttune\Component\BaseComponent
 {
     protected $userModel;
     protected $countryModel;
 
-    public function __construct(\Peldax\NetteInit\Authenticator $userModel, \App\Model\CountryModel $countryModel)
+    public function __construct(\Nepttune\Model\Authenticator $userModel, \App\Model\CountryModel $countryModel)
     {
         $this->userModel = $userModel;
         $this->countryModel = $countryModel;

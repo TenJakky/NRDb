@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class LogLoginModel extends \Peldax\NetteInit\Model\BaseModel
+final class LogLoginModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'log_login';
 

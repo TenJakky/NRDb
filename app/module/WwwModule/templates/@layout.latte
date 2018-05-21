@@ -1,9 +1,85 @@
 {layout $presenter->getCoreLayout()}
-
 {block bodyContent}
 
-{include content}
-
-<footer>
-    <p>©Václav Pelíšek, 2017</p>
-</footer>
+<aside class="w-100 h-100 position-fixed bg-dark">
+    <ul class="p-0 mt-5 ml-4">
+        <li class="highlight fs-13 mt-3 mb-1">{_www.social}</li>
+        <li><a class="white link fs-12" href="https://www.instagram.com/vaclav.pelisek/" target="_blank" rel="noopener">{icon instagram, type => 'b'} Instagram</a></li>
+        <li><a class="white link fs-12" href="https://www.facebook.com/vaclav.pelisek" target="_blank" rel="noopener">{icon facebook, type => 'b'} Facebook</a></li>
+        <li><a class="white link fs-12" href="https://www.twitter.com/peldax" target="_blank" rel="noopener">{icon twitter, type => 'b'} Twitter</a></li>
+        <li><a class="white link fs-12" href="https://plus.google.com/u/0/111564084691185534418/about" target="_blank" rel="noopener">{icon google-plus, type => 'b'} Google+</a></li>
+        <li><a class="white link fs-12" href="https://www.linkedin.com/in/peldax" target="_blank" rel="noopener">{icon linkedin, type => 'b'} Linked In</a></li>
+        <li class="highlight fs-13 mt-3 mb-1">{_www.useful}</li>
+        <li><a class="white link fs-12" href="https://www.reddit.com/user/peldax/" target="_blank" rel="noopener">{icon reddit, type => 'b'} Reddit</a></li>
+        <li><a class="white link fs-12" href="https://www.youtube.com/channel/UC8CvvZctdZYShcmMiFy3bZw" target="_blank" rel="noopener">{icon youtube, type => 'b'} Youtube</a></li>
+        <li><a class="white link fs-12" href="https://www.twitch.tv/peldax" target="_blank" rel="noopener">{icon twitch, type => 'b'} Twitch</a></li>
+        <li><a class="white link fs-12" href="https://www.chess.com/member/peldax" target="_blank" rel="noopener">{icon chess-pawn} Chess.com</a></li>
+        <li><a class="white link fs-12" href="http://www.lezec.cz/denik.php?uid=70656c6461h" target="_blank" rel="noopener">{icon arrow-up} Lezec.cz</a></li>
+        <li class="highlight fs-13 mt-3 mb-1">{_www.development}</li>
+        <li><a class="white link fs-12" href="https://www.github.com/peldax" target="_blank" rel="noopener">{icon github, type => 'b'} Github</a></li>
+        <li><a class="white link fs-12" href="https://stackexchange.com/users/1425082/peldax?tab=accounts" target="_blank" rel="noopener">{icon stack-exchange, type => 'b'} Stack Exchange</a></li>
+    </ul>
+</aside>
+<div class="w-100 h-100 position-relative body">
+    {var $isHome = $presenter->isLinkCurrent('Default:default')}
+    <nav class="position-absolute m-4 d-flex justify-content-between">
+        <ul class="p-0 m-0">
+            <li class="my-1"><a class="fs-14 link-nav link us-none {if $isHome}unavailable{/if}" {if !$isHome}href="{plink Default:default}"{/if}>{icon arrow-left} {_www.home}</a></li>
+            <li class="my-1"><span class="fs-14 link-nav link us-none" id="menu-button">{icon bars} {_www.links}</span></li>
+        </ul>
+        {if !$isHome}
+            <ol class="p-0 m-0 d-flex align-items-baseline">
+                <li class="mx-2 us-none">
+                    {if $presenter->isLinkCurrent('About:default')}
+                        <h1 class="p-0 m-0 highlight fs-14">{_www.about}</h1>
+                    {else}
+                        <a class="link-nav fs-14 link" href="{plink About:default}">{_www.about}</a>
+                    {/if}
+                </li>
+                <li class="mx-2 us-none">
+                    {if $presenter->isLinkCurrent('Sport:default')}
+                        <h1 class="p-0 m-0 highlight fs-14">{_www.sport}</h1>
+                    {else}
+                        <a class="link-nav fs-14 link" href="{plink Sport:default}">{_www.sport}</a>
+                    {/if}
+                </li>
+                <li class="mx-2 us-none">
+                    {if $presenter->isLinkCurrent('Business:default')}
+                        <h1 class="p-0 m-0 highlight fs-14">{_www.business}</h1>
+                    {else}
+                        <a class="link-nav fs-14 link" href="{plink Business:default}">{_www.business}</a>
+                    {/if}
+                </li>
+                <li class="mx-2 us-none">
+                    {if $presenter->isLinkCurrent('Projects:default')}
+                        <h1 class="p-0 m-0 highlight fs-14">{_www.projects}</h1>
+                    {else}
+                        <a class="link-nav fs-14 link" href="{plink Projects:default}">{_www.projects}</a>
+                    {/if}
+                </li>
+                <li class="mx-2 us-none">
+                    {if $presenter->isLinkCurrent('Gallery:default')}
+                        <h1 class="p-0 m-0 highlight fs-14">{_www.gallery}</h1>
+                    {else}
+                        <a class="link-nav fs-14 link" href="{plink Gallery:default}">{_www.gallery}</a>
+                    {/if}
+                </li>
+            </ol>
+        {/if}
+        {include $presenter->getLocaleSelect()}
+    </nav>
+    {ifset #extra}
+        {include #extra}
+    {/ifset}
+    {ifset #content}
+        <main class="position-absolute p-4">
+            <div class="ml-4 mb-4">
+                {include #content}
+                <div class="red link us-none">
+                    <span class="mr-2 unavailable" id="back">{icon arrow-alt-circle-left, size => '2'}</span><span class="ml-2" id="forward">{icon arrow-alt-circle-right, size => '2'}</span>
+                </div>
+            </div>
+        </main>
+    {/ifset}
+    {include $presenter->getCookiePopup()}
+</div>

@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-final class Search extends \Peldax\NetteInit\Component\BaseComponent
+final class Search extends \Nepttune\Component\BaseComponent
 {
     /** @var  \App\Model\EntityModel */
 	protected $entityModel;

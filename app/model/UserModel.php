@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class UserModel extends \Peldax\NetteInit\Model\BaseModel
+class UserModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'user';
 

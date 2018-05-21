@@ -2,7 +2,7 @@
 
 namespace App\RatingModule\Presenter;
 
-final class DefaultPresenter extends \Peldax\NetteInit\Presenter\BaseAuthPresenter
+final class DefaultPresenter extends \Nepttune\Presenter\BaseAuthPresenter
 {
 
 }

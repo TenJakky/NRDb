@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class GroupMemberModel extends \Peldax\NetteInit\Model\BaseModel
+final class GroupMemberModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'jun_group2member';
 }

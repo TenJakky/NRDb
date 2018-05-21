@@ -2,9 +2,9 @@
 
 namespace App\Presenter;
 
-abstract class BaseViewPresenter extends \Peldax\NetteInit\Presenter\BaseAuthPresenter
+abstract class BaseViewPresenter extends \Nepttune\Presenter\BaseAuthPresenter
 {
-    /** @var  \Peldax\NetteInit\Model\BaseModel */
+    /** @var  \Nepttune\Model\BaseModel */
     protected $model;
 
     public function actionView(int $id)

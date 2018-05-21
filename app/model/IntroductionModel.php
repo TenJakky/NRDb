@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-final class IntroductionModel extends \Peldax\NetteInit\Model\BaseModel
+final class IntroductionModel extends \Nepttune\Model\BaseModel
 {
     public $tableName = 'adm_introduction';
 

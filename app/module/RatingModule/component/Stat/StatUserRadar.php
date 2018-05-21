@@ -2,13 +2,13 @@
 
 namespace App\Component;
 
-final class StatUserRadar extends \Peldax\NetteInit\Component\BaseComponent
+final class StatUserRadar extends \Nepttune\Component\BaseComponent
 {
     /** @var \App\Model\UserModel */
     protected $userModel;
 
     public function __construct(
-        \Peldax\NetteInit\Authenticator $userModel)
+        \Nepttune\Model\Authenticator $userModel)
     {
         $this->userModel = $userModel;
     }

@@ -1,76 +1,44 @@
-includes:
-    - sensitive.neon
-    - model.neon
-
-extensions:
-    webmod: App\Extension\ModuleLoader
-
-application:
-    catchExceptions: false
-
-session:
-    cookieSecure: false
-
-http:
-    csp:
-        style-src: [
-            self
-            https://fonts.googleapis.com/
-            unsafe-inline ]
-
-parameters:
-    domain: 'localhost.com'
-    sessionName: 'peldaxcom'
-    appName: 'PELDAX.com'
-    appNameShort: 'PLX'
-    appDescription: 'peldax.com - personal multi-purpose webpage'
-    appKeywords: 'personal, webpage, peldax, application'
-    appAuthor: 'peldax.com'
-
-    homepageDest: ':App:Default:default'
-    userProfileDest: ':User:Profile:view'   # false or dest
-    signInRedirect: ':User:Default:default'
-    signOutRedirect: ':User:Sign:in'
-    signInDest: ':User:Sign:in'
-    signOutDest: ':User:Sign:out'
-
 services:
-
-    loginForm:
-        class: Peldax\NetteInit\Component\LoginForm
+    - App\Model\CountryModel
+    - App\Model\ChangelogModel
+    - App\Model\NewsModel
+    - App\Model\IntroductionModel
+    - App\Model\ArtistModel
+    - App\Model\ArtistEntityModel
+    - App\Model\GroupMemberModel
+    - App\Model\EntityModel
+    - App\Model\RatingModel
+    - App\Model\StatEntityModel
+    - App\Model\StatRatingModel
+    - App\Model\ImageModel
+    - App\Model\ImageObjectModel
 
     settingsForm:
         class: App\Component\SettingsForm
     passwordForm:
         class: App\Component\PasswordForm
-
     newUserForm:
         class: App\Component\NewUserForm
-
     newsBanner:
         class: App\Component\NewsBanner
     newsForm:
         class: App\Component\NewsForm
-
     introductionBanner:
         class: App\Component\IntroductionBanner
     introductionForm:
         class: App\Component\IntroductionForm
-
     changelog:
         class: App\Component\Changelog
     #search:
     #    class: App\Component\Search
     locale:
         class: App\Component\Locale
-
     artistForm:
         class: App\Component\ArtistForm
     artistList:
         class: App\Component\ArtistList
     artistWorks:
         class: App\Component\ArtistWorks
-
     entityForm:
         class: App\Component\EntityForm
     entityList:
@@ -81,15 +49,16 @@ services:
         class: App\Component\TopEntitySmallList
     notRatedEntitySmallList:
         class: App\Component\NotRatedEntitySmallList
-
     ratingForm:
         class: App\Component\RatingForm
     ratingList:
         class: App\Component\RatingList
-
     statElementCount:
         class: App\Component\StatElementCount
     statUserActivity:
         class: App\Component\StatUserActivity
     statUserRadar:
         class: App\Component\StatUserRadar
+
+translation:
+    default: 'cs'

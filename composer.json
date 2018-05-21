@@ -10,21 +10,15 @@
       "homepage": "http://peldax.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/peldax/nette-init"
-    }
-  ],
   "require": {
-    "peldax/nette-init": "dev-master"
-  },
-  "config": {
-    "discard-changes": true
+    "nepttune/nepttune": "^4.0",
+    "nepttune/admin": "^4.0",
+    "phpstan/phpstan-nette": "^0.9",
+    "phpstan/phpstan-strict-rules": "^0.9"
   },
   "scripts": {
-    "post-update-cmd": "Peldax\\NetteInit\\Deploy::init",
-    "post-install-cmd": "Peldax\\NetteInit\\Deploy::init"
+    "post-update-cmd": "Nepttune\\Deploy::init",
+    "post-install-cmd": "Nepttune\\Deploy::init"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

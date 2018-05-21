@@ -1,0 +1,16 @@
+includes:
+    - sensitive.neon
+    - service.neon
+
+extensions:
+    webmod: App\Extension\ModuleLoader
+
+parameters:
+    domain: 'localhost.com'
+    adminModule: 'app'
+
+    dest:
+        adminHomepage: ':App:Default:default'
+        userProfile: ':User:Profile:view'
+
+    redirectSignIn: ':App:Default:default'

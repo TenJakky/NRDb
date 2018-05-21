@@ -2,7 +2,9 @@
 
 namespace App\Component;
 
-final class ArtistWorks extends BaseSmallDatagridComponent
+use Ublaboo\DataGrid\DataGrid;
+
+final class ArtistWorks extends \Nepttune\Component\BaseListComponent
 {
     /** @var \App\Model\RatingModel */
     protected $ratingModel;
@@ -13,10 +15,8 @@ final class ArtistWorks extends BaseSmallDatagridComponent
         $this->ratingModel = $ratingModel;
     }
 
-    public function createComponentDataGrid()
+    public function modifyList(DataGrid $grid) : DataGrid
     {
-        parent::createComponentDataGrid();
-
         $this->grid->addColumn('type', 'Type')->enableSort();
         $this->grid->addColumn('role', 'Role')->enableSort();
         $this->grid->addColumn('original_title', 'Original title')->enableSort();
@@ -24,25 +24,7 @@ final class ArtistWorks extends BaseSmallDatagridComponent
         $this->grid->addColumn('rating', 'Rating')->enableSort();
         $this->grid->addColumn('my_rating', 'My Rating')->enableSort();
         $this->grid->addColumn('action', 'Action');
-        $this->grid->addCellsTemplate(__DIR__ . '/ArtistWorksCellsTemplate.latte');
-        $this->grid->setTemplateParameters(array(
-                'ratingModel' => $this->ratingModel));
-        return $this->grid;
-    }
 
-    public function getDataSource($filter, $order)
-    {
-        $set = $this->model->getTable()
-            ->alias('entity:rating', 'r')
-            ->select('jun_artist2entity.*, entity.*, r.value AS my_rating, r.id AS my_rating_id')
-            ->joinWhere('r', 'r.user_id', $this->getPresenter()->getUser()->getId())
-            ->where('artist_id', $this->getPresenter()->getParameter('id'));
-
-        if ($order[0])
-        {
-            $set->order(implode(' ', $order));
-        }
-
-        return $set;
+        return $grid;
     }
 }

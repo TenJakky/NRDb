@@ -2,7 +2,7 @@
 
 namespace App\Extension;
 
-final class Menu extends \Peldax\NetteInit\Component\BaseComponent
+final class Menu extends \Nepttune\Component\BaseComponent
 {
     protected $items;
 

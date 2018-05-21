@@ -1,5 +1,3 @@
-@import "../colors";
-
 div.rating
 {
   float: left;
@@ -22,7 +20,6 @@ div.rating
     cursor:pointer;
     font-size:200%;
     line-height:1.2;
-    color: $grey;
   }
 
   &:not(:checked) > label:before
@@ -33,7 +30,6 @@ div.rating
 
   input:checked ~ label
   {
-    color: $red;
   }
 
   &:not(:checked) > label:hover,
@@ -44,7 +40,6 @@ div.rating
   input:checked ~ label:hover ~ label,
   label:hover ~ input:checked ~ label
   {
-    color: $black;
   }
 
   label:active

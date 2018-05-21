@@ -5,7 +5,7 @@ namespace App\UserModule\Presenter;
 final class ProfilePresenter extends \App\Presenter\BaseViewPresenter
 {
     public function __construct(
-        \Peldax\NetteInit\Authenticator $userModel)
+        \Nepttune\Model\Authenticator $userModel)
     {
         $this->model = $userModel;
     }
